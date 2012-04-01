@@ -1,0 +1,181 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Contextual Related Posts\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-01 18:43-0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Ajay D'Souza <me@ajaydsouza.com>\n"
+"Language-Team:  <me@ajaydsouza.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-KeywordsList: __;_e;_c;__ngettext\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: add-to-all.php:204
+msgid "Use of this feed is for personal non-commercial use only. If you are not reading this article in your feed reader, then the site is guilty of copyright infringement. Please contact me at "
+msgstr ""
+
+#: add-to-all.php:336
+msgid "Settings"
+msgstr ""
+
+#: add-to-all.php:337
+#: admin.inc.php:92
+msgid "Support"
+msgstr ""
+
+#: add-to-all.php:338
+msgid "Donate"
+msgstr ""
+
+#: admin.inc.php:46
+msgid "Options saved successfully."
+msgstr ""
+
+#: admin.inc.php:55
+msgid "Options set to Default."
+msgstr ""
+
+#: admin.inc.php:69
+msgid "Support the development"
+msgstr ""
+
+#: admin.inc.php:77
+msgid "Enter amount in USD: "
+msgstr ""
+
+#: admin.inc.php:81
+msgid "Send your donation to the author of"
+msgstr ""
+
+#: admin.inc.php:87
+msgid "Quick links"
+msgstr ""
+
+#: admin.inc.php:89
+msgid "Add to All "
+msgstr ""
+
+#: admin.inc.php:89
+msgid "plugin page"
+msgstr ""
+
+#: admin.inc.php:90
+msgid "Other plugins"
+msgstr ""
+
+#: admin.inc.php:91
+msgid "Ajay's blog"
+msgstr ""
+
+#: admin.inc.php:93
+msgid "Follow @ajaydsouza on Twitter"
+msgstr ""
+
+#: admin.inc.php:97
+msgid "Recent developments"
+msgstr ""
+
+#: admin.inc.php:109
+msgid "Options for 3rd party services"
+msgstr ""
+
+#: admin.inc.php:112
+msgid "Statcounter Options:"
+msgstr ""
+
+#: admin.inc.php:114
+msgid "StatCounter Project ID (Value of sc_project): "
+msgstr ""
+
+#: admin.inc.php:117
+msgid "StatCounter Security ID (Value of sc_security): "
+msgstr ""
+
+#: admin.inc.php:120
+msgid "Google Analytics Options: "
+msgstr ""
+
+#: admin.inc.php:122
+msgid "Tracking ID: "
+msgstr ""
+
+#: admin.inc.php:125
+msgid "Multiple sub-domain support (Value of _setDomainName): "
+msgstr ""
+
+#: admin.inc.php:128
+msgid "Kontera Options: "
+msgstr ""
+
+#: admin.inc.php:130
+msgid "Kontera ID (Value of dc_PublisherID): "
+msgstr ""
+
+#: admin.inc.php:133
+msgid "Kontera link colour (Value of dc_AdLinkColor): "
+msgstr ""
+
+#: admin.inc.php:136
+msgid "Wrap post content with Kontera Zone Tags: "
+msgstr ""
+
+#: admin.inc.php:143
+msgid "Header options"
+msgstr ""
+
+#: admin.inc.php:146
+msgid "Custom CSS to add to header:"
+msgstr ""
+
+#: admin.inc.php:149
+msgid "Do not include <code>style</code> tags"
+msgstr ""
+
+#: admin.inc.php:150
+msgid "Any other HTML (no PHP) to add to <code>wp_head</code>:"
+msgstr ""
+
+#: admin.inc.php:158
+msgid "Footer options"
+msgstr ""
+
+#: admin.inc.php:161
+msgid "Any other HTML (no PHP) to add to <code>wp_footer</code>:"
+msgstr ""
+
+#: admin.inc.php:169
+msgid "Feed options"
+msgstr ""
+
+#: admin.inc.php:173
+msgid "Add the following to the feed before the content. (You can use HTML): "
+msgstr ""
+
+#: admin.inc.php:177
+msgid "Add the following to the feed after the content. (You can use HTML): "
+msgstr ""
+
+#: admin.inc.php:181
+msgid "Add the following copyright notice to the feed (You can use HTML): "
+msgstr ""
+
+#: admin.inc.php:184
+msgid "Add a link to the title of the post in the feed: "
+msgstr ""
+
+#: admin.inc.php:187
+msgid "Add a link to \"Add to All\" plugin page: "
+msgstr ""
+
+#: admin.inc.php:195
+msgid "Do you want to set options to Default?"
+msgstr ""
+
+#: admin.inc.php:225
+msgid "Add to All"
+msgstr ""
+
