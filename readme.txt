@@ -29,10 +29,13 @@ The plugin gives you the power to add content to your feed in addition to adding
 
 == Upgrade Notice ==
 
-= 1.0 =
-* Release
+= 1.0.1 =
+* Fixed: Bug that stopped displaying content when plugin was activated
 
 == Changelog ==
+
+= 1.0.1 =
+* Fixed: Bug that stopped displaying content when plugin was activated
 
 = 1.0 =
 * Release
