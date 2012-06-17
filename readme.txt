@@ -1,5 +1,5 @@
 ﻿=== Add to All ===
-Tags: header, footer, feed, Google Analytics, Statcounter, Kontera
+Tags: header, footer, feed, Google Analytics, Statcounter, Kontera, Wibiya
 Contributors: Ajay
 Donate link: http://ajaydsouza.com/donate/
 Stable tag: trunk
