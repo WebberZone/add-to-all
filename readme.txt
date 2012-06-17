@@ -1,11 +1,11 @@
-=== Add to All ===
+ï»¿=== Add to All ===
 Tags: header, footer, feed, Google Analytics, Statcounter, Kontera
-Contributors: Ajay, Mark Ghosh
+Contributors: Ajay
 Donate link: http://ajaydsouza.com/donate/
 Stable tag: trunk
 Requires at least: 3.0
-Tested up to: 3.4
-
+Tested up to: 3.5
+License: GPLv2 or later
 
 A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
 
@@ -21,7 +21,7 @@ The plugin gives you the power to add content to your feed in addition to adding
 
 = Key features =
 
-* Support for Google Analytics, Statcounter and Kontera
+* Support for Google Analytics, Statcounter, Wibiya and Kontera
 * Add custom CSS code to your header
 * Add any HTML code to your header or footer or feed
 * Add a copyright notice and a link to the post in your site's feed
@@ -29,10 +29,14 @@ The plugin gives you the power to add content to your feed in addition to adding
 
 == Upgrade Notice ==
 
-= 1.0.1 =
-* Fixed: Bug that stopped displaying content when plugin was activated
+= 1.0.2 =
+* Added support for Wibiya
 
 == Changelog ==
+
+= 1.0.2 =
+* Added: support for Wibiya
+* Modified: Code changes to fix some language and PHP warning issues
 
 = 1.0.1 =
 * Fixed: Bug that stopped displaying content when plugin was activated
@@ -42,13 +46,21 @@ The plugin gives you the power to add content to your feed in addition to adding
 
 == Installation ==
 
+= WordPress install =
+1. Navigate to Plugins within your WordPress Admin Area
+
+2. Click "Add new" and in the search box enter "Add to All" and select "Keyword" from the dropdown
+
+3. Find the plugin in the list (usually the first result) and click "Install Now"
+
+= Manual install =
 1. Download the plugin
 
 2. Extract the contents of add-to-all.zip to wp-content/plugins/ folder. You should get a folder called add-to-all.
 
 3. Activate the Plugin in WP-Admin. 
 
-4. Goto Settings > Add to All to configure
+4. Goto Settings &raquo; Add to All to configure
 
 == Screenshots ==
 
@@ -60,11 +72,11 @@ The plugin gives you the power to add content to your feed in addition to adding
 
 == Frequently Asked Questions ==
 
-If your question isn't listed here, please post a comment at the <a href="http://wordpress.org/tags/add-to-all?forum_id=10">WordPress.org support forum</a>. I monitor the forums on an ongoing basis. If you're looking for more advanced support, please see <a href="http://ajaydsouza.com/support/">details here</a>.
+If your question isn't listed here, please post a comment at the <a href="http://wordpress.org/support/plugin/add-to-all">WordPress.org support forum</a>. I monitor the forums on an ongoing basis. If you're looking for more advanced support, please see <a href="http://wordpress.org/support/plugin/add-to-all">details here</a>.
 
 = How can I customise the output? =
 
-Several customization options are available via the Settings page in WordPress Admin. You can access this via <strong>Settings » Add to All</strong>
+Several customization options are available via the Settings page in WordPress Admin. You can access this via <strong>Settings &raquo; Add to All</strong>
 
 The plugin supports CSS, HTML and JavaScript code in the header and footer. PHP support is likely to be added in future versions
 
@@ -79,9 +91,8 @@ Below are a few features that I plan on implementing in future versions of the p
 * Limited support for Google Adsense code
 * Support for PHP code
 * Sidebar widgets
-* Support for Wibiya
 * Support for Infolinks
 * Support for Text Link Ads
 
-If you would like a feature to be added, or if you already have the code for the feature, you can let me know by <a href="http://wordpress.org/tags/add-to-all?forum_id=10">posting in this forum</a>.
+If you would like a feature to be added, or if you already have the code for the feature, you can let me know by <a href="http://wordpress.org/support/plugin/add-to-all">posting in this forum</a>.
 

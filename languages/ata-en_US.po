@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Contextual Related Posts\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-01 18:43-0000\n"
+"POT-Creation-Date: 2012-06-17 17:47-0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Ajay D'Souza <me@ajaydsouza.com>\n"
 "Language-Team:  <me@ajaydsouza.com>\n"
@@ -14,168 +14,176 @@ msgstr ""
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: add-to-all.php:204
+#: add-to-all.php:215
 msgid "Use of this feed is for personal non-commercial use only. If you are not reading this article in your feed reader, then the site is guilty of copyright infringement. Please contact me at "
 msgstr ""
 
-#: add-to-all.php:336
+#: add-to-all.php:348
 msgid "Settings"
 msgstr ""
 
-#: add-to-all.php:337
-#: admin.inc.php:92
+#: add-to-all.php:349
+#: admin.inc.php:93
 msgid "Support"
 msgstr ""
 
-#: add-to-all.php:338
+#: add-to-all.php:350
 msgid "Donate"
 msgstr ""
 
-#: admin.inc.php:46
+#: admin.inc.php:47
 msgid "Options saved successfully."
 msgstr ""
 
-#: admin.inc.php:55
+#: admin.inc.php:56
 msgid "Options set to Default."
 msgstr ""
 
-#: admin.inc.php:69
+#: admin.inc.php:70
 msgid "Support the development"
 msgstr ""
 
-#: admin.inc.php:77
+#: admin.inc.php:78
 msgid "Enter amount in USD: "
 msgstr ""
 
-#: admin.inc.php:81
+#: admin.inc.php:82
 msgid "Send your donation to the author of"
 msgstr ""
 
-#: admin.inc.php:87
+#: admin.inc.php:88
 msgid "Quick links"
 msgstr ""
 
-#: admin.inc.php:89
+#: admin.inc.php:90
 msgid "Add to All "
 msgstr ""
 
-#: admin.inc.php:89
+#: admin.inc.php:90
 msgid "plugin page"
 msgstr ""
 
-#: admin.inc.php:90
+#: admin.inc.php:91
 msgid "Other plugins"
 msgstr ""
 
-#: admin.inc.php:91
+#: admin.inc.php:92
 msgid "Ajay's blog"
 msgstr ""
 
-#: admin.inc.php:93
+#: admin.inc.php:94
 msgid "Follow @ajaydsouza on Twitter"
 msgstr ""
 
-#: admin.inc.php:97
+#: admin.inc.php:98
 msgid "Recent developments"
 msgstr ""
 
-#: admin.inc.php:109
+#: admin.inc.php:110
 msgid "Options for 3rd party services"
 msgstr ""
 
-#: admin.inc.php:112
+#: admin.inc.php:113
 msgid "Statcounter Options:"
 msgstr ""
 
-#: admin.inc.php:114
-msgid "StatCounter Project ID (Value of sc_project): "
+#: admin.inc.php:115
+msgid "StatCounter Project ID (Value of sc_project):"
 msgstr ""
 
-#: admin.inc.php:117
-msgid "StatCounter Security ID (Value of sc_security): "
+#: admin.inc.php:118
+msgid "StatCounter Security ID (Value of sc_security):"
 msgstr ""
 
-#: admin.inc.php:120
-msgid "Google Analytics Options: "
+#: admin.inc.php:121
+msgid "Google Analytics Options:"
 msgstr ""
 
-#: admin.inc.php:122
-msgid "Tracking ID: "
+#: admin.inc.php:123
+msgid "Tracking ID:"
 msgstr ""
 
-#: admin.inc.php:125
-msgid "Multiple sub-domain support (Value of _setDomainName): "
+#: admin.inc.php:126
+msgid "Multiple sub-domain support (Value of _setDomainName):"
 msgstr ""
 
-#: admin.inc.php:128
-msgid "Kontera Options: "
+#: admin.inc.php:129
+msgid "Kontera Options:"
 msgstr ""
 
-#: admin.inc.php:130
-msgid "Kontera ID (Value of dc_PublisherID): "
+#: admin.inc.php:131
+msgid "Kontera ID (Value of dc_PublisherID):"
 msgstr ""
 
-#: admin.inc.php:133
-msgid "Kontera link colour (Value of dc_AdLinkColor): "
+#: admin.inc.php:134
+msgid "Kontera link colour (Value of dc_AdLinkColor):"
 msgstr ""
 
-#: admin.inc.php:136
-msgid "Wrap post content with Kontera Zone Tags: "
+#: admin.inc.php:137
+msgid "Wrap post content with Kontera Zone Tags:"
 msgstr ""
 
-#: admin.inc.php:143
-msgid "Header options"
+#: admin.inc.php:140
+msgid "Wibiya Options:"
 msgstr ""
 
-#: admin.inc.php:146
-msgid "Custom CSS to add to header:"
+#: admin.inc.php:142
+msgid "Wibiya Toolbar Path:"
 msgstr ""
 
 #: admin.inc.php:149
+msgid "Header options"
+msgstr ""
+
+#: admin.inc.php:152
+msgid "Custom CSS to add to header:"
+msgstr ""
+
+#: admin.inc.php:155
 msgid "Do not include <code>style</code> tags"
 msgstr ""
 
-#: admin.inc.php:150
+#: admin.inc.php:156
 msgid "Any other HTML (no PHP) to add to <code>wp_head</code>:"
 msgstr ""
 
-#: admin.inc.php:158
+#: admin.inc.php:164
 msgid "Footer options"
 msgstr ""
 
-#: admin.inc.php:161
+#: admin.inc.php:167
 msgid "Any other HTML (no PHP) to add to <code>wp_footer</code>:"
 msgstr ""
 
-#: admin.inc.php:169
+#: admin.inc.php:175
 msgid "Feed options"
 msgstr ""
 
-#: admin.inc.php:173
-msgid "Add the following to the feed before the content. (You can use HTML): "
+#: admin.inc.php:179
+msgid "Add the following to the feed before the content. (You can use HTML):"
 msgstr ""
 
-#: admin.inc.php:177
-msgid "Add the following to the feed after the content. (You can use HTML): "
-msgstr ""
-
-#: admin.inc.php:181
-msgid "Add the following copyright notice to the feed (You can use HTML): "
-msgstr ""
-
-#: admin.inc.php:184
-msgid "Add a link to the title of the post in the feed: "
+#: admin.inc.php:183
+msgid "Add the following to the feed after the content. (You can use HTML):"
 msgstr ""
 
 #: admin.inc.php:187
-msgid "Add a link to \"Add to All\" plugin page: "
+msgid "Add the following copyright notice to the feed (You can use HTML):"
 msgstr ""
 
-#: admin.inc.php:195
+#: admin.inc.php:190
+msgid "Add a link to the title of the post in the feed:"
+msgstr ""
+
+#: admin.inc.php:193
+msgid "Add a link to \"Add to All\" plugin page:"
+msgstr ""
+
+#: admin.inc.php:201
 msgid "Do you want to set options to Default?"
 msgstr ""
 
-#: admin.inc.php:225
+#: admin.inc.php:231
 msgid "Add to All"
 msgstr ""
 

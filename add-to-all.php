@@ -55,6 +55,7 @@ function ald_ata_footer() {
 	$ga_url = stripslashes($ata_settings[tp_ga_domain]);
 	$kontera_ID = stripslashes($ata_settings[tp_kontera_ID]);
 	$kontera_linkcolor = stripslashes($ata_settings[tp_kontera_linkcolor]);
+	$tp_wibiya_url = stripslashes($ata_settings[tp_wibiya_url]);
 	
 	// Add other footer 
 	if ($ata_other != '') {
@@ -112,6 +113,14 @@ function ald_ata_footer() {
 
 <?php	}
 	
+	if ($tp_wibiya_url != '') {
+?>
+	<!-- Wibiya -->
+	<script src="<?php echo $tp_wibiya_url; ?>" type="text/javascript"></script>
+	<!-- end Wibiya --> 
+
+<?php	}
+	
 }
 
 // Content function
@@ -138,7 +147,7 @@ function ald_ata_content($content) {
 add_filter('the_content', 'ald_ata',99999999);
 function ald_ata($content) {
 	$ata_settings = ata_read_options();
-	$creditline = '<br /><span style="font-size: 0.8em">Feed enhanced by the <a href="http://ajaydsouza.com/wordpress/plugins/add-to-feed/">Add To Feed Plugin</a> by <a href="http://ajaydsouza.com/">Ajay D\'Souza</a></span>';
+	$creditline = '<br /><span style="font-size: 0.8em">Feed enhanced by the <a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/">Add To All Plugin</a> by <a href="http://ajaydsouza.com/">Ajay D\'Souza</a></span>';
 	
 	$str_before ='';
 	$str_after ='<hr style="border-top:black solid 1px" />';
@@ -205,36 +214,37 @@ function ata_default_options() {
 	$copyrightnotice = '&copy;'. date("Y").' &quot;<a href="'.get_option('home').'">'.get_option('blogname').'</a>&quot;. ';
 	$copyrightnotice .= __('Use of this feed is for personal non-commercial use only. If you are not reading this article in your feed reader, then the site is guilty of copyright infringement. Please contact me at ','ald_ata_plugin');
 	$copyrightnotice .= get_option('admin_email');
-	$ga_url = parse_url(get_option('home'),PHP_URL_HOST);
+	$ga_url = '.'.parse_url(get_option('home'),PHP_URL_HOST);
 
 	$ata_settings = Array (
-						addcredit => false,		// Show credits?
+						'addcredit' => false,		// Show credits?
 						
 						// Feed options
-						feed_htmlbefore => '',		// HTML you want added to the feed
-						feed_htmlafter => '',		// HTML you want added to the feed
-						feed_copyrightnotice => $copyrightnotice,		// Copyright Notice
-						feed_emailaddress => get_option('admin_email'),		// Admin Email
-						feed_addhtmlbefore => false,		// Add HTML to Feed?
-						feed_addhtmlafter => false,		// Add HTML to Feed?
-						feed_addtitle => true,		// Add title of the post?
-						feed_addcopyright => true,		// Add copyright notice?
+						'feed_htmlbefore' => '',		// HTML you want added to the feed
+						'feed_htmlafter' => '',		// HTML you want added to the feed
+						'feed_copyrightnotice' => $copyrightnotice,		// Copyright Notice
+						'feed_emailaddress' => get_option('admin_email'),		// Admin Email
+						'feed_addhtmlbefore' => false,		// Add HTML to Feed?
+						'feed_addhtmlafter' => false,		// Add HTML to Feed?
+						'feed_addtitle' => true,		// Add title of the post?
+						'feed_addcopyright' => true,		// Add copyright notice?
 						
 						// 3rd party options
-						tp_sc_project => '',		// StatCounter Project ID
-						tp_sc_security => '',		// StatCounter Security String
-						tp_ga_uacct => '',			// Google Analytics Web Property ID
-						tp_ga_domain => $ga_url,		// Google Analytics _setDomainName value
-						tp_kontera_ID => '',		// Kontera Publisher ID
-						tp_kontera_linkcolor => '',		// Kontera link color
-						tp_kontera_addZT => '',		// Kontera Add zone tags
+						'tp_sc_project' => '',		// StatCounter Project ID
+						'tp_sc_security' => '',		// StatCounter Security String
+						'tp_ga_uacct' => '',			// Google Analytics Web Property ID
+						'tp_ga_domain' => $ga_url,		// Google Analytics _setDomainName value
+						'tp_kontera_ID' => '',		// Kontera Publisher ID
+						'tp_kontera_linkcolor' => '',		// Kontera link color
+						'tp_kontera_addZT' => '',		// Kontera Add zone tags
+						'tp_wibiya_url' => '',		// Kontera Add zone tags
 
 						// Footer options
-						ft_other => '',				// For any other code
+						'ft_other' => '',				// For any other code
 
 						// Header options
-						head_CSS => '',				// CSS to add to header (do not wrap with <style> tags)
-						head_other => '',			// For any other code
+						'head_CSS' => '',				// CSS to add to header (do not wrap with <style> tags)
+						'head_other' => '',			// For any other code
 
 					);
 	return $ata_settings;
@@ -336,7 +346,7 @@ function ata_plugin_actions( $links, $file ) {
 	// create link
 	if ($file == $plugin) {
 		$links[] = '<a href="' . admin_url( 'options-general.php?page=ata_options' ) . '">' . __('Settings', ATA_LOCAL_NAME ) . '</a>';
-		$links[] = '<a href="http://ajaydsouza.com/support/">' . __('Support', ATA_LOCAL_NAME ) . '</a>';
+		$links[] = '<a href="http://wordpress.org/support/plugin/add-to-all">' . __('Support', ATA_LOCAL_NAME ) . '</a>';
 		$links[] = '<a href="http://ajaydsouza.com/donate/">' . __('Donate', ATA_LOCAL_NAME ) . '</a>';
 	}
 	return $links;
