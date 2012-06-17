@@ -40,6 +40,7 @@ function ata_options() {
 		$ata_settings[tp_kontera_ID] = ($_POST['tp_kontera_ID']);
 		$ata_settings[tp_kontera_linkcolor] = ($_POST['tp_kontera_linkcolor']);
 		$ata_settings[tp_kontera_addZT] = (($_POST['tp_kontera_addZT']) ? true : false);
+		$ata_settings[tp_wibiya_url] = ($_POST['tp_wibiya_url']);
 
 		update_option('ald_ata_settings', $ata_settings);
 		
@@ -89,7 +90,7 @@ function ata_options() {
 			<li><a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/"><?php _e('Add to All ');_e('plugin page',ATA_LOCAL_NAME) ?></a></li>
 			<li><a href="http://ajaydsouza.com/wordpress/plugins/"><?php _e('Other plugins',ATA_LOCAL_NAME) ?></a></li>
 			<li><a href="http://ajaydsouza.com/"><?php _e('Ajay\'s blog',ATA_LOCAL_NAME) ?></a></li>
-			<li><a href="http://ajaydsouza.com/support/"><?php _e('Support',ATA_LOCAL_NAME) ?></a></li>
+			<li><a href="http://wordpress.org/support/plugin/add-to-all"><?php _e('Support',ATA_LOCAL_NAME) ?></a></li>
 			<li><a href="http://twitter.com/ajaydsouza"><?php _e('Follow @ajaydsouza on Twitter',ATA_LOCAL_NAME) ?></a></li>
 		</ul>
 		</div>
@@ -111,30 +112,35 @@ function ata_options() {
 			  <table class="form-table">
 				<tr style="vertical-align: top; background: #eee"><th scope="row" colspan="2"><?php _e('Statcounter Options:',ATA_LOCAL_NAME); ?></th>
 				</tr>
-				<tr style="vertical-align: top;"><th scope="row"><label for="tp_sc_project"><?php _e('StatCounter Project ID (Value of sc_project): ',ATA_LOCAL_NAME); ?></label></th>
+				<tr style="vertical-align: top;"><th scope="row"><label for="tp_sc_project"><?php _e('StatCounter Project ID (Value of sc_project):',ATA_LOCAL_NAME); ?></label></th>
 				<td><input type="textbox" name="tp_sc_project" id="tp_sc_project" value="<?php echo attribute_escape(stripslashes($ata_settings[tp_sc_project])); ?>" style="width:250px" /></td>
 				</tr>
-				<tr style="vertical-align: top;"><th scope="row"><label for="tp_sc_security"><?php _e('StatCounter Security ID (Value of sc_security): ',ATA_LOCAL_NAME); ?></label></th>
+				<tr style="vertical-align: top;"><th scope="row"><label for="tp_sc_security"><?php _e('StatCounter Security ID (Value of sc_security):',ATA_LOCAL_NAME); ?></label></th>
 				<td><input type="textbox" name="tp_sc_security" id="tp_sc_security" value="<?php echo attribute_escape(stripslashes($ata_settings[tp_sc_security])); ?>" style="width:250px" /></td>
 				</tr>
-				<tr style="vertical-align: top; background: #eee"><th scope="row" colspan="2"><?php _e('Google Analytics Options: ',ATA_LOCAL_NAME); ?></th>
+				<tr style="vertical-align: top; background: #eee"><th scope="row" colspan="2"><?php _e('Google Analytics Options:',ATA_LOCAL_NAME); ?></th>
 				</tr>
-				<tr style="vertical-align: top;"><th scope="row"><label for="tp_ga_uacct"><?php _e('Tracking ID: ',ATA_LOCAL_NAME); ?></label></th>
+				<tr style="vertical-align: top;"><th scope="row"><label for="tp_ga_uacct"><?php _e('Tracking ID:',ATA_LOCAL_NAME); ?></label></th>
 				<td><input type="textbox" name="tp_ga_uacct" id="tp_ga_uacct" value="<?php echo attribute_escape(stripslashes($ata_settings[tp_ga_uacct])); ?>" style="width:250px" /></td>
 				</tr>
-				<tr style="vertical-align: top;"><th scope="row"><label for="tp_ga_domain"><?php _e('Multiple sub-domain support (Value of _setDomainName): ',ATA_LOCAL_NAME); ?></label></th>
+				<tr style="vertical-align: top;"><th scope="row"><label for="tp_ga_domain"><?php _e('Multiple sub-domain support (Value of _setDomainName):',ATA_LOCAL_NAME); ?></label></th>
 				<td><input type="textbox" name="tp_ga_domain" id="tp_ga_domain" value="<?php echo attribute_escape(stripslashes($ata_settings[tp_ga_domain])); ?>" style="width:250px" /></td>
 				</tr>
-				<tr style="vertical-align: top; background: #eee"><th scope="row" colspan="2"><?php _e('Kontera Options: ',ATA_LOCAL_NAME); ?></th>
+				<tr style="vertical-align: top; background: #eee"><th scope="row" colspan="2"><?php _e('Kontera Options:',ATA_LOCAL_NAME); ?></th>
 				</tr>
-				<tr style="vertical-align: top;"><th scope="row"><label for="tp_kontera_ID"><?php _e('Kontera ID (Value of dc_PublisherID): ',ATA_LOCAL_NAME); ?></label></th>
+				<tr style="vertical-align: top;"><th scope="row"><label for="tp_kontera_ID"><?php _e('Kontera ID (Value of dc_PublisherID):',ATA_LOCAL_NAME); ?></label></th>
 				<td><input type="textbox" name="tp_kontera_ID" id="tp_kontera_ID" value="<?php echo attribute_escape(stripslashes($ata_settings[tp_kontera_ID])); ?>" style="width:250px" /></td>
 				</tr>
-				<tr style="vertical-align: top;"><th scope="row"><label for="tp_kontera_linkcolor"><?php _e('Kontera link colour (Value of dc_AdLinkColor): ',ATA_LOCAL_NAME); ?></label></th>
+				<tr style="vertical-align: top;"><th scope="row"><label for="tp_kontera_linkcolor"><?php _e('Kontera link colour (Value of dc_AdLinkColor):',ATA_LOCAL_NAME); ?></label></th>
 				<td><input type="textbox" name="tp_kontera_linkcolor" id="tp_kontera_linkcolor" value="<?php echo attribute_escape(stripslashes($ata_settings[tp_kontera_linkcolor])); ?>" style="width:250px" /></td>
 				</tr>
-				<tr style="vertical-align: top;"><th scope="row"><label for="tp_kontera_addZT"><?php _e('Wrap post content with Kontera Zone Tags: ',ATA_LOCAL_NAME); ?></label></th>
+				<tr style="vertical-align: top;"><th scope="row"><label for="tp_kontera_addZT"><?php _e('Wrap post content with Kontera Zone Tags:',ATA_LOCAL_NAME); ?></label></th>
 				<td><input type="checkbox" name="tp_kontera_addZT" id="tp_kontera_addZT" <?php if ($ata_settings[tp_kontera_addZT]) echo 'checked="checked"' ?> /></td>
+				</tr>
+				<tr style="vertical-align: top; background: #eee"><th scope="row" colspan="2"><?php _e('Wibiya Options:',ATA_LOCAL_NAME); ?></th>
+				</tr>
+				<tr style="vertical-align: top;"><th scope="row"><label for="tp_wibiya_url"><?php _e('Wibiya Toolbar Path:',ATA_LOCAL_NAME); ?></label></th>
+				<td><input type="textbox" name="tp_wibiya_url" id="tp_wibiya_url" value="<?php echo attribute_escape(stripslashes($ata_settings[tp_wibiya_url])); ?>" style="width:500px" /></td>
 				</tr>
 			  </table>
 			</div>
@@ -170,21 +176,21 @@ function ata_options() {
 			</h3>
 			  <table class="form-table">
 				<tr style="vertical-align: top; "><td scope="row" colspan="2">
-					<label><input type="checkbox" name="feed_addhtmlbefore" id="feed_addhtmlbefore" <?php if ($ata_settings[feed_addhtmlbefore]) echo 'checked="checked"' ?> /> <?php _e('Add the following to the feed before the content. (You can use HTML): ',ATA_LOCAL_NAME); ?></label>
+					<label><input type="checkbox" name="feed_addhtmlbefore" id="feed_addhtmlbefore" <?php if ($ata_settings[feed_addhtmlbefore]) echo 'checked="checked"' ?> /> <?php _e('Add the following to the feed before the content. (You can use HTML):',ATA_LOCAL_NAME); ?></label>
 					<br /><textarea name="feed_htmlbefore" id="feed_htmlbefore" rows="15" cols="80"><?php echo stripslashes($ata_settings[feed_htmlbefore]); ?></textarea></td>
 				</tr>
 				<tr style="vertical-align: top; "><td scope="row" colspan="2">
-					<label><input type="checkbox" name="feed_addhtmlafter" id="feed_addhtmlafter" <?php if ($ata_settings[feed_addhtmlafter]) echo 'checked="checked"' ?> /> <?php _e('Add the following to the feed after the content. (You can use HTML): ',ATA_LOCAL_NAME); ?></label>
+					<label><input type="checkbox" name="feed_addhtmlafter" id="feed_addhtmlafter" <?php if ($ata_settings[feed_addhtmlafter]) echo 'checked="checked"' ?> /> <?php _e('Add the following to the feed after the content. (You can use HTML):',ATA_LOCAL_NAME); ?></label>
 					<br /><textarea name="feed_htmlafter" id="feed_htmlafter" rows="15" cols="80"><?php echo stripslashes($ata_settings[feed_htmlafter]); ?></textarea></td>
 				</tr>
 				<tr style="vertical-align: top; "><td scope="row" colspan="2">
-					<label><input type="checkbox" name="feed_addcopyright" id="feed_addcopyright" <?php if ($ata_settings[feed_addcopyright]) echo 'checked="checked"' ?> /> <?php _e('Add the following copyright notice to the feed (You can use HTML): ',ATA_LOCAL_NAME); ?></label>
+					<label><input type="checkbox" name="feed_addcopyright" id="feed_addcopyright" <?php if ($ata_settings[feed_addcopyright]) echo 'checked="checked"' ?> /> <?php _e('Add the following copyright notice to the feed (You can use HTML):',ATA_LOCAL_NAME); ?></label>
 					<br /><textarea name="feed_copyrightnotice" id="feed_copyrightnotice" rows="15" cols="80"><?php echo stripslashes($ata_settings[feed_copyrightnotice]); ?></textarea></td>
 				</tr>
-				<tr style="vertical-align: top;"><th scope="row"><label for="feed_addtitle"><?php _e('Add a link to the title of the post in the feed: ',ATA_LOCAL_NAME); ?></label></th>
+				<tr style="vertical-align: top;"><th scope="row"><label for="feed_addtitle"><?php _e('Add a link to the title of the post in the feed:',ATA_LOCAL_NAME); ?></label></th>
 				<td><input type="checkbox" name="feed_addtitle" id="feed_addtitle" <?php if ($ata_settings[feed_addtitle]) echo 'checked="checked"' ?> /></td>
 				</tr>
-				<tr style="vertical-align: top;"><th scope="row"><label for="addcredit"><?php _e('Add a link to "Add to All" plugin page: ',ATA_LOCAL_NAME); ?></label></th>
+				<tr style="vertical-align: top;"><th scope="row"><label for="addcredit"><?php _e('Add a link to "Add to All" plugin page:',ATA_LOCAL_NAME); ?></label></th>
 				<td><input type="checkbox" name="addcredit" id="addcredit" <?php if ($ata_settings[addcredit]) echo 'checked="checked"' ?> /></td>
 				</tr>
 			  </table>
