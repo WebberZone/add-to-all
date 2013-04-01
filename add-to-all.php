@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Add to All
-Version:     1.0.2
+Version:     1.0.3
 Plugin URI:  http://ajaydsouza.com/wordpress/plugins/add-to-all/
 Description: A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
 Author:      Ajay D'Souza
@@ -48,14 +48,14 @@ function ald_ata_footer() {
 
 	$ata_settings = ata_read_options();
 
-	$ata_other = stripslashes($ata_settings[ft_other]);
-	$sc_project = stripslashes($ata_settings[tp_sc_project]);
-	$sc_security = stripslashes($ata_settings[tp_sc_security]);
-	$ga_uacct = stripslashes($ata_settings[tp_ga_uacct]);
-	$ga_url = stripslashes($ata_settings[tp_ga_domain]);
-	$kontera_ID = stripslashes($ata_settings[tp_kontera_ID]);
-	$kontera_linkcolor = stripslashes($ata_settings[tp_kontera_linkcolor]);
-	$tp_wibiya_url = stripslashes($ata_settings[tp_wibiya_url]);
+	$ata_other = stripslashes($ata_settings['ft_other']);
+	$sc_project = stripslashes($ata_settings['tp_sc_project']);
+	$sc_security = stripslashes($ata_settings['tp_sc_security']);
+	$ga_uacct = stripslashes($ata_settings['tp_ga_uacct']);
+	$ga_url = stripslashes($ata_settings['tp_ga_domain']);
+	$kontera_ID = stripslashes($ata_settings['tp_kontera_ID']);
+	$kontera_linkcolor = stripslashes($ata_settings['tp_kontera_linkcolor']);
+	$tp_wibiya_url = stripslashes($ata_settings['tp_wibiya_url']);
 	
 	// Add other footer 
 	if ($ata_other != '') {
@@ -84,6 +84,8 @@ function ald_ata_footer() {
 	<script type="text/javascript">
 	// <![CDATA[
 	  var _gaq = _gaq || [];
+	  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+	  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
 	  _gaq.push(['_setAccount', '<?php echo $ga_uacct; ?>']);
 	  _gaq.push(['_setDomainName', '<?php echo $ga_url; ?>']);
 	  _gaq.push(['_setAllowLinker', true]);
@@ -123,16 +125,17 @@ function ald_ata_footer() {
 	
 }
 
-// Content function
-add_filter('the_content', 'ald_ata_content');
-function ald_ata_content($content) {
+
+// Content function with default filter
+add_filter('the_content', 'ata_content_nofilter');
+function ata_content_nofilter($content) {
 	
 	global $single;
 	$ata_settings = ata_read_options();
-	$str_before = '<div class="KonaBody">';
-	$str_after = '</div>';
 	
     if($ata_settings['tp_kontera_addZT']) {
+		$str_before = '<div class="KonaBody">';
+		$str_after = '</div>';
 		if((is_singular())||(is_home())||(is_archive())) {
 			return $str_before.$content.$str_after;
 		} else {
@@ -143,41 +146,100 @@ function ald_ata_content($content) {
 	}
 }
 
-// Feed function
-add_filter('the_content', 'ald_ata',99999999);
-function ald_ata($content) {
+// Content function with user defined filter
+add_action( 'template_redirect', 'ata_content_prepare_filter' );
+function ata_content_prepare_filter() {
 	$ata_settings = ata_read_options();
-	$creditline = '<br /><span style="font-size: 0.8em">Feed enhanced by the <a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/">Add To All Plugin</a> by <a href="http://ajaydsouza.com/">Ajay D\'Souza</a></span>';
+
+    $priority = isset ( $ata_settings['content_filter_priority'] ) ? $ata_settings['content_filter_priority'] : 10;
+
+    add_filter( 'the_content', 'ata_content', $priority );
+}
+
+function ata_content($content) {
+	$ata_settings = ata_read_options();
 	
-	$str_before ='';
-	$str_after ='<hr style="border-top:black solid 1px" />';
+	if((is_singular())||(is_home())||(is_archive())) {
+		$str_before = '';
+		$str_after = '';
 	
-    if(is_feed()) {
-		if($ata_settings[feed_addhtmlbefore])
+		if (is_singular()) {
+			if($ata_settings['content_addhtmlbefore'])
+			{
+				$str_before .= stripslashes($ata_settings['content_htmlbefore']);
+			}
+			
+			if($ata_settings['content_addhtmlafter'])
+			{
+				$str_after .= stripslashes($ata_settings['content_htmlafter']);
+			}
+				
+				
+			if($ata_settings['content_addhtmlbeforeS'])
+			{
+				$str_before .= stripslashes($ata_settings['content_htmlbeforeS']);
+			}
+			
+			if($ata_settings['content_addhtmlafterS'])
+			{
+				$str_after .= stripslashes($ata_settings['content_htmlafterS']);
+			}
+		} elseif ((is_home())||(is_archive())) {
+			if($ata_settings['content_addhtmlbefore'])
+			{
+				$str_before .= stripslashes($ata_settings['content_htmlbefore']);
+			}
+			
+			if($ata_settings['content_addhtmlafter'])
+			{
+				$str_after .= stripslashes($ata_settings['content_htmlafter']);
+			}
+		}
+
+	    return $str_before.$content.$str_after;
+	} else {
+		return $content;
+	}
+	
+}
+
+
+// Feed function
+add_filter('the_excerpt_rss', 'ald_ata_rss',99999999);
+add_filter('the_content_feed', 'ald_ata_rss',99999999);
+function ald_ata_rss($content) {
+	$ata_settings = ata_read_options();
+	
+    if( ($ata_settings['feed_addhtmlbefore']) || ($ata_settings['feed_addhtmlafter']) || ($ata_settings['feed_addtitle']) || ($ata_settings['feed_addcopyright']) || ($ata_settings['addcredit']) ) {
+		$creditline = '<br /><span style="font-size: 0.8em">Feed enhanced by the <a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All Plugin</a> by <a href="http://ajaydsouza.com/" rel="nofollow">Ajay D\'Souza</a></span>';
+		$str_before ='';
+		$str_after ='<hr style="border-top:black solid 1px" />';
+
+		if($ata_settings['feed_addhtmlbefore'])
 		{
-			$str_before .= stripslashes($ata_settings[feed_htmlbefore]);
+			$str_before .= stripslashes($ata_settings['feed_htmlbefore']);
 			$str_before .= '<br />';
 		}
 		
-		if($ata_settings[feed_addhtmlafter])
+		if($ata_settings['feed_addhtmlafter'])
 		{
-			$str_after .= stripslashes($ata_settings[feed_feed_htmlafter]);
+			$str_after .= stripslashes($ata_settings['feed_htmlafter']);
 			$str_after .= '<br />';
 		}
 		
-		if($ata_settings[feed_addtitle])
+		if($ata_settings['feed_addtitle'])
 		{
 			$str_after .= '<a href="'.get_permalink().'">'.the_title('','',false).'</a> was first posted on '.get_the_time('F j, Y').' at '.get_the_time('g:i a').'.';
 			$str_after .= '<br />';
 		}
 		
-		if($ata_settings[feed_addcopyright])
+		if($ata_settings['feed_addcopyright'])
 		{
-			$str_after .= stripslashes($ata_settings[feed_copyrightnotice]);
+			$str_after .= stripslashes($ata_settings['feed_copyrightnotice']);
 			$str_after .= '<br />';
 		}
 		
-		if($ata_settings[addcredit])
+		if($ata_settings['addcredit'])
 		{
 			$str_after .= $creditline;
 			$str_after .= '<br />';
@@ -195,8 +257,8 @@ function ald_ata_header() {
 	global $wpdb, $post, $single;
 
 	$ata_settings = ata_read_options();
-	$ata_other = stripslashes($ata_settings[head_other]);
-	$ata_head_CSS = stripslashes($ata_settings[head_CSS]);
+	$ata_other = stripslashes($ata_settings['head_other']);
+	$ata_head_CSS = stripslashes($ata_settings['head_CSS']);
 	
 	// Add CSS to header 
 	if ($ata_head_CSS != '') {
@@ -218,6 +280,17 @@ function ata_default_options() {
 
 	$ata_settings = Array (
 						'addcredit' => false,		// Show credits?
+						
+						// Content options
+						'content_htmlbefore' => '',		// HTML you want added to the content
+						'content_htmlafter' => '',		// HTML you want added to the content
+						'content_addhtmlbefore' => false,		// Add HTML to content?
+						'content_addhtmlafter' => false,		// Add HTML to content?
+						'content_htmlbeforeS' => '',		// HTML you want added to the content on single pages only
+						'content_htmlafterS' => '',		// HTML you want added to the content on single pages only
+						'content_addhtmlbeforeS' => false,		// Add HTML to content on single pages?
+						'content_addhtmlafterS' => false,		// Add HTML to content on single pages?
+						'content_filter_priority' => 999,		// Content priority
 						
 						// Feed options
 						'feed_htmlbefore' => '',		// HTML you want added to the feed
@@ -292,9 +365,9 @@ function ata_get_the_post_thumbnail($postid) {
 	$title = get_the_title($postid);
 	
 	if (function_exists('has_post_thumbnail') && has_post_thumbnail($result->ID)) {
-		$output .= get_the_post_thumbnail($result->ID, array($ata_settings[thumb_width],$ata_settings[thumb_height]), array('title' => $title,'alt' => $title, 'class' => 'ata_thumb', 'border' => '0'));
+		$output .= get_the_post_thumbnail($result->ID, array($ata_settings['thumb_width'],$ata_settings['thumb_height']), array('title' => $title,'alt' => $title, 'class' => 'ata_thumb', 'border' => '0'));
 	} else {
-		$postimage = get_post_meta($result->ID, $ata_settings[thumb_meta], true);	// Check
+		$postimage = get_post_meta($result->ID, $ata_settings['thumb_meta'], true);	// Check
 		if (!$postimage && $ata_settings['scan_images']) {
 			preg_match_all( '|<img.*?src=[\'"](.*?)[\'"].*?>|i', $result->post_content, $matches );
 			// any image there?
@@ -303,9 +376,9 @@ function ata_get_the_post_thumbnail($postid) {
 			}
 		}
 		if (!$postimage) $postimage = get_post_meta($result->ID, '_video_thumbnail', true); // If no other thumbnail set, try to get the custom video thumbnail set by the Video Thumbnails plugin
-		if ($ata_settings['thumb_default_show'] && !$postimage) $postimage = $ata_settings[thumb_default]; // If no thumb found and settings permit, use default thumb
+		if ($ata_settings['thumb_default_show'] && !$postimage) $postimage = $ata_settings['thumb_default']; // If no thumb found and settings permit, use default thumb
 		if ($postimage) {
-		  $output .= '<img src="'.$postimage.'" alt="'.$title.'" title="'.$title.'" style="max-width:'.$ata_settings[thumb_width].'px;max-height:'.$ata_settings[thumb_height].'px;" border="0" class="ata_thumb" />';
+		  $output .= '<img src="'.$postimage.'" alt="'.$title.'" title="'.$title.'" style="max-width:'.$ata_settings['thumb_width'].'px;max-height:'.$ata_settings['thumb_height'].'px;" border="0" class="ata_thumb" />';
 		}
 	}
 	
@@ -334,28 +407,43 @@ function ata_excerpt($id,$excerpt_length){
 	return $out;
 }
 
+/*********************************************************************
+*				Admin Functions									*
+********************************************************************/
 // This function adds an Options page in WP Admin
 if (is_admin() || strstr($_SERVER['PHP_SELF'], 'wp-admin/')) {
 	require_once(ALD_ATA_DIR . "/admin.inc.php");
 
-// Add meta links
-function ata_plugin_actions( $links, $file ) {
-	static $plugin;
-	if (!$plugin) $plugin = plugin_basename(__FILE__);
- 
-	// create link
-	if ($file == $plugin) {
-		$links[] = '<a href="' . admin_url( 'options-general.php?page=ata_options' ) . '">' . __('Settings', ATA_LOCAL_NAME ) . '</a>';
-		$links[] = '<a href="http://wordpress.org/support/plugin/add-to-all">' . __('Support', ATA_LOCAL_NAME ) . '</a>';
-		$links[] = '<a href="http://ajaydsouza.com/donate/">' . __('Donate', ATA_LOCAL_NAME ) . '</a>';
+	// Adding WordPress plugin action links
+	add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'ata_plugin_actions_links' );
+	function ata_plugin_actions_links( $links ) {
+	
+		return array_merge(
+			array(
+				'settings' => '<a href="' . admin_url( 'options-general.php?page=ata_options' ) . '">' . __('Settings', ATA_LOCAL_NAME ) . '</a>'
+			),
+			$links
+		);
+	
 	}
-	return $links;
-}
-global $wp_version;
-if ( version_compare( $wp_version, '2.8alpha', '>' ) )
-	add_filter( 'plugin_row_meta', 'ata_plugin_actions', 10, 2 ); // only 2.8 and higher
-else add_filter( 'plugin_action_links', 'ata_plugin_actions', 10, 2 );
 
+	// Add meta links
+	function ata_plugin_actions( $links, $file ) {
+		static $plugin;
+		if (!$plugin) $plugin = plugin_basename(__FILE__);
+	 
+		// create link
+		if ($file == $plugin) {
+			$links[] = '<a href="http://wordpress.org/support/plugin/add-to-all">' . __('Support', ATA_LOCAL_NAME ) . '</a>';
+			$links[] = '<a href="http://ajaydsouza.com/donate/">' . __('Donate', ATA_LOCAL_NAME ) . '</a>';
+		}
+		return $links;
+	}
+	global $wp_version;
+	if ( version_compare( $wp_version, '2.8alpha', '>' ) )
+		add_filter( 'plugin_row_meta', 'ata_plugin_actions', 10, 2 ); // only 2.8 and higher
+	else add_filter( 'plugin_action_links', 'ata_plugin_actions', 10, 2 );
+	
 
 } // End admin.inc
 
