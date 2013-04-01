@@ -1,10 +1,10 @@
 ﻿=== Add to All ===
-Tags: header, footer, feed, Google Analytics, Statcounter, Kontera, Wibiya
+Tags: header, footer, feed, Google Analytics, Statcounter, Kontera, Wibiya, content, Infolinks, Adsense
 Contributors: Ajay
 Donate link: http://ajaydsouza.com/donate/
 Stable tag: trunk
 Requires at least: 3.0
-Tested up to: 3.5
+Tested up to: 3.6
 License: GPLv2 or later
 
 A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
@@ -21,18 +21,24 @@ The plugin gives you the power to add content to your feed in addition to adding
 
 = Key features =
 
-* Support for Google Analytics, Statcounter, Wibiya and Kontera
+* Inbuilt support for Google Analytics, Statcounter, Wibiya and Kontera
 * Add custom CSS code to your header
-* Add any HTML code to your header or footer or feed
+* Add any HTML code to your header, content, footer and feed
 * Add a copyright notice and a link to the post in your site's feed
 
 
 == Upgrade Notice ==
 
-= 1.0.2 =
-* Added support for Wibiya
+= 1.0.3 =
+* New section to add content before and after the post content, Enhanced link tracking for Google Analytics, plus some bug fixes
 
 == Changelog ==
+
+= 1.0.3 =
+* Added: new section for adding text / HTML to content of a post
+* Added: Enhanced link tracking for Google Analytics. <a href="https://support.google.com/analytics/bin/answer.py?hl=en-GB&utm_id=ad&answer=2558867">View explanation</a>
+* Fixed: After content settings in feeds were not working
+* Modified: Feed settings now work correctly in feed excerpts
 
 = 1.0.2 =
 * Added: support for Wibiya
@@ -62,12 +68,14 @@ The plugin gives you the power to add content to your feed in addition to adding
 
 4. Goto Settings &raquo; Add to All to configure
 
+
 == Screenshots ==
 
 1. Add to All options in WP-Admin - 3rd Party Options
 2. Add to All options in WP-Admin - Header Options
-3. Add to All options in WP-Admin - Footer Options
-4. Add to All options in WP-Admin - Feed Options
+3. Add to All options in WP-Admin - Content Options
+4. Add to All options in WP-Admin - Footer Options
+5. Add to All options in WP-Admin - Feed Options
 
 
 == Frequently Asked Questions ==
@@ -88,7 +96,6 @@ For more information, please visit http://ajaydsouza.com/wordpress/plugins/add-t
 Below are a few features that I plan on implementing in future versions of the plugin. However, there is no fixed time-frame for this and largely depends on how much time I can contribute to development.
 
 * Limited Facebook support to add your fan page in the sidebar
-* Limited support for Google Adsense code
 * Support for PHP code
 * Sidebar widgets
 * Support for Infolinks
