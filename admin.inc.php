@@ -50,7 +50,6 @@ function ata_options() {
 		$ata_settings['tp_kontera_ID'] = ($_POST['tp_kontera_ID']);
 		$ata_settings['tp_kontera_linkcolor'] = ($_POST['tp_kontera_linkcolor']);
 		$ata_settings['tp_kontera_addZT'] = (($_POST['tp_kontera_addZT']) ? true : false);
-		$ata_settings['tp_wibiya_url'] = ($_POST['tp_wibiya_url']);
 
 		update_option('ald_ata_settings', $ata_settings);
 		
@@ -147,11 +146,6 @@ function ata_options() {
 				</tr>
 				<tr style="vertical-align: top;"><th scope="row"><label for="tp_kontera_addZT"><?php _e('Wrap post content with Kontera Zone Tags:',ATA_LOCAL_NAME); ?></label></th>
 				<td><input type="checkbox" name="tp_kontera_addZT" id="tp_kontera_addZT" <?php if ($ata_settings['tp_kontera_addZT']) echo 'checked="checked"' ?> /></td>
-				</tr>
-				<tr style="vertical-align: top; background: #eee"><th scope="row" colspan="2"><?php _e('Wibiya Options:',ATA_LOCAL_NAME); ?></th>
-				</tr>
-				<tr style="vertical-align: top;"><th scope="row"><label for="tp_wibiya_url"><?php _e('Wibiya Toolbar Path:',ATA_LOCAL_NAME); ?></label></th>
-				<td><input type="textbox" name="tp_wibiya_url" id="tp_wibiya_url" value="<?php echo esc_attr(stripslashes($ata_settings['tp_wibiya_url'])); ?>" style="width:500px" /></td>
 				</tr>
 			  </table>
 			</div>

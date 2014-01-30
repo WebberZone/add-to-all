@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Add to All
-Version:     1.0.3
+Version:     1.0.3.1
 Plugin URI:  http://ajaydsouza.com/wordpress/plugins/add-to-all/
 Description: A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
 Author:      Ajay D'Souza
@@ -55,7 +55,6 @@ function ald_ata_footer() {
 	$ga_url = stripslashes($ata_settings['tp_ga_domain']);
 	$kontera_ID = stripslashes($ata_settings['tp_kontera_ID']);
 	$kontera_linkcolor = stripslashes($ata_settings['tp_kontera_linkcolor']);
-	$tp_wibiya_url = stripslashes($ata_settings['tp_wibiya_url']);
 	
 	// Add other footer 
 	if ($ata_other != '') {
@@ -115,13 +114,6 @@ function ald_ata_footer() {
 
 <?php	}
 	
-	if ($tp_wibiya_url != '') {
-?>
-	<!-- Wibiya -->
-	<script src="<?php echo $tp_wibiya_url; ?>" type="text/javascript"></script>
-	<!-- end Wibiya --> 
-
-<?php	}
 	
 }
 
@@ -310,7 +302,6 @@ function ata_default_options() {
 						'tp_kontera_ID' => '',		// Kontera Publisher ID
 						'tp_kontera_linkcolor' => '',		// Kontera link color
 						'tp_kontera_addZT' => '',		// Kontera Add zone tags
-						'tp_wibiya_url' => '',		// Kontera Add zone tags
 
 						// Footer options
 						'ft_other' => '',				// For any other code
