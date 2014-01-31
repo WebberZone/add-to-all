@@ -49,7 +49,11 @@ function ata_options() {
 		$ata_settings['tp_ga_domain'] = ($_POST['tp_ga_domain']);
 		$ata_settings['tp_kontera_ID'] = ($_POST['tp_kontera_ID']);
 		$ata_settings['tp_kontera_linkcolor'] = ($_POST['tp_kontera_linkcolor']);
+<<<<<<< HEAD
 		$ata_settings['tp_kontera_addZT'] = (($_POST['tp_kontera_addZT']) ? true : false);
+=======
+		$ata_settings['tp_kontera_addZT'] = ((isset($_POST['tp_kontera_addZT'])) ? true : false);
+>>>>>>> work
 
 		update_option('ald_ata_settings', $ata_settings);
 		
@@ -239,8 +243,8 @@ function ata_options() {
 			</div>
 		</div>
 		<p>
-		  <input type="submit" name="ata_save" id="ata_save" value="Save Options" style="border:#0C0 1px solid" />
-		  <input name="ata_default" type="submit" id="ata_default" value="Default Options" style="border:#F00 1px solid" onclick="if (!confirm('<?php _e('Do you want to set options to Default?',ATA_LOCAL_NAME); ?>')) return false;" />
+		  <input type="submit" name="ata_save" id="ata_save" value="Save Options" class="button-primary" />
+		  <input name="ata_default" type="submit" id="ata_default" value="Default Options" class="button-secondary" onclick="if (!confirm('<?php _e('Do you want to set options to Default?',ATA_LOCAL_NAME); ?>')) return false;" />
 		</p>
 		</fieldset>
 	  </form>
