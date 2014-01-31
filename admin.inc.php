@@ -49,11 +49,7 @@ function ata_options() {
 		$ata_settings['tp_ga_domain'] = ($_POST['tp_ga_domain']);
 		$ata_settings['tp_kontera_ID'] = ($_POST['tp_kontera_ID']);
 		$ata_settings['tp_kontera_linkcolor'] = ($_POST['tp_kontera_linkcolor']);
-<<<<<<< HEAD
-		$ata_settings['tp_kontera_addZT'] = (($_POST['tp_kontera_addZT']) ? true : false);
-=======
 		$ata_settings['tp_kontera_addZT'] = ((isset($_POST['tp_kontera_addZT'])) ? true : false);
->>>>>>> work
 
 		update_option('ald_ata_settings', $ata_settings);
 		
