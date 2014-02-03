@@ -38,7 +38,7 @@ Add to All comes with a pre-installed copyright notice added to your feed and yo
 = 1.0.4 =
 * Added: Support for Tynt
 * Modified: Removed Wibiya
-* New: Admin interface has been totally revamped to fit the look and feel of your WordPress Dashboard. Check out the <a href="">new screenshots</a>
+* New: Admin interface has been totally revamped to fit the look and feel of your WordPress Dashboard. Check out the <a href="http://wordpress.org/plugins/add-to-all/screenshots/">new screenshots</a>
 * Fixed: Potential cross site request forgery in plugin settings page
 
 = 1.0.3 =
