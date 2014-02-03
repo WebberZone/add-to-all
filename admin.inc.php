@@ -11,7 +11,7 @@ function ata_options() {
 
 	$ata_settings = ata_read_options();
 
-	if (isset($_POST['ata_save'])) {
+	if ( (isset($_POST['ata_save'])) && (check_admin_referer('add-to-all')) ) {
 
 		$ata_settings['addcredit'] = ((isset($_POST['addcredit'])) ? true : false);
 
@@ -70,63 +70,18 @@ function ata_options() {
 ?>
 
 <div class="wrap">
-	<div id="page-wrap">
-	<div id="inside">
-		<div id="header">
-		<h2>Add to All</h2>
-		</div>
-	  <div id="side">
-		<div class="side-widget">
-			<span class="title"><?php _e('Support the development',ATA_LOCAL_NAME) ?></span>
-			<div id="donate-form">
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-				<input type="hidden" name="cmd" value="_xclick">
-				<input type="hidden" name="business" value="donate@ajaydsouza.com">
-				<input type="hidden" name="lc" value="IN">
-				<input type="hidden" name="item_name" value="Donation for Add to All">
-				<input type="hidden" name="item_number" value="ata">
-				<strong><?php _e('Enter amount in USD: ',ATA_LOCAL_NAME) ?></strong> <input name="amount" value="10.00" size="6" type="text"><br />
-				<input type="hidden" name="currency_code" value="USD">
-				<input type="hidden" name="button_subtype" value="services">
-				<input type="hidden" name="bn" value="PP-BuyNowBF:btn_donate_LG.gif:NonHosted">
-				<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="<?php _e('Send your donation to the author of',ATA_LOCAL_NAME) ?> Add to All?">
-				<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-				</form>
-			</div>
-		</div>
-		<div class="side-widget">
-			<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fajaydsouzacom&amp;width=292&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=true&amp;appId=113175385243" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:62px;" allowTransparency="true"></iframe>
-			<div style="text-align:center"><a href="https://twitter.com/ajaydsouza" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @ajaydsouza</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>
-		</div>
-		<div class="side-widget">
-		<span class="title"><?php _e('Quick links',ATA_LOCAL_NAME) ?></span>				
-		<ul>
-			<li><a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/"><?php _e('Add to All plugin page',ATA_LOCAL_NAME) ?></a></li>
-			<li><a href="http://ajaydsouza.com/wordpress/plugins/"><?php _e('Other plugins',ATA_LOCAL_NAME) ?></a></li>
-			<li><a href="http://ajaydsouza.com/"><?php _e('Ajay\'s blog',ATA_LOCAL_NAME) ?></a></li>
-			<li><a href="https://wordpress.org/plugins/add-to-all/faq/"><?php _e('FAQ',ATA_LOCAL_NAME) ?></a></li>
-			<li><a href="http://wordpress.org/support/plugin/add-to-all"><?php _e('Support',ATA_LOCAL_NAME) ?></a></li>
-			<li><a href="https://wordpress.org/support/view/plugin-reviews/add-to-all"><?php _e('Reviews',ATA_LOCAL_NAME) ?></a></li>
-		</ul>
-		</div>
-		<div class="side-widget">
-		<span class="title"><?php _e('Recent developments',ATA_LOCAL_NAME) ?></span>				
-		<?php require_once(ABSPATH . WPINC . '/class-simplepie.php'); wp_widget_rss_output('http://ajaydsouza.com/archives/category/wordpress/plugins/feed/', array('items' => 5, 'show_author' => 0, 'show_date' => 1));
-		?>
-		</div>
-	  </div>
-
+	<h2>Add to All</h2>
+	<div id="poststuff">
+	<div id="post-body" class="metabox-holder columns-2">
+	<div id="post-body-content">
 	  <div id="options-div">
 	  <form method="post" id="ata_options" name="ata_options" onsubmit="return checkForm()">
-		<fieldset class="options">
-		<div class="tabber">
-			<div class="tabbertab">
-			<h3>
-			  <?php _e('Options for 3rd party services',ATA_LOCAL_NAME); ?>
-			</h3>
-			  <table class="form-table">
-				<tr style="background: #eee"><th scope="row" colspan="2"><?php _e('Statcounter Options:',ATA_LOCAL_NAME); ?></th>
+	    <div id="thirdpartydiv" class="postbox"><div class="handlediv" title="Click to toggle"><br /></div>
+	      <h3 class='hndle'><span><?php _e('Options for 3rd party services',ATA_LOCAL_NAME); ?></span></h3>
+	      <div class="inside">
+			<table class="form-table">
+			  <tbody>
+				<tr><th scope="row" colspan="2"><?php _e('Statcounter Options:',ATA_LOCAL_NAME); ?></th>
 				</tr>
 				<tr><th scope="row"><label for="tp_sc_project"><?php _e('StatCounter Project ID (Value of sc_project):',ATA_LOCAL_NAME); ?></label></th>
 					<td><input type="textbox" name="tp_sc_project" id="tp_sc_project" value="<?php echo esc_attr(stripslashes($ata_settings['tp_sc_project'])); ?>" style="width:250px" /></td>
@@ -134,7 +89,7 @@ function ata_options() {
 				<tr><th scope="row"><label for="tp_sc_security"><?php _e('StatCounter Security ID (Value of sc_security):',ATA_LOCAL_NAME); ?></label></th>
 					<td><input type="textbox" name="tp_sc_security" id="tp_sc_security" value="<?php echo esc_attr(stripslashes($ata_settings['tp_sc_security'])); ?>" style="width:250px" /></td>
 				</tr>
-				<tr style="background: #eee"><th scope="row" colspan="2"><?php _e('Google Analytics Options:',ATA_LOCAL_NAME); ?></th>
+				<tr><th scope="row" colspan="2"><?php _e('Google Analytics Options:',ATA_LOCAL_NAME); ?></th>
 				</tr>
 				<tr><th scope="row"><label for="tp_ga_uacct"><?php _e('Tracking ID:',ATA_LOCAL_NAME); ?></label></th>
 					<td><input type="textbox" name="tp_ga_uacct" id="tp_ga_uacct" value="<?php echo esc_attr(stripslashes($ata_settings['tp_ga_uacct'])); ?>" style="width:250px" /></td>
@@ -143,7 +98,7 @@ function ata_options() {
 					<td><input type="textbox" name="tp_ga_domain" id="tp_ga_domain" value="<?php echo esc_attr(stripslashes($ata_settings['tp_ga_domain'])); ?>" style="width:250px" /> 
 				    <a href="https://support.google.com/analytics/bin/answer.py?hl=en-GB&utm_id=ad&answer=1034342" target="_blank"><?php _e('View Explanation',ATA_LOCAL_NAME); ?></a></td>
 				</tr>
-				<tr style="background: #eee"><th scope="row" colspan="2"><?php _e('Kontera Options:',ATA_LOCAL_NAME); ?></th>
+				<tr><th scope="row" colspan="2"><?php _e('Kontera Options:',ATA_LOCAL_NAME); ?></th>
 				</tr>
 				<tr><th scope="row"><label for="tp_kontera_ID"><?php _e('Kontera ID (Value of dc_PublisherID):',ATA_LOCAL_NAME); ?></label></th>
 					<td><input type="textbox" name="tp_kontera_ID" id="tp_kontera_ID" value="<?php echo esc_attr(stripslashes($ata_settings['tp_kontera_ID'])); ?>" style="width:250px" /></td>
@@ -154,7 +109,7 @@ function ata_options() {
 				<tr><th scope="row"><label for="tp_kontera_addZT"><?php _e('Wrap post content with Kontera Zone Tags:',ATA_LOCAL_NAME); ?></label></th>
 					<td><input type="checkbox" name="tp_kontera_addZT" id="tp_kontera_addZT" <?php if ($ata_settings['tp_kontera_addZT']) echo 'checked="checked"' ?> /></td>
 				</tr>
-				<tr style="background: #eee"><th scope="row" colspan="2"><?php _e('Tynt Options:',ATA_LOCAL_NAME); ?></th>
+				<tr><th scope="row" colspan="2"><?php _e('Tynt Options:',ATA_LOCAL_NAME); ?></th>
 				</tr>
 				<tr><th scope="row"><label for="tp_tynt_id"><?php _e('Tynt ID:',ATA_LOCAL_NAME); ?></label></th>
 					<td>
@@ -162,51 +117,53 @@ function ata_options() {
 						<p class="description"><?php _e("This is the text between <code>Tynt.push('ID IS HERE')</code> in the <a href='http://tcr1.tynt.com/install' target='_blank'>Install Code</a>",ATA_LOCAL_NAME); ?></p>
 					</td>
 				</tr>
-			  </table>
-			</div>
-			<div class="tabbertab">
-			<h3>
-			  <?php _e('Header options',ATA_LOCAL_NAME); ?>
-			</h3>
-			  <table class="form-table">
-				<tr style="vertical-align: top; "><th scope="row" colspan="2"><?php _e('Custom CSS to add to header:',ATA_LOCAL_NAME); ?></th>
+			  </tbody>
+			</table>
+	      </div>
+	    </div>
+	    <div id="headeropdiv" class="postbox"><div class="handlediv" title="Click to toggle"><br /></div>
+	      <h3 class='hndle'><span><?php _e('Header options',ATA_LOCAL_NAME); ?></span></h3>
+	      <div class="inside">
+			<table class="form-table">
+			  <tbody>
+				<tr><th scope="row" colspan="2"><?php _e('Custom CSS to add to header:',ATA_LOCAL_NAME); ?></th>
 				</tr>
-				<tr style="vertical-align: top; "><td scope="row" colspan="2"><textarea name="head_CSS" id="head_CSS" rows="15" cols="80"><?php echo stripslashes($ata_settings['head_CSS']); ?></textarea></td>
+				<tr><td scope="row" colspan="2"><textarea name="head_CSS" id="head_CSS" rows="15" cols="40" style="width:100%"><?php echo stripslashes($ata_settings['head_CSS']); ?></textarea></td>
 				<br /><em><?php _e('Do not include <code>style</code> tags',ATA_LOCAL_NAME); ?></em></tr>
-				<tr style="vertical-align: top; "><th scope="row" colspan="2"><?php _e('Any other HTML (no PHP) to add to <code>wp_head</code>:',ATA_LOCAL_NAME); ?></th>
+				<tr><th scope="row" colspan="2"><?php _e('Any other HTML (no PHP) to add to <code>wp_head</code>:',ATA_LOCAL_NAME); ?></th>
 				</tr>
-				<tr style="vertical-align: top; "><td scope="row" colspan="2"><textarea name="head_other" id="head_other" rows="15" cols="80"><?php echo stripslashes($ata_settings['head_other']); ?></textarea></td>
+				<tr><td scope="row" colspan="2"><textarea name="head_other" id="head_other" rows="15" cols="40" style="width:100%"><?php echo stripslashes($ata_settings['head_other']); ?></textarea></td>
 				</tr>
-			  </table>		
-			</div>
-			<div class="tabbertab">
-			<h3>
-			  <?php _e('Content options',ATA_LOCAL_NAME); ?>
-			</h3>
-			  <table class="form-table">
-				<tr style="background: #eee"><th scope="row" colspan="2"><?php _e('Content to add to all posts before and/or after post content:',ATA_LOCAL_NAME); ?></th>
+			  </tbody>
+			</table>		
+	      </div>
+	    </div>
+	    <div id="contentopdiv" class="postbox"><div class="handlediv" title="Click to toggle"><br /></div>
+	      <h3 class='hndle'><span><?php _e('Content options',ATA_LOCAL_NAME); ?></span></h3>
+	      <div class="inside">
+			<table class="form-table">
+			  <tbody>
+				<tr><th scope="row" colspan="2"><?php _e('Content to add to all posts before and/or after post content:',ATA_LOCAL_NAME); ?></th>
 				</tr>
-				<tr style="vertical-align: top; "><td scope="row" colspan="2">
+				<tr><td scope="row" colspan="2">
 					<label><input type="checkbox" name="content_addhtmlbefore" id="content_addhtmlbefore" <?php if ($ata_settings['content_addhtmlbefore']) echo 'checked="checked"' ?> /> <?php _e('Add the following before the content. (You can use HTML):',ATA_LOCAL_NAME); ?></label>
-					<br /><textarea name="content_htmlbefore" id="content_htmlbefore" rows="15" cols="80"><?php echo stripslashes($ata_settings['content_htmlbefore']); ?></textarea></td>
+					<br /><textarea name="content_htmlbefore" id="content_htmlbefore" rows="15" cols="40" style="width:100%"><?php echo stripslashes($ata_settings['content_htmlbefore']); ?></textarea></td>
 				</tr>
-				<tr style="vertical-align: top; "><td scope="row" colspan="2">
+				<tr><td scope="row" colspan="2">
 					<label><input type="checkbox" name="content_addhtmlafter" id="content_addhtmlafter" <?php if ($ata_settings['content_addhtmlafter']) echo 'checked="checked"' ?> /> <?php _e('Add the following after the content. (You can use HTML):',ATA_LOCAL_NAME); ?></label>
-					<br /><textarea name="content_htmlafter" id="content_htmlafter" rows="15" cols="80"><?php echo stripslashes($ata_settings['content_htmlafter']); ?></textarea></td>
+					<br /><textarea name="content_htmlafter" id="content_htmlafter" rows="15" cols="40" style="width:100%"><?php echo stripslashes($ata_settings['content_htmlafter']); ?></textarea></td>
 				</tr>
-
-				<tr style="background: #eee"><th scope="row" colspan="2"><?php _e('Content to add to single posts before and/or after post content:',ATA_LOCAL_NAME); ?></th>
+				<tr><th scope="row" colspan="2"><?php _e('Content to add to single posts before and/or after post content:',ATA_LOCAL_NAME); ?></th>
 				</tr>
-				<tr style="vertical-align: top; "><td scope="row" colspan="2">
+				<tr><td scope="row" colspan="2">
 					<label><input type="checkbox" name="content_addhtmlbeforeS" id="content_addhtmlbeforeS" <?php if ($ata_settings['content_addhtmlbeforeS']) echo 'checked="checked"' ?> /> <?php _e('Add the following before the content. (You can use HTML):',ATA_LOCAL_NAME); ?></label>
-					<br /><textarea name="content_htmlbeforeS" id="content_htmlbeforeS" rows="15" cols="80"><?php echo stripslashes($ata_settings['content_htmlbeforeS']); ?></textarea></td>
+					<br /><textarea name="content_htmlbeforeS" id="content_htmlbeforeS" rows="15" cols="40" style="width:100%"><?php echo stripslashes($ata_settings['content_htmlbeforeS']); ?></textarea></td>
 				</tr>
-				<tr style="vertical-align: top; "><td scope="row" colspan="2">
+				<tr><td scope="row" colspan="2">
 					<label><input type="checkbox" name="content_addhtmlafterS" id="content_addhtmlafterS" <?php if ($ata_settings['content_addhtmlafterS']) echo 'checked="checked"' ?> /> <?php _e('Add the following after the content. (You can use HTML):',ATA_LOCAL_NAME); ?></label>
-					<br /><textarea name="content_htmlafterS" id="content_htmlafterS" rows="15" cols="80"><?php echo stripslashes($ata_settings['content_htmlafterS']); ?></textarea></td>
+					<br /><textarea name="content_htmlafterS" id="content_htmlafterS" rows="15" cols="40" style="width:100%"><?php echo stripslashes($ata_settings['content_htmlafterS']); ?></textarea></td>
 				</tr>
-
-				<tr style="background: #eee"><th scope="row" colspan="2"><?php _e('Adjust content filter priority:',ATA_LOCAL_NAME); ?></th>
+				<tr><th scope="row" colspan="2"><?php _e('Adjust content filter priority:',ATA_LOCAL_NAME); ?></th>
 				</tr>
 				<tr>
 				<td colspan="2">
@@ -214,35 +171,39 @@ function ata_options() {
 					<p class="description"><?php _e('A higher number will cause the content above to be processed after other filters. Number below 10 is not recommended',ATA_LOCAL_NAME); ?></p>
 				</td>
 				</tr>
-			  </table>
-			</div>
-			<div class="tabbertab">
-			<h3>
-			  <?php _e('Footer options',ATA_LOCAL_NAME); ?>
-			</h3>
-			  <table class="form-table">
-				<tr style="vertical-align: top; "><th scope="row" colspan="2"><?php _e('Any other HTML (no PHP) to add to <code>wp_footer</code>:',ATA_LOCAL_NAME); ?></th>
+			  </tbody>
+			</table>
+	      </div>
+	    </div>
+	    <div id="footeropdiv" class="postbox"><div class="handlediv" title="Click to toggle"><br /></div>
+	      <h3 class='hndle'><span><?php _e('Footer options',ATA_LOCAL_NAME); ?></span></h3>
+	      <div class="inside">
+			<table class="form-table">
+			  <tbody>
+				<tr><th scope="row" colspan="2"><?php _e('Any other HTML (no PHP) to add to <code>wp_footer</code>:',ATA_LOCAL_NAME); ?></th>
 				</tr>
-				<tr style="vertical-align: top; "><td scope="row" colspan="2"><textarea name="ft_other" id="ft_other" rows="15" cols="80"><?php echo stripslashes($ata_settings['ft_other']); ?></textarea></td>
+				<tr><td scope="row" colspan="2"><textarea name="ft_other" id="ft_other" rows="15" cols="40" style="width:100%"><?php echo stripslashes($ata_settings['ft_other']); ?></textarea></td>
 				</tr>
-			  </table>		
-			</div>
-			<div class="tabbertab">
-			<h3>
-			  <?php _e('Feed options',ATA_LOCAL_NAME); ?>
-			</h3>
-			  <table class="form-table">
-				<tr style="vertical-align: top; "><td scope="row" colspan="2">
+			  </tbody>
+			</table>		
+	      </div>
+	    </div>
+	    <div id="feedopdiv" class="postbox"><div class="handlediv" title="Click to toggle"><br /></div>
+	      <h3 class='hndle'><span><?php _e('Feed options',ATA_LOCAL_NAME); ?></span></h3>
+	      <div class="inside">
+			<table class="form-table">
+			  <tbody>
+				<tr><td scope="row" colspan="2">
 					<label><input type="checkbox" name="feed_addhtmlbefore" id="feed_addhtmlbefore" <?php if ($ata_settings['feed_addhtmlbefore']) echo 'checked="checked"' ?> /> <?php _e('Add the following to the feed before the content. (You can use HTML):',ATA_LOCAL_NAME); ?></label>
-					<br /><textarea name="feed_htmlbefore" id="feed_htmlbefore" rows="15" cols="80"><?php echo stripslashes($ata_settings['feed_htmlbefore']); ?></textarea></td>
+					<br /><textarea name="feed_htmlbefore" id="feed_htmlbefore" rows="15" cols="40" style="width:100%"><?php echo stripslashes($ata_settings['feed_htmlbefore']); ?></textarea></td>
 				</tr>
-				<tr style="vertical-align: top; "><td scope="row" colspan="2">
+				<tr><td scope="row" colspan="2">
 					<label><input type="checkbox" name="feed_addhtmlafter" id="feed_addhtmlafter" <?php if ($ata_settings['feed_addhtmlafter']) echo 'checked="checked"' ?> /> <?php _e('Add the following to the feed after the content. (You can use HTML):',ATA_LOCAL_NAME); ?></label>
-					<br /><textarea name="feed_htmlafter" id="feed_htmlafter" rows="15" cols="80"><?php echo stripslashes($ata_settings['feed_htmlafter']); ?></textarea></td>
+					<br /><textarea name="feed_htmlafter" id="feed_htmlafter" rows="15" cols="40" style="width:100%"><?php echo stripslashes($ata_settings['feed_htmlafter']); ?></textarea></td>
 				</tr>
-				<tr style="vertical-align: top; "><td scope="row" colspan="2">
+				<tr><td scope="row" colspan="2">
 					<label><input type="checkbox" name="feed_addcopyright" id="feed_addcopyright" <?php if ($ata_settings['feed_addcopyright']) echo 'checked="checked"' ?> /> <?php _e('Add the following copyright notice to the feed (You can use HTML):',ATA_LOCAL_NAME); ?></label>
-					<br /><textarea name="feed_copyrightnotice" id="feed_copyrightnotice" rows="15" cols="80"><?php echo stripslashes($ata_settings['feed_copyrightnotice']); ?></textarea></td>
+					<br /><textarea name="feed_copyrightnotice" id="feed_copyrightnotice" rows="15" cols="40" style="width:100%"><?php echo stripslashes($ata_settings['feed_copyrightnotice']); ?></textarea></td>
 				</tr>
 				<tr><th scope="row"><label for="feed_addtitle"><?php _e('Add a link to the title of the post in the feed:',ATA_LOCAL_NAME); ?></label></th>
 				<td><input type="checkbox" name="feed_addtitle" id="feed_addtitle" <?php if ($ata_settings['feed_addtitle']) echo 'checked="checked"' ?> /></td>
@@ -250,23 +211,73 @@ function ata_options() {
 				<tr><th scope="row"><label for="addcredit"><?php _e('Add a link to "Add to All" plugin page:',ATA_LOCAL_NAME); ?></label></th>
 				<td><input type="checkbox" name="addcredit" id="addcredit" <?php if ($ata_settings['addcredit']) echo 'checked="checked"' ?> /></td>
 				</tr>
-			  </table>
-			</div>
-		</div>
+			  </tbody>
+			</table>
+	      </div>
+	    </div>
+
 		<p>
 		  <input type="submit" name="ata_save" id="ata_save" value="Save Options" class="button-primary" />
 		  <input name="ata_default" type="submit" id="ata_default" value="Default Options" class="button-secondary" onclick="if (!confirm('<?php _e('Do you want to set options to Default?',ATA_LOCAL_NAME); ?>')) return false;" />
 		</p>
-		</fieldset>
+		<?php wp_nonce_field('add-to-all') ?>
 	  </form>
-	</div>
+	</div><!-- /options-div -->
+	</div><!-- /post-body-content -->
+	<div id="postbox-container-1" class="postbox-container">
+	  <div id="side-sortables" class="meta-box-sortables ui-sortable">
+	    <div id="donatediv" class="postbox"><div class="handlediv" title="Click to toggle"><br /></div>
+	      <h3 class='hndle'><span><?php _e('Support the development',ATA_LOCAL_NAME); ?></span></h3>
+	      <div class="inside">
+			<div id="donate-form">
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+				<input type="hidden" name="cmd" value="_xclick">
+				<input type="hidden" name="business" value="donate@ajaydsouza.com">
+				<input type="hidden" name="lc" value="IN">
+				<input type="hidden" name="item_name" value="Donation for Add to All">
+				<input type="hidden" name="item_number" value="ata">
+				<strong><?php _e('Enter amount in USD: ',ATA_LOCAL_NAME); ?></strong> <input name="amount" value="10.00" size="6" type="text"><br />
+				<input type="hidden" name="currency_code" value="USD">
+				<input type="hidden" name="button_subtype" value="services">
+				<input type="hidden" name="bn" value="PP-BuyNowBF:btn_donate_LG.gif:NonHosted">
+				<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="<?php _e('Send your donation to the author of',ATA_LOCAL_NAME); ?> Add to All?">
+				<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+				</form>
+			</div>
+	      </div>
+	    </div>
+	    <div id="followdiv" class="postbox"><div class="handlediv" title="Click to toggle"><br /></div>
+	      <h3 class='hndle'><span><?php _e('Follow me',ATA_LOCAL_NAME); ?></span></h3>
+	      <div class="inside">
+			<div id="follow-us">
+				<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fajaydsouzacom&amp;width=292&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=true&amp;appId=113175385243" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:62px;" allowTransparency="true"></iframe>
+				<div style="text-align:center"><a href="https://twitter.com/ajaydsouza" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @ajaydsouza</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>
+			</div>
+	      </div>
+	    </div>
+	    <div id="qlinksdiv" class="postbox"><div class="handlediv" title="Click to toggle"><br /></div>
+	      <h3 class='hndle'><span><?php _e('Quick links',ATA_LOCAL_NAME); ?></span></h3>
+	      <div class="inside">
+	        <div id="quick-links">
+				<ul>
+					<li><a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/"><?php _e('Add to All plugin page',ATA_LOCAL_NAME); ?></a></li>
+					<li><a href="http://ajaydsouza.com/wordpress/plugins/"><?php _e('Other plugins',ATA_LOCAL_NAME); ?></a></li>
+					<li><a href="http://ajaydsouza.com/"><?php _e('Ajay\'s blog',ATA_LOCAL_NAME); ?></a></li>
+					<li><a href="https://wordpress.org/plugins/add-to-all/faq/"><?php _e('FAQ',ATA_LOCAL_NAME); ?></a></li>
+					<li><a href="http://wordpress.org/support/plugin/add-to-all"><?php _e('Support',ATA_LOCAL_NAME); ?></a></li>
+					<li><a href="https://wordpress.org/support/view/plugin-reviews/add-to-all"><?php _e('Reviews',ATA_LOCAL_NAME); ?></a></li>
+				</ul>
+	        </div>
+	      </div>
+	    </div>
+	  </div><!-- /side-sortables -->
+	</div><!-- /postbox-container-1 -->
+	</div><!-- /post-body -->
+	<br class="clear" />
+	</div><!-- /poststuff -->
 
-	  </div>
-	  <div style="clear: both;"></div>
-	</div>
-</div>
 <?php
-
 }
 
 
@@ -293,18 +304,53 @@ function ata_admin_notice() {
 function ata_adminhead() {
 	global $ata_url;
 
+	wp_enqueue_script('common');
+	wp_enqueue_script('wp-lists');
+	wp_enqueue_script('postbox');
+
 ?>
-<link rel="stylesheet" type="text/css" href="<?php echo $ata_url ?>/admin-styles.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo $ata_url ?>/tabber/tabber.css" />
-<script type="text/javascript" language="JavaScript">
-function checkForm() {
-answer = true;
-if (siw && siw.selectingSomething)
-	answer = false;
-return answer;
-}//
-</script>
-<script type="text/javascript" src="<?php echo $ata_url ?>/tabber/tabber.js"></script>
-<?php }
+	<style type="text/css">
+	.postbox .handlediv:before {
+		right:12px;
+		font:400 20px/1 dashicons;
+		speak:none;
+		display:inline-block;
+		top:0;
+		position:relative;
+		-webkit-font-smoothing:antialiased;
+		-moz-osx-font-smoothing:grayscale;
+		text-decoration:none!important;
+		content:'\f142';
+		padding:8px 10px;
+	}
+	.postbox.closed .handlediv:before {
+		content: '\f140';
+	}
+	</style>
+	
+	<script type="text/javascript">
+		//<![CDATA[
+		jQuery(document).ready( function($) {
+			// close postboxes that should be closed
+			$('.if-js-closed').removeClass('if-js-closed').addClass('closed');
+			// postboxes setup
+			postboxes.add_postbox_toggles('ata_options');
+		});
+		//]]>
+	</script>
+	
+	<script type="text/javascript" language="JavaScript">
+		//<![CDATA[
+		function checkForm() {
+		answer = true;
+		if (siw && siw.selectingSomething)
+			answer = false;
+		return answer;
+		}//
+		//]]>
+	</script>
+
+<?php 
+}
 
 ?>

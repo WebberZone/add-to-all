@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Add to All
-Version:     1.0.3.2
+Version:     1.0.3.3
 Plugin URI:  http://ajaydsouza.com/wordpress/plugins/add-to-all/
 Description: A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
 Author:      Ajay D'Souza
