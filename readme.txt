@@ -13,7 +13,7 @@ A powerful plugin that will allow you to add custom code or CSS to your header, 
 
 <a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/">Add to All</a> is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
 
-Add to All comes with out of the box support for Google Analytics, Statcounter, Kontera and Tynt with other third party services in the pipeline.
+It comes with out of the box support for Google Analytics, Statcounter, Kontera and Tynt with other third party services in the pipeline. If you have any script that isn't supported by Add to All currently, you can just add the code to the Header or Footer sections.
 
 With this plugin installed, you do not need to edit your theme files every time you switch themes.
 
@@ -31,13 +31,14 @@ Add to All comes with a pre-installed copyright notice added to your feed and yo
 == Upgrade Notice ==
 
 = 1.0.4 =
-* Removed Wibiya; Added Tynt; Security and bug fixes
+* Removed Wibiya; Added Tynt; Security and bug fixes; New admin interface
 
 == Changelog ==
 
 = 1.0.4 =
 * Added: Support for Tynt
 * Modified: Removed Wibiya
+* New: Admin interface has been totally revamped to fit the look and feel of your WordPress Dashboard. Check out the <a href="">new screenshots</a>
 * Fixed: Potential cross site request forgery in plugin settings page
 
 = 1.0.3 =
@@ -56,6 +57,7 @@ Add to All comes with a pre-installed copyright notice added to your feed and yo
 = 1.0 =
 * Release
 
+
 == Installation ==
 
 = WordPress install =
@@ -72,7 +74,7 @@ Add to All comes with a pre-installed copyright notice added to your feed and yo
 
 3. Activate the Plugin in WP-Admin. 
 
-4. Goto Settings &raquo; Add to All to configure
+4. Goto **Settings &raquo; Add to All** to configure
 
 
 == Screenshots ==
@@ -94,10 +96,8 @@ Several customization options are available via the Settings page in WordPress A
 
 The plugin supports CSS, HTML and JavaScript code in the header and footer. PHP support is likely to be added in future versions
 
-For more information, please visit http://ajaydsouza.com/wordpress/plugins/add-to-all/
 
-
-== Wishlist ==
+= Wishlist =
 
 Below are a few features that I plan on implementing in future versions of the plugin. However, there is no fixed time-frame for this and largely depends on how much time I can contribute to development.
 
