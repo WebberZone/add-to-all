@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Add to All
-Version:     1.0.3
+Version:     1.0.4
 Plugin URI:  http://ajaydsouza.com/wordpress/plugins/add-to-all/
 Description: A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
 Author:      Ajay D'Souza
@@ -55,7 +55,6 @@ function ald_ata_footer() {
 	$ga_url = stripslashes($ata_settings['tp_ga_domain']);
 	$kontera_ID = stripslashes($ata_settings['tp_kontera_ID']);
 	$kontera_linkcolor = stripslashes($ata_settings['tp_kontera_linkcolor']);
-	$tp_wibiya_url = stripslashes($ata_settings['tp_wibiya_url']);
 	
 	// Add other footer 
 	if ($ata_other != '') {
@@ -115,13 +114,6 @@ function ald_ata_footer() {
 
 <?php	}
 	
-	if ($tp_wibiya_url != '') {
-?>
-	<!-- Wibiya -->
-	<script src="<?php echo $tp_wibiya_url; ?>" type="text/javascript"></script>
-	<!-- end Wibiya --> 
-
-<?php	}
 	
 }
 
@@ -251,7 +243,7 @@ function ald_ata_rss($content) {
     }
 }
 
-// Footer function
+// Header function
 add_action('wp_head','ald_ata_header');
 function ald_ata_header() {
 	global $wpdb, $post, $single;
@@ -259,11 +251,27 @@ function ald_ata_header() {
 	$ata_settings = ata_read_options();
 	$ata_other = stripslashes($ata_settings['head_other']);
 	$ata_head_CSS = stripslashes($ata_settings['head_CSS']);
+	$ata_tp_tynt_id = stripslashes($ata_settings['tp_tynt_id']);
 	
 	// Add CSS to header 
 	if ($ata_head_CSS != '') {
 		echo '<style type="text/css">'.$ata_head_CSS.'</style>';
 	}
+
+	// Add Tynt code to Header
+	if ($ata_tp_tynt_id != '') {
+?>
+	<!-- BEGIN Tynt Script - Inserted by Add to All WordPress Plugin -->
+	<script type="text/javascript">
+	if(document.location.protocol=='http:'){
+	 var Tynt=Tynt||[];Tynt.push('<?php echo $ata_tp_tynt_id; ?>');
+	 (function(){var s=document.createElement('script');s.async="async";s.type="text/javascript";s.src='http://tcr.tynt.com/ti.js';var h=document.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})();
+	}
+	</script>
+	<!-- END Tynt Script -->
+<?php
+	}
+
 	// Add other header 
 	if ($ata_other != '') {
 		echo $ata_other;
@@ -276,7 +284,7 @@ function ata_default_options() {
 	$copyrightnotice = '&copy;'. date("Y").' &quot;<a href="'.get_option('home').'">'.get_option('blogname').'</a>&quot;. ';
 	$copyrightnotice .= __('Use of this feed is for personal non-commercial use only. If you are not reading this article in your feed reader, then the site is guilty of copyright infringement. Please contact me at ','ald_ata_plugin');
 	$copyrightnotice .= get_option('admin_email');
-	$ga_url = '.'.parse_url(get_option('home'),PHP_URL_HOST);
+	$ga_url = parse_url(get_option('home'),PHP_URL_HOST);
 
 	$ata_settings = Array (
 						'addcredit' => false,		// Show credits?
@@ -310,7 +318,7 @@ function ata_default_options() {
 						'tp_kontera_ID' => '',		// Kontera Publisher ID
 						'tp_kontera_linkcolor' => '',		// Kontera link color
 						'tp_kontera_addZT' => '',		// Kontera Add zone tags
-						'tp_wibiya_url' => '',		// Kontera Add zone tags
+						'tp_tynt_id' => '',			// Tynt ID
 
 						// Footer options
 						'ft_other' => '',				// For any other code

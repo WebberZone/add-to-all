@@ -1,27 +1,28 @@
 ﻿=== Add to All ===
-Tags: header, footer, feed, Google Analytics, Statcounter, Kontera, Wibiya, content, Infolinks, Adsense
+Tags: header, footer, feed, Google Analytics, Statcounter, Kontera, Tynt, content, Infolinks, Adsense
 Contributors: Ajay
 Donate link: http://ajaydsouza.com/donate/
 Stable tag: trunk
 Requires at least: 3.0
-Tested up to: 3.6
+Tested up to: 3.9
 License: GPLv2 or later
 
 A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
 
 == Description ==
 
-<a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/">Add to All</a> is a powerful plugin that will allow you to add custom code or CSS to your header, footer, content or feed.
+<a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/">Add to All</a> is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
 
-Add to All comes with out of the box support for Google Analytics, Statcounter, Kontera, with other third party services in the pipeline.
+It comes with out of the box support for Google Analytics, Statcounter, Kontera and Tynt with other third party services in the pipeline. If you have any script that isn't supported by Add to All currently, you can just add the code to the Header or Footer sections.
 
-With this plugin installed, you do not need to edit your theme files every time you switch themes. You can also add custom CSS styles to your header as well as any HTML code to the header or footer of the theme.
+With this plugin installed, you do not need to edit your theme files every time you switch themes.
 
-The plugin gives you the power to add content to your feed in addition to adding a copyright notice. This is especially useful if you have any website scraping your feeds.
+Add to All comes with a pre-installed copyright notice added to your feed and you can also add in a link to your post or any other HTML or text that you might want.
+
 
 = Key features =
 
-* Inbuilt support for Google Analytics, Statcounter, Wibiya and Kontera
+* Inbuilt support for Google Analytics, Statcounter, Tynt and Kontera
 * Add custom CSS code to your header
 * Add any HTML code to your header, content, footer and feed
 * Add a copyright notice and a link to the post in your site's feed
@@ -29,10 +30,16 @@ The plugin gives you the power to add content to your feed in addition to adding
 
 == Upgrade Notice ==
 
-= 1.0.3 =
-* New section to add content before and after the post content, Enhanced link tracking for Google Analytics, plus some bug fixes
+= 1.0.4 =
+* Removed Wibiya; Added Tynt; Security and bug fixes; New admin interface
 
 == Changelog ==
+
+= 1.0.4 =
+* Added: Support for Tynt
+* Modified: Removed Wibiya
+* New: Admin interface has been totally revamped to fit the look and feel of your WordPress Dashboard. Check out the <a href="http://wordpress.org/plugins/add-to-all/screenshots/">new screenshots</a>
+* Fixed: Potential cross site request forgery in plugin settings page
 
 = 1.0.3 =
 * Added: new section for adding text / HTML to content of a post
@@ -50,6 +57,7 @@ The plugin gives you the power to add content to your feed in addition to adding
 = 1.0 =
 * Release
 
+
 == Installation ==
 
 = WordPress install =
@@ -66,7 +74,7 @@ The plugin gives you the power to add content to your feed in addition to adding
 
 3. Activate the Plugin in WP-Admin. 
 
-4. Goto Settings &raquo; Add to All to configure
+4. Goto **Settings &raquo; Add to All** to configure
 
 
 == Screenshots ==
@@ -88,10 +96,8 @@ Several customization options are available via the Settings page in WordPress A
 
 The plugin supports CSS, HTML and JavaScript code in the header and footer. PHP support is likely to be added in future versions
 
-For more information, please visit http://ajaydsouza.com/wordpress/plugins/add-to-all/
 
-
-== Wishlist ==
+= Wishlist =
 
 Below are a few features that I plan on implementing in future versions of the plugin. However, there is no fixed time-frame for this and largely depends on how much time I can contribute to development.
 
@@ -99,7 +105,6 @@ Below are a few features that I plan on implementing in future versions of the p
 * Support for PHP code
 * Sidebar widgets
 * Support for Infolinks
-* Support for Text Link Ads
 
 If you would like a feature to be added, or if you already have the code for the feature, you can let me know by <a href="http://wordpress.org/support/plugin/add-to-all">posting in this forum</a>.
 

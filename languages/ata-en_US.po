@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Contextual Related Posts\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-01 21:27-0000\n"
+"POT-Creation-Date: 2014-02-03 23:24-0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Ajay D'Souza <me@ajaydsouza.com>\n"
 "Language-Team:  <me@ajaydsouza.com>\n"
@@ -12,227 +12,277 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e;_c;__ngettext\n"
 "X-Poedit-Basepath: ../\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: add-to-all.php:277
+#: add-to-all.php:285
+#, fuzzy
 msgid ""
 "Use of this feed is for personal non-commercial use only. If you are not "
 "reading this article in your feed reader, then the site is guilty of "
 "copyright infringement. Please contact me at "
 msgstr ""
+"Indtast søgekriterier. Prøv at brug beskrivende ord, da denne søgefunktion "
+"er intelligent."
 
-#: add-to-all.php:423
+#: add-to-all.php:431
+#, fuzzy
 msgid "Settings"
-msgstr ""
+msgstr "Opciones"
 
-#: add-to-all.php:437 admin.inc.php:103
+#: add-to-all.php:445 admin.inc.php:268
+#, fuzzy
 msgid "Support"
-msgstr ""
+msgstr "Ayuda"
 
-#: add-to-all.php:438
+#: add-to-all.php:446
+#, fuzzy
 msgid "Donate"
-msgstr ""
+msgstr "Donar"
 
 #: admin.inc.php:57
+#, fuzzy
 msgid "Options saved successfully."
-msgstr ""
+msgstr "Indstillinger gemt."
 
 #: admin.inc.php:66
+#, fuzzy
 msgid "Options set to Default."
-msgstr ""
+msgstr "Indstillinger sat til default."
 
 #: admin.inc.php:80
-msgid "Support the development"
-msgstr ""
-
-#: admin.inc.php:88
-msgid "Enter amount in USD: "
-msgstr ""
-
-#: admin.inc.php:92
-msgid "Send your donation to the author of"
-msgstr ""
-
-#: admin.inc.php:98
-msgid "Quick links"
-msgstr ""
-
-#: admin.inc.php:100
-msgid "Add to All "
-msgstr ""
-
-#: admin.inc.php:100
-msgid "plugin page"
-msgstr ""
-
-#: admin.inc.php:101
-msgid "Other plugins"
-msgstr ""
-
-#: admin.inc.php:102
-msgid "Ajay's blog"
-msgstr ""
-
-#: admin.inc.php:104
-msgid "Follow @ajaydsouza on Twitter"
-msgstr ""
-
-#: admin.inc.php:108
-msgid "Recent developments"
-msgstr ""
-
-#: admin.inc.php:120
+#, fuzzy
 msgid "Options for 3rd party services"
-msgstr ""
+msgstr "Indstillinger gemt."
 
-#: admin.inc.php:123
+#: admin.inc.php:84
+#, fuzzy
 msgid "Statcounter Options:"
-msgstr ""
+msgstr "Indstillinger gemt."
 
-#: admin.inc.php:125
+#: admin.inc.php:86
 msgid "StatCounter Project ID (Value of sc_project):"
 msgstr ""
 
-#: admin.inc.php:128
+#: admin.inc.php:89
 msgid "StatCounter Security ID (Value of sc_security):"
 msgstr ""
 
-#: admin.inc.php:131
+#: admin.inc.php:92
+#, fuzzy
 msgid "Google Analytics Options:"
-msgstr ""
+msgstr "Indstillinger gemt."
 
-#: admin.inc.php:133
+#: admin.inc.php:94
 msgid "Tracking ID:"
 msgstr ""
 
-#: admin.inc.php:136
+#: admin.inc.php:97
+#, fuzzy
 msgid ""
 "Multiple sub-domain and top-level domain support (Value of _setDomainName):"
-msgstr ""
+msgstr "Ayuda"
 
-#: admin.inc.php:138
+#: admin.inc.php:99
 msgid "View Explanation"
 msgstr ""
 
-#: admin.inc.php:140
+#: admin.inc.php:101
+#, fuzzy
 msgid "Kontera Options:"
-msgstr ""
+msgstr "Indstillinger gemt."
 
-#: admin.inc.php:142
+#: admin.inc.php:103
 msgid "Kontera ID (Value of dc_PublisherID):"
 msgstr ""
 
-#: admin.inc.php:145
+#: admin.inc.php:106
 msgid "Kontera link colour (Value of dc_AdLinkColor):"
 msgstr ""
 
-#: admin.inc.php:148
+#: admin.inc.php:109
+#, fuzzy
 msgid "Wrap post content with Kontera Zone Tags:"
+msgstr "Peso del contenido:"
+
+#: admin.inc.php:112
+#, fuzzy
+msgid "Tynt Options:"
+msgstr "Indstillinger gemt."
+
+#: admin.inc.php:114
+msgid "Tynt ID:"
 msgstr ""
 
-#: admin.inc.php:151
-msgid "Wibiya Options:"
-msgstr ""
+#: admin.inc.php:117
+#, fuzzy
+msgid ""
+"This is the text between <code>Tynt.push('ID IS HERE')</code> in the <a "
+"href='http://tcr1.tynt.com/install' target='_blank'>Install Code</a>"
+msgstr "Tekst der skal inkluderes før søgeresultaterne i heatmappet"
 
-#: admin.inc.php:153
-msgid "Wibiya Toolbar Path:"
-msgstr ""
-
-#: admin.inc.php:160
+#: admin.inc.php:125
+#, fuzzy
 msgid "Header options"
-msgstr ""
+msgstr "Indstillinger gemt."
 
-#: admin.inc.php:163
+#: admin.inc.php:129
+#, fuzzy
 msgid "Custom CSS to add to header:"
-msgstr ""
+msgstr "Periodo de tiempo personalizado (indicar abajo)"
 
-#: admin.inc.php:166
+#: admin.inc.php:132
+#, fuzzy
 msgid "Do not include <code>style</code> tags"
-msgstr ""
+msgstr "Ønsker du at resette alle indstillinger til default?"
 
-#: admin.inc.php:167
+#: admin.inc.php:133
 msgid "Any other HTML (no PHP) to add to <code>wp_head</code>:"
 msgstr ""
 
-#: admin.inc.php:175
+#: admin.inc.php:142
+#, fuzzy
 msgid "Content options"
-msgstr ""
+msgstr "Peso del contenido:"
 
-#: admin.inc.php:178
+#: admin.inc.php:146
+#, fuzzy
 msgid "Content to add to all posts before and/or after post content:"
-msgstr ""
+msgstr "Peso del contenido:"
 
-#: admin.inc.php:181 admin.inc.php:192
+#: admin.inc.php:149 admin.inc.php:159
+#, fuzzy
 msgid "Add the following before the content. (You can use HTML):"
-msgstr ""
+msgstr "Peso del contenido:"
 
-#: admin.inc.php:185 admin.inc.php:196
+#: admin.inc.php:153 admin.inc.php:163
+#, fuzzy
 msgid "Add the following after the content. (You can use HTML):"
-msgstr ""
+msgstr "Peso del contenido:"
 
-#: admin.inc.php:189
+#: admin.inc.php:156
+#, fuzzy
 msgid "Content to add to single posts before and/or after post content:"
-msgstr ""
+msgstr "Peso del contenido:"
 
-#: admin.inc.php:200
+#: admin.inc.php:166
+#, fuzzy
 msgid "Adjust content filter priority:"
-msgstr ""
+msgstr "Peso del contenido:"
 
-#: admin.inc.php:205
+#: admin.inc.php:171
+#, fuzzy
 msgid ""
 "A higher number will cause the content above to be processed after other "
 "filters. Number below 10 is not recommended"
 msgstr ""
+"Rango en número de días (aplica solo para la opción personalizada anterior)"
 
-#: admin.inc.php:212
+#: admin.inc.php:179
+#, fuzzy
 msgid "Footer options"
-msgstr ""
+msgstr "Indstillinger gemt."
 
-#: admin.inc.php:215
+#: admin.inc.php:183
 msgid "Any other HTML (no PHP) to add to <code>wp_footer</code>:"
 msgstr ""
 
-#: admin.inc.php:223
+#: admin.inc.php:192
+#, fuzzy
 msgid "Feed options"
-msgstr ""
+msgstr "Indstillinger gemt."
 
-#: admin.inc.php:227
+#: admin.inc.php:197
+#, fuzzy
 msgid "Add the following to the feed before the content. (You can use HTML):"
-msgstr ""
+msgstr "Peso del contenido:"
 
-#: admin.inc.php:231
+#: admin.inc.php:201
+#, fuzzy
 msgid "Add the following to the feed after the content. (You can use HTML):"
-msgstr ""
+msgstr "Peso del contenido:"
 
-#: admin.inc.php:235
+#: admin.inc.php:205
+#, fuzzy
 msgid "Add the following copyright notice to the feed (You can use HTML):"
-msgstr ""
+msgstr "¿Estás seguro de que quieres reiniciar las búsquedas frecuentes?"
 
-#: admin.inc.php:238
+#: admin.inc.php:208
+#, fuzzy
 msgid "Add a link to the title of the post in the feed:"
-msgstr ""
+msgstr "Título"
 
-#: admin.inc.php:241
+#: admin.inc.php:211
+#, fuzzy
 msgid "Add a link to \"Add to All\" plugin page:"
+msgstr "Resultados por página"
+
+#: admin.inc.php:221
+#, fuzzy
+msgid "Do you want to set options to Default?"
+msgstr "Ønsker du at resette alle indstillinger til default?"
+
+#: admin.inc.php:230
+#, fuzzy
+msgid "Support the development"
+msgstr "Ayuda al desarrollador"
+
+#: admin.inc.php:239
+#, fuzzy
+msgid "Enter amount in USD: "
+msgstr "Introduce la cantidad en USD:"
+
+#: admin.inc.php:243
+#, fuzzy
+msgid "Send your donation to the author of"
+msgstr "Enviar donación al autor de"
+
+#: admin.inc.php:250
+msgid "Follow me"
 msgstr ""
 
-#: admin.inc.php:249
-msgid "Do you want to set options to Default?"
+#: admin.inc.php:260
+msgid "Quick links"
+msgstr ""
+
+#: admin.inc.php:264
+#, fuzzy
+msgid "Add to All plugin page"
+msgstr "Resultados por página"
+
+#: admin.inc.php:265
+msgid "Other plugins"
 msgstr ""
 
 #: admin.inc.php:266
+#, fuzzy
+msgid "Ajay's blog"
+msgstr "Blog de Ajay"
+
+#: admin.inc.php:267
+msgid "FAQ"
+msgstr ""
+
+#: admin.inc.php:269
+msgid "Reviews"
+msgstr ""
+
+#: admin.inc.php:286
 msgid "Add to All"
 msgstr ""
 
-#: admin.inc.php:274
+#: admin.inc.php:294
+#, fuzzy
 msgid "plugin settings page"
-msgstr ""
+msgstr "Opciones"
 
-#: admin.inc.php:279
+#: admin.inc.php:299
+#, fuzzy
 msgid "Add to All plugin has just been installed / upgraded. Please visit the "
 msgstr ""
+"No se puede deshacer. Asegurate de que has realizado una copia de seguridad "
+"de la base de datos antes de proceder"
 
-#: admin.inc.php:279
+#: admin.inc.php:299
 msgid " to configure."
 msgstr ""
