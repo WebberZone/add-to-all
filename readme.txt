@@ -4,7 +4,11 @@ Contributors: Ajay
 Donate link: http://ajaydsouza.com/donate/
 Stable tag: trunk
 Requires at least: 3.0
+<<<<<<< HEAD
 Tested up to: 4.0
+=======
+Tested up to: 3.9
+>>>>>>> a25471bda391e5450a9a80df0e3f472bb0a2a9c4
 License: GPLv2 or later
 
 A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
@@ -30,6 +34,7 @@ Add to All comes with a pre-installed copyright notice added to your feed and yo
 
 == Upgrade Notice ==
 
+<<<<<<< HEAD
 = 1.1 =
 * Plugin code reformatted;
 
@@ -38,6 +43,13 @@ Add to All comes with a pre-installed copyright notice added to your feed and yo
 = 1.1 =
 * Modified: Plugin code has been completely reformatted for WordPress PHP standards
 
+=======
+= 1.0.4 =
+* Removed Wibiya; Added Tynt; Security and bug fixes; New admin interface
+
+== Changelog ==
+
+>>>>>>> a25471bda391e5450a9a80df0e3f472bb0a2a9c4
 = 1.0.4 =
 * Added: Support for Tynt
 * Modified: Removed Wibiya
@@ -75,7 +87,11 @@ Add to All comes with a pre-installed copyright notice added to your feed and yo
 
 2. Extract the contents of add-to-all.zip to wp-content/plugins/ folder. You should get a folder called add-to-all.
 
+<<<<<<< HEAD
 3. Activate the Plugin in WP-Admin.
+=======
+3. Activate the Plugin in WP-Admin. 
+>>>>>>> a25471bda391e5450a9a80df0e3f472bb0a2a9c4
 
 4. Goto **Settings &raquo; Add to All** to configure
 
