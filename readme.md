@@ -1,12 +1,15 @@
 # Add to All
 
+__Requires:__ 3.5
+
+__Tested up to:__ 4.0
+
+__License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
+
+__Plugin page:__ <a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/">Add to All</a>
+
 A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
 
-<<<<<<< HEAD
-=======
-License: GPL2
-
->>>>>>> a25471bda391e5450a9a80df0e3f472bb0a2a9c4
 ## Description
 
 [Add to All](http://ajaydsouza.com/wordpress/plugins/add-to-all/) is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
