@@ -91,7 +91,7 @@ function ata_options() {
 	      <div class="inside">
 			<table class="form-table">
 			  <tbody>
-				<tr><th scope="row" colspan="2"><h3 style="cursor:auto"><?php _e( 'Statcounter Options:', ATA_LOCAL_NAME ); ?></h3></th>
+				<tr><th scope="row" colspan="2" style="background:#eee;padding-left:10px;"><?php _e( 'Statcounter Options:', ATA_LOCAL_NAME ); ?></th>
 				</tr>
 				<tr><th scope="row"><label for="tp_sc_project"><?php _e( 'StatCounter Project ID (Value of sc_project):', ATA_LOCAL_NAME ); ?></label></th>
 					<td><input type="textbox" name="tp_sc_project" id="tp_sc_project" value="<?php echo esc_attr( stripslashes( $ata_settings['tp_sc_project'] ) ); ?>" style="width:250px" /></td>
@@ -99,7 +99,7 @@ function ata_options() {
 				<tr><th scope="row"><label for="tp_sc_security"><?php _e( 'StatCounter Security ID (Value of sc_security):', ATA_LOCAL_NAME ); ?></label></th>
 					<td><input type="textbox" name="tp_sc_security" id="tp_sc_security" value="<?php echo esc_attr( stripslashes( $ata_settings['tp_sc_security'] ) ); ?>" style="width:250px" /></td>
 				</tr>
-				<tr><th scope="row" colspan="2"><h3 style="cursor:auto"><?php _e( 'Google Analytics Options:', ATA_LOCAL_NAME ); ?></h3></th>
+				<tr><th scope="row" colspan="2" style="background:#eee;padding-left:10px;"><?php _e( 'Google Analytics Options:', ATA_LOCAL_NAME ); ?></th>
 				</tr>
 				<tr><th scope="row"><label for="tp_ga_uacct"><?php _e( 'Tracking ID:', ATA_LOCAL_NAME ); ?></label></th>
 					<td><input type="textbox" name="tp_ga_uacct" id="tp_ga_uacct" value="<?php echo esc_attr( stripslashes( $ata_settings['tp_ga_uacct'] ) ); ?>" style="width:250px" /></td>
@@ -108,7 +108,7 @@ function ata_options() {
 					<td><input type="textbox" name="tp_ga_domain" id="tp_ga_domain" value="<?php echo esc_attr( stripslashes( $ata_settings['tp_ga_domain'] ) ); ?>" style="width:250px" />
 				    <a href="https://support.google.com/analytics/bin/answer.py?hl=en-GB&utm_id=ad&answer=1034342" target="_blank"><?php _e( 'View Explanation', ATA_LOCAL_NAME ); ?></a></td>
 				</tr>
-				<tr><th scope="row" colspan="2"><h3 style="cursor:auto"><?php _e( 'Kontera Options:', ATA_LOCAL_NAME ); ?></h3></th>
+				<tr><th scope="row" colspan="2" style="background:#eee;padding-left:10px;"><?php _e( 'Kontera Options:', ATA_LOCAL_NAME ); ?></th>
 				</tr>
 				<tr><th scope="row"><label for="tp_kontera_ID"><?php _e( 'Kontera ID (Value of dc_PublisherID):', ATA_LOCAL_NAME ); ?></label></th>
 					<td><input type="textbox" name="tp_kontera_ID" id="tp_kontera_ID" value="<?php echo esc_attr( stripslashes( $ata_settings['tp_kontera_ID'] ) ); ?>" style="width:250px" /></td>
@@ -119,7 +119,7 @@ function ata_options() {
 				<tr><th scope="row"><label for="tp_kontera_addZT"><?php _e( 'Wrap post content with Kontera Zone Tags:', ATA_LOCAL_NAME ); ?></label></th>
 					<td><input type="checkbox" name="tp_kontera_addZT" id="tp_kontera_addZT" <?php if ( $ata_settings['tp_kontera_addZT'] ) echo 'checked="checked"'; ?> /></td>
 				</tr>
-				<tr><th scope="row" colspan="2"><h3 style="cursor:auto"><?php _e( 'Tynt Options:', ATA_LOCAL_NAME ); ?></h3></th>
+				<tr><th scope="row" colspan="2" style="background:#eee;padding-left:10px;"><?php _e( 'Tynt Options:', ATA_LOCAL_NAME ); ?></th>
 				</tr>
 				<tr><th scope="row"><label for="tp_tynt_id"><?php _e( 'Tynt ID:', ATA_LOCAL_NAME ); ?></label></th>
 					<td>
