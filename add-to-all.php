@@ -26,7 +26,6 @@ if ( ! defined( 'WPINC' ) ) {
  * Holds the filesystem directory path.
  */
 define( 'ALD_ATA_DIR', dirname( __FILE__ ) );
-define( 'ATA_LOCAL_NAME', 'ata' );
 
 // Set the global variables for Better Search path and URL
 $ata_path = plugin_dir_path( __FILE__ );
@@ -44,7 +43,7 @@ $ata_settings = ata_read_options();
  * Function to load translation files.
  */
 function ata_lang_init() {
-	load_plugin_textdomain( ATA_LOCAL_NAME, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	load_plugin_textdomain( 'add-to-all', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 add_action('init', 'ata_lang_init');
 
@@ -240,7 +239,7 @@ function ald_ata_rss( $content ) {
 
 	if ( ( $ata_settings[ 'feed_addhtmlbefore' ] ) || ( $ata_settings[ 'feed_addhtmlafter' ] ) || ( $ata_settings[ 'feed_addtitle' ] ) || ( $ata_settings[ 'feed_addcopyright' ] ) || ( $ata_settings[ 'addcredit' ] ) ) {
 		$creditline = '<br /><span style="font-size: 0.8em">';
-		$creditline .= __( 'Feed enhanced by the <a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All Plugin</a> by <a href="http://ajaydsouza.com/" rel="nofollow">Ajay</a>', ATA_LOCAL_NAME );
+		$creditline .= __( 'Feed enhanced by the <a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All Plugin</a> by <a href="http://ajaydsouza.com/" rel="nofollow">Ajay</a>', 'add-to-all' );
 		$creditline .= '</span>';
 
 		$str_before = '';
@@ -499,7 +498,7 @@ if ( is_admin() || strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) ) {
 
 		return array_merge(
 			array(
-				'settings' => '<a href="' . admin_url( 'options-general.php?page=ata_options' ) . '">' . __( 'Settings', ATA_LOCAL_NAME ) . '</a>'
+				'settings' => '<a href="' . admin_url( 'options-general.php?page=ata_options' ) . '">' . __( 'Settings', 'add-to-all' ) . '</a>'
 			),
 			$links
 		);
@@ -522,8 +521,8 @@ if ( is_admin() || strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) ) {
 
 		// create link
 		if ( $file == $plugin ) {
-			$links[] = '<a href="http://wordpress.org/support/plugin/add-to-all">' . __( 'Support', ATA_LOCAL_NAME ) . '</a>';
-			$links[] = '<a href="http://ajaydsouza.com/donate/">' . __( 'Donate', ATA_LOCAL_NAME ) . '</a>';
+			$links[] = '<a href="http://wordpress.org/support/plugin/add-to-all">' . __( 'Support', 'add-to-all' ) . '</a>';
+			$links[] = '<a href="http://ajaydsouza.com/donate/">' . __( 'Donate', 'add-to-all' ) . '</a>';
 		}
 		return $links;
 	}

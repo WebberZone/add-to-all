@@ -31,13 +31,14 @@ Add to All comes with a pre-installed copyright notice added to your feed and yo
 == Upgrade Notice ==
 
 = 1.1 =
-* Plugin code reformatted; Google Universal Analytics support;
+* Plugin code reformatted; Google Universal Analytics support; modified localization name
 
 == Changelog ==
 
 = 1.1 =
 * New: Support for Google's Universal Analytics code
 * Modified: Plugin code has been completely reformatted for WordPress PHP standards
+* Modified: Localization name from `ata` and `add-to-all`
 
 = 1.0.4 =
 * Added: Support for Tynt
