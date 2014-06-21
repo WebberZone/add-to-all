@@ -31,11 +31,12 @@ Add to All comes with a pre-installed copyright notice added to your feed and yo
 == Upgrade Notice ==
 
 = 1.1 =
-* Plugin code reformatted;
+* Plugin code reformatted; Google Universal Analytics support;
 
 == Changelog ==
 
 = 1.1 =
+* New: Support for Google's Universal Analytics code
 * Modified: Plugin code has been completely reformatted for WordPress PHP standards
 
 = 1.0.4 =

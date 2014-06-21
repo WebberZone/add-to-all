@@ -60,7 +60,7 @@ function ald_ata_footer() {
 	$sc_project = stripslashes( $ata_settings['tp_sc_project'] );
 	$sc_security = stripslashes( $ata_settings['tp_sc_security'] );
 	$ga_uacct = stripslashes( $ata_settings['tp_ga_uacct'] );
-	$ga_url = stripslashes( $ata_settings['tp_ga_domain'] );
+	$ga_domain = stripslashes( $ata_settings['tp_ga_domain'] );
 	$kontera_ID = stripslashes( $ata_settings['tp_kontera_ID'] );
 	$kontera_linkcolor = stripslashes( $ata_settings['tp_kontera_linkcolor'] );
 
@@ -86,15 +86,30 @@ function ald_ata_footer() {
 <?php	}
 
 	if ( '' != $ga_uacct ) {
+		if ( $ata_settings['tp_ga_ua'] ) {
 ?>
+
+	<!-- Start Google Analytics -->
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', '<?php echo $ga_uacct; ?>', '<?php echo $ga_domain; ?>');
+	  ga('send', 'pageview');
+
+	</script>
+	<!-- End Google Analytics // Added by Add to All WordPress plugin -->
+
+<?php } else { ?>
+
 	<!-- Start Google Analytics -->
 	<script type="text/javascript">
 	// <![CDATA[
 	  var _gaq = _gaq || [];
-	  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
-	  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
 	  _gaq.push(['_setAccount', '<?php echo $ga_uacct; ?>']);
-	  _gaq.push(['_setDomainName', '<?php echo $ga_url; ?>']);
+	  _gaq.push(['_setDomainName', '<?php echo $ga_domain; ?>']);
 	  _gaq.push(['_setAllowLinker', true]);
 	  _gaq.push(['_trackPageview']);
 
@@ -105,8 +120,9 @@ function ald_ata_footer() {
 	  })();
 	// ]]>
 	</script>
-	<!-- End Google Analytics // by Add to All WordPress plugin -->
+	<!-- End Google Analytics // Added by Add to All WordPress plugin -->
 <?php	}
+	}
 
 	if ( ( '' != $kontera_ID ) && ( '' != $kontera_linkcolor ) ) {
 ?>
@@ -346,6 +362,7 @@ function ata_default_options() {
 		'tp_sc_security' => '', // StatCounter Security String
 		'tp_ga_uacct' => '', // Google Analytics Web Property ID
 		'tp_ga_domain' => $ga_url, // Google Analytics _setDomainName value
+		'tp_ga_ua' => false, // Use Google Universal Analytics code
 		'tp_kontera_ID' => '', // Kontera Publisher ID
 		'tp_kontera_linkcolor' => '', // Kontera link color
 		'tp_kontera_addZT' => '', // Kontera Add zone tags

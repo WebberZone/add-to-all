@@ -54,11 +54,15 @@ function ata_options() {
 		// 3rd party options
 		$ata_settings['tp_sc_project'] = $_POST['tp_sc_project'];
 		$ata_settings['tp_sc_security'] = $_POST['tp_sc_security'];
+
 		$ata_settings['tp_ga_uacct'] = $_POST['tp_ga_uacct'];
 		$ata_settings['tp_ga_domain'] = $_POST['tp_ga_domain'];
+		$ata_settings['tp_ga_ua'] = isset( $_POST['tp_ga_ua'] ) ? true : false;
+
 		$ata_settings['tp_kontera_ID'] = $_POST['tp_kontera_ID'];
 		$ata_settings['tp_kontera_linkcolor'] = $_POST['tp_kontera_linkcolor'];
 		$ata_settings['tp_kontera_addZT'] = ( isset( $_POST['tp_kontera_addZT'] ) ) ? true : false;
+
 		$ata_settings['tp_tynt_id'] = $_POST['tp_tynt_id'];
 
 		update_option( 'ald_ata_settings', $ata_settings );
@@ -100,6 +104,13 @@ function ata_options() {
 					<td><input type="textbox" name="tp_sc_security" id="tp_sc_security" value="<?php echo esc_attr( stripslashes( $ata_settings['tp_sc_security'] ) ); ?>" style="width:250px" /></td>
 				</tr>
 				<tr><th scope="row" colspan="2" style="background:#eee;padding-left:10px;"><?php _e( 'Google Analytics Options:', ATA_LOCAL_NAME ); ?></th>
+				</tr>
+				<tr>
+					<th scope="row"><label for="tp_ga_ua"><?php _e( 'Enable Universal Analytics:', ATA_LOCAL_NAME ); ?></label></th>
+					<td>
+						<input type="checkbox" name="tp_ga_ua" id="tp_ga_ua" <?php if ( $ata_settings['tp_ga_ua'] ) echo 'checked="checked"'; ?> />
+						<p class="description"><?php printf( __( 'Only check this box if you have upgraded to Universal Analytics. Visit the <a href="%s" target="_blank">Universal Analytics Upgrade Center</a> to know more', 'add-to-footer' ), esc_url( 'https://developers.google.com/analytics/devguides/collection/upgrade/' ) ); ?></p>
+					</td>
 				</tr>
 				<tr><th scope="row"><label for="tp_ga_uacct"><?php _e( 'Tracking ID:', ATA_LOCAL_NAME ); ?></label></th>
 					<td><input type="textbox" name="tp_ga_uacct" id="tp_ga_uacct" value="<?php echo esc_attr( stripslashes( $ata_settings['tp_ga_uacct'] ) ); ?>" style="width:250px" /></td>
