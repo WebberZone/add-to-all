@@ -32,6 +32,7 @@ Add to All comes with a pre-installed copyright notice added to your feed and yo
 
 = 1.1 =
 * Plugin code reformatted; Google Universal Analytics support; modified localization name; modify the title text;
+Check out the Changelog for more details
 
 == Changelog ==
 
