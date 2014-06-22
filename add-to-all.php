@@ -238,10 +238,6 @@ function ald_ata_rss( $content ) {
 	global $ata_settings;
 
 	if ( ( $ata_settings[ 'feed_addhtmlbefore' ] ) || ( $ata_settings[ 'feed_addhtmlafter' ] ) || ( $ata_settings[ 'feed_addtitle' ] ) || ( $ata_settings[ 'feed_addcopyright' ] ) || ( $ata_settings[ 'addcredit' ] ) ) {
-		$creditline = '<br /><span style="font-size: 0.8em">';
-		$creditline .= __( 'Feed enhanced by the <a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All Plugin</a> by <a href="http://ajaydsouza.com/" rel="nofollow">Ajay</a>', 'add-to-all' );
-		$creditline .= '</span>';
-
 		$str_before = '';
 		$str_after = '<hr style="border-top:black solid 1px" />';
 
@@ -256,7 +252,19 @@ function ald_ata_rss( $content ) {
 		}
 
 		if ( $ata_settings[ 'feed_addtitle' ] ) {
-			$str_after .= '<a href="' . get_permalink() . '">' . the_title( '', '', false ) . '</a> was first posted on ' . get_the_time( 'F j, Y' ) . ' at ' . get_the_time( 'g:i a' ) . '.';
+			$title = '<a href="' . get_permalink() . '">' . the_title( '', '', false ) . '</a>';
+			$search_array = array(
+				'%title%',
+				'%date%',
+				'%time%',
+			);
+			$replace_array = array(
+				$title,
+				get_the_time( 'F j, Y' ),
+				get_the_time( 'g:i a' ),
+			);
+			$str_after .= str_replace( $search_array, $replace_array, $ata_settings['feed_titletext'] );
+
 			$str_after .= '<br />';
 		}
 
@@ -266,6 +274,10 @@ function ald_ata_rss( $content ) {
 		}
 
 		if ( $ata_settings[ 'addcredit' ] ) {
+			$creditline = '<br /><span style="font-size: 0.8em">';
+			$creditline .= __( 'Feed enhanced by ', 'add-to-all' );
+			$creditline .= '<a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All</a>';
+
 			$str_after .= $creditline;
 			$str_after .= '<br />';
 		}
@@ -332,6 +344,8 @@ function ata_default_options() {
 	$copyrightnotice .= get_option( 'admin_email' );
 	$ga_url = parse_url( get_option( 'home' ), PHP_URL_HOST );
 
+	$titletext = __( '%title% was first posted on %date% at %time%.', 'add-to-all' );
+
 	$ata_settings = array(
 		 'addcredit' => false, // Show credits?
 
@@ -354,6 +368,7 @@ function ata_default_options() {
 		'feed_addhtmlbefore' => false, // Add HTML to Feed?
 		'feed_addhtmlafter' => false, // Add HTML to Feed?
 		'feed_addtitle' => true, // Add title of the post?
+		'feed_titletext' => $titletext,	// Custom text when adding a link to the post title
 		'feed_addcopyright' => true, // Add copyright notice?
 
 		// 3rd party options

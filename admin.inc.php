@@ -46,6 +46,7 @@ function ata_options() {
 		$ata_settings['feed_addhtmlbefore'] = ( isset( $_POST['feed_addhtmlbefore'] ) ) ? true : false;
 		$ata_settings['feed_addhtmlafter'] = ( isset( $_POST['feed_addhtmlafter'] ) ) ? true : false;
 		$ata_settings['feed_addtitle'] = (isset( $_POST['feed_addtitle'] ) ) ? true : false;
+		$ata_settings['feed_titletext'] = $_POST['feed_titletext'];
 		$ata_settings['feed_addcopyright'] = ( isset( $_POST['feed_addcopyright'] ) ) ? true : false;
 
 		// Save Footer related options
@@ -226,11 +227,15 @@ function ata_options() {
 					<label><input type="checkbox" name="feed_addcopyright" id="feed_addcopyright" <?php if ( $ata_settings['feed_addcopyright'] ) echo 'checked="checked"'; ?> /> <?php _e( 'Add the following copyright notice to the feed (You can use HTML):', 'add-to-all' ); ?></label>
 					<br /><textarea name="feed_copyrightnotice" id="feed_copyrightnotice" rows="15" cols="40" style="width:100%"><?php echo stripslashes( $ata_settings['feed_copyrightnotice'] ); ?></textarea></td>
 				</tr>
-				<tr><th scope="row"><label for="feed_addtitle"><?php _e( 'Add a link to the title of the post in the feed:', 'add-to-all' ); ?></label></th>
-				<td><input type="checkbox" name="feed_addtitle" id="feed_addtitle" <?php if ( $ata_settings['feed_addtitle'] ) echo 'checked="checked"'; ?> /></td>
+				<tr>
+					<td scope="row" colspan="2">
+						<label><input type="checkbox" name="feed_addtitle" id="feed_addtitle" <?php if ( $ata_settings['feed_addtitle'] ) echo 'checked="checked"' ?> /> <?php _e( 'Add a link to the title of the post in the feed. Customize this below', 'add-to-all' ); ?></label>
+						<br /><textarea name="feed_titletext" id="feed_titletext" rows="5" cols="80" style="width:100%"><?php echo stripslashes( $ata_settings['feed_titletext'] ); ?></textarea>
+						<p class="description"><?php _e( 'The above text will be added to the feed. You can use %title% to add a link to the post, %date% and %time% to display the date and time of the post respectively', 'add-to-all' ); ?></p>
+					</td>
 				</tr>
 				<tr><th scope="row"><label for="addcredit"><?php _e( 'Add a link to "Add to All" plugin page:', 'add-to-all' ); ?></label></th>
-				<td><input type="checkbox" name="addcredit" id="addcredit" <?php if ( $ata_settings['addcredit'] ) echo 'checked="checked"'; ?> /></td>
+					<td><input type="checkbox" name="addcredit" id="addcredit" <?php if ( $ata_settings['addcredit'] ) echo 'checked="checked"'; ?> /></td>
 				</tr>
 			  </tbody>
 			</table>

@@ -31,12 +31,13 @@ Add to All comes with a pre-installed copyright notice added to your feed and yo
 == Upgrade Notice ==
 
 = 1.1 =
-* Plugin code reformatted; Google Universal Analytics support; modified localization name
+* Plugin code reformatted; Google Universal Analytics support; modified localization name; modify the title text;
 
 == Changelog ==
 
 = 1.1 =
 * New: Support for Google's Universal Analytics code
+* New: Customize the text used when linking to the title in the blog feed. You can use `%title%` to add a link to the post, `%date%` and `%time%` to display the date and time of the post respectively
 * Modified: Plugin code has been completely reformatted for WordPress PHP standards
 * Modified: Localization name from `ata` and `add-to-all`
 
@@ -101,15 +102,4 @@ Several customization options are available via the Settings page in WordPress A
 
 The plugin supports CSS, HTML and JavaScript code in the header and footer. PHP support is likely to be added in future versions
 
-
-= Wishlist =
-
-Below are a few features that I plan on implementing in future versions of the plugin. However, there is no fixed time-frame for this and largely depends on how much time I can contribute to development.
-
-* Limited Facebook support to add your fan page in the sidebar
-* Support for PHP code
-* Sidebar widgets
-* Support for Infolinks
-
 If you would like a feature to be added, or if you already have the code for the feature, you can let me know by <a href="http://wordpress.org/support/plugin/add-to-all">posting in this forum</a>.
-
