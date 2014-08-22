@@ -302,6 +302,7 @@ function ata_options() {
 	</div><!-- /post-body -->
 	<br class="clear" />
 	</div><!-- /poststuff -->
+</div><!-- /wrap -->
 
 <?php
 }

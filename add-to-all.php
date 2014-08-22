@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'ALD_ATA_DIR', dirname( __FILE__ ) );
 
-// Set the global variables for Better Search path and URL
+// Set the global variables for Add to All path and URL
 $ata_path = plugin_dir_path( __FILE__ );
 $ata_url = plugins_url() . '/' . plugin_basename( dirname( __FILE__ ) );
 
