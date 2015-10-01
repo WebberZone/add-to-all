@@ -15,7 +15,7 @@
  * License:		GPL-2.0+
  * License URI:	http://www.gnu.org/licenses/gpl-2.0.txt
  * Domain Path:	/languages
-*/
+ */
 
 // If this file is called directly, then abort execution.
 if ( ! defined( 'WPINC' ) ) {
@@ -45,12 +45,11 @@ $ata_settings = ata_read_options();
 function ata_lang_init() {
 	load_plugin_textdomain( 'add-to-all', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
-add_action('init', 'ata_lang_init');
+add_action( 'init', 'ata_lang_init' );
 
 
 /**
  * Function to add the necessary code to `wp_footer`.
- *
  */
 function ald_ata_footer() {
 	global $wpdb, $post, $single, $ata_settings;
@@ -151,7 +150,7 @@ function ata_content_nofilter( $content ) {
 
 	global $single, $ata_settings;
 
-    if ( $ata_settings['tp_kontera_addZT'] ) {
+	if ( $ata_settings['tp_kontera_addZT'] ) {
 		$str_before = '<div class="KonaBody">';
 		$str_after = '</div>';
 		if ( ( is_singular() ) || ( is_home() ) || ( is_archive() ) ) {
@@ -168,14 +167,13 @@ add_filter( 'the_content', 'ata_content_nofilter' );
 
 /**
  * Function to modify the_content filter priority.
- *
  */
 function ata_content_prepare_filter() {
 	global $ata_settings;
 
-    $priority = isset ( $ata_settings['content_filter_priority'] ) ? $ata_settings['content_filter_priority'] : 10;
+	$priority = isset( $ata_settings['content_filter_priority'] ) ? $ata_settings['content_filter_priority'] : 10;
 
-    add_filter( 'the_content', 'ata_content', $priority );
+	add_filter( 'the_content', 'ata_content', $priority );
 }
 add_action( 'template_redirect', 'ata_content_prepare_filter' );
 
@@ -201,7 +199,6 @@ function ata_content( $content ) {
 			if ( $ata_settings['content_addhtmlafter'] ) {
 				$str_after .= stripslashes( $ata_settings['content_htmlafter'] );
 			}
-
 
 			if ( $ata_settings['content_addhtmlbeforeS'] ) {
 				$str_before .= stripslashes( $ata_settings['content_htmlbeforeS'] );
@@ -237,21 +234,21 @@ function ata_content( $content ) {
 function ald_ata_rss( $content ) {
 	global $ata_settings;
 
-	if ( ( $ata_settings[ 'feed_addhtmlbefore' ] ) || ( $ata_settings[ 'feed_addhtmlafter' ] ) || ( $ata_settings[ 'feed_addtitle' ] ) || ( $ata_settings[ 'feed_addcopyright' ] ) || ( $ata_settings[ 'addcredit' ] ) ) {
+	if ( ( $ata_settings['feed_addhtmlbefore'] ) || ( $ata_settings['feed_addhtmlafter'] ) || ( $ata_settings['feed_addtitle'] ) || ( $ata_settings['feed_addcopyright'] ) || ( $ata_settings['addcredit'] ) ) {
 		$str_before = '';
 		$str_after = '<hr style="border-top:black solid 1px" />';
 
-		if ( $ata_settings[ 'feed_addhtmlbefore' ] ) {
-			$str_before .= stripslashes( $ata_settings[ 'feed_htmlbefore' ] );
+		if ( $ata_settings['feed_addhtmlbefore'] ) {
+			$str_before .= stripslashes( $ata_settings['feed_htmlbefore'] );
 			$str_before .= '<br />';
 		}
 
-		if ( $ata_settings[ 'feed_addhtmlafter' ] ) {
-			$str_after .= stripslashes( $ata_settings[ 'feed_htmlafter' ] );
+		if ( $ata_settings['feed_addhtmlafter'] ) {
+			$str_after .= stripslashes( $ata_settings['feed_htmlafter'] );
 			$str_after .= '<br />';
 		}
 
-		if ( $ata_settings[ 'feed_addtitle' ] ) {
+		if ( $ata_settings['feed_addtitle'] ) {
 			$title = '<a href="' . get_permalink() . '">' . the_title( '', '', false ) . '</a>';
 			$search_array = array(
 				'%title%',
@@ -268,12 +265,12 @@ function ald_ata_rss( $content ) {
 			$str_after .= '<br />';
 		}
 
-		if ( $ata_settings[ 'feed_addcopyright' ] ) {
-			$str_after .= stripslashes( $ata_settings[ 'feed_copyrightnotice' ] );
+		if ( $ata_settings['feed_addcopyright'] ) {
+			$str_after .= stripslashes( $ata_settings['feed_copyrightnotice'] );
 			$str_after .= '<br />';
 		}
 
-		if ( $ata_settings[ 'addcredit' ] ) {
+		if ( $ata_settings['addcredit'] ) {
 			$creditline = '<br /><span style="font-size: 0.8em">';
 			$creditline .= __( 'Feed enhanced by ', 'add-to-all' );
 			$creditline .= '<a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All</a>';
@@ -294,15 +291,14 @@ add_filter( 'the_content_feed', 'ald_ata_rss', 99999999 );
 
 /**
  * Function to add custom code to the header. Filters `wp_head`.
- *
  */
 function ald_ata_header() {
 
 	global $wpdb, $post, $single, $ata_settings;
 
-	$ata_other = stripslashes( $ata_settings[ 'head_other' ] );
-	$ata_head_CSS = stripslashes( $ata_settings[ 'head_CSS' ] );
-	$ata_tp_tynt_id = stripslashes( $ata_settings[ 'tp_tynt_id' ] );
+	$ata_other = stripslashes( $ata_settings['head_other'] );
+	$ata_head_CSS = stripslashes( $ata_settings['head_CSS'] );
+	$ata_tp_tynt_id = stripslashes( $ata_settings['tp_tynt_id'] );
 
 	// Add CSS to header
 	if ( $ata_head_CSS != '' ) {
@@ -339,7 +335,7 @@ add_action( 'wp_head', 'ald_ata_header' );
  */
 function ata_default_options() {
 	global $ata_url;
-	$copyrightnotice = '&copy;' . date( "Y" ) . ' &quot;<a href="' . get_option( 'home' ) . '">' . get_option( 'blogname' ) . '</a>&quot;. ';
+	$copyrightnotice = '&copy;' . date( 'Y' ) . ' &quot;<a href="' . get_option( 'home' ) . '">' . get_option( 'blogname' ) . '</a>&quot;. ';
 	$copyrightnotice .= __( 'Use of this feed is for personal non-commercial use only. If you are not reading this article in your feed reader, then the site is guilty of copyright infringement. Please contact me at ', 'ald_ata_plugin' );
 	$copyrightnotice .= get_option( 'admin_email' );
 	$ga_url = parse_url( get_option( 'home' ), PHP_URL_HOST );
@@ -387,7 +383,7 @@ function ata_default_options() {
 
 		// Header options
 		'head_CSS' => '', // CSS to add to header (do not wrap with <style> tags)
-		'head_other' => '' // For any other code
+		'head_other' => '',// For any other code
 
 	);
 	return apply_filters( 'ata_default_options', $ata_settings );
@@ -404,16 +400,16 @@ function ata_read_options() {
 
 	$defaults = ata_default_options();
 
-	$ata_settings = array_map('stripslashes',(array)get_option('ald_ata_settings'));
-	unset($ata_settings[0]); // produced by the (array) casting when there's nothing in the DB
+	$ata_settings = array_map( 'stripslashes',(array) get_option( 'ald_ata_settings' ) );
+	unset( $ata_settings[0] ); // produced by the (array) casting when there's nothing in the DB
 
-	foreach ($defaults as $k=>$v) {
-		if (!isset($ata_settings[$k]))
-			$ata_settings[$k] = $v;
+	foreach ( $defaults as $k => $v ) {
+		if ( ! isset( $ata_settings[ $k ] ) ) {
+			$ata_settings[ $k ] = $v; }
 		$ata_settings_changed = true;
 	}
-	if ($ata_settings_changed == true)
-		update_option('ald_ata_settings', $ata_settings);
+	if ( $ata_settings_changed == true ) {
+		update_option( 'ald_ata_settings', $ata_settings ); }
 
 	return apply_filters( 'ata_read_options', $ata_settings );
 }
@@ -434,29 +430,29 @@ function ata_get_the_post_thumbnail( $postid ) {
 
 	if ( function_exists( 'has_post_thumbnail' ) && has_post_thumbnail( $result->ID ) ) {
 		$output .= get_the_post_thumbnail( $result->ID, array(
-			 $ata_settings[ 'thumb_width' ],
-			$ata_settings[ 'thumb_height' ]
-		), array(
+			 $ata_settings['thumb_width'],
+			$ata_settings['thumb_height'],
+			), array(
 			 'title' => $title,
 			'alt' => $title,
 			'class' => 'ata_thumb',
-			'border' => '0'
-		) );
+			'border' => '0',
+			) );
 	} else {
-		$postimage = get_post_meta( $result->ID, $ata_settings[ 'thumb_meta' ], true ); // Check
-		if ( !$postimage && $ata_settings[ 'scan_images' ] ) {
+		$postimage = get_post_meta( $result->ID, $ata_settings['thumb_meta'], true ); // Check
+		if ( ! $postimage && $ata_settings['scan_images'] ) {
 			preg_match_all( '|<img.*?src=[\'"](.*?)[\'"].*?>|i', $result->post_content, $matches );
 			// any image there?
-			if ( isset( $matches ) && $matches[ 1 ][ 0 ] ) {
-				$postimage = $matches[ 1 ][ 0 ]; // we need the first one only!
+			if ( isset( $matches ) && $matches[1][0] ) {
+				$postimage = $matches[1][0]; // we need the first one only!
 			}
 		}
-		if ( !$postimage )
+		if ( ! $postimage ) {
 			$postimage = get_post_meta( $result->ID, '_video_thumbnail', true ); // If no other thumbnail set, try to get the custom video thumbnail set by the Video Thumbnails plugin
-		if ( $ata_settings[ 'thumb_default_show' ] && !$postimage )
-			$postimage = $ata_settings[ 'thumb_default' ]; // If no thumb found and settings permit, use default thumb
-		if ( $postimage ) {
-			$output .= '<img src="' . $postimage . '" alt="' . $title . '" title="' . $title . '" style="max-width:' . $ata_settings[ 'thumb_width' ] . 'px;max-height:' . $ata_settings[ 'thumb_height' ] . 'px; border:0;" class="ata_thumb" />';
+		}		if ( $ata_settings['thumb_default_show'] && ! $postimage ) {
+			$postimage = $ata_settings['thumb_default']; // If no thumb found and settings permit, use default thumb
+		}		if ( $postimage ) {
+			$output .= '<img src="' . $postimage . '" alt="' . $title . '" title="' . $title . '" style="max-width:' . $ata_settings['thumb_width'] . 'px;max-height:' . $ata_settings['thumb_height'] . 'px; border:0;" class="ata_thumb" />';
 		}
 	}
 
@@ -469,7 +465,7 @@ function ata_get_the_post_thumbnail( $postid ) {
  * Function to create an excerpt for the post.
  *
  * @param integer $id Post ID
- * @param mixed $excerpt_length Length of the excerpt in words
+ * @param mixed   $excerpt_length Length of the excerpt in words
  * @return string The excerpt
  */
 function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
@@ -493,15 +489,13 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 
 /**
  *  Admin options
- *
  */
 if ( is_admin() || strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) ) {
 
 	/**
 	 *  Load the admin pages if we're in the Admin.
-	 *
 	 */
-	require_once( ALD_ATA_DIR . "/admin.inc.php" );
+	require_once( ALD_ATA_DIR . '/admin.inc.php' );
 
 	/**
 	 * Adding WordPress plugin action links.
@@ -513,7 +507,7 @@ if ( is_admin() || strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) ) {
 
 		return array_merge(
 			array(
-				'settings' => '<a href="' . admin_url( 'options-general.php?page=ata_options' ) . '">' . __( 'Settings', 'add-to-all' ) . '</a>'
+				'settings' => '<a href="' . admin_url( 'options-general.php?page=ata_options' ) . '">' . __( 'Settings', 'add-to-all' ) . '</a>',
 			),
 			$links
 		);
@@ -524,7 +518,7 @@ if ( is_admin() || strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) ) {
 	/**
 	 * Add meta links on Plugins page.
 	 *
-	 * @param array $links
+	 * @param array  $links
 	 * @param string $file
 	 * @return array
 	 */
@@ -545,4 +539,3 @@ if ( is_admin() || strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) ) {
 
 } // End admin.inc
 
-?>

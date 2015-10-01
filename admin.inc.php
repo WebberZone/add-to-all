@@ -16,7 +16,7 @@ if ( ! defined( 'WPINC' ) ) {
 function ata_options() {
 
 	global $wpdb;
-    $poststable = $wpdb->posts;
+	$poststable = $wpdb->posts;
 
 	$ata_settings = ata_read_options();
 
@@ -109,7 +109,7 @@ function ata_options() {
 				<tr>
 					<th scope="row"><label for="tp_ga_ua"><?php _e( 'Enable Universal Analytics:', 'add-to-all' ); ?></label></th>
 					<td>
-						<input type="checkbox" name="tp_ga_ua" id="tp_ga_ua" <?php if ( $ata_settings['tp_ga_ua'] ) echo 'checked="checked"'; ?> />
+						<input type="checkbox" name="tp_ga_ua" id="tp_ga_ua" <?php if ( $ata_settings['tp_ga_ua'] ) { echo 'checked="checked"'; } ?> />
 						<p class="description"><?php printf( __( 'Only check this box if you have upgraded to Universal Analytics. Visit the <a href="%s" target="_blank">Universal Analytics Upgrade Center</a> to know more', 'add-to-footer' ), esc_url( 'https://developers.google.com/analytics/devguides/collection/upgrade/' ) ); ?></p>
 					</td>
 				</tr>
@@ -129,7 +129,7 @@ function ata_options() {
 					<td><input type="textbox" name="tp_kontera_linkcolor" id="tp_kontera_linkcolor" value="<?php echo esc_attr( stripslashes( $ata_settings['tp_kontera_linkcolor'] ) ); ?>" style="width:250px" /></td>
 				</tr>
 				<tr><th scope="row"><label for="tp_kontera_addZT"><?php _e( 'Wrap post content with Kontera Zone Tags:', 'add-to-all' ); ?></label></th>
-					<td><input type="checkbox" name="tp_kontera_addZT" id="tp_kontera_addZT" <?php if ( $ata_settings['tp_kontera_addZT'] ) echo 'checked="checked"'; ?> /></td>
+					<td><input type="checkbox" name="tp_kontera_addZT" id="tp_kontera_addZT" <?php if ( $ata_settings['tp_kontera_addZT'] ) { echo 'checked="checked"'; } ?> /></td>
 				</tr>
 				<tr><th scope="row" colspan="2" style="background:#eee;padding-left:10px;"><?php _e( 'Tynt Options:', 'add-to-all' ); ?></th>
 				</tr>
@@ -168,21 +168,21 @@ function ata_options() {
 				<tr><th scope="row" colspan="2"><?php _e( 'Content to add to all posts before and/or after post content:', 'add-to-all' ); ?></th>
 				</tr>
 				<tr><td scope="row" colspan="2">
-					<label><input type="checkbox" name="content_addhtmlbefore" id="content_addhtmlbefore" <?php if ( $ata_settings['content_addhtmlbefore'] ) echo 'checked="checked"'; ?> /> <?php _e( 'Add the following before the content. (You can use HTML):', 'add-to-all' ); ?></label>
+					<label><input type="checkbox" name="content_addhtmlbefore" id="content_addhtmlbefore" <?php if ( $ata_settings['content_addhtmlbefore'] ) { echo 'checked="checked"'; } ?> /> <?php _e( 'Add the following before the content. (You can use HTML):', 'add-to-all' ); ?></label>
 					<br /><textarea name="content_htmlbefore" id="content_htmlbefore" rows="15" cols="40" style="width:100%"><?php echo stripslashes( $ata_settings['content_htmlbefore'] ); ?></textarea></td>
 				</tr>
 				<tr><td scope="row" colspan="2">
-					<label><input type="checkbox" name="content_addhtmlafter" id="content_addhtmlafter" <?php if ( $ata_settings['content_addhtmlafter'] ) echo 'checked="checked"'; ?> /> <?php _e( 'Add the following after the content. (You can use HTML):', 'add-to-all' ); ?></label>
+					<label><input type="checkbox" name="content_addhtmlafter" id="content_addhtmlafter" <?php if ( $ata_settings['content_addhtmlafter'] ) { echo 'checked="checked"'; } ?> /> <?php _e( 'Add the following after the content. (You can use HTML):', 'add-to-all' ); ?></label>
 					<br /><textarea name="content_htmlafter" id="content_htmlafter" rows="15" cols="40" style="width:100%"><?php echo stripslashes( $ata_settings['content_htmlafter'] ); ?></textarea></td>
 				</tr>
 				<tr><th scope="row" colspan="2"><?php _e( 'Content to add to single posts before and/or after post content:', 'add-to-all' ); ?></th>
 				</tr>
 				<tr><td scope="row" colspan="2">
-					<label><input type="checkbox" name="content_addhtmlbeforeS" id="content_addhtmlbeforeS" <?php if ( $ata_settings['content_addhtmlbeforeS'] ) echo 'checked="checked"'; ?> /> <?php _e( 'Add the following before the content. (You can use HTML):', 'add-to-all' ); ?></label>
+					<label><input type="checkbox" name="content_addhtmlbeforeS" id="content_addhtmlbeforeS" <?php if ( $ata_settings['content_addhtmlbeforeS'] ) { echo 'checked="checked"'; } ?> /> <?php _e( 'Add the following before the content. (You can use HTML):', 'add-to-all' ); ?></label>
 					<br /><textarea name="content_htmlbeforeS" id="content_htmlbeforeS" rows="15" cols="40" style="width:100%"><?php echo stripslashes( $ata_settings['content_htmlbeforeS'] ); ?></textarea></td>
 				</tr>
 				<tr><td scope="row" colspan="2">
-					<label><input type="checkbox" name="content_addhtmlafterS" id="content_addhtmlafterS" <?php if ( $ata_settings['content_addhtmlafterS'] ) echo 'checked="checked"'; ?> /> <?php _e( 'Add the following after the content. (You can use HTML):', 'add-to-all' ); ?></label>
+					<label><input type="checkbox" name="content_addhtmlafterS" id="content_addhtmlafterS" <?php if ( $ata_settings['content_addhtmlafterS'] ) { echo 'checked="checked"'; } ?> /> <?php _e( 'Add the following after the content. (You can use HTML):', 'add-to-all' ); ?></label>
 					<br /><textarea name="content_htmlafterS" id="content_htmlafterS" rows="15" cols="40" style="width:100%"><?php echo stripslashes( $ata_settings['content_htmlafterS'] ); ?></textarea></td>
 				</tr>
 				<tr><th scope="row" colspan="2"><?php _e( 'Adjust content filter priority:', 'add-to-all' ); ?></th>
@@ -216,26 +216,26 @@ function ata_options() {
 			<table class="form-table">
 			  <tbody>
 				<tr><td scope="row" colspan="2">
-					<label><input type="checkbox" name="feed_addhtmlbefore" id="feed_addhtmlbefore" <?php if ( $ata_settings['feed_addhtmlbefore'] ) echo 'checked="checked"'; ?> /> <?php _e( 'Add the following to the feed before the content. (You can use HTML):', 'add-to-all' ); ?></label>
+					<label><input type="checkbox" name="feed_addhtmlbefore" id="feed_addhtmlbefore" <?php if ( $ata_settings['feed_addhtmlbefore'] ) { echo 'checked="checked"'; } ?> /> <?php _e( 'Add the following to the feed before the content. (You can use HTML):', 'add-to-all' ); ?></label>
 					<br /><textarea name="feed_htmlbefore" id="feed_htmlbefore" rows="15" cols="40" style="width:100%"><?php echo stripslashes( $ata_settings['feed_htmlbefore'] ); ?></textarea></td>
 				</tr>
 				<tr><td scope="row" colspan="2">
-					<label><input type="checkbox" name="feed_addhtmlafter" id="feed_addhtmlafter" <?php if ( $ata_settings['feed_addhtmlafter'] ) echo 'checked="checked"'; ?> /> <?php _e( 'Add the following to the feed after the content. (You can use HTML):', 'add-to-all' ); ?></label>
+					<label><input type="checkbox" name="feed_addhtmlafter" id="feed_addhtmlafter" <?php if ( $ata_settings['feed_addhtmlafter'] ) { echo 'checked="checked"'; } ?> /> <?php _e( 'Add the following to the feed after the content. (You can use HTML):', 'add-to-all' ); ?></label>
 					<br /><textarea name="feed_htmlafter" id="feed_htmlafter" rows="15" cols="40" style="width:100%"><?php echo stripslashes( $ata_settings['feed_htmlafter'] ); ?></textarea></td>
 				</tr>
 				<tr><td scope="row" colspan="2">
-					<label><input type="checkbox" name="feed_addcopyright" id="feed_addcopyright" <?php if ( $ata_settings['feed_addcopyright'] ) echo 'checked="checked"'; ?> /> <?php _e( 'Add the following copyright notice to the feed (You can use HTML):', 'add-to-all' ); ?></label>
+					<label><input type="checkbox" name="feed_addcopyright" id="feed_addcopyright" <?php if ( $ata_settings['feed_addcopyright'] ) { echo 'checked="checked"'; } ?> /> <?php _e( 'Add the following copyright notice to the feed (You can use HTML):', 'add-to-all' ); ?></label>
 					<br /><textarea name="feed_copyrightnotice" id="feed_copyrightnotice" rows="15" cols="40" style="width:100%"><?php echo stripslashes( $ata_settings['feed_copyrightnotice'] ); ?></textarea></td>
 				</tr>
 				<tr>
 					<td scope="row" colspan="2">
-						<label><input type="checkbox" name="feed_addtitle" id="feed_addtitle" <?php if ( $ata_settings['feed_addtitle'] ) echo 'checked="checked"' ?> /> <?php _e( 'Add a link to the title of the post in the feed. Customize this below', 'add-to-all' ); ?></label>
+						<label><input type="checkbox" name="feed_addtitle" id="feed_addtitle" <?php if ( $ata_settings['feed_addtitle'] ) { echo 'checked="checked"'; } ?> /> <?php _e( 'Add a link to the title of the post in the feed. Customize this below', 'add-to-all' ); ?></label>
 						<br /><textarea name="feed_titletext" id="feed_titletext" rows="5" cols="80" style="width:100%"><?php echo stripslashes( $ata_settings['feed_titletext'] ); ?></textarea>
 						<p class="description"><?php _e( 'The above text will be added to the feed. You can use %title% to add a link to the post, %date% and %time% to display the date and time of the post respectively', 'add-to-all' ); ?></p>
 					</td>
 				</tr>
 				<tr><th scope="row"><label for="addcredit"><?php _e( 'Add a link to "Add to All" plugin page:', 'add-to-all' ); ?></label></th>
-					<td><input type="checkbox" name="addcredit" id="addcredit" <?php if ( $ata_settings['addcredit'] ) echo 'checked="checked"'; ?> /></td>
+					<td><input type="checkbox" name="addcredit" id="addcredit" <?php if ( $ata_settings['addcredit'] ) { echo 'checked="checked"'; } ?> /></td>
 				</tr>
 			  </tbody>
 			</table>
@@ -310,10 +310,9 @@ function ata_options() {
 
 /**
  * Add menu item in WP-Admin.
- *
  */
 function ata_adminmenu() {
-	$plugin_page = add_options_page(__( "Add to All", 'add-to-all'), __( "Add to All", 'add-to-all'), 'manage_options', 'ata_options', 'ata_options');
+	$plugin_page = add_options_page( __( 'Add to All', 'add-to-all' ), __( 'Add to All', 'add-to-all' ), 'manage_options', 'ata_options', 'ata_options' );
 	add_action( 'admin_head-'. $plugin_page, 'ata_adminhead' );
 }
 add_action( 'admin_menu', 'ata_adminmenu' );
@@ -321,7 +320,6 @@ add_action( 'admin_menu', 'ata_adminmenu' );
 
 /**
  * Add script to the Admin head.
- *
  */
 function ata_adminhead() {
 	global $ata_url;
@@ -375,4 +373,3 @@ function ata_adminhead() {
 <?php
 }
 
-?>
