@@ -103,13 +103,12 @@ function ald_ata_footer() {
 		var sc_click_stat=1;
 	// ]]>
 	</script>
-	<script type="text/javascript" src="http://www.statcounter.com/counter/counter_xhtml.js"></script>
-	<noscript><div class="statcounter"><a title="tumblr hit counter" href="http://statcounter.com/tumblr/" class="statcounter"><img class="statcounter" src="http://c.statcounter.com/<?php echo esc_attr( $sc_project ); ?>/0/<?php echo esc_attr( $sc_security ); ?>/1/" alt="tumblr hit counter" /></a></div></noscript>
+	<script type="text/javascript" src="https://secure.statcounter.com/counter/counter.js"></script>
+	<noscript><div class="statcounter"><a title="WordPress hit counter" href="https://statcounter.com/wordpress.org/" class="statcounter"><img class="statcounter" src="//c.statcounter.com/<?php echo esc_attr( $sc_project ); ?>/0/<?php echo esc_attr( $sc_security ); ?>/1/" alt="WordPress hit counter" /></a></div></noscript>
 	<!-- End of StatCounter Code // by Add to All WordPress Plugin -->
 <?php	}
 
 	if ( '' !== $ga_uacct ) {
-		if ( $ata_settings['tp_ga_ua'] ) {
 ?>
 
 	<!-- Start Google Analytics -->
@@ -117,35 +116,15 @@ function ald_ata_footer() {
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', '<?php echo esc_attr( $ga_uacct ); ?>', '<?php echo esc_attr( $ga_domain ); ?>');
+	  ga('create', '<?php echo esc_attr( $ga_uacct ); ?>', 'auto');
 	  ga('send', 'pageview');
 
 	</script>
 	<!-- End Google Analytics // Added by Add to All WordPress plugin -->
 
-<?php } else { ?>
-
-	<!-- Start Google Analytics -->
-	<script type="text/javascript">
-	// <![CDATA[
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', '<?php echo esc_attr( $ga_uacct ); ?>']);
-	  _gaq.push(['_setDomainName', '<?php echo esc_attr( $ga_domain ); ?>']);
-	  _gaq.push(['_setAllowLinker', true]);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-	// ]]>
-	</script>
-	<!-- End Google Analytics // Added by Add to All WordPress plugin -->
-<?php	}
-	}
+<?php }
 
 	if ( ( '' !== $kontera_id ) && ( '' !== $kontera_linkcolor ) ) {
 ?>
@@ -156,7 +135,7 @@ function ald_ata_footer() {
 	var dc_PublisherID = <?php echo esc_attr( $kontera_id ); ?> ;
 	// ]]>
 	</script>
-	<script type='text/javascript' src='http://kona.kontera.com/javascript/lib/KonaLibInline.js'></script>
+	<script type='text/javascript' src='///kona.kontera.com/javascript/lib/KonaLibInline.js'></script>
 	<!-- end Kontera(TM) // by Add to All WordPress plugin -->
 
 <?php	}
