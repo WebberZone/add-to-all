@@ -23,13 +23,37 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Holds the filesystem directory path.
+ * Holds the filesystem directory path (with trailing slash) for Top 10
+ *
+ * @since 1.2.0
+ *
+ * @var string Plugin folder path
  */
-define( 'ALD_ATA_DIR', dirname( __FILE__ ) );
+if ( ! defined( 'ATA_PLUGIN_DIR' ) ) {
+	define( 'ATA_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+}
 
-// Set the global variables for Add to All path and URL
-$ata_path = plugin_dir_path( __FILE__ );
-$ata_url = plugins_url() . '/' . plugin_basename( dirname( __FILE__ ) );
+/**
+ * Holds the filesystem directory path (with trailing slash) for Top 10
+ *
+ * @since 1.2.0
+ *
+ * @var string Plugin folder URL
+ */
+if ( ! defined( 'ATA_PLUGIN_URL' ) ) {
+	define( 'ATA_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+}
+
+/**
+ * Holds the filesystem directory path (with trailing slash) for Top 10
+ *
+ * @since 1.2.0
+ *
+ * @var string Plugin Root File
+ */
+if ( ! defined( 'ATA_PLUGIN_FILE' ) ) {
+	define( 'ATA_PLUGIN_FILE', __FILE__ );
+}
 
 
 /**
@@ -43,7 +67,7 @@ $ata_settings = ata_read_options();
  * Function to load translation files.
  */
 function ata_lang_init() {
-	load_plugin_textdomain( 'add-to-all', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	load_plugin_textdomain( 'add-to-all', false, dirname( plugin_basename( ATA_PLUGIN_FILE ) ) . '/languages/' );
 }
 add_action( 'init', 'ata_lang_init' );
 
@@ -334,7 +358,7 @@ add_action( 'wp_head', 'ald_ata_header' );
  * @return return Array with default options
  */
 function ata_default_options() {
-	global $ata_url;
+
 	$copyrightnotice = '&copy;' . date( 'Y' ) . ' &quot;<a href="' . get_option( 'home' ) . '">' . get_option( 'blogname' ) . '</a>&quot;. ';
 	$copyrightnotice .= __( 'Use of this feed is for personal non-commercial use only. If you are not reading this article in your feed reader, then the site is guilty of copyright infringement. Please contact me at ', 'ald_ata_plugin' );
 	$copyrightnotice .= get_option( 'admin_email' );
@@ -437,7 +461,7 @@ function ata_get_the_post_thumbnail( $postid ) {
 			'alt' => $title,
 			'class' => 'ata_thumb',
 			'border' => '0',
-			) );
+        ) );
 	} else {
 		$postimage = get_post_meta( $result->ID, $ata_settings['thumb_meta'], true ); // Check
 		if ( ! $postimage && $ata_settings['scan_images'] ) {
@@ -495,47 +519,7 @@ if ( is_admin() || strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) ) {
 	/**
 	 *  Load the admin pages if we're in the Admin.
 	 */
-	require_once( ALD_ATA_DIR . '/admin.inc.php' );
+	require_once( ATA_PLUGIN_DIR . '/admin.inc.php' );
 
-	/**
-	 * Adding WordPress plugin action links.
-	 *
-	 * @param array $links
-	 * @return array
-	 */
-	function ata_plugin_actions_links( $links ) {
-
-		return array_merge(
-			array(
-				'settings' => '<a href="' . admin_url( 'options-general.php?page=ata_options' ) . '">' . __( 'Settings', 'add-to-all' ) . '</a>',
-			),
-			$links
-		);
-
-	}
-	add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'ata_plugin_actions_links' );
-
-	/**
-	 * Add meta links on Plugins page.
-	 *
-	 * @param array  $links
-	 * @param string $file
-	 * @return array
-	 */
-	function ata_plugin_actions( $links, $file ) {
-		static $plugin;
-		if ( ! $plugin ) {
-			$plugin = plugin_basename( __FILE__ );
-		}
-
-		// create link
-		if ( $file == $plugin ) {
-			$links[] = '<a href="http://wordpress.org/support/plugin/add-to-all">' . __( 'Support', 'add-to-all' ) . '</a>';
-			$links[] = '<a href="http://ajaydsouza.com/donate/">' . __( 'Donate', 'add-to-all' ) . '</a>';
-		}
-		return $links;
-	}
-	add_filter( 'plugin_row_meta', 'ata_plugin_actions', 10, 2 ); // only 2.8 and higher
-
-} // End admin.inc
+}
 

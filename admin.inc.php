@@ -322,7 +322,6 @@ add_action( 'admin_menu', 'ata_adminmenu' );
  * Add script to the Admin head.
  */
 function ata_adminhead() {
-	global $ata_url;
 
 	wp_enqueue_script( 'common' );
 	wp_enqueue_script( 'wp-lists' );
@@ -372,4 +371,39 @@ function ata_adminhead() {
 
 <?php
 }
+
+/**
+ * Adding WordPress plugin action links.
+ *
+ * @param array $links
+ * @return array
+ */
+function ata_plugin_actions_links( $links ) {
+
+	return array_merge(
+		array(
+			'settings' => '<a href="' . admin_url( 'options-general.php?page=ata_options' ) . '">' . __( 'Settings', 'add-to-all' ) . '</a>',
+		),
+		$links
+	);
+
+}
+add_filter( 'plugin_action_links_' . plugin_basename( ATA_PLUGIN_FILE ), 'ata_plugin_actions_links' );
+
+/**
+ * Add meta links on Plugins page.
+ *
+ * @param array  $links
+ * @param string $file
+ * @return array
+ */
+function ata_plugin_actions( $links, $file ) {
+
+	if ( false !== strpos( $file, 'add-to-all.php' ) ) {
+		$links[] = '<a href="http://wordpress.org/support/plugin/add-to-all">' . __( 'Support', 'add-to-all' ) . '</a>';
+		$links[] = '<a href="http://ajaydsouza.com/donate/">' . __( 'Donate', 'add-to-all' ) . '</a>';
+	}
+	return $links;
+}
+add_filter( 'plugin_row_meta', 'ata_plugin_actions', 10, 2 );
 
