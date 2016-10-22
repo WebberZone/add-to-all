@@ -312,14 +312,18 @@ function ald_ata_header() {
 	// Add Tynt code to Header.
 	if ( '' !== $ata_tp_tynt_id ) {
 	?>
-		<!-- BEGIN Tynt Script - Inserted by Add to All WordPress Plugin -->
-		<script type="text/javascript">
-		if(document.location.protocol=='http:'){
-		 var Tynt=Tynt||[];Tynt.push('<?php	echo esc_attr( $ata_tp_tynt_id ); ?>');
-		 (function(){var s=document.createElement('script');s.async="async";s.type="text/javascript";s.src='http://tcr.tynt.com/ti.js';var h=document.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})();
-		}
-		</script>
-		<!-- END Tynt Script -->
+
+	<!-- Begin 33Across SiteCTRL - Inserted by Add to All WordPress Plugin -->
+	<script>
+	var Tynt=Tynt||[];Tynt.push('<?php	echo esc_attr( $ata_tp_tynt_id ); ?>');
+	(function(){var h,s=document.createElement('script');
+	s.src=(window.location.protocol==='https:'?
+	'https':'http')+'://cdn.tynt.com/ti.js';
+	h=document.getElementsByTagName('script')[0];
+	h.parentNode.insertBefore(s,h);})();
+	</script>
+	<!-- End 33Across SiteCTRL - Inserted by Add to All WordPress Plugin -->
+
 	<?php
 	}
 
