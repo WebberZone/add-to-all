@@ -15,8 +15,20 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function ata_options() {
 
-	global $wpdb;
-	$poststable = $wpdb->posts;
+	global $allowedposttags;
+
+	// We need more tags to allow for script and style.
+	$moretags = array(
+		'script' => array(
+			'type' => true,
+			'src' => true,
+		),
+		'style' => array(
+			'type' => true,
+		),
+	);
+
+	$allowedatatags = array_merge( $allowedposttags, $moretags );
 
 	$ata_settings = ata_read_options();
 
@@ -24,9 +36,9 @@ function ata_options() {
 
 		$ata_settings['addcredit'] = ( isset( $_POST['addcredit'] ) ) ? true : false;
 
-		// Save Header related options
-		$ata_settings['head_CSS'] = $_POST['head_CSS'];
-		$ata_settings['head_other'] = $_POST['head_other'];
+		// Save Header related options.
+		$ata_settings['head_CSS'] = wp_kses_post( wp_unslash( $_POST['head_CSS'] ) );
+		$ata_settings['head_other'] = wp_kses( wp_unslash( $_POST['head_other'] ), $allowedatatags );
 
 		// Save Content related options
 		$ata_settings['content_htmlbefore'] = $_POST['content_htmlbefore'];
@@ -50,7 +62,7 @@ function ata_options() {
 		$ata_settings['feed_addcopyright'] = ( isset( $_POST['feed_addcopyright'] ) ) ? true : false;
 
 		// Save Footer related options
-		$ata_settings['ft_other'] = $_POST['ft_other'];
+		$ata_settings['ft_other'] = wp_kses( wp_unslash( $_POST['ft_other'] ), $allowedatatags );
 
 		// 3rd party options
 		$ata_settings['tp_sc_project'] = $_POST['tp_sc_project'];
@@ -275,11 +287,8 @@ function ata_options() {
 	    <div id="followdiv" class="postbox"><div class="handlediv" title="<?php _e( 'Click to toggle', 'add-to-all' ); ?>"><br /></div>
 	      <h3 class='hndle'><span><?php _e( 'Follow me', 'add-to-all' ); ?></span></h3>
 	      <div class="inside">
-			<div id="follow-us">
-				<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fajaydsouzacom&amp;width=292&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=true&amp;appId=113175385243" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:62px;" allowTransparency="true"></iframe>
-				<div style="text-align:center"><a href="https://twitter.com/ajaydsouza" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @ajaydsouza</a>
-				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//plataorm.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>
-			</div>
+			<a href="https://facebook.com/webberzone/" target="_blank"><img src="<?php echo esc_url( ATA_PLUGIN_URL . 'admin/images/fb.png' ); ?>" width="100" height="100" /></a>
+			<a href="https://twitter.com/webberzonewp/" target="_blank"><img src="<?php echo esc_url( ATA_PLUGIN_URL . 'admin/images/twitter.jpg' ); ?>" width="100" height="100" /></a>
 	      </div>
 	    </div>
 	    <div id="qlinksdiv" class="postbox"><div class="handlediv" title="<?php _e( 'Click to toggle', 'add-to-all' ); ?>"><br /></div>
