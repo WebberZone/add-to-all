@@ -68,7 +68,7 @@ function ata_options() {
 
 		update_option( 'ald_ata_settings', $ata_settings );
 
-		$str = '<div id="message" class="updated fade"><p>'. __( 'Options saved successfully.', 'add-to-all' ) .'</p></div>';
+		$str = '<div id="message" class="updated fade"><p>' . __( 'Options saved successfully.', 'add-to-all' ) . '</p></div>';
 		echo $str;
 	}
 
@@ -78,7 +78,7 @@ function ata_options() {
 		$ata_settings = ata_default_options();
 		update_option( 'ald_ata_settings', $ata_settings );
 
-		$str = '<div id="message" class="updated fade"><p>'. __( 'Options set to Default.', 'add-to-all' ) .'</p></div>';
+		$str = '<div id="message" class="updated fade"><p>' . __( 'Options set to Default.', 'add-to-all' ) . '</p></div>';
 		echo $str;
 	}
 
@@ -313,7 +313,7 @@ function ata_options() {
  */
 function ata_adminmenu() {
 	$plugin_page = add_options_page( __( 'Add to All', 'add-to-all' ), __( 'Add to All', 'add-to-all' ), 'manage_options', 'ata_options', 'ata_options' );
-	add_action( 'admin_head-'. $plugin_page, 'ata_adminhead' );
+	add_action( 'admin_head-' . $plugin_page, 'ata_adminhead' );
 }
 add_action( 'admin_menu', 'ata_adminmenu' );
 
