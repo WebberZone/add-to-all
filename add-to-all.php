@@ -76,38 +76,39 @@ add_action( 'init', 'ata_lang_init' );
  * Function to add the necessary code to `wp_footer`.
  */
 function ald_ata_footer() {
-	global $wpdb, $post, $single, $ata_settings;
+	global $ata_settings;
 
 	$ata_other = stripslashes( $ata_settings['ft_other'] );
 	$sc_project = stripslashes( $ata_settings['tp_sc_project'] );
 	$sc_security = stripslashes( $ata_settings['tp_sc_security'] );
 	$ga_uacct = stripslashes( $ata_settings['tp_ga_uacct'] );
 	$ga_domain = stripslashes( $ata_settings['tp_ga_domain'] );
-	$kontera_ID = stripslashes( $ata_settings['tp_kontera_ID'] );
+	$kontera_id = stripslashes( $ata_settings['tp_kontera_ID'] );
 	$kontera_linkcolor = stripslashes( $ata_settings['tp_kontera_linkcolor'] );
 
-	// Add other footer
-	if ( '' != $ata_other ) {
-		echo $ata_other;
+	// Add other footer.
+	if ( '' !== $ata_other ) {
+		echo $ata_other; // WPCS: XSS OK.
 	}
 
-	if ( '' != $sc_project ) {
+	// Add Statcounter code.
+	if ( '' !== $sc_project ) {
 ?>
 	<!-- Start of StatCounter Code -->
 	<script type="text/javascript">
 	// <![CDATA[
-		var sc_project=<?php echo $sc_project; ?>;
-		var sc_security="<?php echo $sc_security; ?>";
+		var sc_project=<?php echo esc_attr( $sc_project ); ?>;
+		var sc_security="<?php echo esc_attr( $sc_security ); ?>";
 		var sc_invisible=1;
 		var sc_click_stat=1;
 	// ]]>
 	</script>
 	<script type="text/javascript" src="http://www.statcounter.com/counter/counter_xhtml.js"></script>
-	<noscript><div class="statcounter"><a title="tumblr hit counter" href="http://statcounter.com/tumblr/" class="statcounter"><img class="statcounter" src="http://c.statcounter.com/<?php echo $sc_project; ?>/0/<?php echo $sc_security; ?>/1/" alt="tumblr hit counter" /></a></div></noscript>
+	<noscript><div class="statcounter"><a title="tumblr hit counter" href="http://statcounter.com/tumblr/" class="statcounter"><img class="statcounter" src="http://c.statcounter.com/<?php echo esc_attr( $sc_project ); ?>/0/<?php echo esc_attr( $sc_security ); ?>/1/" alt="tumblr hit counter" /></a></div></noscript>
 	<!-- End of StatCounter Code // by Add to All WordPress Plugin -->
 <?php	}
 
-	if ( '' != $ga_uacct ) {
+	if ( '' !== $ga_uacct ) {
 		if ( $ata_settings['tp_ga_ua'] ) {
 ?>
 
@@ -118,7 +119,7 @@ function ald_ata_footer() {
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', '<?php echo $ga_uacct; ?>', '<?php echo $ga_domain; ?>');
+	  ga('create', '<?php echo esc_attr( $ga_uacct ); ?>', '<?php echo esc_attr( $ga_domain ); ?>');
 	  ga('send', 'pageview');
 
 	</script>
@@ -130,8 +131,8 @@ function ald_ata_footer() {
 	<script type="text/javascript">
 	// <![CDATA[
 	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', '<?php echo $ga_uacct; ?>']);
-	  _gaq.push(['_setDomainName', '<?php echo $ga_domain; ?>']);
+	  _gaq.push(['_setAccount', '<?php echo esc_attr( $ga_uacct ); ?>']);
+	  _gaq.push(['_setDomainName', '<?php echo esc_attr( $ga_domain ); ?>']);
 	  _gaq.push(['_setAllowLinker', true]);
 	  _gaq.push(['_trackPageview']);
 
@@ -146,13 +147,13 @@ function ald_ata_footer() {
 <?php	}
 	}
 
-	if ( ( '' != $kontera_ID ) && ( '' != $kontera_linkcolor ) ) {
+	if ( ( '' !== $kontera_id ) && ( '' !== $kontera_linkcolor ) ) {
 ?>
 	<!-- Kontera(TM);-->
 	<script type='text/javascript'>
 	// <![CDATA[
-	var dc_AdLinkColor = '<?php echo $kontera_linkcolor; ?>' ;
-	var dc_PublisherID = <?php echo $kontera_ID; ?> ;
+	var dc_AdLinkColor = '<?php echo esc_attr( $kontera_linkcolor ); ?>' ;
+	var dc_PublisherID = <?php echo esc_attr( $kontera_id ); ?> ;
 	// ]]>
 	</script>
 	<script type='text/javascript' src='http://kona.kontera.com/javascript/lib/KonaLibInline.js'></script>
@@ -167,12 +168,12 @@ add_action( 'wp_footer', 'ald_ata_footer' );
 /**
  * Function to wrap the post content with Kontera tags. Filters `the_content`.
  *
- * @param string $content Post content
+ * @param string $content Post content.
  * @return string Filtered post content
  */
 function ata_content_nofilter( $content ) {
 
-	global $single, $ata_settings;
+	global $ata_settings;
 
 	if ( $ata_settings['tp_kontera_addZT'] ) {
 		$str_before = '<div class="KonaBody">';
@@ -205,7 +206,7 @@ add_action( 'template_redirect', 'ata_content_prepare_filter' );
 /**
  * Function to add custom HTML before and after the post content. Filters `the_content`.
  *
- * @param string $content Post content
+ * @param string $content Post content.
  * @return string Filtered post content
  */
 function ata_content( $content ) {
@@ -252,7 +253,7 @@ function ata_content( $content ) {
 /**
  * Function to add content to RSS feeds. Filters `the_excerpt_rss` and `the_content_feed`.
  *
- * @param string $content Post content
+ * @param string $content Post content.
  * @return string Filtered post content
  */
 function ald_ata_rss( $content ) {
@@ -318,24 +319,24 @@ add_filter( 'the_content_feed', 'ald_ata_rss', 99999999 );
  */
 function ald_ata_header() {
 
-	global $wpdb, $post, $single, $ata_settings;
+	global $ata_settings;
 
 	$ata_other = stripslashes( $ata_settings['head_other'] );
-	$ata_head_CSS = stripslashes( $ata_settings['head_CSS'] );
+	$ata_head_css = stripslashes( $ata_settings['head_CSS'] );
 	$ata_tp_tynt_id = stripslashes( $ata_settings['tp_tynt_id'] );
 
-	// Add CSS to header
-	if ( $ata_head_CSS != '' ) {
-		echo '<style type="text/css">' . $ata_head_CSS . '</style>';
+	// Add CSS to header.
+	if ( '' !== $ata_head_css ) {
+		echo '<style type="text/css">' . $ata_head_css . '</style>'; // WPCS: XSS OK.
 	}
 
-	// Add Tynt code to Header
-	if ( $ata_tp_tynt_id != '' ) {
+	// Add Tynt code to Header.
+	if ( '' !== $ata_tp_tynt_id ) {
 	?>
 		<!-- BEGIN Tynt Script - Inserted by Add to All WordPress Plugin -->
 		<script type="text/javascript">
 		if(document.location.protocol=='http:'){
-		 var Tynt=Tynt||[];Tynt.push('<?php	echo $ata_tp_tynt_id; ?>');
+		 var Tynt=Tynt||[];Tynt.push('<?php	echo esc_attr( $ata_tp_tynt_id ); ?>');
 		 (function(){var s=document.createElement('script');s.async="async";s.type="text/javascript";s.src='http://tcr.tynt.com/ti.js';var h=document.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})();
 		}
 		</script>
@@ -343,9 +344,9 @@ function ald_ata_header() {
 	<?php
 	}
 
-	// Add other header
-	if ( $ata_other != '' ) {
-		echo $ata_other;
+	// Add other header.
+	if ( '' !== $ata_other ) {
+		echo $ata_other; // WPCS: XSS OK.
 	}
 
 }
@@ -362,52 +363,52 @@ function ata_default_options() {
 	$copyrightnotice = '&copy;' . date( 'Y' ) . ' &quot;<a href="' . get_option( 'home' ) . '">' . get_option( 'blogname' ) . '</a>&quot;. ';
 	$copyrightnotice .= __( 'Use of this feed is for personal non-commercial use only. If you are not reading this article in your feed reader, then the site is guilty of copyright infringement. Please contact me at ', 'ald_ata_plugin' );
 	$copyrightnotice .= get_option( 'admin_email' );
-	$ga_url = parse_url( get_option( 'home' ), PHP_URL_HOST );
+	$ga_url = wp_parse_url( get_option( 'home' ), PHP_URL_HOST );
 
 	$titletext = __( '%title% was first posted on %date% at %time%.', 'add-to-all' );
 
 	$ata_settings = array(
 		 'addcredit' => false, // Show credits?
 
-		// Content options
-		'content_htmlbefore' => '', // HTML you want added to the content
-		'content_htmlafter' => '', // HTML you want added to the content
+		// Content options.
+		'content_htmlbefore' => '', // HTML you want added to the content.
+		'content_htmlafter' => '', // HTML you want added to the content.
 		'content_addhtmlbefore' => false, // Add HTML to content?
 		'content_addhtmlafter' => false, // Add HTML to content?
-		'content_htmlbeforeS' => '', // HTML you want added to the content on single pages only
-		'content_htmlafterS' => '', // HTML you want added to the content on single pages only
+		'content_htmlbeforeS' => '', // HTML you want added to the content on single pages only.
+		'content_htmlafterS' => '', // HTML you want added to the content on single pages only.
 		'content_addhtmlbeforeS' => false, // Add HTML to content on single pages?
 		'content_addhtmlafterS' => false, // Add HTML to content on single pages?
-		'content_filter_priority' => 999, // Content priority
+		'content_filter_priority' => 999, // Content priority.
 
-		// Feed options
-		'feed_htmlbefore' => '', // HTML you want added to the feed
-		'feed_htmlafter' => '', // HTML you want added to the feed
-		'feed_copyrightnotice' => $copyrightnotice, // Copyright Notice
-		'feed_emailaddress' => get_option( 'admin_email' ), // Admin Email
+		// Feed options.
+		'feed_htmlbefore' => '', // HTML you want added to the feed.
+		'feed_htmlafter' => '', // HTML you want added to the feed.
+		'feed_copyrightnotice' => $copyrightnotice, // Copyright Notice.
+		'feed_emailaddress' => get_option( 'admin_email' ), // Admin Email.
 		'feed_addhtmlbefore' => false, // Add HTML to Feed?
 		'feed_addhtmlafter' => false, // Add HTML to Feed?
 		'feed_addtitle' => true, // Add title of the post?
-		'feed_titletext' => $titletext,	// Custom text when adding a link to the post title
+		'feed_titletext' => $titletext,	// Custom text when adding a link to the post title.
 		'feed_addcopyright' => true, // Add copyright notice?
 
-		// 3rd party options
-		'tp_sc_project' => '', // StatCounter Project ID
-		'tp_sc_security' => '', // StatCounter Security String
-		'tp_ga_uacct' => '', // Google Analytics Web Property ID
-		'tp_ga_domain' => $ga_url, // Google Analytics _setDomainName value
-		'tp_ga_ua' => false, // Use Google Universal Analytics code
-		'tp_kontera_ID' => '', // Kontera Publisher ID
-		'tp_kontera_linkcolor' => '', // Kontera link color
-		'tp_kontera_addZT' => '', // Kontera Add zone tags
-		'tp_tynt_id' => '', // Tynt ID
+		// 3rd party options.
+		'tp_sc_project' => '', // StatCounter Project ID.
+		'tp_sc_security' => '', // StatCounter Security String.
+		'tp_ga_uacct' => '', // Google Analytics Web Property ID.
+		'tp_ga_domain' => $ga_url, // Google Analytics _setDomainName value.
+		'tp_ga_ua' => false, // Use Google Universal Analytics code.
+		'tp_kontera_ID' => '', // Kontera Publisher ID.
+		'tp_kontera_linkcolor' => '', // Kontera link color.
+		'tp_kontera_addZT' => '', // Kontera Add zone tags.
+		'tp_tynt_id' => '', // Tynt ID.
 
-		// Footer options
-		'ft_other' => '', // For any other code
+		// Footer options.
+		'ft_other' => '', // For any other code.
 
-		// Header options
-		'head_CSS' => '', // CSS to add to header (do not wrap with <style> tags)
-		'head_other' => '',// For any other code
+		// Header options.
+		'head_CSS' => '', // CSS to add to header (do not wrap with <style> tags).
+		'head_other' => '',// For any other code.
 
 	);
 	return apply_filters( 'ata_default_options', $ata_settings );
@@ -424,15 +425,15 @@ function ata_read_options() {
 
 	$defaults = ata_default_options();
 
-	$ata_settings = array_map( 'stripslashes',(array) get_option( 'ald_ata_settings' ) );
-	unset( $ata_settings[0] ); // produced by the (array) casting when there's nothing in the DB
+	$ata_settings = array_map( 'stripslashes', (array) get_option( 'ald_ata_settings' ) );
+	unset( $ata_settings[0] ); // Produced by the (array) casting when there's nothing in the DB.
 
 	foreach ( $defaults as $k => $v ) {
 		if ( ! isset( $ata_settings[ $k ] ) ) {
 			$ata_settings[ $k ] = $v; }
 		$ata_settings_changed = true;
 	}
-	if ( $ata_settings_changed == true ) {
+	if ( true === $ata_settings_changed ) {
 		update_option( 'ald_ata_settings', $ata_settings ); }
 
 	return apply_filters( 'ata_read_options', $ata_settings );
@@ -442,7 +443,7 @@ function ata_read_options() {
 /**
  * Function to get the post thumbnail.
  *
- * @param integer $postid Post ID
+ * @param integer $postid Post ID.
  * @return string Image tag with the post thumbnail
  */
 function ata_get_the_post_thumbnail( $postid ) {
@@ -453,28 +454,34 @@ function ata_get_the_post_thumbnail( $postid ) {
 	$title = get_the_title( $postid );
 
 	if ( function_exists( 'has_post_thumbnail' ) && has_post_thumbnail( $result->ID ) ) {
-		$output .= get_the_post_thumbnail( $result->ID, array(
-			 $ata_settings['thumb_width'],
-			$ata_settings['thumb_height'],
-			), array(
-			 'title' => $title,
-			'alt' => $title,
-			'class' => 'ata_thumb',
-			'border' => '0',
-        ) );
+		$output .= get_the_post_thumbnail(
+			$result->ID,
+			array(
+				$ata_settings['thumb_width'],
+				$ata_settings['thumb_height'],
+			),
+			array(
+				'title' => $title,
+				'alt' => $title,
+				'class' => 'ata_thumb',
+				'border' => '0',
+			)
+		);
 	} else {
-		$postimage = get_post_meta( $result->ID, $ata_settings['thumb_meta'], true ); // Check
+		$postimage = get_post_meta( $result->ID, $ata_settings['thumb_meta'], true );
 		if ( ! $postimage && $ata_settings['scan_images'] ) {
 			preg_match_all( '|<img.*?src=[\'"](.*?)[\'"].*?>|i', $result->post_content, $matches );
-			// any image there?
+
 			if ( isset( $matches ) && $matches[1][0] ) {
-				$postimage = $matches[1][0]; // we need the first one only!
+				$postimage = $matches[1][0]; // Get the first one only.
 			}
 		}
 		if ( ! $postimage ) {
-			$postimage = get_post_meta( $result->ID, '_video_thumbnail', true ); // If no other thumbnail set, try to get the custom video thumbnail set by the Video Thumbnails plugin
+			// If no other thumbnail set, try to get the custom video thumbnail set by the Video Thumbnails plugin.
+			$postimage = get_post_meta( $result->ID, '_video_thumbnail', true );
 		}		if ( $ata_settings['thumb_default_show'] && ! $postimage ) {
-			$postimage = $ata_settings['thumb_default']; // If no thumb found and settings permit, use default thumb
+			// If no thumb found and settings permit, use default thumb.
+			$postimage = $ata_settings['thumb_default'];
 		}		if ( $postimage ) {
 			$output .= '<img src="' . $postimage . '" alt="' . $title . '" title="' . $title . '" style="max-width:' . $ata_settings['thumb_width'] . 'px;max-height:' . $ata_settings['thumb_height'] . 'px; border:0;" class="ata_thumb" />';
 		}
@@ -488,16 +495,17 @@ function ata_get_the_post_thumbnail( $postid ) {
 /**
  * Function to create an excerpt for the post.
  *
- * @param integer $id Post ID
- * @param mixed   $excerpt_length Length of the excerpt in words
+ * @param integer $id Post ID.
+ * @param mixed   $excerpt_length Length of the excerpt in words.
+ * @param bool    $use_excerpt Use excerpt.
  * @return string The excerpt
  */
 function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
-	$content = $excerpt = '';
+	$content = '';
 	if ( $use_excerpt ) {
 		$content = get_post( $id )->post_excerpt;
 	}
-	if ( '' == $content ) {
+	if ( '' === $content ) {
 		$content = get_post( $id )->post_content;
 	}
 
@@ -514,7 +522,7 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 /**
  *  Admin options
  */
-if ( is_admin() || strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) ) {
+if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
 	/**
 	 *  Load the admin pages if we're in the Admin.
