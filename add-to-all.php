@@ -59,7 +59,7 @@ if ( ! defined( 'ATA_PLUGIN_FILE' ) ) {
 /**
  * Declare $ata_settings global so that it can be accessed in every function
  */
-global $ata_settings
+global $ata_settings;
 $ata_settings = ata_get_settings();
 
 
@@ -152,31 +152,6 @@ add_action( 'wp_footer', 'ald_ata_footer' );
 
 
 /**
- * Function to wrap the post content with Kontera tags. Filters `the_content`.
- *
- * @param string $content Post content.
- * @return string Filtered post content
- */
-function ata_content_nofilter( $content ) {
-
-	global $ata_settings;
-
-	if ( $ata_settings['tp_kontera_addZT'] ) {
-		$str_before = '<div class="KonaBody">';
-		$str_after = '</div>';
-		if ( ( is_singular() ) || ( is_home() ) || ( is_archive() ) ) {
-			return $str_before . $content . $str_after;
-		} else {
-			return $content;
-		}
-	} else {
-			return $content;
-	}
-}
-add_filter( 'the_content', 'ata_content_nofilter' );
-
-
-/**
  * Function to modify the_content filter priority.
  */
 function ata_content_prepare_filter() {
@@ -203,27 +178,27 @@ function ata_content( $content ) {
 		$str_after = '';
 
 		if ( is_singular() ) {
-			if ( $ata_settings['content_add_html_before'] ) {
+			if ( isset( $ata_settings['content_add_html_before'] ) ) {
 				$str_before .= stripslashes( $ata_settings['content_html_before'] );
 			}
 
-			if ( $ata_settings['content_add_html_after'] ) {
+			if ( isset( $ata_settings['content_add_html_after'] ) ) {
 				$str_after .= stripslashes( $ata_settings['content_html_after'] );
 			}
 
-			if ( $ata_settings['content_add_html_before_single'] ) {
+			if ( isset( $ata_settings['content_add_html_before_single'] ) ) {
 				$str_before .= stripslashes( $ata_settings['content_html_before_single'] );
 			}
 
-			if ( $ata_settings['content_add_html_after_single'] ) {
+			if ( isset( $ata_settings['content_add_html_after_single'] ) ) {
 				$str_after .= stripslashes( $ata_settings['content_html_after_single'] );
 			}
 		} elseif ( ( is_home() ) || ( is_archive() ) ) {
-			if ( $ata_settings['content_add_html_before'] ) {
+			if ( isset( $ata_settings['content_add_html_before'] ) ) {
 				$str_before .= stripslashes( $ata_settings['content_html_before'] );
 			}
 
-			if ( $ata_settings['content_add_html_after'] ) {
+			if ( isset( $ata_settings['content_add_html_after'] ) ) {
 				$str_after .= stripslashes( $ata_settings['content_html_after'] );
 			}
 		}
@@ -245,21 +220,21 @@ function ata_content( $content ) {
 function ald_ata_rss( $content ) {
 	global $ata_settings;
 
-	if ( ( $ata_settings['feed_add_html_before'] ) || ( $ata_settings['feed_add_html_after'] ) || ( $ata_settings['feed_add_title'] ) || ( $ata_settings['feed_add_copyright'] ) || ( $ata_settings['add_credit'] ) ) {
+	if ( isset( $ata_settings['feed_add_html_before'] ) || isset( $ata_settings['feed_add_html_after'] ) || isset( $ata_settings['feed_add_title'] ) || isset( $ata_settings['feed_add_copyright'] ) || isset( $ata_settings['add_credit'] ) ) {
 		$str_before = '';
 		$str_after = '<hr style="border-top:black solid 1px" />';
 
-		if ( $ata_settings['feed_add_html_before'] ) {
+		if ( isset( $ata_settings['feed_add_html_before'] ) ) {
 			$str_before .= stripslashes( $ata_settings['feed_html_before'] );
 			$str_before .= '<br />';
 		}
 
-		if ( $ata_settings['feed_add_html_after'] ) {
+		if ( isset( $ata_settings['feed_add_html_after'] ) ) {
 			$str_after .= stripslashes( $ata_settings['feed_html_after'] );
 			$str_after .= '<br />';
 		}
 
-		if ( $ata_settings['feed_add_title'] ) {
+		if ( isset( $ata_settings['feed_add_title'] ) ) {
 			$title = '<a href="' . get_permalink() . '">' . the_title( '', '', false ) . '</a>';
 			$search_array = array(
 				'%title%',
@@ -276,12 +251,12 @@ function ald_ata_rss( $content ) {
 			$str_after .= '<br />';
 		}
 
-		if ( $ata_settings['feed_add_copyright'] ) {
+		if ( isset( $ata_settings['feed_add_copyright'] ) ) {
 			$str_after .= stripslashes( $ata_settings['feed_copyrightnotice'] );
 			$str_after .= '<br />';
 		}
 
-		if ( $ata_settings['add_credit'] ) {
+		if ( isset( $ata_settings['add_credit'] ) ) {
 			$creditline = '<br /><span style="font-size: 0.8em">';
 			$creditline .= __( 'Feed enhanced by ', 'add-to-all' );
 			$creditline .= '<a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All</a>';
