@@ -361,93 +361,6 @@ add_action( 'wp_head', 'ald_ata_header' );
 
 
 /**
- * Default options.
- *
- * @return return Array with default options
- */
-function ata_default_options() {
-
-	$copyrightnotice = '&copy;' . date( 'Y' ) . ' &quot;<a href="' . get_option( 'home' ) . '">' . get_option( 'blogname' ) . '</a>&quot;. ';
-	$copyrightnotice .= __( 'Use of this feed is for personal non-commercial use only. If you are not reading this article in your feed reader, then the site is guilty of copyright infringement. Please contact me at ', 'ald_ata_plugin' );
-	$copyrightnotice .= get_option( 'admin_email' );
-	$ga_url = wp_parse_url( get_option( 'home' ), PHP_URL_HOST );
-
-	$titletext = __( '%title% was first posted on %date% at %time%.', 'add-to-all' );
-
-	$ata_settings = array(
-		'addcredit' => false, // Show credits?
-
-		// Content options.
-		'content_htmlbefore' => '', // HTML you want added to the content.
-		'content_htmlafter' => '', // HTML you want added to the content.
-		'content_addhtmlbefore' => false, // Add HTML to content?
-		'content_addhtmlafter' => false, // Add HTML to content?
-		'content_htmlbeforeS' => '', // HTML you want added to the content on single pages only.
-		'content_htmlafterS' => '', // HTML you want added to the content on single pages only.
-		'content_addhtmlbeforeS' => false, // Add HTML to content on single pages?
-		'content_addhtmlafterS' => false, // Add HTML to content on single pages?
-		'content_filter_priority' => 999, // Content priority.
-
-		// Feed options.
-		'feed_htmlbefore' => '', // HTML you want added to the feed.
-		'feed_htmlafter' => '', // HTML you want added to the feed.
-		'feed_copyrightnotice' => $copyrightnotice, // Copyright Notice.
-		'feed_emailaddress' => get_option( 'admin_email' ), // Admin Email.
-		'feed_addhtmlbefore' => false, // Add HTML to Feed?
-		'feed_addhtmlafter' => false, // Add HTML to Feed?
-		'feed_addtitle' => true, // Add title of the post?
-		'feed_titletext' => $titletext,	// Custom text when adding a link to the post title.
-		'feed_addcopyright' => true, // Add copyright notice?
-
-		// 3rd party options.
-		'tp_sc_project' => '', // StatCounter Project ID.
-		'tp_sc_security' => '', // StatCounter Security String.
-		'tp_ga_uacct' => '', // Google Analytics Web Property ID.
-		'tp_ga_domain' => $ga_url, // Google Analytics _setDomainName value.
-		'tp_ga_ua' => false, // Use Google Universal Analytics code.
-		'tp_kontera_ID' => '', // Kontera Publisher ID.
-		'tp_kontera_linkcolor' => '', // Kontera link color.
-		'tp_kontera_addZT' => '', // Kontera Add zone tags.
-		'tp_tynt_id' => '', // Tynt ID.
-
-		// Footer options.
-		'ft_other' => '', // For any other code.
-
-		// Header options.
-		'head_CSS' => '', // CSS to add to header (do not wrap with <style> tags).
-		'head_other' => '',// For any other code.
-
-	);
-	return apply_filters( 'ata_default_options', $ata_settings );
-}
-
-
-/**
- * Function to read options from the database and add any new ones.
- *
- * @return array Options array
- */
-function ata_read_options() {
-	$ata_settings_changed = false;
-
-	$defaults = ata_default_options();
-
-	$ata_settings = array_map( 'stripslashes', (array) get_option( 'ald_ata_settings' ) );
-	unset( $ata_settings[0] ); // Produced by the (array) casting when there's nothing in the DB.
-
-	foreach ( $defaults as $k => $v ) {
-		if ( ! isset( $ata_settings[ $k ] ) ) {
-			$ata_settings[ $k ] = $v; }
-		$ata_settings_changed = true;
-	}
-	if ( true === $ata_settings_changed ) {
-		update_option( 'ald_ata_settings', $ata_settings ); }
-
-	return apply_filters( 'ata_read_options', $ata_settings );
-}
-
-
-/**
  * Function to get the post thumbnail.
  *
  * @param integer $postid Post ID.
@@ -541,11 +454,17 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 
 if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
-	require_once ATA_PLUGIN_DIR . '/admin.inc.php';
 	require_once ATA_PLUGIN_DIR . 'includes/admin/admin.php';
 	require_once ATA_PLUGIN_DIR . 'includes/admin/settings-page.php';
 	require_once ATA_PLUGIN_DIR . 'includes/admin/save-settings.php';
 	require_once ATA_PLUGIN_DIR . 'includes/admin/help-tab.php';
 
 }
+
+/*
+ ----------------------------------------------------------------------------*
+ * Deprecated functions, variables and constants
+ *----------------------------------------------------------------------------*/
+
+	require_once ATA_PLUGIN_DIR . '/includes/deprecated.php';
 
