@@ -28,7 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 function ata_settings_sanitize( $input = array() ) {
 
 	// First, we read the options collection.
-	global $ata_options;
+	global $ata_settings;
 
 	// This should be set if a form is submitted, so let's save it in the $referrer variable
 	if ( empty( $_POST['_wp_http_referer'] ) ) {
@@ -45,11 +45,11 @@ function ata_settings_sanitize( $input = array() ) {
 
 	if ( $reset ) {
 		ata_settings_reset();
-		$ata_options = get_option( 'ata_settings' );
+		$ata_settings = get_option( 'ata_settings' );
 
 		add_settings_error( 'ata-notices', '', __( 'Settings have been reset to their default values. Reload this page to view the updated settings', 'add-to-all' ), 'error' );
 
-		return $ata_options;
+		return $ata_settings;
 	}
 
 	// Get the tab. This is also our settings' section
@@ -77,18 +77,18 @@ function ata_settings_sanitize( $input = array() ) {
 	// Loop through the whitelist and unset any that are empty for the tab being saved.
 	if ( ! empty( $settings[ $tab ] ) ) {
 		foreach ( $settings[ $tab ] as $key => $value ) {
-			if ( empty( $input[ $key ] ) && ! empty( $ata_options[ $key ] ) ) {
-				unset( $ata_options[ $key ] );
+			if ( empty( $input[ $key ] ) && ! empty( $ata_settings[ $key ] ) ) {
+				unset( $ata_settings[ $key ] );
 			}
 		}
 	}
 
 	// Merge our new settings with the existing. Force (array) in case it is empty.
-	$ata_options = array_merge( (array) $ata_options, $input );
+	$ata_settings = array_merge( (array) $ata_settings, $input );
 
 	add_settings_error( 'ata-notices', '', __( 'Settings updated.', 'add-to-all' ), 'updated' );
 
-	return $ata_options;
+	return $ata_settings;
 
 }
 

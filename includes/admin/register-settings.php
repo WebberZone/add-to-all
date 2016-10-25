@@ -28,9 +28,9 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function ata_get_option( $key = '', $default = false ) {
 
-	global $ata_options;
+	global $ata_settings;
 
-	$value = ! empty( $ata_options[ $key ] ) ? $ata_options[ $key ] : $default;
+	$value = ! empty( $ata_settings[ $key ] ) ? $ata_settings[ $key ] : $default;
 
 	/**
 	 * Filter the value for the option being fetched.
@@ -94,8 +94,8 @@ function ata_update_option( $key = '', $value = false ) {
 
 	// If it updated, let's update the global variable.
 	if ( $did_update ) {
-		global $ata_options;
-		$ata_options[ $key ] = $value;
+		global $ata_settings;
+		$ata_settings[ $key ] = $value;
 	}
 	return $did_update;
 }
@@ -130,8 +130,8 @@ function ata_delete_option( $key = '' ) {
 
 	// If it updated, let's update the global variable.
 	if ( $did_update ) {
-		global $ata_options;
-		$ata_options = $options;
+		global $ata_settings;
+		$ata_settings = $options;
 	}
 	return $did_update;
 }

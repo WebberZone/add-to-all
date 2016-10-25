@@ -176,10 +176,10 @@ function ata_header_callback( $args ) {
 function ata_text_callback( $args ) {
 
 	// First, we read the options collection
-	global $ata_options;
+	global $ata_settings;
 
-	if ( isset( $ata_options[ $args['id'] ] ) ) {
-		$value = $ata_options[ $args['id'] ];
+	if ( isset( $ata_settings[ $args['id'] ] ) ) {
+		$value = $ata_settings[ $args['id'] ];
 	} else {
 		$value = isset( $args['options'] ) ? $args['options'] : '';
 	}
@@ -204,10 +204,10 @@ function ata_text_callback( $args ) {
 function ata_textarea_callback( $args ) {
 
 	// First, we read the options collection
-	global $ata_options;
+	global $ata_settings;
 
-	if ( isset( $ata_options[ $args['id'] ] ) ) {
-		$value = $ata_options[ $args['id'] ];
+	if ( isset( $ata_settings[ $args['id'] ] ) ) {
+		$value = $ata_settings[ $args['id'] ];
 	} else {
 		$value = isset( $args['options'] ) ? $args['options'] : '';
 	}
@@ -231,9 +231,9 @@ function ata_textarea_callback( $args ) {
 function ata_checkbox_callback( $args ) {
 
 	// First, we read the options collection
-	global $ata_options;
+	global $ata_settings;
 
-	$checked = isset( $ata_options[ $args['id'] ] ) ? checked( 1, $ata_options[ $args['id'] ], false ) : '';
+	$checked = isset( $ata_settings[ $args['id'] ] ) ? checked( 1, $ata_settings[ $args['id'] ], false ) : '';
 
 	$html = '<input type="checkbox" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="1" ' . $checked . '/>';
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
@@ -255,12 +255,12 @@ function ata_checkbox_callback( $args ) {
  * @return void
  */
 function ata_multicheck_callback( $args ) {
-	global $ata_options;
+	global $ata_settings;
 	$html = '';
 
 	if ( ! empty( $args['options'] ) ) {
 		foreach ( $args['options'] as $key => $option ) {
-			if ( isset( $ata_options[ $args['id'] ][ $key ] ) ) {
+			if ( isset( $ata_settings[ $args['id'] ][ $key ] ) ) {
 				$enabled = $option;
 			} else {
 				$enabled = null;
@@ -291,15 +291,15 @@ function ata_multicheck_callback( $args ) {
  * @return void
  */
 function ata_radio_callback( $args ) {
-	global $ata_options;
+	global $ata_settings;
 	$html = '';
 
 	foreach ( $args['options'] as $key => $option ) {
 		$checked = false;
 
-		if ( isset( $ata_options[ $args['id'] ] ) && $ata_options[ $args['id'] ] == $key ) {
+		if ( isset( $ata_settings[ $args['id'] ] ) && $ata_settings[ $args['id'] ] == $key ) {
 			$checked = true;
-		} elseif ( isset( $args['options'] ) && $args['options'] == $key && ! isset( $ata_options[ $args['id'] ] ) ) {
+		} elseif ( isset( $args['options'] ) && $args['options'] == $key && ! isset( $ata_settings[ $args['id'] ] ) ) {
 			$checked = true;
 		}
 
@@ -326,10 +326,10 @@ function ata_radio_callback( $args ) {
  * @return void
  */
 function ata_number_callback( $args ) {
-	global $ata_options;
+	global $ata_settings;
 
-	if ( isset( $ata_options[ $args['id'] ] ) ) {
-		$value = $ata_options[ $args['id'] ];
+	if ( isset( $ata_settings[ $args['id'] ] ) ) {
+		$value = $ata_settings[ $args['id'] ];
 	} else {
 		$value = isset( $args['options'] ) ? $args['options'] : '';
 	}
@@ -359,10 +359,10 @@ function ata_number_callback( $args ) {
  * @return void
  */
 function ata_select_callback( $args ) {
-	global $ata_options;
+	global $ata_settings;
 
-	if ( isset( $ata_options[ $args['id'] ] ) ) {
-		$value = $ata_options[ $args['id'] ];
+	if ( isset( $ata_settings[ $args['id'] ] ) ) {
+		$value = $ata_settings[ $args['id'] ];
 	} else {
 		$value = isset( $args['options'] ) ? $args['options'] : '';
 	}

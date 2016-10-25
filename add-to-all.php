@@ -59,9 +59,8 @@ if ( ! defined( 'ATA_PLUGIN_FILE' ) ) {
 /**
  * Declare $ata_settings global so that it can be accessed in every function
  */
-global $ata_settings, $ata_options;
-$ata_options = ata_get_settings();
-$ata_settings = ata_read_options();
+global $ata_settings
+$ata_settings = ata_get_settings();
 
 
 /**
