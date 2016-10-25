@@ -59,8 +59,33 @@ if ( ! defined( 'ATA_PLUGIN_FILE' ) ) {
 /**
  * Declare $ata_settings global so that it can be accessed in every function
  */
-global $ata_settings;
+global $ata_settings, $ata_options;
+$ata_options = ata_get_settings();
 $ata_settings = ata_read_options();
+
+
+/**
+ * Get Settings.
+ *
+ * Retrieves all plugin settings
+ *
+ * @since  1.2.0
+ * @return array Add to All settings
+ */
+function ata_get_settings() {
+
+	$settings = get_option( 'ata_settings' );
+
+	/**
+	 * Settings array
+	 *
+	 * Retrieves all plugin settings
+	 *
+	 * @since 1.2.0
+	 * @param array $settings Settings array
+	 */
+	return apply_filters( 'ata_get_settings', $settings );
+}
 
 
 /**
@@ -351,7 +376,7 @@ function ata_default_options() {
 	$titletext = __( '%title% was first posted on %date% at %time%.', 'add-to-all' );
 
 	$ata_settings = array(
-		 'addcredit' => false, // Show credits?
+		'addcredit' => false, // Show credits?
 
 		// Content options.
 		'content_htmlbefore' => '', // HTML you want added to the content.
@@ -502,15 +527,26 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 }
 
 
-/**
- *  Admin options
- */
+/*
+ ----------------------------------------------------------------------------*
+ * Include files
+ *----------------------------------------------------------------------------*/
+
+	require_once ATA_PLUGIN_DIR . 'includes/admin/register-settings.php';
+
+
+/*
+ ----------------------------------------------------------------------------*
+ * Dashboard and Administrative Functionality
+ *----------------------------------------------------------------------------*/
+
 if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
-	/**
-	 *  Load the admin pages if we're in the Admin.
-	 */
-	require_once( ATA_PLUGIN_DIR . '/admin.inc.php' );
+	require_once ATA_PLUGIN_DIR . '/admin.inc.php';
+	require_once ATA_PLUGIN_DIR . 'includes/admin/admin.php';
+	require_once ATA_PLUGIN_DIR . 'includes/admin/settings-page.php';
+	require_once ATA_PLUGIN_DIR . 'includes/admin/save-settings.php';
+	require_once ATA_PLUGIN_DIR . 'includes/admin/help-tab.php';
 
 }
 

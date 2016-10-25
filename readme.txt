@@ -36,6 +36,10 @@ Check out the Changelog for more details
 
 == Changelog ==
 
+= 1.2.0 =
+* Deprecated:
+	* Removed support for Kontera. If you'd like to continue using Kontera, please get the code from [the Kontera setup page](https://publishers.kontera.com/main/tag) and then add this under <strong>Footer settings</strong>
+
 = 1.1 =
 * New: Support for Google's Universal Analytics code
 * New: Customize the text used when linking to the title in the blog feed. You can use `%title%` to add a link to the post, `%date%` and `%time%` to display the date and time of the post respectively
