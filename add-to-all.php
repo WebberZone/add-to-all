@@ -102,13 +102,10 @@ add_action( 'init', 'ata_lang_init' );
 function ald_ata_footer() {
 	global $ata_settings;
 
-	$ata_other = stripslashes( $ata_settings['ft_other'] );
-	$sc_project = stripslashes( $ata_settings['tp_sc_project'] );
-	$sc_security = stripslashes( $ata_settings['tp_sc_security'] );
-	$ga_uacct = stripslashes( $ata_settings['tp_ga_uacct'] );
-	$ga_domain = stripslashes( $ata_settings['tp_ga_domain'] );
-	$kontera_id = stripslashes( $ata_settings['tp_kontera_ID'] );
-	$kontera_linkcolor = stripslashes( $ata_settings['tp_kontera_linkcolor'] );
+	$ata_other = stripslashes( $ata_settings['footer_other_html'] );
+	$sc_project = stripslashes( $ata_settings['sc_project'] );
+	$sc_security = stripslashes( $ata_settings['sc_security'] );
+	$ga_uacct = stripslashes( $ata_settings['ga_uacct'] );
 
 	// Add other footer.
 	if ( '' !== $ata_other ) {
@@ -149,20 +146,6 @@ function ald_ata_footer() {
 	<!-- End Google Analytics // Added by Add to All WordPress plugin -->
 
 <?php }
-
-	if ( ( '' !== $kontera_id ) && ( '' !== $kontera_linkcolor ) ) {
-?>
-	<!-- Kontera(TM);-->
-	<script type='text/javascript'>
-	// <![CDATA[
-	var dc_AdLinkColor = '<?php echo esc_attr( $kontera_linkcolor ); ?>' ;
-	var dc_PublisherID = <?php echo esc_attr( $kontera_id ); ?> ;
-	// ]]>
-	</script>
-	<script type='text/javascript' src='///kona.kontera.com/javascript/lib/KonaLibInline.js'></script>
-	<!-- end Kontera(TM) // by Add to All WordPress plugin -->
-
-<?php	}
 
 }
 add_action( 'wp_footer', 'ald_ata_footer' );
@@ -220,28 +203,28 @@ function ata_content( $content ) {
 		$str_after = '';
 
 		if ( is_singular() ) {
-			if ( $ata_settings['content_addhtmlbefore'] ) {
-				$str_before .= stripslashes( $ata_settings['content_htmlbefore'] );
+			if ( $ata_settings['content_add_html_before'] ) {
+				$str_before .= stripslashes( $ata_settings['content_html_before'] );
 			}
 
-			if ( $ata_settings['content_addhtmlafter'] ) {
-				$str_after .= stripslashes( $ata_settings['content_htmlafter'] );
+			if ( $ata_settings['content_add_html_after'] ) {
+				$str_after .= stripslashes( $ata_settings['content_html_after'] );
 			}
 
-			if ( $ata_settings['content_addhtmlbeforeS'] ) {
-				$str_before .= stripslashes( $ata_settings['content_htmlbeforeS'] );
+			if ( $ata_settings['content_add_html_before_single'] ) {
+				$str_before .= stripslashes( $ata_settings['content_html_before_single'] );
 			}
 
-			if ( $ata_settings['content_addhtmlafterS'] ) {
-				$str_after .= stripslashes( $ata_settings['content_htmlafterS'] );
+			if ( $ata_settings['content_add_html_after_single'] ) {
+				$str_after .= stripslashes( $ata_settings['content_html_after_single'] );
 			}
 		} elseif ( ( is_home() ) || ( is_archive() ) ) {
-			if ( $ata_settings['content_addhtmlbefore'] ) {
-				$str_before .= stripslashes( $ata_settings['content_htmlbefore'] );
+			if ( $ata_settings['content_add_html_before'] ) {
+				$str_before .= stripslashes( $ata_settings['content_html_before'] );
 			}
 
-			if ( $ata_settings['content_addhtmlafter'] ) {
-				$str_after .= stripslashes( $ata_settings['content_htmlafter'] );
+			if ( $ata_settings['content_add_html_after'] ) {
+				$str_after .= stripslashes( $ata_settings['content_html_after'] );
 			}
 		}
 
@@ -262,21 +245,21 @@ function ata_content( $content ) {
 function ald_ata_rss( $content ) {
 	global $ata_settings;
 
-	if ( ( $ata_settings['feed_addhtmlbefore'] ) || ( $ata_settings['feed_addhtmlafter'] ) || ( $ata_settings['feed_addtitle'] ) || ( $ata_settings['feed_addcopyright'] ) || ( $ata_settings['addcredit'] ) ) {
+	if ( ( $ata_settings['feed_add_html_before'] ) || ( $ata_settings['feed_add_html_after'] ) || ( $ata_settings['feed_add_title'] ) || ( $ata_settings['feed_add_copyright'] ) || ( $ata_settings['add_credit'] ) ) {
 		$str_before = '';
 		$str_after = '<hr style="border-top:black solid 1px" />';
 
-		if ( $ata_settings['feed_addhtmlbefore'] ) {
-			$str_before .= stripslashes( $ata_settings['feed_htmlbefore'] );
+		if ( $ata_settings['feed_add_html_before'] ) {
+			$str_before .= stripslashes( $ata_settings['feed_html_before'] );
 			$str_before .= '<br />';
 		}
 
-		if ( $ata_settings['feed_addhtmlafter'] ) {
-			$str_after .= stripslashes( $ata_settings['feed_htmlafter'] );
+		if ( $ata_settings['feed_add_html_after'] ) {
+			$str_after .= stripslashes( $ata_settings['feed_html_after'] );
 			$str_after .= '<br />';
 		}
 
-		if ( $ata_settings['feed_addtitle'] ) {
+		if ( $ata_settings['feed_add_title'] ) {
 			$title = '<a href="' . get_permalink() . '">' . the_title( '', '', false ) . '</a>';
 			$search_array = array(
 				'%title%',
@@ -288,17 +271,17 @@ function ald_ata_rss( $content ) {
 				get_the_time( 'F j, Y' ),
 				get_the_time( 'g:i a' ),
 			);
-			$str_after .= str_replace( $search_array, $replace_array, $ata_settings['feed_titletext'] );
+			$str_after .= str_replace( $search_array, $replace_array, $ata_settings['feed_title_text'] );
 
 			$str_after .= '<br />';
 		}
 
-		if ( $ata_settings['feed_addcopyright'] ) {
+		if ( $ata_settings['feed_add_copyright'] ) {
 			$str_after .= stripslashes( $ata_settings['feed_copyrightnotice'] );
 			$str_after .= '<br />';
 		}
 
-		if ( $ata_settings['addcredit'] ) {
+		if ( $ata_settings['add_credit'] ) {
 			$creditline = '<br /><span style="font-size: 0.8em">';
 			$creditline .= __( 'Feed enhanced by ', 'add-to-all' );
 			$creditline .= '<a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All</a>';
@@ -324,9 +307,9 @@ function ald_ata_header() {
 
 	global $ata_settings;
 
-	$ata_other = stripslashes( $ata_settings['head_other'] );
-	$ata_head_css = stripslashes( $ata_settings['head_CSS'] );
-	$ata_tp_tynt_id = stripslashes( $ata_settings['tp_tynt_id'] );
+	$ata_other = stripslashes( $ata_settings['head_other_html'] );
+	$ata_head_css = stripslashes( $ata_settings['head_css'] );
+	$ata_tynt_id = stripslashes( $ata_settings['tynt_id'] );
 
 	// Add CSS to header.
 	if ( '' !== $ata_head_css ) {
@@ -334,12 +317,12 @@ function ald_ata_header() {
 	}
 
 	// Add Tynt code to Header.
-	if ( '' !== $ata_tp_tynt_id ) {
+	if ( '' !== $ata_tynt_id ) {
 	?>
 
 	<!-- Begin 33Across SiteCTRL - Inserted by Add to All WordPress Plugin -->
 	<script>
-	var Tynt=Tynt||[];Tynt.push('<?php	echo esc_attr( $ata_tp_tynt_id ); ?>');
+	var Tynt=Tynt||[];Tynt.push('<?php	echo esc_attr( $ata_tynt_id ); ?>');
 	(function(){var h,s=document.createElement('script');
 	s.src=(window.location.protocol==='https:'?
 	'https':'http')+'://cdn.tynt.com/ti.js';

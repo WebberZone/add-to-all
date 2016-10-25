@@ -539,18 +539,18 @@ function ata_upgrade_settings() {
 
 			// Content options.
 			'content_html_before'            => 'content_htmlbefore',
-			'content_htmlafter'              => 'content_htmlafter',
+			'content_html_after'             => 'content_htmlafter',
 			'content_add_html_before'        => 'content_addhtmlbefore',
 			'content_add_html_after'         => 'content_addhtmlafter',
 			'content_html_before_single'     => 'content_htmlbeforeS',
-			'content_htmlafter_single'       => 'content_htmlafterS',
+			'content_html_after_single'      => 'content_htmlafterS',
 			'content_add_html_before_single' => 'content_addhtmlbeforeS',
 			'content_add_html_after_single'  => 'content_addhtmlafterS',
 			'content_filter_priority'        => 'content_filter_priority',
 
 			// Feed options.
 			'feed_html_before'               => 'feed_htmlbefore',
-			'feed_htmlafter'                 => 'feed_htmlafter',
+			'feed_html_after'                => 'feed_htmlafter',
 			'feed_add_html_before'           => 'feed_addhtmlbefore',
 			'feed_add_html_after'            => 'feed_addhtmlafter',
 			'feed_copyrightnotice'           => 'feed_copyrightnotice',
