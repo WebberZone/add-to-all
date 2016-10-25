@@ -28,7 +28,6 @@ function ata_add_admin_pages_links() {
 	global $ata_settings_page;
 
 	$ata_settings_page = add_options_page( __( 'Add to All', 'add-to-all' ), __( 'Add to All', 'add-to-all' ), 'manage_options', 'ata_options_page', 'ata_options_page' );
-	add_action( 'admin_head-' . $ata_settings_page, 'ata_adminhead' );
 
 	// Load the settings contextual help.
 	add_action( "load-$ata_settings_page", 'ata_settings_help' );
