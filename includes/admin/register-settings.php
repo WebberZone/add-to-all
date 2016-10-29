@@ -238,7 +238,7 @@ function ata_get_registered_settings() {
 					'id'                            => 'ga_linker',
 					'name'                          => esc_html__( 'Linker autoLink domains', 'add-to-all' ),
 					'desc'                          => esc_html__( "If you'd like to implement cross-domain tracking, enter a comma-separated list of domains, e.g. ajaydsouza.com,webberzone.com", 'add-to-all' ),
-					'type'                          => 'text',
+					'type'                          => 'csv',
 					'options'                       => '',
 				),
 				'tynt_header'                    => array(

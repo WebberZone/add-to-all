@@ -53,7 +53,7 @@ function ata_settings_sanitize( $input = array() ) {
 	}
 
 	// Get the tab. This is also our settings' section
-	$tab = isset( $referrer['tab'] ) ? $referrer['tab'] : 'general';
+	$tab = isset( $referrer['tab'] ) ? $referrer['tab'] : 'third_party';
 
 	$input = $input ? $input : array();
 
@@ -105,4 +105,19 @@ function ata_sanitize_text_field( $input ) {
 	return sanitize_text_field( $input );
 }
 add_filter( 'ata_settings_sanitize_text', 'ata_sanitize_text_field' );
+
+
+/**
+ * Sanitize CSV fields
+ *
+ * @since 1.2.0
+ *
+ * @param  array $input The field value
+ * @return string  $input  Sanitizied value
+ */
+function ata_sanitize_csv_field( $input ) {
+
+	return implode( ',', array_map( 'trim', explode( ',', sanitize_text_field( wp_unslash( $input ) ) ) ) );
+}
+add_filter( 'ata_settings_sanitize_csv', 'ata_sanitize_csv_field' );
 

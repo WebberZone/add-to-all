@@ -182,12 +182,26 @@ function ata_text_callback( $args ) {
 		$value = isset( $args['options'] ) ? $args['options'] : '';
 	}
 
-	$html = '<input type="text" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '" />';
+	$html = '<input type="text" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '" class="regular-text" />';
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
 	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args );
 
+}
+
+
+/**
+ * Display text fields.
+ *
+ * @since 1.2.0
+ *
+ * @param array $args Array of arguments
+ * @return void
+ */
+function ata_csv_callback( $args ) {
+
+	ata_text_callback( $args );
 }
 
 
