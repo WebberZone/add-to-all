@@ -31,8 +31,6 @@ function ata_options_page() {
 	<div class="wrap">
 		<h1><?php _e( 'Add to All Settings', 'add-to-all' ); // WPCS: XSS OK. ?></h1>
 
-		<?php //settings_errors(); ?>
-
 		<h2 class="nav-tab-wrapper">
 			<?php
 			foreach ( ata_get_settings_sections() as $tab_id => $tab_name ) {
@@ -187,7 +185,7 @@ function ata_text_callback( $args ) {
 	$html = '<input type="text" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '" />';
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
-	/** This filter has been defined in settings-page.php **/
+	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args );
 
 }
@@ -215,7 +213,7 @@ function ata_textarea_callback( $args ) {
 	$html = '<textarea class="large-text" cols="50" rows="5" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']">' . esc_textarea( stripslashes( $value ) ) . '</textarea>';
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
-	/** This filter has been defined in settings-page.php **/
+	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args );
 }
 
@@ -238,7 +236,7 @@ function ata_checkbox_callback( $args ) {
 	$html = '<input type="checkbox" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="1" ' . $checked . '/>';
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
-	/** This filter has been defined in settings-page.php **/
+	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args );
 
 }
@@ -274,7 +272,7 @@ function ata_multicheck_callback( $args ) {
 		$html .= '<p class="description">' . $args['desc'] . '</p>';
 	}
 
-	/** This filter has been defined in settings-page.php **/
+	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args );
 
 }
@@ -309,7 +307,7 @@ function ata_radio_callback( $args ) {
 
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
-	/** This filter has been defined in settings-page.php **/
+	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args );
 
 }
@@ -342,7 +340,7 @@ function ata_number_callback( $args ) {
 	$html = '<input type="number" step="' . esc_attr( $step ) . '" max="' . esc_attr( $max ) . '" min="' . esc_attr( $min ) . '" class="' . $size . '-text" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
-	/** This filter has been defined in settings-page.php **/
+	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args );
 
 }
@@ -383,7 +381,7 @@ function ata_select_callback( $args ) {
 	$html .= '</select>';
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
-	/** This filter has been defined in settings-page.php **/
+	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args );
 
 }

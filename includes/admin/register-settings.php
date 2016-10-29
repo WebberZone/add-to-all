@@ -573,7 +573,6 @@ function ata_upgrade_settings() {
 		);
 
 		foreach ( $map as $key => $value ) {
-			//$settings[ $key ] = is_bool( $old_settings[ $value ] ) ? (string) $old_settings[ $value ] : $old_settings[ $value ];
 			$settings[ $key ] = strval( $old_settings[ $value ] );
 		}
 

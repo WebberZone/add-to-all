@@ -30,7 +30,7 @@ function ata_settings_help() {
 		'<p>' . sprintf( __( 'For more information or how to get support visit the <a href="%s">support site</a>.', 'add-to-all' ), esc_url( 'https://ajaydsouza.com/support/' ) ) . '</p>' .
 		'<p>' . sprintf( __( 'Support queries should be posted in the <a href="%s">WordPress.org support forums</a>.', 'add-to-all' ), esc_url( 'https://wordpress.org/support/plugin/knowledgebase' ) ) . '</p>' .
 		'<p>' . sprintf(
-			__( '<a href="%s">Post an issue</a> on <a href="%s">GitHub</a> (bug reports only).', 'add-to-all' ),
+			__( '<a href="%1$s">Post an issue</a> on <a href="%2$s">GitHub</a> (bug reports only).', 'add-to-all' ),
 			esc_url( 'https://github.com/WebberZone/knowledgebase/issues' ),
 			esc_url( 'https://github.com/WebberZone/knowledgebase' )
 		) . '</p>'
@@ -41,9 +41,8 @@ function ata_settings_help() {
 		'title'	    => __( 'Third Party', 'add-to-all' ),
 		'content'	=>
 			'<p><strong>' . __( 'This screen provides the settings for configuring the integration with third party scripts.', 'add-to-all' ) . '</strong></p>' .
-			'<p>' . sprintf( esc_html__( 'Google Analytics tracking can be founds by visiting this help article: %s', 'add-to-all' ), esc_url( 'https://support.google.com/analytics/answer/1008080?hl=en' ) )  . '</p>',
+			'<p>' . sprintf( esc_html__( 'Google Analytics tracking can be founds by visiting this help article: %s', 'add-to-all' ), esc_url( 'https://support.google.com/analytics/answer/1008080?hl=en' ) ) . '</p>',
 	) );
-
 
 	do_action( 'ata_settings_help', $screen );
 
