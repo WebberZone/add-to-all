@@ -34,11 +34,11 @@ function ata_settings_help() {
 	// Set the text in the help sidebar.
 	$screen->set_help_sidebar(
 		'<p>' . sprintf( __( 'For more information or how to get support visit the <a href="%s">support site</a>.', 'add-to-all' ), esc_url( 'https://ajaydsouza.com/support/' ) ) . '</p>' .
-		'<p>' . sprintf( __( 'Support queries should be posted in the <a href="%s">WordPress.org support forums</a>.', 'add-to-all' ), esc_url( 'https://wordpress.org/support/plugin/knowledgebase' ) ) . '</p>' .
+		'<p>' . sprintf( __( 'Support queries should be posted in the <a href="%s">WordPress.org support forums</a>.', 'add-to-all' ), esc_url( 'https://wordpress.org/support/plugin/add-to-all' ) ) . '</p>' .
 		'<p>' . sprintf(
 			__( '<a href="%1$s">Post an issue</a> on <a href="%2$s">GitHub</a> (bug reports only).', 'add-to-all' ),
-			esc_url( 'https://github.com/WebberZone/knowledgebase/issues' ),
-			esc_url( 'https://github.com/WebberZone/knowledgebase' )
+			esc_url( 'https://github.com/ajaydsouza/add-to-all/issues' ),
+			esc_url( 'https://github.com/ajaydsouza/add-to-all' )
 		) . '</p>'
 	);
 
