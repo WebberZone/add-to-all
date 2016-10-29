@@ -65,7 +65,7 @@ function ata_options_page() {
 				<?php
 					// Default submit button
 					submit_button(
-						__( 'Submit', 'add-to-all' ),
+						esc_html__( 'Save changes', 'add-to-all' ),
 						'primary',
 						'submit',
 						false
