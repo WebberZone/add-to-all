@@ -74,7 +74,7 @@ function ata_options_page() {
 					echo '&nbsp;&nbsp;';
 
 					// Reset button.
-					$confirm = esc_js( __( 'Do you really want to reset all these settings to their default values?', 'add-to-all' ) );
+					$confirm = esc_js( __( 'Do you really want to reset settings to their default values? This resets settings across all tabs.', 'add-to-all' ) );
 					submit_button(
 						__( 'Reset', 'add-to-all' ),
 						'secondary',
