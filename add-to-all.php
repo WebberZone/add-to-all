@@ -60,7 +60,31 @@ if ( ! defined( 'ATA_PLUGIN_FILE' ) ) {
  * Declare $ata_settings global so that it can be accessed in every function
  */
 global $ata_settings;
-$ata_settings = ata_read_options();
+$ata_settings = ata_get_settings();
+
+
+/**
+ * Get Settings.
+ *
+ * Retrieves all plugin settings
+ *
+ * @since  1.2.0
+ * @return array Add to All settings
+ */
+function ata_get_settings() {
+
+	$settings = get_option( 'ata_settings' );
+
+	/**
+	 * Settings array
+	 *
+	 * Retrieves all plugin settings
+	 *
+	 * @since 1.2.0
+	 * @param array $settings Settings array
+	 */
+	return apply_filters( 'ata_get_settings', $settings );
+}
 
 
 /**
@@ -78,13 +102,10 @@ add_action( 'init', 'ata_lang_init' );
 function ald_ata_footer() {
 	global $ata_settings;
 
-	$ata_other = stripslashes( $ata_settings['ft_other'] );
-	$sc_project = stripslashes( $ata_settings['tp_sc_project'] );
-	$sc_security = stripslashes( $ata_settings['tp_sc_security'] );
-	$ga_uacct = stripslashes( $ata_settings['tp_ga_uacct'] );
-	$ga_domain = stripslashes( $ata_settings['tp_ga_domain'] );
-	$kontera_id = stripslashes( $ata_settings['tp_kontera_ID'] );
-	$kontera_linkcolor = stripslashes( $ata_settings['tp_kontera_linkcolor'] );
+	$ata_other = stripslashes( $ata_settings['footer_other_html'] );
+	$sc_project = stripslashes( $ata_settings['sc_project'] );
+	$sc_security = stripslashes( $ata_settings['sc_security'] );
+	$ga_uacct = stripslashes( $ata_settings['ga_uacct'] );
 
 	// Add other footer.
 	if ( '' !== $ata_other ) {
@@ -126,47 +147,8 @@ function ald_ata_footer() {
 
 <?php }
 
-	if ( ( '' !== $kontera_id ) && ( '' !== $kontera_linkcolor ) ) {
-?>
-	<!-- Kontera(TM);-->
-	<script type='text/javascript'>
-	// <![CDATA[
-	var dc_AdLinkColor = '<?php echo esc_attr( $kontera_linkcolor ); ?>' ;
-	var dc_PublisherID = <?php echo esc_attr( $kontera_id ); ?> ;
-	// ]]>
-	</script>
-	<script type='text/javascript' src='///kona.kontera.com/javascript/lib/KonaLibInline.js'></script>
-	<!-- end Kontera(TM) // by Add to All WordPress plugin -->
-
-<?php	}
-
 }
 add_action( 'wp_footer', 'ald_ata_footer' );
-
-
-/**
- * Function to wrap the post content with Kontera tags. Filters `the_content`.
- *
- * @param string $content Post content.
- * @return string Filtered post content
- */
-function ata_content_nofilter( $content ) {
-
-	global $ata_settings;
-
-	if ( $ata_settings['tp_kontera_addZT'] ) {
-		$str_before = '<div class="KonaBody">';
-		$str_after = '</div>';
-		if ( ( is_singular() ) || ( is_home() ) || ( is_archive() ) ) {
-			return $str_before . $content . $str_after;
-		} else {
-			return $content;
-		}
-	} else {
-			return $content;
-	}
-}
-add_filter( 'the_content', 'ata_content_nofilter' );
 
 
 /**
@@ -196,28 +178,28 @@ function ata_content( $content ) {
 		$str_after = '';
 
 		if ( is_singular() ) {
-			if ( $ata_settings['content_addhtmlbefore'] ) {
-				$str_before .= stripslashes( $ata_settings['content_htmlbefore'] );
+			if ( isset( $ata_settings['content_add_html_before'] ) ) {
+				$str_before .= stripslashes( $ata_settings['content_html_before'] );
 			}
 
-			if ( $ata_settings['content_addhtmlafter'] ) {
-				$str_after .= stripslashes( $ata_settings['content_htmlafter'] );
+			if ( isset( $ata_settings['content_add_html_after'] ) ) {
+				$str_after .= stripslashes( $ata_settings['content_html_after'] );
 			}
 
-			if ( $ata_settings['content_addhtmlbeforeS'] ) {
-				$str_before .= stripslashes( $ata_settings['content_htmlbeforeS'] );
+			if ( isset( $ata_settings['content_add_html_before_single'] ) ) {
+				$str_before .= stripslashes( $ata_settings['content_html_before_single'] );
 			}
 
-			if ( $ata_settings['content_addhtmlafterS'] ) {
-				$str_after .= stripslashes( $ata_settings['content_htmlafterS'] );
+			if ( isset( $ata_settings['content_add_html_after_single'] ) ) {
+				$str_after .= stripslashes( $ata_settings['content_html_after_single'] );
 			}
 		} elseif ( ( is_home() ) || ( is_archive() ) ) {
-			if ( $ata_settings['content_addhtmlbefore'] ) {
-				$str_before .= stripslashes( $ata_settings['content_htmlbefore'] );
+			if ( isset( $ata_settings['content_add_html_before'] ) ) {
+				$str_before .= stripslashes( $ata_settings['content_html_before'] );
 			}
 
-			if ( $ata_settings['content_addhtmlafter'] ) {
-				$str_after .= stripslashes( $ata_settings['content_htmlafter'] );
+			if ( isset( $ata_settings['content_add_html_after'] ) ) {
+				$str_after .= stripslashes( $ata_settings['content_html_after'] );
 			}
 		}
 
@@ -238,21 +220,21 @@ function ata_content( $content ) {
 function ald_ata_rss( $content ) {
 	global $ata_settings;
 
-	if ( ( $ata_settings['feed_addhtmlbefore'] ) || ( $ata_settings['feed_addhtmlafter'] ) || ( $ata_settings['feed_addtitle'] ) || ( $ata_settings['feed_addcopyright'] ) || ( $ata_settings['addcredit'] ) ) {
+	if ( isset( $ata_settings['feed_add_html_before'] ) || isset( $ata_settings['feed_add_html_after'] ) || isset( $ata_settings['feed_add_title'] ) || isset( $ata_settings['feed_add_copyright'] ) || isset( $ata_settings['add_credit'] ) ) {
 		$str_before = '';
 		$str_after = '<hr style="border-top:black solid 1px" />';
 
-		if ( $ata_settings['feed_addhtmlbefore'] ) {
-			$str_before .= stripslashes( $ata_settings['feed_htmlbefore'] );
+		if ( isset( $ata_settings['feed_add_html_before'] ) ) {
+			$str_before .= stripslashes( $ata_settings['feed_html_before'] );
 			$str_before .= '<br />';
 		}
 
-		if ( $ata_settings['feed_addhtmlafter'] ) {
-			$str_after .= stripslashes( $ata_settings['feed_htmlafter'] );
+		if ( isset( $ata_settings['feed_add_html_after'] ) ) {
+			$str_after .= stripslashes( $ata_settings['feed_html_after'] );
 			$str_after .= '<br />';
 		}
 
-		if ( $ata_settings['feed_addtitle'] ) {
+		if ( isset( $ata_settings['feed_add_title'] ) ) {
 			$title = '<a href="' . get_permalink() . '">' . the_title( '', '', false ) . '</a>';
 			$search_array = array(
 				'%title%',
@@ -264,17 +246,17 @@ function ald_ata_rss( $content ) {
 				get_the_time( 'F j, Y' ),
 				get_the_time( 'g:i a' ),
 			);
-			$str_after .= str_replace( $search_array, $replace_array, $ata_settings['feed_titletext'] );
+			$str_after .= str_replace( $search_array, $replace_array, $ata_settings['feed_title_text'] );
 
 			$str_after .= '<br />';
 		}
 
-		if ( $ata_settings['feed_addcopyright'] ) {
+		if ( isset( $ata_settings['feed_add_copyright'] ) ) {
 			$str_after .= stripslashes( $ata_settings['feed_copyrightnotice'] );
 			$str_after .= '<br />';
 		}
 
-		if ( $ata_settings['addcredit'] ) {
+		if ( isset( $ata_settings['add_credit'] ) ) {
 			$creditline = '<br /><span style="font-size: 0.8em">';
 			$creditline .= __( 'Feed enhanced by ', 'add-to-all' );
 			$creditline .= '<a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All</a>';
@@ -300,9 +282,9 @@ function ald_ata_header() {
 
 	global $ata_settings;
 
-	$ata_other = stripslashes( $ata_settings['head_other'] );
-	$ata_head_css = stripslashes( $ata_settings['head_CSS'] );
-	$ata_tp_tynt_id = stripslashes( $ata_settings['tp_tynt_id'] );
+	$ata_other = stripslashes( $ata_settings['head_other_html'] );
+	$ata_head_css = stripslashes( $ata_settings['head_css'] );
+	$ata_tynt_id = stripslashes( $ata_settings['tynt_id'] );
 
 	// Add CSS to header.
 	if ( '' !== $ata_head_css ) {
@@ -310,12 +292,12 @@ function ald_ata_header() {
 	}
 
 	// Add Tynt code to Header.
-	if ( '' !== $ata_tp_tynt_id ) {
+	if ( '' !== $ata_tynt_id ) {
 	?>
 
 	<!-- Begin 33Across SiteCTRL - Inserted by Add to All WordPress Plugin -->
 	<script>
-	var Tynt=Tynt||[];Tynt.push('<?php	echo esc_attr( $ata_tp_tynt_id ); ?>');
+	var Tynt=Tynt||[];Tynt.push('<?php	echo esc_attr( $ata_tynt_id ); ?>');
 	(function(){var h,s=document.createElement('script');
 	s.src=(window.location.protocol==='https:'?
 	'https':'http')+'://cdn.tynt.com/ti.js';
@@ -334,93 +316,6 @@ function ald_ata_header() {
 
 }
 add_action( 'wp_head', 'ald_ata_header' );
-
-
-/**
- * Default options.
- *
- * @return return Array with default options
- */
-function ata_default_options() {
-
-	$copyrightnotice = '&copy;' . date( 'Y' ) . ' &quot;<a href="' . get_option( 'home' ) . '">' . get_option( 'blogname' ) . '</a>&quot;. ';
-	$copyrightnotice .= __( 'Use of this feed is for personal non-commercial use only. If you are not reading this article in your feed reader, then the site is guilty of copyright infringement. Please contact me at ', 'ald_ata_plugin' );
-	$copyrightnotice .= get_option( 'admin_email' );
-	$ga_url = wp_parse_url( get_option( 'home' ), PHP_URL_HOST );
-
-	$titletext = __( '%title% was first posted on %date% at %time%.', 'add-to-all' );
-
-	$ata_settings = array(
-		 'addcredit' => false, // Show credits?
-
-		// Content options.
-		'content_htmlbefore' => '', // HTML you want added to the content.
-		'content_htmlafter' => '', // HTML you want added to the content.
-		'content_addhtmlbefore' => false, // Add HTML to content?
-		'content_addhtmlafter' => false, // Add HTML to content?
-		'content_htmlbeforeS' => '', // HTML you want added to the content on single pages only.
-		'content_htmlafterS' => '', // HTML you want added to the content on single pages only.
-		'content_addhtmlbeforeS' => false, // Add HTML to content on single pages?
-		'content_addhtmlafterS' => false, // Add HTML to content on single pages?
-		'content_filter_priority' => 999, // Content priority.
-
-		// Feed options.
-		'feed_htmlbefore' => '', // HTML you want added to the feed.
-		'feed_htmlafter' => '', // HTML you want added to the feed.
-		'feed_copyrightnotice' => $copyrightnotice, // Copyright Notice.
-		'feed_emailaddress' => get_option( 'admin_email' ), // Admin Email.
-		'feed_addhtmlbefore' => false, // Add HTML to Feed?
-		'feed_addhtmlafter' => false, // Add HTML to Feed?
-		'feed_addtitle' => true, // Add title of the post?
-		'feed_titletext' => $titletext,	// Custom text when adding a link to the post title.
-		'feed_addcopyright' => true, // Add copyright notice?
-
-		// 3rd party options.
-		'tp_sc_project' => '', // StatCounter Project ID.
-		'tp_sc_security' => '', // StatCounter Security String.
-		'tp_ga_uacct' => '', // Google Analytics Web Property ID.
-		'tp_ga_domain' => $ga_url, // Google Analytics _setDomainName value.
-		'tp_ga_ua' => false, // Use Google Universal Analytics code.
-		'tp_kontera_ID' => '', // Kontera Publisher ID.
-		'tp_kontera_linkcolor' => '', // Kontera link color.
-		'tp_kontera_addZT' => '', // Kontera Add zone tags.
-		'tp_tynt_id' => '', // Tynt ID.
-
-		// Footer options.
-		'ft_other' => '', // For any other code.
-
-		// Header options.
-		'head_CSS' => '', // CSS to add to header (do not wrap with <style> tags).
-		'head_other' => '',// For any other code.
-
-	);
-	return apply_filters( 'ata_default_options', $ata_settings );
-}
-
-
-/**
- * Function to read options from the database and add any new ones.
- *
- * @return array Options array
- */
-function ata_read_options() {
-	$ata_settings_changed = false;
-
-	$defaults = ata_default_options();
-
-	$ata_settings = array_map( 'stripslashes', (array) get_option( 'ald_ata_settings' ) );
-	unset( $ata_settings[0] ); // Produced by the (array) casting when there's nothing in the DB.
-
-	foreach ( $defaults as $k => $v ) {
-		if ( ! isset( $ata_settings[ $k ] ) ) {
-			$ata_settings[ $k ] = $v; }
-		$ata_settings_changed = true;
-	}
-	if ( true === $ata_settings_changed ) {
-		update_option( 'ald_ata_settings', $ata_settings ); }
-
-	return apply_filters( 'ata_read_options', $ata_settings );
-}
 
 
 /**
@@ -502,15 +397,32 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 }
 
 
-/**
- *  Admin options
- */
+/*
+ ----------------------------------------------------------------------------*
+ * Include files
+ *----------------------------------------------------------------------------*/
+
+	require_once ATA_PLUGIN_DIR . 'includes/admin/register-settings.php';
+
+
+/*
+ ----------------------------------------------------------------------------*
+ * Dashboard and Administrative Functionality
+ *----------------------------------------------------------------------------*/
+
 if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
-	/**
-	 *  Load the admin pages if we're in the Admin.
-	 */
-	require_once( ATA_PLUGIN_DIR . '/admin.inc.php' );
+	require_once ATA_PLUGIN_DIR . 'includes/admin/admin.php';
+	require_once ATA_PLUGIN_DIR . 'includes/admin/settings-page.php';
+	require_once ATA_PLUGIN_DIR . 'includes/admin/save-settings.php';
+	require_once ATA_PLUGIN_DIR . 'includes/admin/help-tab.php';
 
 }
+
+/*
+ ----------------------------------------------------------------------------*
+ * Deprecated functions, variables and constants
+ *----------------------------------------------------------------------------*/
+
+	require_once ATA_PLUGIN_DIR . '/includes/deprecated.php';
 

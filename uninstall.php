@@ -11,4 +11,5 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 delete_option( 'ald_ata_settings' );
+delete_option( 'ata_settings' );
 
