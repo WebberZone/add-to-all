@@ -13,6 +13,26 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+
+/**
+ * Site Verification.
+ *
+ * @since 1.2.0
+ */
+function ata_site_verification() {
+
+	ata_site_verification_google();
+	ata_site_verification_bing();
+
+	/**
+	 * Site Verification action.
+	 *
+	 * @since 1.2.0
+	 */
+	do_action( 'ata_site_verification' );
+}
+add_action( 'wp_head', 'ata_site_verification' );
+
 /**
  * Google Site Verification.
  *
@@ -29,4 +49,20 @@ function ata_site_verification_google() {
 	}
 
 }
-add_action( 'wp_head', 'ata_site_verification_google' );
+
+/**
+ * Bing Site Verification.
+ *
+ * @since 1.2.0
+ */
+function ata_site_verification_bing() {
+
+	$verification_code = ata_get_option( 'bing_verification', '' );
+
+	if ( '' !== $verification_code ) {
+?>
+		<meta name="msvalidate.01" content="<?php esc_attr_e( $verification_code ); ?>" />
+<?php
+	}
+
+}
