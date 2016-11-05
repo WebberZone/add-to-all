@@ -431,7 +431,7 @@ function ata_get_registered_settings() {
 					'name'                          => esc_html__( 'Add a link to "Add to All" plugin page', 'add-to-all' ),
 					'desc'                          => '',
 					'type'                          => 'checkbox',
-					'options'                       => true,
+					'options'                       => false,
 				),
 			)
 		),
@@ -467,6 +467,10 @@ function ata_settings_defaults() {
 			// When checkbox is set to true, set this to 1.
 			if ( 'checkbox' === $option['type'] && ! empty( $option['options'] ) ) {
 				$options[ $option['id'] ] = '1';
+			}
+			// If an option is set.
+			if ( in_array( $option['type'], array( 'textarea', 'text', 'csv' ), true ) && ! empty( $option['options'] ) ) {
+				$options[ $option['id'] ] = $option['options'];
 			}
 		}
 	}
