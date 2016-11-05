@@ -1,72 +1,35 @@
 ﻿=== Add to All ===
-Tags: header, footer, feed, Google Analytics, Statcounter, Kontera, Tynt, content, Infolinks, Adsense
-Contributors: Ajay
-Donate link: http://ajaydsouza.com/donate/
+Tags: header, footer, feed, Google Analytics, Statcounter, Tynt, content, Adsense, site verification
+Contributors: Ajay, webberzone
+Donate link: https://ajaydsouza.com/donate/
 Stable tag: trunk
-Requires at least: 3.0
-Tested up to: 4.0
+Requires at least: 4.0
+Tested up to: 4.7
 License: GPLv2 or later
 
 A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
 
 == Description ==
 
-<a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/">Add to All</a> is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
+[Add to All](http://ajaydsouza.com/wordpress/plugins/add-to-all/) is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
 
-It comes with out of the box support for Google Analytics, Statcounter, Kontera and Tynt with other third party services in the pipeline. If you have any script that isn't supported by Add to All currently, you can just add the code to the Header or Footer sections.
+It comes with out of the box support for Google Analytics, Statcounter and Tynt. Additionally, it supports site verification for Google, Bing and Pinterest via their HTML tag methods.
+
+If you have any script that isn't supported by Add to All currently, you can just add the code to the Header, Content or Footer sections.
+
+Add to All includes a copyright notice that can be automatically added your feed. Additionally, you can also add in a link to your post as well as any other HTML or text that you might want.
 
 With this plugin installed, you do not need to edit your theme files every time you switch themes.
-
-Add to All comes with a pre-installed copyright notice added to your feed and you can also add in a link to your post or any other HTML or text that you might want.
 
 
 = Key features =
 
-* Inbuilt support for Google Analytics, Statcounter, Tynt and Kontera
+* Inbuilt support for Google Analytics, Statcounter and Tynt
+* Site verification for Google, Bing and Pinterest
 * Add custom CSS code to your header
-* Add any HTML code to your header, content, footer and feed
+* Add any HTML or JavaScript code to your header, content, footer and feed
 * Add a copyright notice and a link to the post in your site's feed
-
-
-== Upgrade Notice ==
-
-= 1.1 =
-* Plugin code reformatted; Google Universal Analytics support; modified localization name; modify the title text;
-Check out the Changelog for more details
-
-== Changelog ==
-
-= 1.2.0 =
-* Deprecated:
-	* Removed support for Kontera. If you'd like to continue using Kontera, please get the code from [the Kontera setup page](https://publishers.kontera.com/main/tag) and then add this under <strong>Footer settings</strong>
-
-= 1.1 =
-* New: Support for Google's Universal Analytics code
-* New: Customize the text used when linking to the title in the blog feed. You can use `%title%` to add a link to the post, `%date%` and `%time%` to display the date and time of the post respectively
-* Modified: Plugin code has been completely reformatted for WordPress PHP standards
-* Modified: Localization name from `ata` and `add-to-all`
-
-= 1.0.4 =
-* Added: Support for Tynt
-* Modified: Removed Wibiya
-* New: Admin interface has been totally revamped to fit the look and feel of your WordPress Dashboard. Check out the <a href="http://wordpress.org/plugins/add-to-all/screenshots/">new screenshots</a>
-* Fixed: Potential cross site request forgery in plugin settings page
-
-= 1.0.3 =
-* Added: new section for adding text / HTML to content of a post
-* Added: Enhanced link tracking for Google Analytics. <a href="https://support.google.com/analytics/bin/answer.py?hl=en-GB&utm_id=ad&answer=2558867">View explanation</a>
-* Fixed: After content settings in feeds were not working
-* Modified: Feed settings now work correctly in feed excerpts
-
-= 1.0.2 =
-* Added: support for Wibiya
-* Modified: Code changes to fix some language and PHP warning issues
-
-= 1.0.1 =
-* Fixed: Bug that stopped displaying content when plugin was activated
-
-= 1.0 =
-* Release
+* Tonnes of actions and filters to easily extend the plugin.
 
 
 == Installation ==
@@ -88,6 +51,13 @@ Check out the Changelog for more details
 4. Goto **Settings &raquo; Add to All** to configure
 
 
+== Frequently Asked Questions ==
+
+If your question isn't listed here, please post a comment at the [WordPress.org support forum](https://wordpress.org/support/plugin/add-to-all). I monitor the forums on an ongoing basis. If you're looking for more advanced **paid** support, please see [details here](https://ajaydsouza.com/support/).
+
+If you would like a feature to be added, or if you already have the code for the feature, you can let me know by [posting in this forum](https://wordpress.org/support/plugin/add-to-all) or creating an issue in the [Github repository](https://github.com/ajaydsouza/add-to-all/issues).
+
+
 == Screenshots ==
 
 1. Add to All options in WP-Admin - 3rd Party Options
@@ -97,14 +67,25 @@ Check out the Changelog for more details
 5. Add to All options in WP-Admin - Feed Options
 
 
-== Frequently Asked Questions ==
+== Changelog ==
 
-If your question isn't listed here, please post a comment at the <a href="http://wordpress.org/support/plugin/add-to-all">WordPress.org support forum</a>. I monitor the forums on an ongoing basis. If you're looking for more advanced support, please see <a href="http://wordpress.org/support/plugin/add-to-all">details here</a>.
+= 1.2.0 =
+* Features:
+	* Settings now uses the WordPress Settings API. Verify your site options by visiting the Add to All settings page
+	* Site verification for Google, Bing and Pinterest
 
-= How can I customise the output? =
+* Enhancements:
+	* Google Analytics code now supports cross domain tracking using the Linker Plugin
+	* Updated code for Statcounter and Tynt
 
-Several customization options are available via the Settings page in WordPress Admin. You can access this via <strong>Settings &raquo; Add to All</strong>
+* Deprecated:
+	* Removed support for Kontera. If you'd like to continue using Kontera, please get the code from [the Kontera setup page](https://publishers.kontera.com/main/tag) and then add this under <strong>Footer settings</strong>
 
-The plugin supports CSS, HTML and JavaScript code in the header and footer. PHP support is likely to be added in future versions
+Check changelog.txt for older entries.
 
-If you would like a feature to be added, or if you already have the code for the feature, you can let me know by <a href="http://wordpress.org/support/plugin/add-to-all">posting in this forum</a>.
+== Upgrade Notice ==
+
+= 1.2.0 =
+New plugin settings interface. Verify your settings on upgrade; Site verification support, bug fixes;
+Check out the Changelog for more details
+

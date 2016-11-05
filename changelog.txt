@@ -1,0 +1,32 @@
+== Changelog archive ==
+
+This is an archive of older changelog entries. Most recent entries are maintained in readme.txt
+
+= 1.1 =
+* New: Support for Google's Universal Analytics code
+* New: Customize the text used when linking to the title in the blog feed. You can use `%title%` to add a link to the post, `%date%` and `%time%` to display the date and time of the post respectively
+* Modified: Plugin code has been completely reformatted for WordPress PHP standards
+* Modified: Localization name from `ata` and `add-to-all`
+
+= 1.0.4 =
+* Added: Support for Tynt
+* Modified: Removed Wibiya
+* New: Admin interface has been totally revamped to fit the look and feel of your WordPress Dashboard. Check out the <a href="http://wordpress.org/plugins/add-to-all/screenshots/">new screenshots</a>
+* Fixed: Potential cross site request forgery in plugin settings page
+
+= 1.0.3 =
+* Added: new section for adding text / HTML to content of a post
+* Added: Enhanced link tracking for Google Analytics. <a href="https://support.google.com/analytics/bin/answer.py?hl=en-GB&utm_id=ad&answer=2558867">View explanation</a>
+* Fixed: After content settings in feeds were not working
+* Modified: Feed settings now work correctly in feed excerpts
+
+= 1.0.2 =
+* Added: support for Wibiya
+* Modified: Code changes to fix some language and PHP warning issues
+
+= 1.0.1 =
+* Fixed: Bug that stopped displaying content when plugin was activated
+
+= 1.0 =
+* Release
+

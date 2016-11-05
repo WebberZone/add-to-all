@@ -1,40 +1,44 @@
 # Add to All
 
-__Requires:__ 3.5
+__Requires:__ 4.0
 
-__Tested up to:__ 4.0
+__Tested up to:__ 4.7
 
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
-__Plugin page:__ <a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/">Add to All</a>
+__Plugin page:__ [Add to All](http://ajaydsouza.com/wordpress/plugins/add-to-all/) | [WordPress Plugin page](https://wordpress.org/plugins/add-to-all/)
 
-A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
+Add custom code or CSS to your header, footer, sidebar, content or feed. Site verification and more...
 
 ## Description
 
 [Add to All](http://ajaydsouza.com/wordpress/plugins/add-to-all/) is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
 
-It comes with out of the box support for Google Analytics, Statcounter, Kontera and Tynt with other third party services in the pipeline. If you have any script that isn't supported by Add to All currently, you can just add the code to the Header or Footer sections.
+It comes with out of the box support for Google Analytics, Statcounter and Tynt. Additionally, it supports site verification for Google, Bing and Pinterest via their HTML tag methods.
+
+If you have any script that isn't supported by Add to All currently, you can just add the code to the Header, Content or Footer sections.
+
+Add to All includes a copyright notice that can be automatically added your feed. Additionally, you can also add in a link to your post as well as any other HTML or text that you might want.
 
 With this plugin installed, you do not need to edit your theme files every time you switch themes.
-
-Add to All comes with a pre-installed copyright notice added to your feed and you can also add in a link to your post or any other HTML or text that you might want.
 
 
 ## Key features
 
-* Inbuilt support for Google Analytics, Statcounter, Tynt and Kontera
+* Inbuilt support for Google Analytics, Statcounter and Tynt
+* Site verification for Google, Bing and Pinterest
 * Add custom CSS code to your header
-* Add any HTML code to your header, content, footer and feed
+* Add any HTML or JavaScript code to your header, content, footer and feed
 * Add a copyright notice and a link to the post in your site's feed
+* Tonnes of actions and filters to easily extend the plugin.
 
 
 ## Installation
 
-### WordPress install
+### WordPress install (the easy way)
 
 1. Navigate to Plugins within your WordPress Admin Area
-2. Click "Add new" and in the search box enter "Add to All" and select "Keyword" from the dropdown
+2. Click "Add new" and in the search box enter "Add to All"
 3. Find the plugin in the list (usually the first result) and click "Install Now"
 
 ### Manual install
@@ -47,14 +51,7 @@ Add to All comes with a pre-installed copyright notice added to your feed and yo
 
 ## Frequently Asked Questions
 
-If your question isn't listed here, please post a comment at the [WordPress.org support forum](http://wordpress.org/support/plugin/add-to-all). I monitor the forums on an ongoing basis. If you're looking for more advanced support, please see [details here](http://wordpress.org/support/plugin/add-to-all).
+If your question isn't listed here, please post a comment at the [WordPress.org support forum](https://wordpress.org/support/plugin/add-to-all). I monitor the forums on an ongoing basis. If you're looking for more advanced **paid** support, please see [details here](https://ajaydsouza.com/support/).
 
-### How can I customise the output?
+If you would like a feature to be added, or if you already have the code for the feature, you can let me know by [posting in this forum](https://wordpress.org/support/plugin/add-to-all) or creating an issue in the [Github repository](https://github.com/ajaydsouza/add-to-all/issues).
 
-Several customization options are available via the Settings page in WordPress Admin. You can access this via **Settings &raquo; Add to All**
-
-The plugin supports CSS, HTML and JavaScript code in the header and footer. PHP support is likely to be added in future versions
-
-### How do I recommend features?
-
-If you would like a feature to be added, or if you already have the code for the feature, you can let me know by [posting in this forum](http://wordpress.org/support/plugin/add-to-all).
