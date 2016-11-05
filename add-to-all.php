@@ -189,6 +189,7 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 	require_once ATA_PLUGIN_DIR . 'includes/modules/statcounter.php';
 	require_once ATA_PLUGIN_DIR . 'includes/modules/google-analytics.php';
 	require_once ATA_PLUGIN_DIR . 'includes/modules/tynt.php';
+	require_once ATA_PLUGIN_DIR . 'includes/modules/site-verification.php';
 
 
 /*

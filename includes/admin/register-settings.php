@@ -257,6 +257,19 @@ function ata_get_registered_settings() {
 					'type'                          => 'text',
 					'options'                       => '',
 				),
+				'verification_header'            => array(
+					'id'                            => 'verification_header',
+					'name'                          => '<h3>' . esc_html__( 'Site verification settings', 'easy-digital-downloads' ) . '</h3>',
+					'desc'                          => '',
+					'type'                          => 'header',
+				),
+				'google_verification'            => array(
+					'id'                            => 'google_verification',
+					'name'                          => esc_html__( 'Google Site Verification', 'add-to-all' ),
+					'desc'                          => sprintf( esc_html__( 'Value of the content portion of the HTML tag method on the %s', 'add-to-all' ), '<a href="https://www.google.com/webmasters/verification/verification" target="_blank">' . esc_html__( 'verification details page', 'add-to-all' ) . '</a>' ),
+					'type'                          => 'text',
+					'options'                       => '',
+				),
 			)
 		),
 		/*** Header settings ***/
