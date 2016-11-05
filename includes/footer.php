@@ -19,11 +19,11 @@ if ( ! defined( 'WPINC' ) ) {
 function ald_ata_footer() {
 	global $ata_settings;
 
-	$ata_other = stripslashes( $ata_settings['footer_other_html'] );
-	$sc_project = stripslashes( $ata_settings['sc_project'] );
-	$sc_security = stripslashes( $ata_settings['sc_security'] );
-	$ga_uacct = stripslashes( $ata_settings['ga_uacct'] );
-	$ga_linker = stripslashes( $ata_settings['ga_linker'] );
+	$ata_other = ata_get_option( 'footer_other_html', '' );
+	$sc_project = ata_get_option( 'sc_project', '' );
+	$sc_security = ata_get_option( 'sc_security', '' );
+	$ga_uacct = ata_get_option( 'ga_uacct', '' );
+	$ga_linker = ata_get_option( 'ga_linker', '' );
 
 	// Add other footer.
 	if ( '' !== $ata_other ) {

@@ -20,9 +20,9 @@ function ald_ata_header() {
 
 	global $ata_settings;
 
-	$ata_other = stripslashes( $ata_settings['head_other_html'] );
-	$ata_head_css = stripslashes( $ata_settings['head_css'] );
-	$ata_tynt_id = stripslashes( $ata_settings['tynt_id'] );
+	$ata_other = ata_get_option( 'head_other_html', '' );
+	$ata_head_css = ata_get_option( 'head_css', '' );
+	$ata_tynt_id = ata_get_option( 'tynt_id', '' );
 
 	// Add CSS to header.
 	if ( '' !== $ata_head_css ) {

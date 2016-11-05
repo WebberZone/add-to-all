@@ -57,6 +57,12 @@ function ata_settings_sanitize( $input = array() ) {
 
 	$input = $input ? $input : array();
 
+	/**
+	 * Filter the settings for the tab. e.g. ata_settings_third_party_sanitize.
+	 *
+	 * @since  1.2.0
+	 * @param  array $input Input unclean array
+	 */
 	$input = apply_filters( 'ata_settings_' . $tab . '_sanitize', $input );
 
 	// Loop through each setting being saved and pass it through a sanitization filter.
@@ -66,11 +72,23 @@ function ata_settings_sanitize( $input = array() ) {
 		$type = isset( $settings[ $tab ][ $key ]['type'] ) ? $settings[ $tab ][ $key ]['type'] : false;
 
 		if ( $type ) {
-			// Field type specific filter
+
+			/**
+			 * Field type specific filter.
+			 *
+			 * @since  1.2.0
+			 * @param  array $value Setting value.
+			 * @paaram array $key Setting key.
+			 */
 			$input[ $key ] = apply_filters( 'ata_settings_sanitize_' . $type, $value, $key );
 		}
 
-		// General filter
+		/**
+		 * Field type general filter.
+		 *
+		 * @since  1.2.0
+		 * @paaram array $key Setting key.
+		 */
 		$input[ $key ] = apply_filters( 'ata_settings_sanitize', $input[ $key ], $key );
 	}
 
@@ -120,4 +138,35 @@ function ata_sanitize_csv_field( $input ) {
 	return implode( ',', array_map( 'trim', explode( ',', sanitize_text_field( wp_unslash( $input ) ) ) ) );
 }
 add_filter( 'ata_settings_sanitize_csv', 'ata_sanitize_csv_field' );
+
+
+/**
+ * Sanitize textarea fields
+ *
+ * @since 1.2.0
+ *
+ * @param  array $input The field value
+ * @return string  $input  Sanitizied value
+ */
+function ata_sanitize_textarea_field( $input ) {
+
+	global $allowedposttags;
+
+	// We need more tags to allow for script and style.
+	$moretags = array(
+		'script' => array(
+			'type' => true,
+			'src' => true,
+		),
+		'style' => array(
+			'type' => true,
+		),
+	);
+
+	$allowedatatags = array_merge( $allowedposttags, $moretags );
+
+	return wp_kses( wp_unslash( $input ), $allowedatatags );
+
+}
+add_filter( 'ata_settings_sanitize_textarea', 'ata_sanitize_textarea_field' );
 

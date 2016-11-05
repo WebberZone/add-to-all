@@ -27,12 +27,12 @@ function ald_ata_rss( $content ) {
 		$str_after = '<hr style="border-top:black solid 1px" />';
 
 		if ( isset( $ata_settings['feed_add_html_before'] ) ) {
-			$str_before .= stripslashes( $ata_settings['feed_html_before'] );
+			$str_before .= ata_get_option( 'feed_html_before', '' );
 			$str_before .= '<br />';
 		}
 
 		if ( isset( $ata_settings['feed_add_html_after'] ) ) {
-			$str_after .= stripslashes( $ata_settings['feed_html_after'] );
+			$str_after .= ata_get_option( 'feed_html_after', '' );
 			$str_after .= '<br />';
 		}
 
@@ -48,13 +48,13 @@ function ald_ata_rss( $content ) {
 				get_the_time( 'F j, Y' ),
 				get_the_time( 'g:i a' ),
 			);
-			$str_after .= str_replace( $search_array, $replace_array, $ata_settings['feed_title_text'] );
+			$str_after .= str_replace( $search_array, $replace_array, ata_get_option( 'feed_title_text', '' ) );
 
 			$str_after .= '<br />';
 		}
 
 		if ( isset( $ata_settings['feed_add_copyright'] ) ) {
-			$str_after .= stripslashes( $ata_settings['feed_copyrightnotice'] );
+			$str_after .= ata_get_option( 'feed_copyrightnotice', '' );
 			$str_after .= '<br />';
 		}
 

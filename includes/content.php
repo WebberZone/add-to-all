@@ -19,7 +19,7 @@ if ( ! defined( 'WPINC' ) ) {
 function ata_content_prepare_filter() {
 	global $ata_settings;
 
-	$priority = isset( $ata_settings['content_filter_priority'] ) ? $ata_settings['content_filter_priority'] : 10;
+	$priority = ata_get_option( 'content_filter_priority', 10 );
 
 	add_filter( 'the_content', 'ata_content', $priority );
 }
@@ -41,27 +41,27 @@ function ata_content( $content ) {
 
 		if ( is_singular() ) {
 			if ( isset( $ata_settings['content_add_html_before'] ) ) {
-				$str_before .= stripslashes( $ata_settings['content_html_before'] );
+				$str_before .= ata_get_option( 'content_html_before', '' );
 			}
 
 			if ( isset( $ata_settings['content_add_html_after'] ) ) {
-				$str_after .= stripslashes( $ata_settings['content_html_after'] );
+				$str_after .= ata_get_option( 'content_html_after', '' );
 			}
 
 			if ( isset( $ata_settings['content_add_html_before_single'] ) ) {
-				$str_before .= stripslashes( $ata_settings['content_html_before_single'] );
+				$str_before .= ata_get_option( 'content_html_before_single', '' );
 			}
 
 			if ( isset( $ata_settings['content_add_html_after_single'] ) ) {
-				$str_after .= stripslashes( $ata_settings['content_html_after_single'] );
+				$str_after .= ata_get_option( 'content_html_after_single', '' );
 			}
 		} elseif ( ( is_home() ) || ( is_archive() ) ) {
 			if ( isset( $ata_settings['content_add_html_before'] ) ) {
-				$str_before .= stripslashes( $ata_settings['content_html_before'] );
+				$str_before .= ata_get_option( 'content_html_before', '' );
 			}
 
 			if ( isset( $ata_settings['content_add_html_after'] ) ) {
-				$str_after .= stripslashes( $ata_settings['content_html_after'] );
+				$str_after .= ata_get_option( 'content_html_after', '' );
 			}
 		}
 
