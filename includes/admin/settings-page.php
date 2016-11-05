@@ -35,12 +35,12 @@ function ata_options_page() {
 			<?php
 			foreach ( ata_get_settings_sections() as $tab_id => $tab_name ) {
 
-				$tab_url = add_query_arg(
+				$tab_url = esc_url( add_query_arg(
 					array(
 					'settings-updated' => false,
 					'tab' => $tab_id,
 					)
-				);
+				) );
 
 				$active = $active_tab === $tab_id ? ' nav-tab-active' : '';
 
