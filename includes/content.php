@@ -17,7 +17,6 @@ if ( ! defined( 'WPINC' ) ) {
  * Function to modify the_content filter priority.
  */
 function ata_content_prepare_filter() {
-	global $ata_settings;
 
 	$priority = ata_get_option( 'content_filter_priority', 10 );
 

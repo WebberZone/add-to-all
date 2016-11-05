@@ -40,7 +40,7 @@ add_action( 'admin_menu', 'ata_add_admin_pages_links' );
  *
  * @since 1.2.0
  *
- * @param string $footer_text The existing footer text
+ * @param string $footer_text The existing footer text.
  * @return string Updated Footer text
  */
 function ata_admin_footer( $footer_text ) {

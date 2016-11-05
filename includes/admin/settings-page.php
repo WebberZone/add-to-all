@@ -24,12 +24,12 @@ if ( ! defined( 'WPINC' ) ) {
  * @return void
  */
 function ata_options_page() {
-	$active_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], ata_get_settings_sections() ) ? $_GET['tab'] : 'third_party';
+	$active_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], ata_get_settings_sections() ) ? esc_attr( $_GET['tab'] ) : 'third_party';
 
 	ob_start();
 	?>
 	<div class="wrap">
-		<h1><?php _e( 'Add to All Settings', 'add-to-all' ); // WPCS: XSS OK. ?></h1>
+		<h1><?php esc_html_e( 'Add to All Settings', 'add-to-all' ); ?></h1>
 
 		<h2 class="nav-tab-wrapper">
 			<?php
@@ -42,7 +42,7 @@ function ata_options_page() {
 					)
 				);
 
-				$active = $active_tab == $tab_id ? ' nav-tab-active' : '';
+				$active = $active_tab === $tab_id ? ' nav-tab-active' : '';
 
 				echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">';
 							echo esc_html( $tab_name );
@@ -63,7 +63,7 @@ function ata_options_page() {
 
 				<p>
 				<?php
-					// Default submit button
+					// Default submit button.
 					submit_button(
 						esc_html__( 'Save changes', 'add-to-all' ),
 						'primary',
@@ -134,6 +134,7 @@ function ata_get_settings_sections() {
  *
  * @since 1.2.0
  *
+ * @param array $args Arguments array.
  * @return void
  */
 function ata_missing_callback( $args ) {
@@ -147,7 +148,8 @@ function ata_missing_callback( $args ) {
  * Renders the header.
  *
  * @since 1.2.0
- * @param array $args Arguments passed by the setting
+ *
+ * @param array $args Arguments passed by the setting.
  * @return void
  */
 function ata_header_callback( $args ) {
@@ -168,12 +170,12 @@ function ata_header_callback( $args ) {
  *
  * @since 1.2.0
  *
- * @param array $args Array of arguments
+ * @param array $args Array of arguments.
  * @return void
  */
 function ata_text_callback( $args ) {
 
-	// First, we read the options collection
+	// First, we read the options collection.
 	global $ata_settings;
 
 	if ( isset( $ata_settings[ $args['id'] ] ) ) {
@@ -196,7 +198,7 @@ function ata_text_callback( $args ) {
  *
  * @since 1.2.0
  *
- * @param array $args Array of arguments
+ * @param array $args Array of arguments.
  * @return void
  */
 function ata_csv_callback( $args ) {
@@ -210,12 +212,12 @@ function ata_csv_callback( $args ) {
  *
  * @since 1.2.0
  *
- * @param array $args Array of arguments
+ * @param array $args Array of arguments.
  * @return void
  */
 function ata_textarea_callback( $args ) {
 
-	// First, we read the options collection
+	// First, we read the options collection.
 	global $ata_settings;
 
 	if ( isset( $ata_settings[ $args['id'] ] ) ) {
@@ -237,12 +239,12 @@ function ata_textarea_callback( $args ) {
  *
  * @since 1.2.0
  *
- * @param array $args Array of arguments
+ * @param array $args Array of arguments.
  * @return void
  */
 function ata_checkbox_callback( $args ) {
 
-	// First, we read the options collection
+	// First, we read the options collection.
 	global $ata_settings;
 
 	$checked = isset( $ata_settings[ $args['id'] ] ) ? checked( 1, $ata_settings[ $args['id'] ], false ) : '';
@@ -263,7 +265,7 @@ function ata_checkbox_callback( $args ) {
  *
  * @since 1.2.0
  *
- * @param array $args Array of arguments
+ * @param array $args Array of arguments.
  * @return void
  */
 function ata_multicheck_callback( $args ) {
@@ -299,7 +301,7 @@ function ata_multicheck_callback( $args ) {
  *
  * @since 1.2.0
  *
- * @param array $args Array of arguments
+ * @param array $args Array of arguments.
  * @return void
  */
 function ata_radio_callback( $args ) {
@@ -309,9 +311,9 @@ function ata_radio_callback( $args ) {
 	foreach ( $args['options'] as $key => $option ) {
 		$checked = false;
 
-		if ( isset( $ata_settings[ $args['id'] ] ) && $ata_settings[ $args['id'] ] == $key ) {
+		if ( isset( $ata_settings[ $args['id'] ] ) && $ata_settings[ $args['id'] ] === $key ) {
 			$checked = true;
-		} elseif ( isset( $args['options'] ) && $args['options'] == $key && ! isset( $ata_settings[ $args['id'] ] ) ) {
+		} elseif ( isset( $args['options'] ) && $args['options'] === $key && ! isset( $ata_settings[ $args['id'] ] ) ) {
 			$checked = true;
 		}
 
@@ -334,7 +336,7 @@ function ata_radio_callback( $args ) {
  *
  * @since 1.2.0
  *
- * @param array $args Array of arguments
+ * @param array $args Array of arguments.
  * @return void
  */
 function ata_number_callback( $args ) {
@@ -367,7 +369,7 @@ function ata_number_callback( $args ) {
  *
  * @since 1.2.0
  *
- * @param array $args Array of arguments
+ * @param array $args Array of arguments.
  * @return void
  */
 function ata_select_callback( $args ) {

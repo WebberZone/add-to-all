@@ -15,6 +15,10 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Function to generate Google Analytics code.
+ *
+ * @since 1.2.0
+ *
+ * @param string $ata_tynt_id Tynt ID.
  */
 function ata_tynt( $ata_tynt_id ) {
 

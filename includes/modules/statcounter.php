@@ -15,6 +15,11 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Function to add the necessary code to `wp_footer`.
+ *
+ * @since 1.2.0
+ *
+ * @param string $sc_project Statcounter Project ID.
+ * @param string $sc_security Statcounter Security ID.
  */
 function ata_statcounter( $sc_project, $sc_security ) {
 

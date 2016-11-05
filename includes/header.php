@@ -18,8 +18,6 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function ald_ata_header() {
 
-	global $ata_settings;
-
 	$ata_other = ata_get_option( 'head_other_html', '' );
 	$ata_head_css = ata_get_option( 'head_css', '' );
 	$ata_tynt_id = ata_get_option( 'tynt_id', '' );

@@ -22,7 +22,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Sanitize the form data being submitted.
  *
  * @since  1.2.0
- * @param  array $input Input unclean array
+ * @param  array $input Input unclean array.
  * @return array Sanitized array
  */
 function ata_settings_sanitize( $input = array() ) {
@@ -30,7 +30,7 @@ function ata_settings_sanitize( $input = array() ) {
 	// First, we read the options collection.
 	global $ata_settings;
 
-	// This should be set if a form is submitted, so let's save it in the $referrer variable
+	// This should be set if a form is submitted, so let's save it in the $referrer variable.
 	if ( empty( $_POST['_wp_http_referer'] ) ) {
 		return $input;
 	}
@@ -40,7 +40,7 @@ function ata_settings_sanitize( $input = array() ) {
 	// Get the various settings we've registered.
 	$settings = ata_get_registered_settings();
 
-	// Check if we need to set to defaults
+	// Check if we need to set to defaults.
 	$reset = isset( $_POST['settings_reset'] );
 
 	if ( $reset ) {
@@ -52,7 +52,7 @@ function ata_settings_sanitize( $input = array() ) {
 		return $ata_settings;
 	}
 
-	// Get the tab. This is also our settings' section
+	// Get the tab. This is also our settings' section.
 	$tab = isset( $referrer['tab'] ) ? $referrer['tab'] : 'third_party';
 
 	$input = $input ? $input : array();
@@ -116,7 +116,7 @@ function ata_settings_sanitize( $input = array() ) {
  *
  * @since 1.2.0
  *
- * @param  array $input The field value
+ * @param  array $input The field value.
  * @return string  $input  Sanitizied value
  */
 function ata_sanitize_text_field( $input ) {
@@ -130,7 +130,7 @@ add_filter( 'ata_settings_sanitize_text', 'ata_sanitize_text_field' );
  *
  * @since 1.2.0
  *
- * @param  array $input The field value
+ * @param  array $input The field value.
  * @return string  $input  Sanitizied value
  */
 function ata_sanitize_csv_field( $input ) {
@@ -145,7 +145,7 @@ add_filter( 'ata_settings_sanitize_csv', 'ata_sanitize_csv_field' );
  *
  * @since 1.2.0
  *
- * @param  array $input The field value
+ * @param  array $input The field value.
  * @return string  $input  Sanitizied value
  */
 function ata_sanitize_textarea_field( $input ) {

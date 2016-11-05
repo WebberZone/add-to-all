@@ -178,7 +178,8 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 /*
  ----------------------------------------------------------------------------*
  * Include files
- *----------------------------------------------------------------------------*/
+ *----------------------------------------------------------------------------
+ */
 
 	require_once ATA_PLUGIN_DIR . 'includes/admin/register-settings.php';
 	require_once ATA_PLUGIN_DIR . 'includes/content.php';
@@ -193,7 +194,8 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 /*
  ----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality
- *----------------------------------------------------------------------------*/
+ *----------------------------------------------------------------------------
+ */
 
 if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
@@ -207,7 +209,8 @@ if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 /*
  ----------------------------------------------------------------------------*
  * Deprecated functions, variables and constants
- *----------------------------------------------------------------------------*/
+ *----------------------------------------------------------------------------
+ */
 
 	require_once ATA_PLUGIN_DIR . '/includes/deprecated.php';
 

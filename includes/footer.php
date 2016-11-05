@@ -17,7 +17,6 @@ if ( ! defined( 'WPINC' ) ) {
  * Function to add the necessary code to `wp_footer`.
  */
 function ald_ata_footer() {
-	global $ata_settings;
 
 	$ata_other = ata_get_option( 'footer_other_html', '' );
 	$sc_project = ata_get_option( 'sc_project', '' );

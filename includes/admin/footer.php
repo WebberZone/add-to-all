@@ -33,17 +33,17 @@
 	</div><!-- /.postbox -->
 
 	<div id="qlinksdiv" class="postbox meta-box-sortables">
-	  <h2 class='hndle metabox-holder'><span><?php _e( 'Quick links', 'add-to-all' ); ?></span></h3>
+	  <h2 class='hndle metabox-holder'><span><?php esc_html_e( 'Quick links', 'add-to-all' ); ?></span></h3>
 	  <div class="inside" style="text-align: center">
 	    <div id="quick-links">
 			<ul class="subsubsub">
-				<li><a href="https://ajaydsouza.com/wordpress/plugins/add-to-all/"><?php _e( 'Add to All plugin homepage', 'add-to-all' ); ?></a>| </li>
-				<li><a href="https://wordpress.org/plugins/add-to-all/faq/"><?php _e( 'FAQ', 'add-to-all' ); ?></a>| </li>
-				<li><a href="https://wordpress.org/support/plugin/add-to-all/"><?php _e( 'Support', 'add-to-all' ); ?></a>| </li>
-				<li><a href="https://wordpress.org/support/plugin/add-to-all/reviews/"><?php _e( 'Reviews', 'add-to-all' ); ?></a>| </li>
-				<li><a href="https://github.com/ajaydsouza/add-to-all"><?php _e( 'Github repository', 'add-to-all' ); ?></a>| </li>
-				<li><a href="https://ajaydsouza.com/wordpress/plugins/"><?php _e( 'Other plugins', 'add-to-all' ); ?></a>| </li>
-				<li><a href="https://ajaydsouza.com/"><?php _e( "Ajay's blog", 'add-to-all' ); ?></a></li>
+				<li><a href="https://ajaydsouza.com/wordpress/plugins/add-to-all/"><?php esc_html_e( 'Add to All plugin homepage', 'add-to-all' ); ?></a>| </li>
+				<li><a href="https://wordpress.org/plugins/add-to-all/faq/"><?php esc_html_e( 'FAQ', 'add-to-all' ); ?></a>| </li>
+				<li><a href="https://wordpress.org/support/plugin/add-to-all/"><?php esc_html_e( 'Support', 'add-to-all' ); ?></a>| </li>
+				<li><a href="https://wordpress.org/support/plugin/add-to-all/reviews/"><?php esc_html_e( 'Reviews', 'add-to-all' ); ?></a>| </li>
+				<li><a href="https://github.com/ajaydsouza/add-to-all"><?php esc_html_e( 'Github repository', 'add-to-all' ); ?></a>| </li>
+				<li><a href="https://ajaydsouza.com/wordpress/plugins/"><?php esc_html_e( 'Other plugins', 'add-to-all' ); ?></a>| </li>
+				<li><a href="https://ajaydsouza.com/"><?php esc_html_e( "Ajay's blog", 'add-to-all' ); ?></a></li>
 			</ul>
 	    </div>
 	    <br />&nbsp;
@@ -53,7 +53,7 @@
 
 <div class="postbox-container">
 	<div id="followdiv" class="postbox meta-box-sortables">
-		<h2 class='hndle'><span><?php _e( 'Follow me', 'add-to-all' ); ?></span></h3>
+		<h2 class='hndle'><span><?php esc_html_e( 'Follow me', 'add-to-all' ); ?></span></h3>
 		<div class="inside" style="text-align: center">
 			<a href="https://facebook.com/webberzone/" target="_blank"><img src="<?php echo esc_url( ATA_PLUGIN_URL . 'includes/admin/images/fb.png' ); ?>" width="100" height="100" /></a>
 			<a href="https://twitter.com/webberzonewp/" target="_blank"><img src="<?php echo esc_url( ATA_PLUGIN_URL . 'includes/admin/images/twitter.jpg' ); ?>" width="100" height="100" /></a>

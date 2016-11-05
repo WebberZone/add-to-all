@@ -15,6 +15,11 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Function to generate Google Analytics code.
+ *
+ * @since 1.2.0
+ *
+ * @param string $ga_uacct Google Analytics Site ID.
+ * @param string $ga_linker Google Linker Domains.
  */
 function ata_ga( $ga_uacct, $ga_linker ) {
 
@@ -48,7 +53,7 @@ function ata_ga( $ga_uacct, $ga_linker ) {
 
 	?>
 		ga('require', 'linker');
-		ga('linker:autoLink', [<?php _e( $ga_linker ); ?>]);
+		ga('linker:autoLink', [<?php _e( $ga_linker ); // WPCS: XSS OK. ?>]);
 
 	<?php } ?>
 
