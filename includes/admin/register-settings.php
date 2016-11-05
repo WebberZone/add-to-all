@@ -277,6 +277,13 @@ function ata_get_registered_settings() {
 					'type'                          => 'text',
 					'options'                       => '',
 				),
+				'pinterest_verification'            => array(
+					'id'                            => 'pinterest_verification',
+					'name'                          => esc_html__( 'Pinterest', 'add-to-all' ),
+					'desc'                          => sprintf( esc_html__( 'Read how to get the Meta Tag from the %s', 'add-to-all' ), '<a href="https://help.pinterest.com/en/articles/confirm-your-website" target="_blank">' . esc_html__( 'Pinterest help page', 'add-to-all' ) . '</a>' ),
+					'type'                          => 'text',
+					'options'                       => '',
+				),
 			)
 		),
 		/*** Header settings ***/

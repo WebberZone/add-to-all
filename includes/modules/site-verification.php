@@ -23,6 +23,7 @@ function ata_site_verification() {
 
 	ata_site_verification_google();
 	ata_site_verification_bing();
+	ata_site_verification_pinterest();
 
 	/**
 	 * Site Verification action.
@@ -62,6 +63,23 @@ function ata_site_verification_bing() {
 	if ( '' !== $verification_code ) {
 ?>
 		<meta name="msvalidate.01" content="<?php esc_attr_e( $verification_code ); ?>" />
+<?php
+	}
+
+}
+
+/**
+ * Pinterest Site Verification.
+ *
+ * @since 1.2.0
+ */
+function ata_site_verification_pinterest() {
+
+	$verification_code = ata_get_option( 'pinterest_verification', '' );
+
+	if ( '' !== $verification_code ) {
+?>
+		<meta name="p:domain_verify" content="<?php esc_attr_e( $verification_code ); ?>" />
 <?php
 	}
 
