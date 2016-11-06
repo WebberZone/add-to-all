@@ -26,17 +26,17 @@ function ald_ata_rss( $content ) {
 		$str_before = '';
 		$str_after = '<hr style="border-top:black solid 1px" />';
 
-		if ( isset( $ata_settings['feed_add_html_before'] ) ) {
+		if ( isset( $ata_settings['feed_add_html_before'] ) && $ata_settings['feed_add_html_before'] ) {
 			$str_before .= ata_get_option( 'feed_html_before', '' );
 			$str_before .= '<br />';
 		}
 
-		if ( isset( $ata_settings['feed_add_html_after'] ) ) {
+		if ( isset( $ata_settings['feed_add_html_after'] ) && $ata_settings['feed_add_html_after'] ) {
 			$str_after .= ata_get_option( 'feed_html_after', '' );
 			$str_after .= '<br />';
 		}
 
-		if ( isset( $ata_settings['feed_add_title'] ) ) {
+		if ( isset( $ata_settings['feed_add_title'] ) && $ata_settings['feed_add_title'] ) {
 			$title = '<a href="' . get_permalink() . '">' . the_title( '', '', false ) . '</a>';
 			$search_array = array(
 				'%title%',
@@ -53,12 +53,12 @@ function ald_ata_rss( $content ) {
 			$str_after .= '<br />';
 		}
 
-		if ( isset( $ata_settings['feed_add_copyright'] ) ) {
+		if ( isset( $ata_settings['feed_add_copyright'] ) && $ata_settings['feed_add_copyright'] ) {
 			$str_after .= ata_get_option( 'feed_copyrightnotice', '' );
 			$str_after .= '<br />';
 		}
 
-		if ( isset( $ata_settings['add_credit'] ) ) {
+		if ( isset( $ata_settings['add_credit'] ) && $ata_settings['add_credit'] ) {
 			$creditline = '<br /><span style="font-size: 0.8em">';
 			$creditline .= __( 'Feed enhanced by ', 'add-to-all' );
 			$creditline .= '<a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All</a>';

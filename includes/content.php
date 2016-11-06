@@ -39,27 +39,27 @@ function ata_content( $content ) {
 		$str_after = '';
 
 		if ( is_singular() ) {
-			if ( isset( $ata_settings['content_add_html_before'] ) ) {
+			if ( isset( $ata_settings['content_add_html_before'] ) && $ata_settings['content_add_html_before'] ) {
 				$str_before .= ata_get_option( 'content_html_before', '' );
 			}
 
-			if ( isset( $ata_settings['content_add_html_after'] ) ) {
+			if ( isset( $ata_settings['content_add_html_after'] ) && $ata_settings['content_add_html_after'] ) {
 				$str_after .= ata_get_option( 'content_html_after', '' );
 			}
 
-			if ( isset( $ata_settings['content_add_html_before_single'] ) ) {
+			if ( isset( $ata_settings['content_add_html_before_single'] ) && $ata_settings['content_add_html_before_single'] ) {
 				$str_before .= ata_get_option( 'content_html_before_single', '' );
 			}
 
-			if ( isset( $ata_settings['content_add_html_after_single'] ) ) {
+			if ( isset( $ata_settings['content_add_html_after_single'] ) && $ata_settings['content_add_html_after_single'] ) {
 				$str_after .= ata_get_option( 'content_html_after_single', '' );
 			}
 		} elseif ( ( is_home() ) || ( is_archive() ) ) {
-			if ( isset( $ata_settings['content_add_html_before'] ) ) {
+			if ( isset( $ata_settings['content_add_html_before'] ) && $ata_settings['content_add_html_before'] ) {
 				$str_before .= ata_get_option( 'content_html_before', '' );
 			}
 
-			if ( isset( $ata_settings['content_add_html_after'] ) ) {
+			if ( isset( $ata_settings['content_add_html_after'] ) && $ata_settings['content_add_html_after'] ) {
 				$str_after .= ata_get_option( 'content_html_after', '' );
 			}
 		}
