@@ -34,15 +34,15 @@
 
 	<div id="qlinksdiv" class="postbox meta-box-sortables">
 	  <h2 class='hndle metabox-holder'><span><?php esc_html_e( 'Quick links', 'add-to-all' ); ?></span></h3>
-	  <div class="inside" style="text-align: center">
+	  <div class="inside">
 	    <div id="quick-links">
-			<ul class="subsubsub">
-				<li><a href="https://ajaydsouza.com/wordpress/plugins/add-to-all/"><?php esc_html_e( 'Add to All plugin homepage', 'add-to-all' ); ?></a>| </li>
-				<li><a href="https://wordpress.org/plugins/add-to-all/faq/"><?php esc_html_e( 'FAQ', 'add-to-all' ); ?></a>| </li>
-				<li><a href="https://wordpress.org/support/plugin/add-to-all/"><?php esc_html_e( 'Support', 'add-to-all' ); ?></a>| </li>
-				<li><a href="https://wordpress.org/support/plugin/add-to-all/reviews/"><?php esc_html_e( 'Reviews', 'add-to-all' ); ?></a>| </li>
-				<li><a href="https://github.com/ajaydsouza/add-to-all"><?php esc_html_e( 'Github repository', 'add-to-all' ); ?></a>| </li>
-				<li><a href="https://ajaydsouza.com/wordpress/plugins/"><?php esc_html_e( 'Other plugins', 'add-to-all' ); ?></a>| </li>
+			<ul class="subsub">
+				<li><a href="https://ajaydsouza.com/wordpress/plugins/add-to-all/"><?php esc_html_e( 'Add to All plugin homepage', 'add-to-all' ); ?></a></li>
+				<li><a href="https://wordpress.org/plugins/add-to-all/faq/"><?php esc_html_e( 'FAQ', 'add-to-all' ); ?></a></li>
+				<li><a href="https://wordpress.org/support/plugin/add-to-all/"><?php esc_html_e( 'Support', 'add-to-all' ); ?></a></li>
+				<li><a href="https://wordpress.org/support/plugin/add-to-all/reviews/"><?php esc_html_e( 'Reviews', 'add-to-all' ); ?></a></li>
+				<li><a href="https://github.com/ajaydsouza/add-to-all"><?php esc_html_e( 'Github repository', 'add-to-all' ); ?></a></li>
+				<li><a href="https://ajaydsouza.com/wordpress/plugins/"><?php esc_html_e( 'Other plugins', 'add-to-all' ); ?></a></li>
 				<li><a href="https://ajaydsouza.com/"><?php esc_html_e( "Ajay's blog", 'add-to-all' ); ?></a></li>
 			</ul>
 	    </div>

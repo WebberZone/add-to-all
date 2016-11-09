@@ -31,69 +31,80 @@ function ata_options_page() {
 	<div class="wrap">
 		<h1><?php esc_html_e( 'Add to All Settings', 'add-to-all' ); ?></h1>
 
-		<h2 class="nav-tab-wrapper">
-			<?php
-			foreach ( ata_get_settings_sections() as $tab_id => $tab_name ) {
+		<div id="poststuff">
+		<div id="post-body" class="metabox-holder columns-2">
+		<div id="post-body-content">
 
-				$tab_url = esc_url( add_query_arg(
-					array(
-					'settings-updated' => false,
-					'tab' => $tab_id,
-					)
-				) );
-
-				$active = $active_tab === $tab_id ? ' nav-tab-active' : '';
-
-				echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">';
-							echo esc_html( $tab_name );
-				echo '</a>';
-
-			}
-			?>
-		</h2>
-
-		<div id="tab_container">
-			<form method="post" action="options.php">
-				<table class="form-table">
+			<h2 class="nav-tab-wrapper" style="padding:0">
 				<?php
-					settings_fields( 'ata_settings' );
-					do_settings_fields( 'ata_settings_' . $active_tab, 'ata_settings_' . $active_tab );
-				?>
-				</table>
+				foreach ( ata_get_settings_sections() as $tab_id => $tab_name ) {
 
-				<p>
-				<?php
-					// Default submit button.
-					submit_button(
-						esc_html__( 'Save changes', 'add-to-all' ),
-						'primary',
-						'submit',
-						false
-					);
-
-					echo '&nbsp;&nbsp;';
-
-					// Reset button.
-					$confirm = esc_js( __( 'Do you really want to reset settings to their default values? This resets settings across all tabs.', 'add-to-all' ) );
-					submit_button(
-						__( 'Reset', 'add-to-all' ),
-						'secondary',
-						'settings_reset',
-						false,
+					$tab_url = esc_url( add_query_arg(
 						array(
-							'onclick' => "return confirm('{$confirm}');",
+						'settings-updated' => false,
+						'tab' => $tab_id,
 						)
-					);
+					) );
+
+					$active = $active_tab === $tab_id ? ' nav-tab-active' : '';
+
+					echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">';
+								echo esc_html( $tab_name );
+					echo '</a>';
+
+				}
 				?>
-				</p>
-			</form>
-		</div><!-- /#tab_container-->
+			</h2>
 
-		<div id="dashboard-widgets" class="metabox-holder">
+			<div id="tab_container">
+				<form method="post" action="options.php">
+					<table class="form-table">
+					<?php
+						settings_fields( 'ata_settings' );
+						do_settings_fields( 'ata_settings_' . $active_tab, 'ata_settings_' . $active_tab );
+					?>
+					</table>
 
-			<?php include_once( 'footer.php' ); ?>
+					<p>
+					<?php
+						// Default submit button.
+						submit_button(
+							esc_html__( 'Save changes', 'add-to-all' ),
+							'primary',
+							'submit',
+							false
+						);
 
-		</div><!-- /#dashboard-widgets -->
+						echo '&nbsp;&nbsp;';
+
+						// Reset button.
+						$confirm = esc_js( __( 'Do you really want to reset settings to their default values? This resets settings across all tabs.', 'add-to-all' ) );
+						submit_button(
+							__( 'Reset', 'add-to-all' ),
+							'secondary',
+							'settings_reset',
+							false,
+							array(
+								'onclick' => "return confirm('{$confirm}');",
+							)
+						);
+					?>
+					</p>
+				</form>
+			</div><!-- /#tab_container-->
+
+		</div><!-- /#post-body-content -->
+
+		<div id="postbox-container-1" class="postbox-container">
+
+			<div id="side-sortables" class="meta-box-sortables ui-sortable">
+				<?php include_once( 'sidebar.php' ); ?>
+			</div><!-- /#side-sortables -->
+
+		</div><!-- /#postbox-container-1 -->
+		</div><!-- /#post-body -->
+		<br class="clear" />
+		</div><!-- /#poststuff -->
 
 	</div><!-- /.wrap -->
 
