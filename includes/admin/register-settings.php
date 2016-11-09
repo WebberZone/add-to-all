@@ -206,7 +206,7 @@ function ata_get_registered_settings() {
 			array(
 				'statcounter_header'             => array(
 					'id'                            => 'statcounter_header',
-					'name'                          => '<h3>' . esc_html__( 'StatCounter settings', 'easy-digital-downloads' ) . '</h3>',
+					'name'                          => '<h3>' . esc_html__( 'StatCounter', 'easy-digital-downloads' ) . '</h3>',
 					'desc'                          => '',
 					'type'                          => 'header',
 				),
@@ -226,7 +226,7 @@ function ata_get_registered_settings() {
 				),
 				'google_analytics_header'        => array(
 					'id'                            => 'google_analytics_header',
-					'name'                          => '<h3>' . esc_html__( 'Google Analytics settings', 'easy-digital-downloads' ) . '</h3>',
+					'name'                          => '<h3>' . esc_html__( 'Google Analytics', 'easy-digital-downloads' ) . '</h3>',
 					'desc'                          => '',
 					'type'                          => 'header',
 				),
@@ -246,7 +246,7 @@ function ata_get_registered_settings() {
 				),
 				'tynt_header'                    => array(
 					'id'                            => 'tynt_header',
-					'name'                          => '<h3>' . esc_html__( '33 Across (Tynt) settings', 'easy-digital-downloads' ) . '</h3>',
+					'name'                          => '<h3>' . esc_html__( '33 Across (Tynt)', 'easy-digital-downloads' ) . '</h3>',
 					'desc'                          => '',
 					'type'                          => 'header',
 				),
@@ -259,7 +259,7 @@ function ata_get_registered_settings() {
 				),
 				'verification_header'            => array(
 					'id'                            => 'verification_header',
-					'name'                          => '<h3>' . esc_html__( 'Site verification settings', 'easy-digital-downloads' ) . '</h3>',
+					'name'                          => '<h3>' . esc_html__( 'Site verification', 'easy-digital-downloads' ) . '</h3>',
 					'desc'                          => '',
 					'type'                          => 'header',
 				),
