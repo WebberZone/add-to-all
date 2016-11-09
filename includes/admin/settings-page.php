@@ -24,7 +24,7 @@ if ( ! defined( 'WPINC' ) ) {
  * @return void
  */
 function ata_options_page() {
-	$active_tab = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], ata_get_settings_sections() ) ? esc_attr( $_GET['tab'] ) : 'third_party';
+	$active_tab = isset( $_GET['tab'] ) && array_key_exists( sanitize_key( wp_unslash( $_GET['tab'] ) ), ata_get_settings_sections() ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'third_party'; // Input var okay.
 
 	ob_start();
 	?>
@@ -48,7 +48,7 @@ function ata_options_page() {
 
 					$active = $active_tab === $tab_id ? ' nav-tab-active' : '';
 
-					echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">';
+					echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . sanitize_html_class( $active ) . '">';
 								echo esc_html( $tab_name );
 					echo '</a>';
 
@@ -109,7 +109,7 @@ function ata_options_page() {
 	</div><!-- /.wrap -->
 
 	<?php
-	echo ob_get_clean();
+	echo ob_get_clean(); // WPCS: XSS OK.
 }
 
 /**
@@ -172,7 +172,7 @@ function ata_header_callback( $args ) {
 	 * @param string $html HTML string.
 	 * @param array Arguments array.
 	 */
-	echo apply_filters( 'ata_after_setting_output', '', $args );
+	echo apply_filters( 'ata_after_setting_output', '', $args ); // WPCS: XSS OK.
 }
 
 
@@ -199,7 +199,7 @@ function ata_text_callback( $args ) {
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args );
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
 
 }
 
@@ -241,7 +241,7 @@ function ata_textarea_callback( $args ) {
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args );
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
 }
 
 
@@ -264,7 +264,7 @@ function ata_checkbox_callback( $args ) {
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args );
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
 
 }
 
@@ -300,7 +300,7 @@ function ata_multicheck_callback( $args ) {
 	}
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args );
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
 
 }
 
@@ -335,7 +335,7 @@ function ata_radio_callback( $args ) {
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args );
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
 
 }
 
@@ -368,7 +368,7 @@ function ata_number_callback( $args ) {
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args );
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
 
 }
 
@@ -409,7 +409,7 @@ function ata_select_callback( $args ) {
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args );
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
 
 }
 
