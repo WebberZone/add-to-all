@@ -48,7 +48,7 @@ function ata_options_page() {
 
 					$active = $active_tab === $tab_id ? ' nav-tab-active' : '';
 
-					echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . sanitize_html_class( $active ) . '">';
+					echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab ' . sanitize_html_class( $active ) . '">';
 								echo esc_html( $tab_name );
 					echo '</a>';
 
