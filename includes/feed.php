@@ -61,7 +61,7 @@ function ald_ata_rss( $content ) {
 		if ( isset( $ata_settings['add_credit'] ) && $ata_settings['add_credit'] ) {
 			$creditline = '<br /><span style="font-size: 0.8em">';
 			$creditline .= __( 'Feed enhanced by ', 'add-to-all' );
-			$creditline .= '<a href="http://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All</a>';
+			$creditline .= '<a href="https://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All</a>';
 
 			$str_after .= $creditline;
 			$str_after .= '<br />';

@@ -7,10 +7,10 @@
  * @wordpress-plugin
  * Plugin Name: Add to All
  * Version:     1.2.0-beta20160105
- * Plugin URI:  http://ajaydsouza.com/wordpress/plugins/add-to-all/
+ * Plugin URI:  https://ajaydsouza.com/wordpress/plugins/add-to-all/
  * Description: A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
  * Author:      Ajay D'Souza
- * Author URI:  http://ajaydsouza.com/
+ * Author URI:  https://ajaydsouza.com/
  * Text Domain:	add-to-all
  * License:		GPL-2.0+
  * License URI:	http://www.gnu.org/licenses/gpl-2.0.txt

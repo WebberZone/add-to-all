@@ -11,7 +11,7 @@ A powerful plugin that will allow you to add custom code or CSS to your header, 
 
 == Description ==
 
-[Add to All](http://ajaydsouza.com/wordpress/plugins/add-to-all/) is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
+[Add to All](https://ajaydsouza.com/wordpress/plugins/add-to-all/) is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
 
 It comes with out of the box support for Google Analytics, Statcounter and Tynt. Additionally, it supports site verification for Google, Bing and Pinterest via their HTML tag methods.
 

@@ -95,7 +95,7 @@ function ata_plugin_actions( $links, $file ) {
 
 	if ( false !== strpos( $file, 'add-to-all.php' ) ) {
 		$links[] = '<a href="http://wordpress.org/support/plugin/add-to-all">' . __( 'Support', 'add-to-all' ) . '</a>';
-		$links[] = '<a href="http://ajaydsouza.com/donate/">' . __( 'Donate', 'add-to-all' ) . '</a>';
+		$links[] = '<a href="https://ajaydsouza.com/donate/">' . __( 'Donate', 'add-to-all' ) . '</a>';
 	}
 	return $links;
 }

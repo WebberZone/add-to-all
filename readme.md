@@ -6,13 +6,13 @@ __Tested up to:__ 4.7
 
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
-__Plugin page:__ [Add to All](http://ajaydsouza.com/wordpress/plugins/add-to-all/) | [WordPress Plugin page](https://wordpress.org/plugins/add-to-all/)
+__Plugin page:__ [Add to All](https://ajaydsouza.com/wordpress/plugins/add-to-all/) | [WordPress Plugin page](https://wordpress.org/plugins/add-to-all/)
 
 Add custom code or CSS to your header, footer, sidebar, content or feed. Site verification and more...
 
 ## Description
 
-[Add to All](http://ajaydsouza.com/wordpress/plugins/add-to-all/) is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
+[Add to All](https://ajaydsouza.com/wordpress/plugins/add-to-all/) is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
 
 It comes with out of the box support for Google Analytics, Statcounter and Tynt. Additionally, it supports site verification for Google, Bing and Pinterest via their HTML tag methods.
 
