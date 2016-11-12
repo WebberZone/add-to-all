@@ -317,7 +317,7 @@ function ata_get_registered_settings() {
 				),
 				'content_header_all'             => array(
 					'id'                            => 'content_header_all',
-					'name'                          => '<h3>' . esc_html__( 'All posts and pages settings', 'easy-digital-downloads' ) . '</h3>',
+					'name'                          => '<h3>' . esc_html__( 'All posts and pages', 'easy-digital-downloads' ) . '</h3>',
 					'desc'                          => '',
 					'type'                          => 'header',
 				),
@@ -351,7 +351,7 @@ function ata_get_registered_settings() {
 				),
 				'content_header_single'          => array(
 					'id'                            => 'content_header_single',
-					'name'                          => '<h3>' . esc_html__( 'Single posts and pages settings', 'easy-digital-downloads' ) . '</h3>',
+					'name'                          => '<h3>' . esc_html__( 'Single posts and pages', 'easy-digital-downloads' ) . '</h3>',
 					'desc'                          => '',
 					'type'                          => 'header',
 				),
