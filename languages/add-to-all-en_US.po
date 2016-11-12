@@ -2,314 +2,480 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Contextual Related Posts\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-22 22:37-0000\n"
+"POT-Creation-Date: 2016-11-12 16:36+0000\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Ajay D'Souza <me@ajaydsouza.com>\n"
-"Language-Team:  <me@ajaydsouza.com>\n"
-"Language: en\n"
+"Language-Team: me@ajaydsouza.com\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: __;_e;_c;__ngettext\n"
-"X-Poedit-Basepath: ../\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-KeywordsList: __;_e;_c;__ngettext;_x;esc_html__;esc_attr__;"
+"esc_html_e;esc_attr_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 1.8.9\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en_US\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: add-to-all.php:278
-msgid "Feed enhanced by "
+#: includes/admin/admin.php:30
+msgid "Add to All"
 msgstr ""
 
-#: add-to-all.php:343
-#, fuzzy
+#: includes/admin/admin.php:52
+#, php-format
+msgid ""
+"Thank you for using <a href=\"%1$s\" target=\"_blank\">Add to All</a>! "
+"Please <a href=\"%2$s\" target=\"_blank\">rate us</a> on <a href=\"%2$s\" "
+"target=\"_blank\">WordPress.org</a>"
+msgstr ""
+
+#: includes/admin/admin.php:78
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/admin.php:97 includes/admin/sidebar.php:42
+msgid "Support"
+msgstr ""
+
+#: includes/admin/admin.php:98
+msgid "Donate"
+msgstr ""
+
+#: includes/admin/help-tab.php:36
+#, php-format
+msgid ""
+"For more information or how to get support visit the <a href=\"%s\">support "
+"site</a>."
+msgstr ""
+
+#: includes/admin/help-tab.php:37
+#, php-format
+msgid ""
+"Support queries should be posted in the <a href=\"%s\">WordPress.org support "
+"forums</a>."
+msgstr ""
+
+#: includes/admin/help-tab.php:39
+#, php-format
+msgid ""
+"<a href=\"%1$s\">Post an issue</a> on <a href=\"%2$s\">GitHub</a> (bug "
+"reports only)."
+msgstr ""
+
+#: includes/admin/help-tab.php:48 includes/admin/settings-page.php:124
+msgid "Third Party"
+msgstr ""
+
+#: includes/admin/help-tab.php:50
+msgid ""
+"This screen provides the settings for configuring the integration with third "
+"party scripts."
+msgstr ""
+
+#: includes/admin/help-tab.php:52
+#, php-format
+msgid "Google Analytics tracking can be founds by visiting this %s"
+msgstr ""
+
+#: includes/admin/help-tab.php:53
+msgid "article"
+msgstr ""
+
+#: includes/admin/help-tab.php:56 includes/admin/help-tab.php:66
+#: includes/admin/help-tab.php:76 includes/admin/help-tab.php:86
+#: includes/admin/help-tab.php:96
+msgid ""
+"You must click the Save Changes button at the bottom of the screen for new "
+"settings to take effect."
+msgstr ""
+
+#: includes/admin/help-tab.php:62 includes/admin/settings-page.php:125
+msgid "Header"
+msgstr ""
+
+#: includes/admin/help-tab.php:64
+msgid ""
+"This screen allows you to control what content is added to the header of "
+"your site."
+msgstr ""
+
+#: includes/admin/help-tab.php:65
+msgid ""
+"You can add custom CSS or HTML code. Useful for adding meta tags for site "
+"verification, etc."
+msgstr ""
+
+#: includes/admin/help-tab.php:72 includes/admin/settings-page.php:126
+msgid "Content"
+msgstr ""
+
+#: includes/admin/help-tab.php:74
+msgid ""
+"This screen allows you to control what content is added to the content of "
+"posts, pages and custom post types."
+msgstr ""
+
+#: includes/admin/help-tab.php:75
+msgid ""
+"You can set the priority of the filter and choose if you want this to be "
+"displayed on either all content (including archives) or just single posts/"
+"pages."
+msgstr ""
+
+#: includes/admin/help-tab.php:82 includes/admin/settings-page.php:127
+msgid "Footer"
+msgstr ""
+
+#: includes/admin/help-tab.php:84
+msgid ""
+"This screen allows you to control what content is added to the footer of "
+"your site."
+msgstr ""
+
+#: includes/admin/help-tab.php:85
+msgid ""
+"You can add custom HTML code. Useful for adding tracking code for analytics, "
+"etc."
+msgstr ""
+
+#: includes/admin/help-tab.php:92 includes/admin/settings-page.php:128
+msgid "Feed"
+msgstr ""
+
+#: includes/admin/help-tab.php:94
+msgid ""
+"This screen allows you to control what content is added to the feed of your "
+"site."
+msgstr ""
+
+#: includes/admin/help-tab.php:95
+msgid ""
+"You can add copyright text, a link to the title and date of the post, and "
+"HTML before and after the content"
+msgstr ""
+
+#: includes/admin/register-settings.php:209
+msgid "StatCounter"
+msgstr ""
+
+#: includes/admin/register-settings.php:215
+msgid "Project ID"
+msgstr ""
+
+#: includes/admin/register-settings.php:216
+msgid "This is the value of sc_project in your StatCounter code."
+msgstr ""
+
+#: includes/admin/register-settings.php:222
+msgid "Security ID"
+msgstr ""
+
+#: includes/admin/register-settings.php:223
+msgid "This is the value of sc_security in your StatCounter code."
+msgstr ""
+
+#: includes/admin/register-settings.php:229
+msgid "Google Analytics"
+msgstr ""
+
+#: includes/admin/register-settings.php:235
+msgid "Tracking ID"
+msgstr ""
+
+#: includes/admin/register-settings.php:236
+msgid ""
+"You can find this under Admin &raquo; Tracking Info &raquo; Tracking Code "
+"when viewing your project settings and is of the form UA-XXXX-Y."
+msgstr ""
+
+#: includes/admin/register-settings.php:242
+msgid "Linker autoLink domains"
+msgstr ""
+
+#: includes/admin/register-settings.php:243
+msgid ""
+"If you'd like to implement cross-domain tracking, enter a comma-separated "
+"list of domains, e.g. ajaydsouza.com,webberzone.com"
+msgstr ""
+
+#: includes/admin/register-settings.php:249
+msgid "33 Across (Tynt)"
+msgstr ""
+
+#: includes/admin/register-settings.php:255
+msgid "Tynt ID"
+msgstr ""
+
+#: includes/admin/register-settings.php:256
+#, php-format
+msgid ""
+"This is the text between the brackets in %1$s  in the SiteCTRL client script"
+msgstr ""
+
+#: includes/admin/register-settings.php:262
+msgid "Site verification"
+msgstr ""
+
+#: includes/admin/register-settings.php:268
+msgid "Google"
+msgstr ""
+
+#: includes/admin/register-settings.php:269
+#: includes/admin/register-settings.php:276
+#, php-format
+msgid "Value of the content portion of the HTML tag method on the %s"
+msgstr ""
+
+#: includes/admin/register-settings.php:269
+#: includes/admin/register-settings.php:276
+msgid "verification details page"
+msgstr ""
+
+#: includes/admin/register-settings.php:275
+msgid "Bing"
+msgstr ""
+
+#: includes/admin/register-settings.php:282
+msgid "Pinterest"
+msgstr ""
+
+#: includes/admin/register-settings.php:283
+#, php-format
+msgid "Read how to get the Meta Tag from the %s"
+msgstr ""
+
+#: includes/admin/register-settings.php:283
+msgid "Pinterest help page"
+msgstr ""
+
+#: includes/admin/register-settings.php:294
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/admin/register-settings.php:295
+msgid "Add the CSS code without the <style></style> tags."
+msgstr ""
+
+#: includes/admin/register-settings.php:301
+msgid "HTML to add to the header"
+msgstr ""
+
+#: includes/admin/register-settings.php:302
+#: includes/admin/register-settings.php:394
+#, php-format
+msgid ""
+"The code entered here is added to %1$s. Please ensure that you enter valid "
+"HTML or JavaScript."
+msgstr ""
+
+#: includes/admin/register-settings.php:313
+msgid "Content filter priority"
+msgstr ""
+
+#: includes/admin/register-settings.php:314
+msgid ""
+"A higher number will cause the Add to All output to be processed after other "
+"filters. Number below 10 is not recommended."
+msgstr ""
+
+#: includes/admin/register-settings.php:320
+msgid "All posts and pages"
+msgstr ""
+
+#: includes/admin/register-settings.php:326
+#: includes/admin/register-settings.php:360
+#: includes/admin/register-settings.php:433
+msgid "Add HTML before content?"
+msgstr ""
+
+#: includes/admin/register-settings.php:327
+#: includes/admin/register-settings.php:341
+#: includes/admin/register-settings.php:361
+#: includes/admin/register-settings.php:375
+#: includes/admin/register-settings.php:434
+#: includes/admin/register-settings.php:448
+msgid "Check this to add the HTML below before the content of your post."
+msgstr ""
+
+#: includes/admin/register-settings.php:333
+#: includes/admin/register-settings.php:367
+#: includes/admin/register-settings.php:440
+msgid "HTML to add before the content"
+msgstr ""
+
+#: includes/admin/register-settings.php:334
+#: includes/admin/register-settings.php:348
+#: includes/admin/register-settings.php:368
+#: includes/admin/register-settings.php:382
+#: includes/admin/register-settings.php:441
+#: includes/admin/register-settings.php:455
+msgid ""
+"Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed."
+msgstr ""
+
+#: includes/admin/register-settings.php:340
+#: includes/admin/register-settings.php:374
+#: includes/admin/register-settings.php:447
+msgid "Add HTML after content?"
+msgstr ""
+
+#: includes/admin/register-settings.php:347
+#: includes/admin/register-settings.php:381
+#: includes/admin/register-settings.php:454
+msgid "HTML to add after the content"
+msgstr ""
+
+#: includes/admin/register-settings.php:354
+msgid "Single posts and pages"
+msgstr ""
+
+#: includes/admin/register-settings.php:393
+msgid "HTML to add to the footer"
+msgstr ""
+
+#: includes/admin/register-settings.php:405
+msgid "Add copyright notice?"
+msgstr ""
+
+#: includes/admin/register-settings.php:406
+msgid "Check this to add the below copyright notice to your feed."
+msgstr ""
+
+#: includes/admin/register-settings.php:412
+msgid "Coyright text"
+msgstr ""
+
+#: includes/admin/register-settings.php:413
+msgid ""
+"Enter valid HTML only. This copyright notice is added as the last item of "
+"your feed."
+msgstr ""
+
+#: includes/admin/register-settings.php:419
+msgid "Add post title?"
+msgstr ""
+
+#: includes/admin/register-settings.php:420
+msgid "Add a link to the title of the post in the feed."
+msgstr ""
+
+#: includes/admin/register-settings.php:426
+msgid "Title text"
+msgstr ""
+
+#: includes/admin/register-settings.php:427
+msgid ""
+"The above text will be added to the feed. You can use %title% to add a link "
+"to the post, %date% and %time% to display the date and time of the post "
+"respectively."
+msgstr ""
+
+#: includes/admin/register-settings.php:429
+msgid "%title% was first posted on %date% at %time%."
+msgstr ""
+
+#: includes/admin/register-settings.php:461
+msgid "Add a link to \"Add to All\" plugin page"
+msgstr ""
+
+#: includes/admin/register-settings.php:546
 msgid ""
 "Use of this feed is for personal non-commercial use only. If you are not "
 "reading this article in your feed reader, then the site is guilty of "
 "copyright infringement. Please contact me at "
 msgstr ""
-"Indtast søgekriterier. Prøv at brug beskrivende ord, da denne søgefunktion "
-"er intelligent."
 
-#: add-to-all.php:347
-msgid "%title% was first posted on %date% at %time%."
+#: includes/admin/save-settings.php:50
+msgid ""
+"Settings have been reset to their default values. Reload this page to view "
+"the updated settings"
 msgstr ""
 
-#: add-to-all.php:516
-#, fuzzy
-msgid "Settings"
-msgstr "Opciones"
-
-#: add-to-all.php:539 admin.inc.php:294
-#, fuzzy
-msgid "Support"
-msgstr "Ayuda"
-
-#: add-to-all.php:540
-#, fuzzy
-msgid "Donate"
-msgstr "Donar"
-
-#: admin.inc.php:71
-#, fuzzy
-msgid "Options saved successfully."
-msgstr "Indstillinger gemt."
-
-#: admin.inc.php:81
-#, fuzzy
-msgid "Options set to Default."
-msgstr "Indstillinger sat til default."
-
-#: admin.inc.php:88 admin.inc.php:315
-msgid "Add to All"
+#: includes/admin/save-settings.php:107
+msgid "Settings updated."
 msgstr ""
 
-#: admin.inc.php:94 admin.inc.php:146 admin.inc.php:163 admin.inc.php:200
-#: admin.inc.php:213 admin.inc.php:255 admin.inc.php:275 admin.inc.php:285
-msgid "Click to toggle"
+#: includes/admin/settings-page.php:32
+msgid "Add to All Settings"
 msgstr ""
 
-#: admin.inc.php:95
-#, fuzzy
-msgid "Options for 3rd party services"
-msgstr "Indstillinger gemt."
-
-#: admin.inc.php:99
-#, fuzzy
-msgid "Statcounter Options:"
-msgstr "Indstillinger gemt."
-
-#: admin.inc.php:101
-msgid "StatCounter Project ID (Value of sc_project):"
+#: includes/admin/settings-page.php:72
+msgid "Save changes"
 msgstr ""
 
-#: admin.inc.php:104
-msgid "StatCounter Security ID (Value of sc_security):"
+#: includes/admin/settings-page.php:81
+msgid ""
+"Do you really want to reset settings to their default values? This resets "
+"settings across all tabs."
 msgstr ""
 
-#: admin.inc.php:107
-#, fuzzy
-msgid "Google Analytics Options:"
-msgstr "Indstillinger gemt."
-
-#: admin.inc.php:110
-msgid "Enable Universal Analytics:"
+#: includes/admin/settings-page.php:83
+msgid "Reset"
 msgstr ""
 
-#: admin.inc.php:113
+#: includes/admin/settings-page.php:152
 #, php-format
-msgid ""
-"Only check this box if you have upgraded to Universal Analytics. Visit the "
-"<a href=\"%s\" target=\"_blank\">Universal Analytics Upgrade Center</a> to "
-"know more"
+msgid "The callback function used for the %1$s setting is missing."
 msgstr ""
 
-#: admin.inc.php:116
-msgid "Tracking ID:"
-msgstr ""
-
-#: admin.inc.php:119
-#, fuzzy
-msgid ""
-"Multiple sub-domain and top-level domain support (Value of _setDomainName):"
-msgstr "Ayuda"
-
-#: admin.inc.php:121
-msgid "View Explanation"
-msgstr ""
-
-#: admin.inc.php:123
-#, fuzzy
-msgid "Kontera Options:"
-msgstr "Indstillinger gemt."
-
-#: admin.inc.php:125
-msgid "Kontera ID (Value of dc_PublisherID):"
-msgstr ""
-
-#: admin.inc.php:128
-msgid "Kontera link colour (Value of dc_AdLinkColor):"
-msgstr ""
-
-#: admin.inc.php:131
-#, fuzzy
-msgid "Wrap post content with Kontera Zone Tags:"
-msgstr "Peso del contenido:"
-
-#: admin.inc.php:134
-#, fuzzy
-msgid "Tynt Options:"
-msgstr "Indstillinger gemt."
-
-#: admin.inc.php:136
-msgid "Tynt ID:"
-msgstr ""
-
-#: admin.inc.php:139
-#, fuzzy
-msgid ""
-"This is the text between <code>Tynt.push('ID IS HERE')</code> in the <a "
-"href='http://tcr1.tynt.com/install' target='_blank'>Install Code</a>"
-msgstr "Tekst der skal inkluderes før søgeresultaterne i heatmappet"
-
-#: admin.inc.php:147
-#, fuzzy
-msgid "Header options"
-msgstr "Indstillinger gemt."
-
-#: admin.inc.php:151
-#, fuzzy
-msgid "Custom CSS to add to header:"
-msgstr "Periodo de tiempo personalizado (indicar abajo)"
-
-#: admin.inc.php:154
-#, fuzzy
-msgid "Do not include <code>style</code> tags"
-msgstr "Ønsker du at resette alle indstillinger til default?"
-
-#: admin.inc.php:155
-msgid "Any other HTML (no PHP) to add to <code>wp_head</code>:"
-msgstr ""
-
-#: admin.inc.php:164
-#, fuzzy
-msgid "Content options"
-msgstr "Peso del contenido:"
-
-#: admin.inc.php:168
-#, fuzzy
-msgid "Content to add to all posts before and/or after post content:"
-msgstr "Peso del contenido:"
-
-#: admin.inc.php:171 admin.inc.php:181
-#, fuzzy
-msgid "Add the following before the content. (You can use HTML):"
-msgstr "Peso del contenido:"
-
-#: admin.inc.php:175 admin.inc.php:185
-#, fuzzy
-msgid "Add the following after the content. (You can use HTML):"
-msgstr "Peso del contenido:"
-
-#: admin.inc.php:178
-#, fuzzy
-msgid "Content to add to single posts before and/or after post content:"
-msgstr "Peso del contenido:"
-
-#: admin.inc.php:188
-#, fuzzy
-msgid "Adjust content filter priority:"
-msgstr "Peso del contenido:"
-
-#: admin.inc.php:193
-#, fuzzy
-msgid ""
-"A higher number will cause the content above to be processed after other "
-"filters. Number below 10 is not recommended"
-msgstr ""
-"Rango en número de días (aplica solo para la opción personalizada anterior)"
-
-#: admin.inc.php:201
-#, fuzzy
-msgid "Footer options"
-msgstr "Indstillinger gemt."
-
-#: admin.inc.php:205
-msgid "Any other HTML (no PHP) to add to <code>wp_footer</code>:"
-msgstr ""
-
-#: admin.inc.php:214
-#, fuzzy
-msgid "Feed options"
-msgstr "Indstillinger gemt."
-
-#: admin.inc.php:219
-#, fuzzy
-msgid "Add the following to the feed before the content. (You can use HTML):"
-msgstr "Peso del contenido:"
-
-#: admin.inc.php:223
-#, fuzzy
-msgid "Add the following to the feed after the content. (You can use HTML):"
-msgstr "Peso del contenido:"
-
-#: admin.inc.php:227
-#, fuzzy
-msgid "Add the following copyright notice to the feed (You can use HTML):"
-msgstr "¿Estás seguro de que quieres reiniciar las búsquedas frecuentes?"
-
-#: admin.inc.php:232
-#, fuzzy
-msgid "Add a link to the title of the post in the feed. Customize this below"
-msgstr "Título"
-
-#: admin.inc.php:234
-msgid ""
-"The above text will be added to the feed. You can use %title% to add a link "
-"to the post, %date% and %time% to display the date and time of the post "
-"respectively"
-msgstr ""
-
-#: admin.inc.php:237
-#, fuzzy
-msgid "Add a link to \"Add to All\" plugin page:"
-msgstr "Resultados por página"
-
-#: admin.inc.php:247
-#, fuzzy
-msgid "Do you want to set options to Default?"
-msgstr "Ønsker du at resette alle indstillinger til default?"
-
-#: admin.inc.php:256
-#, fuzzy
+#: includes/admin/sidebar.php:15
 msgid "Support the development"
-msgstr "Ayuda al desarrollador"
-
-#: admin.inc.php:265
-#, fuzzy
-msgid "Enter amount in USD: "
-msgstr "Introduce la cantidad en USD:"
-
-#: admin.inc.php:269
-#, fuzzy
-msgid "Send your donation to the author of"
-msgstr "Enviar donación al autor de"
-
-#: admin.inc.php:276
-msgid "Follow me"
 msgstr ""
 
-#: admin.inc.php:286
+#: includes/admin/sidebar.php:22
+msgid "Donation for Add to All"
+msgstr ""
+
+#: includes/admin/sidebar.php:24
+msgid "Enter amount in USD"
+msgstr ""
+
+#: includes/admin/sidebar.php:28
+msgid "Send your donation to the author of Add to All"
+msgstr ""
+
+#: includes/admin/sidebar.php:36
 msgid "Quick links"
 msgstr ""
 
-#: admin.inc.php:290
-#, fuzzy
-msgid "Add to All plugin page"
-msgstr "Resultados por página"
-
-#: admin.inc.php:291
-msgid "Other plugins"
+#: includes/admin/sidebar.php:40
+msgid "Add to All plugin homepage"
 msgstr ""
 
-#: admin.inc.php:292
-#, fuzzy
-msgid "Ajay's blog"
-msgstr "Blog de Ajay"
-
-#: admin.inc.php:293
+#: includes/admin/sidebar.php:41
 msgid "FAQ"
 msgstr ""
 
-#: admin.inc.php:295
+#: includes/admin/sidebar.php:43
 msgid "Reviews"
 msgstr ""
 
-#, fuzzy
-#~ msgid "plugin settings page"
-#~ msgstr "Opciones"
+#: includes/admin/sidebar.php:44
+msgid "Github repository"
+msgstr ""
+
+#: includes/admin/sidebar.php:45
+msgid "Other plugins"
+msgstr ""
+
+#: includes/admin/sidebar.php:46
+msgid "Ajay's blog"
+msgstr ""
+
+#: includes/admin/sidebar.php:56
+msgid "Follow me"
+msgstr ""
+
+#: includes/feed.php:63
+msgid "Feed enhanced by "
+msgstr ""
 
 #, fuzzy
-#~ msgid ""
-#~ "Add to All plugin has just been installed / upgraded. Please visit the "
-#~ msgstr ""
-#~ "No se puede deshacer. Asegurate de que has realizado una copia de "
-#~ "seguridad de la base de datos antes de proceder"
+msgid "plugin settings page"
+msgstr "Opciones"
+
+#, fuzzy
+msgid "Add to All plugin has just been installed / upgraded. Please visit the "
+msgstr ""
+"No se puede deshacer. Asegurate de que has realizado una copia de seguridad "
+"de la base de datos antes de proceder"
