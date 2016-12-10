@@ -157,9 +157,22 @@ function ata_sanitize_textarea_field( $input ) {
 		'script' => array(
 			'type' => true,
 			'src' => true,
+			'async' => true,
+			'defer' => true,
+			'charset' => true,
 		),
 		'style' => array(
 			'type' => true,
+			'media' => true,
+			'scoped' => true,
+		),
+		'link' => array(
+			'rel' => true,
+			'type' => true,
+			'href' => true,
+			'media' => true,
+			'sizes' => true,
+			'hreflang' => true,
 		),
 	);
 
