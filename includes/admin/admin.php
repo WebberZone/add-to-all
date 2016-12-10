@@ -75,7 +75,7 @@ function ata_plugin_actions_links( $links ) {
 
 	return array_merge(
 		array(
-			'settings' => '<a href="' . admin_url( 'options-general.php?page=ata_options' ) . '">' . __( 'Settings', 'add-to-all' ) . '</a>',
+			'settings' => '<a href="' . admin_url( 'options-general.php?page=ata_options_page' ) . '">' . esc_html__( 'Settings', 'add-to-all' ) . '</a>',
 		),
 		$links
 	);
@@ -94,8 +94,8 @@ add_filter( 'plugin_action_links_' . plugin_basename( ATA_PLUGIN_FILE ), 'ata_pl
 function ata_plugin_actions( $links, $file ) {
 
 	if ( false !== strpos( $file, 'add-to-all.php' ) ) {
-		$links[] = '<a href="http://wordpress.org/support/plugin/add-to-all">' . __( 'Support', 'add-to-all' ) . '</a>';
-		$links[] = '<a href="https://ajaydsouza.com/donate/">' . __( 'Donate', 'add-to-all' ) . '</a>';
+		$links[] = '<a href="http://wordpress.org/support/plugin/add-to-all">' . esc_html__( 'Support', 'add-to-all' ) . '</a>';
+		$links[] = '<a href="https://ajaydsouza.com/donate/">' . esc_html__( 'Donate', 'add-to-all' ) . '</a>';
 	}
 	return $links;
 }
