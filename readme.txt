@@ -69,6 +69,10 @@ If you would like a feature to be added, or if you already have the code for the
 
 == Changelog ==
 
+= 1.2.1 =
+* Enhancements:
+	* Admin settings page will allow more attributes and tags for `script`, `style` and `link` allowing you to use favicons, async, etc.
+
 = 1.2.0 =
 * Features:
 	* Settings now uses the WordPress Settings API. Verify your site options by visiting the Add to All settings page
