@@ -1,4 +1,4 @@
-﻿=== Add to All ===
+=== Add to All ===
 Tags: header, footer, feed, Google Analytics, Statcounter, Tynt, content, Adsense, site verification
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
@@ -68,6 +68,10 @@ If you would like a feature to be added, or if you already have the code for the
 
 
 == Changelog ==
+
+= 1.2.2 =
+* Bug-fix:
+	* Disable the sanitize filter
 
 = 1.2.1 =
 * Enhancements:

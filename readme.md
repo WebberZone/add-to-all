@@ -2,7 +2,7 @@
 
 __Requires:__ 4.0
 
-__Tested up to:__ 4.7
+__Tested up to:__ 4.8
 
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -45,7 +45,7 @@ With this plugin installed, you do not need to edit your theme files every time 
 
 1. Download the plugin
 2. Extract the contents of add-to-all.zip to wp-content/plugins/ folder. You should get a folder called add-to-all.
-3. Activate the Plugin in WP-Admin. 
+3. Activate the Plugin in WP-Admin.
 4. Goto Settings &raquo; Add to All to configure
 
 

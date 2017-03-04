@@ -181,5 +181,5 @@ function ata_sanitize_textarea_field( $input ) {
 	return wp_kses( wp_unslash( $input ), $allowedatatags );
 
 }
-add_filter( 'ata_settings_sanitize_textarea', 'ata_sanitize_textarea_field' );
+// add_filter( 'ata_settings_sanitize_textarea', 'ata_sanitize_textarea_field' );
 
