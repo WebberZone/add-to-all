@@ -62,7 +62,7 @@ function ata_ga( $ga_uacct, $ga_linker ) {
 	</script>
 	<!-- End Google Analytics // Added by Add to All WordPress plugin -->
 
-<?php }
+<?php }// End if().
 
 }
 

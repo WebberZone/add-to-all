@@ -70,7 +70,7 @@ function ald_ata_rss( $content ) {
 		return $str_before . $content . $str_after;
 	} else {
 		return $content;
-	}
+	}// End if().
 
 }
 add_filter( 'the_excerpt_rss', 'ald_ata_rss', 99999999 );

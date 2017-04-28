@@ -613,6 +613,6 @@ function ata_upgrade_settings() {
 		delete_option( 'ald_ata_settings' );
 
 		return $settings;
-	}
+	}// End if().
 
 }
