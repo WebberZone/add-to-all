@@ -5,7 +5,7 @@
  * @link  https://ajaydsouza.com
  * @since 1.2.0
  *
- * @package	Add_to_All
+ * @package Add_to_All
  */
 
 // If this file is called directly, abort.
@@ -36,7 +36,7 @@ function ata_content( $content ) {
 
 	if ( ( is_singular() ) || ( is_home() ) || ( is_archive() ) ) {
 		$str_before = '';
-		$str_after = '';
+		$str_after  = '';
 
 		if ( is_singular() ) {
 			if ( isset( $ata_settings['content_add_html_before'] ) && $ata_settings['content_add_html_before'] ) {
@@ -64,7 +64,7 @@ function ata_content( $content ) {
 			}
 		}
 
-	    return $str_before . $content . $str_after;
+		return $str_before . $content . $str_after;
 	} else {
 		return $content;
 	}

@@ -22,7 +22,6 @@ Add to All includes a copyright notice that can be automatically added your feed
 
 With this plugin installed, you do not need to edit your theme files every time you switch themes.
 
-
 ## Key features
 
 * Inbuilt support for Google Analytics, Statcounter and Tynt
@@ -31,7 +30,6 @@ With this plugin installed, you do not need to edit your theme files every time 
 * Add any HTML or JavaScript code to your header, content, footer and feed
 * Add a copyright notice and a link to the post in your site's feed
 * Tonnes of actions and filters to easily extend the plugin.
-
 
 ## Installation
 
@@ -48,10 +46,8 @@ With this plugin installed, you do not need to edit your theme files every time 
 3. Activate the Plugin in WP-Admin.
 4. Goto Settings &raquo; Add to All to configure
 
-
 ## Frequently Asked Questions
 
 If your question isn't listed here, please post a comment at the [WordPress.org support forum](https://wordpress.org/support/plugin/add-to-all). I monitor the forums on an ongoing basis. If you're looking for more advanced **paid** support, please see [details here](https://ajaydsouza.com/support/).
 
 If you would like a feature to be added, or if you already have the code for the feature, you can let me know by [posting in this forum](https://wordpress.org/support/plugin/add-to-all) or creating an issue in the [Github repository](https://github.com/ajaydsouza/add-to-all/issues).
-

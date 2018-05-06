@@ -5,7 +5,7 @@
  * @link  https://ajaydsouza.com
  * @since 1.2.0
  *
- * @package	Add_to_All
+ * @package Add_to_All
  */
 
 // If this file is called directly, abort.

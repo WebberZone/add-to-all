@@ -155,23 +155,23 @@ function ata_sanitize_textarea_field( $input ) {
 	// We need more tags to allow for script and style.
 	$moretags = array(
 		'script' => array(
-			'type' => true,
-			'src' => true,
-			'async' => true,
-			'defer' => true,
+			'type'    => true,
+			'src'     => true,
+			'async'   => true,
+			'defer'   => true,
 			'charset' => true,
 		),
-		'style' => array(
-			'type' => true,
-			'media' => true,
+		'style'  => array(
+			'type'   => true,
+			'media'  => true,
 			'scoped' => true,
 		),
-		'link' => array(
-			'rel' => true,
-			'type' => true,
-			'href' => true,
-			'media' => true,
-			'sizes' => true,
+		'link'   => array(
+			'rel'      => true,
+			'type'     => true,
+			'href'     => true,
+			'media'    => true,
+			'sizes'    => true,
 			'hreflang' => true,
 		),
 	);

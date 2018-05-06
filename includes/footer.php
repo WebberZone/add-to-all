@@ -5,7 +5,7 @@
  * @link  https://ajaydsouza.com
  * @since 1.2.0
  *
- * @package	Add_to_All
+ * @package Add_to_All
  */
 
 // If this file is called directly, abort.
@@ -18,11 +18,11 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function ald_ata_footer() {
 
-	$ata_other = ata_get_option( 'footer_other_html', '' );
-	$sc_project = ata_get_option( 'sc_project', '' );
+	$ata_other   = ata_get_option( 'footer_other_html', '' );
+	$sc_project  = ata_get_option( 'sc_project', '' );
 	$sc_security = ata_get_option( 'sc_security', '' );
-	$ga_uacct = ata_get_option( 'ga_uacct', '' );
-	$ga_linker = ata_get_option( 'ga_linker', '' );
+	$ga_uacct    = ata_get_option( 'ga_uacct', '' );
+	$ga_linker   = ata_get_option( 'ga_linker', '' );
 
 	// Add other footer.
 	if ( '' !== $ata_other ) {

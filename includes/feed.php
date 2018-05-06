@@ -5,7 +5,7 @@
  * @link  https://ajaydsouza.com
  * @since 1.2.0
  *
- * @package	Add_to_All
+ * @package Add_to_All
  */
 
 // If this file is called directly, abort.
@@ -24,7 +24,7 @@ function ald_ata_rss( $content ) {
 
 	if ( isset( $ata_settings['feed_add_html_before'] ) || isset( $ata_settings['feed_add_html_after'] ) || isset( $ata_settings['feed_add_title'] ) || isset( $ata_settings['feed_add_copyright'] ) || isset( $ata_settings['add_credit'] ) ) {
 		$str_before = '';
-		$str_after = '<hr style="border-top:black solid 1px" />';
+		$str_after  = '<hr style="border-top:black solid 1px" />';
 
 		if ( isset( $ata_settings['feed_add_html_before'] ) && $ata_settings['feed_add_html_before'] ) {
 			$str_before .= ata_get_option( 'feed_html_before', '' );
@@ -37,8 +37,8 @@ function ald_ata_rss( $content ) {
 		}
 
 		if ( isset( $ata_settings['feed_add_title'] ) && $ata_settings['feed_add_title'] ) {
-			$title = '<a href="' . get_permalink() . '">' . the_title( '', '', false ) . '</a>';
-			$search_array = array(
+			$title         = '<a href="' . get_permalink() . '">' . the_title( '', '', false ) . '</a>';
+			$search_array  = array(
 				'%title%',
 				'%date%',
 				'%time%',
@@ -48,7 +48,7 @@ function ald_ata_rss( $content ) {
 				get_the_time( 'F j, Y' ),
 				get_the_time( 'g:i a' ),
 			);
-			$str_after .= str_replace( $search_array, $replace_array, ata_get_option( 'feed_title_text', '' ) );
+			$str_after    .= str_replace( $search_array, $replace_array, ata_get_option( 'feed_title_text', '' ) );
 
 			$str_after .= '<br />';
 		}
@@ -59,7 +59,7 @@ function ald_ata_rss( $content ) {
 		}
 
 		if ( isset( $ata_settings['add_credit'] ) && $ata_settings['add_credit'] ) {
-			$creditline = '<br /><span style="font-size: 0.8em">';
+			$creditline  = '<br /><span style="font-size: 0.8em">';
 			$creditline .= __( 'Feed enhanced by ', 'add-to-all' );
 			$creditline .= '<a href="https://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All</a>';
 
@@ -70,7 +70,7 @@ function ald_ata_rss( $content ) {
 		return $str_before . $content . $str_after;
 	} else {
 		return $content;
-	}// End if().
+	}
 
 }
 add_filter( 'the_excerpt_rss', 'ald_ata_rss', 99999999 );

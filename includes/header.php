@@ -5,7 +5,7 @@
  * @link  https://ajaydsouza.com
  * @since 1.2.0
  *
- * @package	Add_to_All
+ * @package Add_to_All
  */
 
 // If this file is called directly, abort.
@@ -18,9 +18,9 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function ald_ata_header() {
 
-	$ata_other = ata_get_option( 'head_other_html', '' );
+	$ata_other    = ata_get_option( 'head_other_html', '' );
 	$ata_head_css = ata_get_option( 'head_css', '' );
-	$ata_tynt_id = ata_get_option( 'tynt_id', '' );
+	$ata_tynt_id  = ata_get_option( 'tynt_id', '' );
 
 	// Add CSS to header.
 	if ( '' !== $ata_head_css ) {

@@ -5,7 +5,7 @@
  * @link  https://ajaydsouza.com
  * @since 1.2.0
  *
- * @package	Add_to_All
+ * @package Add_to_All
  */
 
 // If this file is called directly, abort.
@@ -62,7 +62,8 @@ function ata_ga( $ga_uacct, $ga_linker ) {
 	</script>
 	<!-- End Google Analytics // Added by Add to All WordPress plugin -->
 
-<?php }// End if().
+<?php
+	}
 
 }
 

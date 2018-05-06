@@ -39,12 +39,14 @@ function ata_options_page() {
 				<?php
 				foreach ( ata_get_settings_sections() as $tab_id => $tab_name ) {
 
-					$tab_url = esc_url( add_query_arg(
-						array(
-						'settings-updated' => false,
-						'tab' => $tab_id,
+					$tab_url = esc_url(
+						add_query_arg(
+							array(
+								'settings-updated' => false,
+								'tab'              => $tab_id,
+							)
 						)
-					) );
+					);
 
 					$active = $active_tab === $tab_id ? ' nav-tab-active' : '';
 
@@ -98,7 +100,7 @@ function ata_options_page() {
 		<div id="postbox-container-1" class="postbox-container">
 
 			<div id="side-sortables" class="meta-box-sortables ui-sortable">
-				<?php include_once( 'sidebar.php' ); ?>
+				<?php include_once 'sidebar.php'; ?>
 			</div><!-- /#side-sortables -->
 
 		</div><!-- /#postbox-container-1 -->
@@ -195,7 +197,7 @@ function ata_text_callback( $args ) {
 		$value = isset( $args['options'] ) ? $args['options'] : '';
 	}
 
-	$html = '<input type="text" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '" class="regular-text" />';
+	$html  = '<input type="text" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '" class="regular-text" />';
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
 	/** This filter has been defined in settings-page.php */
@@ -237,7 +239,7 @@ function ata_textarea_callback( $args ) {
 		$value = isset( $args['options'] ) ? $args['options'] : '';
 	}
 
-	$html = '<textarea class="large-text" cols="50" rows="5" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']">' . esc_textarea( stripslashes( $value ) ) . '</textarea>';
+	$html  = '<textarea class="large-text" cols="50" rows="5" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']">' . esc_textarea( stripslashes( $value ) ) . '</textarea>';
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
 	/** This filter has been defined in settings-page.php */
@@ -260,7 +262,7 @@ function ata_checkbox_callback( $args ) {
 
 	$checked = isset( $ata_settings[ $args['id'] ] ) ? checked( 1, $ata_settings[ $args['id'] ], false ) : '';
 
-	$html = '<input type="checkbox" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="1" ' . $checked . '/>';
+	$html  = '<input type="checkbox" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="1" ' . $checked . '/>';
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
 	/** This filter has been defined in settings-page.php */
@@ -363,8 +365,8 @@ function ata_number_callback( $args ) {
 	$min  = isset( $args['min'] ) ? $args['min'] : 0;
 	$step = isset( $args['step'] ) ? $args['step'] : 1;
 
-	$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
-	$html = '<input type="number" step="' . esc_attr( $step ) . '" max="' . esc_attr( $max ) . '" min="' . esc_attr( $min ) . '" class="' . $size . '-text" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+	$size  = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
+	$html  = '<input type="number" step="' . esc_attr( $step ) . '" max="' . esc_attr( $max ) . '" min="' . esc_attr( $min ) . '" class="' . $size . '-text" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
 	/** This filter has been defined in settings-page.php */
@@ -402,7 +404,7 @@ function ata_select_callback( $args ) {
 
 	foreach ( $args['options'] as $option => $name ) {
 		$selected = selected( $option, $value, false );
-		$html .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
+		$html    .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
 	}
 
 	$html .= '</select>';

@@ -6,15 +6,15 @@
  *
  * @wordpress-plugin
  * Plugin Name: Add to All
- * Version:     1.2.2
+ * Version:     1.3.0-beta1
  * Plugin URI:  https://ajaydsouza.com/wordpress/plugins/add-to-all/
  * Description: A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
  * Author:      Ajay D'Souza
  * Author URI:  https://ajaydsouza.com/
- * Text Domain:	add-to-all
- * License:		GPL-2.0+
- * License URI:	http://www.gnu.org/licenses/gpl-2.0.txt
- * Domain Path:	/languages
+ * Text Domain: add-to-all
+ * License:     GPL-2.0+
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+ * Domain Path: /languages
  */
 
 // If this file is called directly, then abort execution.
@@ -107,7 +107,7 @@ function ata_get_the_post_thumbnail( $postid ) {
 	$result = get_post( $postid );
 	global $ata_settings;
 	$output = '';
-	$title = get_the_title( $postid );
+	$title  = get_the_title( $postid );
 
 	if ( function_exists( 'has_post_thumbnail' ) && has_post_thumbnail( $result->ID ) ) {
 		$output .= get_the_post_thumbnail(
@@ -117,9 +117,9 @@ function ata_get_the_post_thumbnail( $postid ) {
 				$ata_settings['thumb_height'],
 			),
 			array(
-				'title' => $title,
-				'alt' => $title,
-				'class' => 'ata_thumb',
+				'title'  => $title,
+				'alt'    => $title,
+				'class'  => 'ata_thumb',
 				'border' => '0',
 			)
 		);
@@ -135,10 +135,10 @@ function ata_get_the_post_thumbnail( $postid ) {
 		if ( ! $postimage ) {
 			// If no other thumbnail set, try to get the custom video thumbnail set by the Video Thumbnails plugin.
 			$postimage = get_post_meta( $result->ID, '_video_thumbnail', true );
-		}		if ( $ata_settings['thumb_default_show'] && ! $postimage ) {
+		}       if ( $ata_settings['thumb_default_show'] && ! $postimage ) {
 			// If no thumb found and settings permit, use default thumb.
 			$postimage = $ata_settings['thumb_default'];
-		}		if ( $postimage ) {
+		}       if ( $postimage ) {
 			$output .= '<img src="' . $postimage . '" alt="' . $title . '" title="' . $title . '" style="max-width:' . $ata_settings['thumb_width'] . 'px;max-height:' . $ata_settings['thumb_height'] . 'px; border:0;" class="ata_thumb" />';
 		}
 	}
@@ -176,7 +176,7 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 
 
 /*
- ----------------------------------------------------------------------------*
+ *----------------------------------------------------------------------------
  * Include files
  *----------------------------------------------------------------------------
  */
@@ -193,7 +193,7 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 
 
 /*
- ----------------------------------------------------------------------------*
+ *----------------------------------------------------------------------------
  * Dashboard and Administrative Functionality
  *----------------------------------------------------------------------------
  */
@@ -208,7 +208,7 @@ if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 }
 
 /*
- ----------------------------------------------------------------------------*
+ *----------------------------------------------------------------------------
  * Deprecated functions, variables and constants
  *----------------------------------------------------------------------------
  */
