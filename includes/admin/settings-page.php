@@ -24,7 +24,7 @@ if ( ! defined( 'WPINC' ) ) {
  * @return void
  */
 function ata_options_page() {
-	$active_tab = isset( $_GET['tab'] ) && array_key_exists( sanitize_key( wp_unslash( $_GET['tab'] ) ), ata_get_settings_sections() ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'third_party'; // Input var okay.
+	$active_tab = isset( $_GET['tab'] ) && array_key_exists( sanitize_key( wp_unslash( $_GET['tab'] ) ), ata_get_settings_sections() ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'third_party'; // WPCS: CSRF ok.
 
 	ob_start();
 	?>
@@ -151,6 +151,7 @@ function ata_get_settings_sections() {
  * @return void
  */
 function ata_missing_callback( $args ) {
+	/* translators: 1: Code. */
 	printf( esc_html__( 'The callback function used for the %1$s setting is missing.', 'add-to-all' ), '<strong>' . esc_attr( $args['id'] ) . '</strong>' );
 }
 
@@ -239,7 +240,7 @@ function ata_textarea_callback( $args ) {
 		$value = isset( $args['options'] ) ? $args['options'] : '';
 	}
 
-	$html  = '<textarea class="large-text" cols="50" rows="5" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']">' . esc_textarea( stripslashes( $value ) ) . '</textarea>';
+	$html  = '<textarea class="large-text" cols="50" rows="10" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']">' . esc_textarea( stripslashes( $value ) ) . '</textarea>';
 	$html .= '<p class="description">' . $args['desc'] . '</p>';
 
 	/** This filter has been defined in settings-page.php */

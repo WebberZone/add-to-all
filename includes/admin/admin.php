@@ -50,6 +50,7 @@ function ata_admin_footer( $footer_text ) {
 	if ( get_current_screen()->id === $ata_settings_page ) {
 
 		$text = sprintf(
+			/* translators: 1: Plugin page link, 2: Review link. */
 			__( 'Thank you for using <a href="%1$s" target="_blank">Add to All</a>! Please <a href="%2$s" target="_blank">rate us</a> on <a href="%2$s" target="_blank">WordPress.org</a>', 'add-to-all' ),
 			'https://ajaydsouza.com/wordpress/plugins/add-to-all',
 			'https://wordpress.org/support/plugin/add-to-all/reviews/#new-post'

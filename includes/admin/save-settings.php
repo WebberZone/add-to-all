@@ -31,17 +31,17 @@ function ata_settings_sanitize( $input = array() ) {
 	global $ata_settings;
 
 	// This should be set if a form is submitted, so let's save it in the $referrer variable.
-	if ( empty( $_POST['_wp_http_referer'] ) ) { // Input var okay.
+	if ( empty( $_POST['_wp_http_referer'] ) ) { // WPCS: CSRF ok.
 		return $input;
 	}
 
-	parse_str( sanitize_text_field( wp_unslash( $_POST['_wp_http_referer'] ) ), $referrer ); // Input var okay.
+	parse_str( sanitize_text_field( wp_unslash( $_POST['_wp_http_referer'] ) ), $referrer ); // WPCS: CSRF ok.
 
 	// Get the various settings we've registered.
 	$settings = ata_get_registered_settings();
 
 	// Check if we need to set to defaults.
-	$reset = isset( $_POST['settings_reset'] ); // Input var okay.
+	$reset = isset( $_POST['settings_reset'] ); // WPCS: CSRF ok.
 
 	if ( $reset ) {
 		ata_settings_reset();
@@ -181,5 +181,5 @@ function ata_sanitize_textarea_field( $input ) {
 	return wp_kses( wp_unslash( $input ), $allowedatatags );
 
 }
-// add_filter( 'ata_settings_sanitize_textarea', 'ata_sanitize_textarea_field' );
+// add_filter( 'ata_settings_sanitize_textarea', 'ata_sanitize_textarea_field' );.
 

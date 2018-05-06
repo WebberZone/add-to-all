@@ -254,6 +254,7 @@ function ata_get_registered_settings() {
 				'tynt_id'                 => array(
 					'id'      => 'tynt_id',
 					'name'    => esc_html__( 'Tynt ID', 'add-to-all' ),
+					/* translators: 1: Code. */
 					'desc'    => sprintf( esc_html__( 'This is the text between the brackets in %1$s  in the SiteCTRL client script', 'add-to-all' ), "<code>Tynt.push('ID HERE')</code>" ),
 					'type'    => 'text',
 					'options' => '',
@@ -267,6 +268,7 @@ function ata_get_registered_settings() {
 				'google_verification'     => array(
 					'id'      => 'google_verification',
 					'name'    => esc_html__( 'Google', 'add-to-all' ),
+					/* translators: 1: Google verification details page. */
 					'desc'    => sprintf( esc_html__( 'Value of the content portion of the HTML tag method on the %s', 'add-to-all' ), '<a href="https://www.google.com/webmasters/verification/verification" target="_blank">' . esc_html__( 'verification details page', 'add-to-all' ) . '</a>' ),
 					'type'    => 'text',
 					'options' => '',
@@ -274,6 +276,7 @@ function ata_get_registered_settings() {
 				'bing_verification'       => array(
 					'id'      => 'bing_verification',
 					'name'    => esc_html__( 'Bing', 'add-to-all' ),
+					/* translators: 1: Bing verification details page. */
 					'desc'    => sprintf( esc_html__( 'Value of the content portion of the HTML tag method on the %s', 'add-to-all' ), '<a href="https://www.bing.com/webmaster/" target="_blank">' . esc_html__( 'verification details page', 'add-to-all' ) . '</a>' ),
 					'type'    => 'text',
 					'options' => '',
@@ -281,6 +284,7 @@ function ata_get_registered_settings() {
 				'pinterest_verification'  => array(
 					'id'      => 'pinterest_verification',
 					'name'    => esc_html__( 'Pinterest', 'add-to-all' ),
+					/* translators: 1: Pinterest meta tag details page. */
 					'desc'    => sprintf( esc_html__( 'Read how to get the Meta Tag from the %s', 'add-to-all' ), '<a href="https://help.pinterest.com/en/articles/confirm-your-website" target="_blank">' . esc_html__( 'Pinterest help page', 'add-to-all' ) . '</a>' ),
 					'type'    => 'text',
 					'options' => '',
@@ -301,6 +305,7 @@ function ata_get_registered_settings() {
 				'head_other_html' => array(
 					'id'      => 'head_other_html',
 					'name'    => esc_html__( 'HTML to add to the header', 'add-to-all' ),
+					/* translators: 1: Code. */
 					'desc'    => sprintf( esc_html__( 'The code entered here is added to %1$s. Please ensure that you enter valid HTML or JavaScript.', 'add-to-all' ), '<code>wp_head()</code>' ),
 					'type'    => 'textarea',
 					'options' => '',
@@ -395,6 +400,7 @@ function ata_get_registered_settings() {
 				'footer_other_html' => array(
 					'id'      => 'footer_other_html',
 					'name'    => esc_html__( 'HTML to add to the footer', 'add-to-all' ),
+					/* translators: 1: Code. */
 					'desc'    => sprintf( esc_html__( 'The code entered here is added to %1$s. Please ensure that you enter valid HTML or JavaScript.', 'add-to-all' ), '<code>wp_footer()</code>' ),
 					'type'    => 'textarea',
 					'options' => '',
@@ -429,8 +435,10 @@ function ata_get_registered_settings() {
 				'feed_title_text'      => array(
 					'id'      => 'feed_title_text',
 					'name'    => esc_html__( 'Title text', 'add-to-all' ),
+					/* translators: No strings here. */
 					'desc'    => esc_html__( 'The above text will be added to the feed. You can use %title% to add a link to the post, %date% and %time% to display the date and time of the post respectively.', 'add-to-all' ),
 					'type'    => 'textarea',
+					/* translators: No strings here. */
 					'options' => esc_html__( '%title% was first posted on %date% at %time%.', 'add-to-all' ),
 				),
 				'feed_add_html_before' => array(

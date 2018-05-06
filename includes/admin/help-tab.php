@@ -33,9 +33,12 @@ function ata_settings_help() {
 
 	// Set the text in the help sidebar.
 	$screen->set_help_sidebar(
+		/* translators: 1: Plugin support site link. */
 		'<p>' . sprintf( __( 'For more information or how to get support visit the <a href="%s">support site</a>.', 'add-to-all' ), esc_url( 'https://ajaydsouza.com/support/' ) ) . '</p>' .
-		'<p>' . sprintf( __( 'Support queries should be posted in the <a href="%s">WordPress.org support forums</a>.', 'add-to-all' ), esc_url( 'https://wordpress.org/support/plugin/add-to-all' ) ) . '</p>' .
+		/* translators: 1: WordPress.org support forums link. */
+			'<p>' . sprintf( __( 'Support queries should be posted in the <a href="%s">WordPress.org support forums</a>.', 'add-to-all' ), esc_url( 'https://wordpress.org/support/plugin/add-to-all' ) ) . '</p>' .
 		'<p>' . sprintf(
+			/* translators: 1: Github issues link, 2: Github plugin page link. */
 			__( '<a href="%1$s">Post an issue</a> on <a href="%2$s">GitHub</a> (bug reports only).', 'add-to-all' ),
 			esc_url( 'https://github.com/ajaydsouza/add-to-all/issues' ),
 			esc_url( 'https://github.com/ajaydsouza/add-to-all' )
@@ -48,12 +51,13 @@ function ata_settings_help() {
 			'id'      => 'ata-settings-third-party-help',
 			'title'   => esc_html__( 'Third Party', 'add-to-all' ),
 			'content' =>
-				 '<p><strong>' . esc_html__( 'This screen provides the settings for configuring the integration with third party scripts.', 'add-to-all' ) . '</strong></p>' .
+				'<p><strong>' . esc_html__( 'This screen provides the settings for configuring the integration with third party scripts.', 'add-to-all' ) . '</strong></p>' .
 				'<p>' . sprintf(
-					esc_html__( 'Google Analytics tracking can be founds by visiting this %s', 'add-to-all' ),
+					/* translators: 1: Google Analystics help article. */
+					esc_html__( 'Google Analytics tracking can be found by visiting this %s', 'add-to-all' ),
 					'<a href="https://support.google.com/analytics/answer/1008080?hl=en" target="_blank">' . esc_html__( 'article', 'add-to-all' ) . '</a>.'
 				) .
-				 '</p>',
+				'</p>',
 			'<p>' . esc_html__( 'You must click the Save Changes button at the bottom of the screen for new settings to take effect.', 'add-to-all' ) . '</p>',
 		)
 	);

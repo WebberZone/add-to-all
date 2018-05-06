@@ -53,7 +53,7 @@ function ata_ga( $ga_uacct, $ga_linker ) {
 
 	?>
 		ga('require', 'linker');
-		ga('linker:autoLink', [<?php _e( $ga_linker ); // WPCS: XSS OK. ?>]);
+		ga('linker:autoLink', [<?php echo esc_attr( $ga_linker ); ?>]);
 
 	<?php } ?>
 

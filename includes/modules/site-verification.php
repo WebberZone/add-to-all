@@ -45,7 +45,7 @@ function ata_site_verification_google() {
 
 	if ( '' !== $verification_code ) {
 ?>
-		<meta name="google-site-verification" content="<?php esc_attr_e( $verification_code ); ?>" />
+		<meta name="google-site-verification" content="<?php echo esc_attr( $verification_code ); ?>" />
 <?php
 	}
 
@@ -62,7 +62,7 @@ function ata_site_verification_bing() {
 
 	if ( '' !== $verification_code ) {
 ?>
-		<meta name="msvalidate.01" content="<?php esc_attr_e( $verification_code ); ?>" />
+		<meta name="msvalidate.01" content="<?php echo esc_attr( $verification_code ); ?>" />
 <?php
 	}
 
@@ -79,7 +79,7 @@ function ata_site_verification_pinterest() {
 
 	if ( '' !== $verification_code ) {
 ?>
-		<meta name="p:domain_verify" content="<?php esc_attr_e( $verification_code ); ?>" />
+		<meta name="p:domain_verify" content="<?php echo esc_attr( $verification_code ); ?>" />
 <?php
 	}
 
