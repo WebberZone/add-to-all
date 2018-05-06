@@ -24,7 +24,7 @@ if ( ! defined( 'WPINC' ) ) {
  * @return void
  */
 function ata_options_page() {
-	$active_tab = isset( $_GET['tab'] ) && array_key_exists( sanitize_key( wp_unslash( $_GET['tab'] ) ), ata_get_settings_sections() ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'third_party'; // WPCS: CSRF ok.
+	$active_tab = isset( $_GET['tab'] ) && array_key_exists( sanitize_key( wp_unslash( $_GET['tab'] ) ), ata_get_settings_sections() ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general'; // WPCS: CSRF ok.
 
 	ob_start();
 	?>
@@ -35,43 +35,37 @@ function ata_options_page() {
 		<div id="post-body" class="metabox-holder columns-2">
 		<div id="post-body-content">
 
-			<h2 class="nav-tab-wrapper" style="padding:0">
+			<ul class="nav-tab-wrapper" style="padding:0">
 				<?php
 				foreach ( ata_get_settings_sections() as $tab_id => $tab_name ) {
 
-					$tab_url = esc_url(
-						add_query_arg(
-							array(
-								'settings-updated' => false,
-								'tab'              => $tab_id,
-							)
-						)
-					);
+					$active = $active_tab === $tab_id ? ' ' : '';
 
-					$active = $active_tab === $tab_id ? ' nav-tab-active' : '';
-
-					echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab ' . sanitize_html_class( $active ) . '">';
-								echo esc_html( $tab_name );
-					echo '</a>';
+					echo '<li><a href="#' . esc_attr( $tab_id ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab ' . sanitize_html_class( $active ) . '">';
+						echo esc_html( $tab_name );
+					echo '</a></li>';
 
 				}
 				?>
-			</h2>
+			</ul>
 
-			<div id="tab_container">
-				<form method="post" action="options.php">
+			<form method="post" action="options.php">
+
+				<?php settings_fields( 'ata_settings' ); ?>
+
+				<?php foreach ( ata_get_settings_sections() as $tab_id => $tab_name ) : ?>
+
+				<div id="<?php echo esc_attr( $tab_id ); ?>">
 					<table class="form-table">
 					<?php
-						settings_fields( 'ata_settings' );
-						do_settings_fields( 'ata_settings_' . $active_tab, 'ata_settings_' . $active_tab );
+						do_settings_fields( 'ata_settings_' . $tab_id, 'ata_settings_' . $tab_id );
 					?>
 					</table>
-
 					<p>
 					<?php
 						// Default submit button.
 						submit_button(
-							esc_html__( 'Save changes', 'add-to-all' ),
+							__( 'Save Changes', 'add-to-all' ),
 							'primary',
 							'submit',
 							false
@@ -80,9 +74,9 @@ function ata_options_page() {
 						echo '&nbsp;&nbsp;';
 
 						// Reset button.
-						$confirm = esc_js( __( 'Do you really want to reset settings to their default values? This resets settings across all tabs.', 'add-to-all' ) );
+						$confirm = esc_js( __( 'Do you really want to reset all these settings to their default values?', 'add-to-all' ) );
 						submit_button(
-							__( 'Reset', 'add-to-all' ),
+							__( 'Reset all settings', 'add-to-all' ),
 							'secondary',
 							'settings_reset',
 							false,
@@ -92,8 +86,11 @@ function ata_options_page() {
 						);
 					?>
 					</p>
-				</form>
-			</div><!-- /#tab_container-->
+				</div><!-- /#tab_id-->
+
+				<?php endforeach; ?>
+
+			</form>
 
 		</div><!-- /#post-body-content -->
 
@@ -113,6 +110,7 @@ function ata_options_page() {
 	<?php
 	echo ob_get_clean(); // WPCS: XSS OK.
 }
+
 
 /**
  * Array containing the settings' sections.
@@ -198,8 +196,21 @@ function ata_text_callback( $args ) {
 		$value = isset( $args['options'] ) ? $args['options'] : '';
 	}
 
-	$html  = '<input type="text" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '" class="regular-text" />';
-	$html .= '<p class="description">' . $args['desc'] . '</p>';
+	$size = sanitize_html_class( ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular' );
+
+	$class = sanitize_html_class( $args['field_class'] );
+
+	$disabled = ! empty( $args['disabled'] ) ? ' disabled="disabled"' : '';
+	$readonly = ( isset( $args['readonly'] ) && true === $args['readonly'] ) ? ' readonly="readonly"' : '';
+
+	$attributes = $disabled . $readonly;
+
+	foreach ( (array) $args['field_attributes'] as $attribute => $val ) {
+		$attributes .= sprintf( ' %1$s="%2$s"', $attribute, esc_attr( $val ) );
+	}
+
+	$html  = sprintf( '<input type="text" id="ata_settings[%1$s]" name="ata_settings[%1$s]" class="%2$s" value="%3$s" %4$s />', sanitize_key( $args['id'] ), $class . ' ' . $size . '-text', esc_attr( stripslashes( $value ) ), $attributes );
+	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
@@ -240,11 +251,25 @@ function ata_textarea_callback( $args ) {
 		$value = isset( $args['options'] ) ? $args['options'] : '';
 	}
 
-	$html  = '<textarea class="large-text" cols="50" rows="10" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']">' . esc_textarea( stripslashes( $value ) ) . '</textarea>';
-	$html .= '<p class="description">' . $args['desc'] . '</p>';
+	$html  = sprintf( '<textarea class="large-text" cols="50" rows="10" id="ata_settings[%1$s]" name="ata_settings[%1$s]">%2$s</textarea>', sanitize_key( $args['id'] ), esc_textarea( stripslashes( $value ) ) );
+	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+}
+
+
+/**
+ * Display CSS fields.
+ *
+ * @since 1.3.0
+ *
+ * @param array $args Array of arguments.
+ * @return void
+ */
+function ata_css_callback( $args ) {
+
+	ata_textarea_callback( $args );
 }
 
 
@@ -263,8 +288,14 @@ function ata_checkbox_callback( $args ) {
 
 	$checked = isset( $ata_settings[ $args['id'] ] ) ? checked( 1, $ata_settings[ $args['id'] ], false ) : '';
 
-	$html  = '<input type="checkbox" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="1" ' . $checked . '/>';
-	$html .= '<p class="description">' . $args['desc'] . '</p>';
+	$checked = ! empty( $ata_settings[ $args['id'] ] ) ? checked( 1, $ata_settings[ $args['id'] ], false ) : '';
+	$default = isset( $args['options'] ) ? $args['options'] : '';
+	$set     = isset( $ata_settings[ $args['id'] ] ) ? $ata_settings[ $args['id'] ] : '';
+
+	$html  = sprintf( '<input type="hidden" name="ata_settings[%1$s]" value="-1" />', sanitize_key( $args['id'] ) );
+	$html .= sprintf( '<input type="checkbox" id="ata_settings[%1$s]" name="ata_settings[%1$s]" value="1" %2$s />', sanitize_key( $args['id'] ), $checked );
+	$html .= ( $set <> $default ) ? '<em style="color:orange"> ' . esc_html__( 'Modified from default setting', 'add-to-all' ) . '</em>' : ''; // WPCS: loose comparison ok.
+	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
@@ -287,19 +318,20 @@ function ata_multicheck_callback( $args ) {
 	$html = '';
 
 	if ( ! empty( $args['options'] ) ) {
+		$html .= sprintf( '<input type="hidden" name="ata_settings[%1$s]" value="-1" />', $args['id'] );
+
 		foreach ( $args['options'] as $key => $option ) {
 			if ( isset( $ata_settings[ $args['id'] ][ $key ] ) ) {
-				$enabled = $option;
+				$enabled = $key;
 			} else {
 				$enabled = null;
 			}
 
-			$html .= '<input name="ata_settings[' . $args['id'] . '][' . $key . ']" id="ata_settings[' . $args['id'] . '][' . $key . ']" type="checkbox" value="' . $option . '" ' . checked( $option, $enabled, false ) . '/> <br />';
-
-			$html .= '<label for="ata_settings[' . $args['id'] . '][' . $key . ']">' . $option . '</label><br/>';
+			$html .= sprintf( '<input name="ata_settings[%1$s][%2$s]" id="ata_settings[%1$s][%2$s]" type="checkbox" value="%3$s" %4$s /> ', sanitize_key( $args['id'] ), sanitize_key( $key ), esc_attr( $key ), checked( $key, $enabled, false ) );
+			$html .= sprintf( '<label for="ata_settings[%1$s][%2$s]">%3$s</label> <br />', sanitize_key( $args['id'] ), sanitize_key( $key ), $option );
 		}
 
-		$html .= '<p class="description">' . $args['desc'] . '</p>';
+		$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 	}
 
 	/** This filter has been defined in settings-page.php */
@@ -322,20 +354,21 @@ function ata_radio_callback( $args ) {
 	global $ata_settings;
 	$html = '';
 
-	foreach ( $args['options'] as $key => $option ) {
+	foreach ( $args['options'] as $option ) {
 		$checked = false;
 
-		if ( isset( $ata_settings[ $args['id'] ] ) && $ata_settings[ $args['id'] ] === $key ) {
+		if ( isset( $ata_settings[ $args['id'] ] ) && $ata_settings[ $args['id'] ] === $option['id'] ) {
 			$checked = true;
-		} elseif ( isset( $args['options'] ) && $args['options'] === $key && ! isset( $ata_settings[ $args['id'] ] ) ) {
+		} elseif ( isset( $args['default'] ) && $args['default'] === $option['id'] && ! isset( $ata_settings[ $args['id'] ] ) ) {
 			$checked = true;
 		}
 
-		$html .= '<input name="ata_settings[' . $args['id'] . ']"" id="ata_settings[' . $args['id'] . '][' . $key . ']" type="radio" value="' . $key . '" ' . checked( true, $checked, false ) . '/> <br />';
-		$html .= '<label for="ata_settings[' . $args['id'] . '][' . $key . ']">' . $option . '</label><br/>';
+		$html .= sprintf( '<input name="ata_settings[%1$s]" id="ata_settings[%1$s][%2$s]" type="radio" value="%2$s" %3$s /> ', sanitize_key( $args['id'] ), $option['id'], checked( true, $checked, false ) );
+		$html .= sprintf( '<label for="ata_settings[%1$s][%2$s]">%3$s</label>', sanitize_key( $args['id'] ), $option['id'], $option['name'] );
+		$html .= ': <em>' . wp_kses_post( $option['description'] ) . '</em> <br />';
 	}
 
-	$html .= '<p class="description">' . $args['desc'] . '</p>';
+	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
@@ -366,9 +399,10 @@ function ata_number_callback( $args ) {
 	$min  = isset( $args['min'] ) ? $args['min'] : 0;
 	$step = isset( $args['step'] ) ? $args['step'] : 1;
 
-	$size  = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
-	$html  = '<input type="number" step="' . esc_attr( $step ) . '" max="' . esc_attr( $max ) . '" min="' . esc_attr( $min ) . '" class="' . $size . '-text" id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
-	$html .= '<p class="description">' . $args['desc'] . '</p>';
+	$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
+
+	$html  = sprintf( '<input type="number" step="%1$s" max="%2$s" min="%3$s" class="%4$s" id="ata_settings[%5$s]" name="ata_settings[%5$s]" value="%6$s"/>', esc_attr( $step ), esc_attr( $max ), esc_attr( $min ), sanitize_html_class( $size ) . '-text', sanitize_key( $args['id'] ), esc_attr( stripslashes( $value ) ) );
+	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
@@ -392,7 +426,7 @@ function ata_select_callback( $args ) {
 	if ( isset( $ata_settings[ $args['id'] ] ) ) {
 		$value = $ata_settings[ $args['id'] ];
 	} else {
-		$value = isset( $args['options'] ) ? $args['options'] : '';
+		$value = isset( $args['default'] ) ? $args['default'] : '';
 	}
 
 	if ( isset( $args['chosen'] ) ) {
@@ -401,19 +435,84 @@ function ata_select_callback( $args ) {
 		$chosen = '';
 	}
 
-	$html = '<select id="ata_settings[' . $args['id'] . ']" name="ata_settings[' . $args['id'] . ']" ' . $chosen . ' />';
+	$html = sprintf( '<select id="ata_settings[%1$s]" name="ata_settings[%1$s]" %2$s />', sanitize_key( $args['id'] ), $chosen );
 
 	foreach ( $args['options'] as $option => $name ) {
-		$selected = selected( $option, $value, false );
-		$html    .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
+		$html .= sprintf( '<option value="%1$s" %2$s>%3$s</option>', sanitize_key( $option ), selected( $option, $value, false ), $name );
 	}
 
 	$html .= '</select>';
-	$html .= '<p class="description">' . $args['desc'] . '</p>';
+	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
 
 }
 
+
+/**
+ * Descriptive text callback.
+ *
+ * Renders descriptive text onto the settings field.
+ *
+ * @since 2.2.0
+ *
+ * @param array $args Array of arguments.
+ * @return void
+ */
+function ata_descriptive_text_callback( $args ) {
+	$html = '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
+
+	/** This filter has been defined in settings-page.php */
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+}
+
+
+/**
+ * Display csv fields.
+ *
+ * @since 2.2.0
+ *
+ * @param array $args Array of arguments.
+ * @return void
+ */
+function ata_posttypes_callback( $args ) {
+
+	global $ata_settings;
+	$html = '';
+
+	if ( isset( $ata_settings[ $args['id'] ] ) ) {
+		$options = $ata_settings[ $args['id'] ];
+	} else {
+		$options = isset( $args['options'] ) ? $args['options'] : '';
+	}
+
+	// If post_types is empty or contains a query string then use parse_str else consider it comma-separated.
+	if ( is_array( $options ) ) {
+		$post_types = $options;
+	} elseif ( ! is_array( $options ) && false === strpos( $options, '=' ) ) {
+		$post_types = explode( ',', $options );
+	} else {
+		parse_str( $options, $post_types );
+	}
+
+	$wp_post_types   = get_post_types(
+		array(
+			'public' => true,
+		)
+	);
+	$posts_types_inc = array_intersect( $wp_post_types, $post_types );
+
+	foreach ( $wp_post_types as $wp_post_type ) {
+
+		$html .= sprintf( '<input name="ata_settings[%1$s][%2$s]" id="ata_settings[%1$s][%2$s]" type="checkbox" value="%2$s" %3$s /> ', sanitize_key( $args['id'] ), esc_attr( $wp_post_type ), checked( true, in_array( $wp_post_type, $posts_types_inc, true ), false ) );
+		$html .= sprintf( '<label for="ata_settings[%1$s][%2$s]">%2$s</label> <br />', sanitize_key( $args['id'] ), $wp_post_type );
+
+	}
+
+	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
+
+	/** This filter has been defined in settings-page.php */
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+}
 

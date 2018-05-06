@@ -72,6 +72,7 @@ If you would like a feature to be added, or if you already have the code for the
 = 1.3.0 =
 * Enhancements:
 	* New functions and filters for content, feed, header and footer
+	* Admin interface: switch between tabs without reloading
 
 = 1.2.2 =
 * Bug fix:

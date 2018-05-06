@@ -181,6 +181,7 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
  *----------------------------------------------------------------------------
  */
 
+	require_once ATA_PLUGIN_DIR . 'includes/admin/default-settings.php';
 	require_once ATA_PLUGIN_DIR . 'includes/admin/register-settings.php';
 	require_once ATA_PLUGIN_DIR . 'includes/content.php';
 	require_once ATA_PLUGIN_DIR . 'includes/header.php';
