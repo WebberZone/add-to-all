@@ -40,27 +40,27 @@ function ata_content( $content ) {
 
 		if ( is_singular() ) {
 			if ( isset( $ata_settings['content_add_html_before'] ) && $ata_settings['content_add_html_before'] ) {
-				$str_before .= ata_get_option( 'content_html_before', '' );
+				$str_before .= ata_content_html_before();
 			}
 
 			if ( isset( $ata_settings['content_add_html_after'] ) && $ata_settings['content_add_html_after'] ) {
-				$str_after .= ata_get_option( 'content_html_after', '' );
+				$str_after .= ata_content_html_after();
 			}
 
 			if ( isset( $ata_settings['content_add_html_before_single'] ) && $ata_settings['content_add_html_before_single'] ) {
-				$str_before .= ata_get_option( 'content_html_before_single', '' );
+				$str_before .= ata_content_html_before_single();
 			}
 
 			if ( isset( $ata_settings['content_add_html_after_single'] ) && $ata_settings['content_add_html_after_single'] ) {
-				$str_after .= ata_get_option( 'content_html_after_single', '' );
+				$str_after .= ata_content_html_after_single();
 			}
 		} elseif ( ( is_home() ) || ( is_archive() ) ) {
 			if ( isset( $ata_settings['content_add_html_before'] ) && $ata_settings['content_add_html_before'] ) {
-				$str_before .= ata_get_option( 'content_html_before', '' );
+				$str_before .= ata_content_html_before();
 			}
 
 			if ( isset( $ata_settings['content_add_html_after'] ) && $ata_settings['content_add_html_after'] ) {
-				$str_after .= ata_get_option( 'content_html_after', '' );
+				$str_after .= ata_content_html_after();
 			}
 		}
 
@@ -72,4 +72,77 @@ function ata_content( $content ) {
 }
 
 
+/**
+ * Get the HTML to be added before the content.
+ *
+ * @since 1.3.0
+ */
+function ata_content_html_before() {
 
+	$output = ata_get_option( 'content_html_before', '' );
+
+	/**
+	 * Get the HTML to be added before the content.
+	 *
+	 * @since 1.3.0
+	 * @param $output HTML added before the content
+	 */
+	return apply_filters( 'ata_content_html_before', $output );
+}
+
+
+/**
+ * Get the HTML to be added after the content.
+ *
+ * @since 1.3.0
+ */
+function ata_content_html_after() {
+
+	$output = ata_get_option( 'content_html_after', '' );
+
+	/**
+	 * Get the HTML to be added after the content.
+	 *
+	 * @since 1.3.0
+	 * @param $output HTML added after the content
+	 */
+	return apply_filters( 'ata_content_html_after', $output );
+}
+
+
+/**
+ * Get the HTML to be added before the content on single pages.
+ *
+ * @since 1.3.0
+ */
+function ata_content_html_before_single() {
+
+	$output = ata_get_option( 'content_html_before_single', '' );
+
+	/**
+	 * Get the HTML to be added before the content.
+	 *
+	 * @since 1.3.0
+	 * @param $output HTML added before the content
+	 */
+	return apply_filters( 'ata_content_html_before_single', $output );
+}
+
+
+/**
+ * Get the HTML to be added after the content on single pages.
+ *
+ * @since 1.3.0
+ */
+function ata_content_html_after_single() {
+
+	$output = ata_get_option( 'content_html_after_single', '' );
+
+	/**
+	 * Get the HTML to be added after the content.
+	 *
+	 * @since 1.3.0
+	 * @param $output HTML added after the content
+	 */
+	return apply_filters( 'ata_content_html_after_single', $output );
+}

@@ -3,8 +3,8 @@ Tags: header, footer, feed, Google Analytics, Statcounter, Tynt, content, Adsens
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
 Stable tag: trunk
-Requires at least: 4.0
-Tested up to: 4.7.3
+Requires at least: 4.2
+Tested up to: 4.9
 License: GPLv2 or later
 
 A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
@@ -68,6 +68,10 @@ If you would like a feature to be added, or if you already have the code for the
 
 
 == Changelog ==
+
+= 1.3.0 =
+* Enhancements:
+	* New functions and filters for content, feed, header and footer
 
 = 1.2.2 =
 * Bug fix:

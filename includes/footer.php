@@ -18,15 +18,15 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function ald_ata_footer() {
 
-	$ata_other   = ata_get_option( 'footer_other_html', '' );
-	$sc_project  = ata_get_option( 'sc_project', '' );
-	$sc_security = ata_get_option( 'sc_security', '' );
-	$ga_uacct    = ata_get_option( 'ga_uacct', '' );
-	$ga_linker   = ata_get_option( 'ga_linker', '' );
+	$footer_other_html = ata_footer_other_html();
+	$sc_project        = ata_get_option( 'sc_project', '' );
+	$sc_security       = ata_get_option( 'sc_security', '' );
+	$ga_uacct          = ata_get_option( 'ga_uacct', '' );
+	$ga_linker         = ata_get_option( 'ga_linker', '' );
 
 	// Add other footer.
-	if ( '' !== $ata_other ) {
-		echo $ata_other; // WPCS: XSS OK.
+	if ( '' !== $footer_other_html ) {
+		echo $footer_other_html; // WPCS: XSS OK.
 	}
 
 	// Add Statcounter code.
@@ -38,4 +38,22 @@ function ald_ata_footer() {
 }
 add_action( 'wp_footer', 'ald_ata_footer' );
 
+
+/**
+ * Get the HTML to be added to the footer.
+ *
+ * @since 1.3.0
+ */
+function ata_footer_other_html() {
+
+	$output = ata_get_option( 'footer_other_html', '' );
+
+	/**
+	 * Get the HTML to be added to the footer.
+	 *
+	 * @since 1.3.0
+	 * @param $output HTML added to the footer
+	 */
+	return apply_filters( 'ata_footer_other_html', $output );
+}
 
