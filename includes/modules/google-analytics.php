@@ -26,39 +26,35 @@ function ata_ga( $ga_uacct, $ga_linker ) {
 	if ( '' !== $ga_uacct ) {
 ?>
 
-	<!-- Start Google Analytics -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr( $ga_uacct ); ?>"></script>
 	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
 
-		ga('create', '<?php echo esc_attr( $ga_uacct ); ?>', 'auto'
+	gtag('config', '<?php echo esc_attr( $ga_uacct ); ?>', {
 
-	<?php if ( '' !== $ga_linker ) { ?>
-		, {allowLinker: true}
-	<?php } ?>
-		);
+		<?php
+		if ( '' !== $ga_linker ) {
 
-	<?php
-	if ( '' !== $ga_linker ) {
+			$ga_domains = explode( ',', $ga_linker );
 
-		$ga_domains = explode( ',', $ga_linker );
+			foreach ( $ga_domains as $ga_domain ) {
+				$ga_linkers[] = "'" . $ga_domain . "'";
+			}
 
-		foreach ( $ga_domains as $ga_domain ) {
-			$ga_linkers[] = "'" . $ga_domain . "'";
+			$ga_linker = implode( ', ', $ga_linkers );
+
+		?>
+
+		'linker': {
+			'domains': [<?php echo $ga_linker; ?>]
 		}
 
-		$ga_linker = implode( ', ', $ga_linkers );
+		<?php } ?>
 
-	?>
-		ga('require', 'linker');
-		ga('linker:autoLink', [<?php echo esc_attr( $ga_linker ); ?>]);
-
-	<?php } ?>
-
-		ga('send', 'pageview');
-
+	});
 	</script>
 	<!-- End Google Analytics // Added by Add to All WordPress plugin -->
 
