@@ -74,6 +74,7 @@ If you would like a feature to be added, or if you already have the code for the
 	* New functions and filters for content, feed, header and footer
 	* Admin interface: switch between tabs without reloading
 	* Google Analytics now use gtag.js implementation instead of analytics.js
+	* Google Analytics: new option to anonymize IPs
 
 = 1.2.2 =
 * Bug fix:

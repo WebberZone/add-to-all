@@ -19,9 +19,10 @@ if ( ! defined( 'WPINC' ) ) {
  * @since 1.2.0
  *
  * @param string $ga_uacct Google Analytics Site ID.
- * @param string $ga_linker Google Linker Domains.
+ * @param string $ga_linker Google Analytics Linker Domains.
+ * @param string $ga_anonymize_ip Google Analytics Anonymize IP.
  */
-function ata_ga( $ga_uacct, $ga_linker ) {
+function ata_ga( $ga_uacct, $ga_linker, $ga_anonymize_ip ) {
 
 	if ( '' !== $ga_uacct ) {
 ?>
@@ -36,6 +37,12 @@ function ata_ga( $ga_uacct, $ga_linker ) {
 	gtag('config', '<?php echo esc_attr( $ga_uacct ); ?>', {
 
 		<?php
+		if ( $ga_anonymize_ip ) {
+		?>
+		'anonymize_ip': true,
+		<?php
+		}
+
 		if ( '' !== $ga_linker ) {
 
 			$ga_domains = explode( ',', $ga_linker );
@@ -52,7 +59,10 @@ function ata_ga( $ga_uacct, $ga_linker ) {
 			'domains': [<?php echo $ga_linker; ?>]
 		}
 
-		<?php } ?>
+		<?php
+		}
+
+		?>
 
 	});
 	</script>

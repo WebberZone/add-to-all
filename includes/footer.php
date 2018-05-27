@@ -23,6 +23,7 @@ function ald_ata_footer() {
 	$sc_security       = ata_get_option( 'sc_security', '' );
 	$ga_uacct          = ata_get_option( 'ga_uacct', '' );
 	$ga_linker         = ata_get_option( 'ga_linker', '' );
+	$ga_anonymize_ip   = ata_get_option( 'ga_anonymize_ip', false );
 
 	// Add other footer.
 	if ( '' !== $footer_other_html ) {
@@ -33,7 +34,7 @@ function ald_ata_footer() {
 	ata_statcounter( $sc_project, $sc_security );
 
 	// Add Google Analytics.
-	ata_ga( $ga_uacct, $ga_linker );
+	ata_ga( $ga_uacct, $ga_linker, $ga_anonymize_ip );
 
 }
 add_action( 'wp_footer', 'ald_ata_footer' );

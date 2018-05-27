@@ -65,9 +65,16 @@ function ata_get_registered_settings() {
 					'type'    => 'text',
 					'options' => '',
 				),
+				'ga_anonymize_ip'         => array(
+					'id'      => 'ga_anonymize_ip',
+					'name'    => esc_html__( 'Anonymize IP', 'add-to-all' ),
+					'desc'    => esc_html__( 'Check this box to anonymize IPs before they are sent to Google Analytics.', 'add-to-all' ),
+					'type'    => 'checkbox',
+					'options' => false,
+				),
 				'ga_linker'               => array(
 					'id'      => 'ga_linker',
-					'name'    => esc_html__( 'Linker autoLink domains', 'add-to-all' ),
+					'name'    => esc_html__( 'Linker domains', 'add-to-all' ),
 					'desc'    => esc_html__( "If you'd like to implement cross-domain tracking, enter a comma-separated list of domains, e.g. ajaydsouza.com,webberzone.com", 'add-to-all' ),
 					'type'    => 'csv',
 					'options' => '',
