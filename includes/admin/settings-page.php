@@ -166,6 +166,8 @@ function ata_missing_callback( $args ) {
  */
 function ata_header_callback( $args ) {
 
+	$html = '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
+
 	/**
 	 * After Settings Output filter
 	 *
@@ -173,7 +175,7 @@ function ata_header_callback( $args ) {
 	 * @param string $html HTML string.
 	 * @param array Arguments array.
 	 */
-	echo apply_filters( 'ata_after_setting_output', '', $args ); // WPCS: XSS OK.
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
 }
 
 
