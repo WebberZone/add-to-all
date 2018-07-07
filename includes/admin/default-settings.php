@@ -159,8 +159,8 @@ function ata_get_registered_settings() {
 				),
 				'content_header_all'             => array(
 					'id'   => 'content_header_all',
-					'name' => '<h3>' . esc_html__( 'All posts and pages', 'easy-digital-downloads' ) . '</h3>',
-					'desc' => '',
+					'name' => '<h3>' . esc_html__( 'Home and other views', 'easy-digital-downloads' ) . '</h3>',
+					'desc' => esc_html__( 'Displays when viewing single posts, home, category, tag and other archives.', 'add-to-all' ),
 					'type' => 'header',
 				),
 				'content_add_html_before'        => array(
@@ -193,8 +193,8 @@ function ata_get_registered_settings() {
 				),
 				'content_header_single'          => array(
 					'id'   => 'content_header_single',
-					'name' => '<h3>' . esc_html__( 'Single posts and pages', 'easy-digital-downloads' ) . '</h3>',
-					'desc' => '',
+					'name' => '<h3>' . esc_html__( 'Single posts views', 'easy-digital-downloads' ) . '</h3>',
+					'desc' => esc_html__( 'Displays when viewing single views including posts, pages, custom-post-types.', 'add-to-all' ),
 					'type' => 'header',
 				),
 				'content_add_html_before_single' => array(
