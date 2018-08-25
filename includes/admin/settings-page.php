@@ -221,7 +221,7 @@ function ata_text_callback( $args ) {
 
 
 /**
- * Display text fields.
+ * Display csv fields.
  *
  * @since 1.2.0
  *
@@ -229,6 +229,20 @@ function ata_text_callback( $args ) {
  * @return void
  */
 function ata_csv_callback( $args ) {
+
+	ata_text_callback( $args );
+}
+
+
+/**
+ * Display numbercsv fields.
+ *
+ * @since 1.3.0
+ *
+ * @param array $args Array of arguments.
+ * @return void
+ */
+function ata_numbercsv_callback( $args ) {
 
 	ata_text_callback( $args );
 }
@@ -375,6 +389,41 @@ function ata_radio_callback( $args ) {
 	/** This filter has been defined in settings-page.php */
 	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
 
+}
+
+
+/**
+ * Radio callback with description.
+ *
+ * Renders radio boxes with each item having it separate description.
+ *
+ * @since 1.3.0
+ *
+ * @param array $args Array of arguments.
+ * @return void
+ */
+function ata_radiodesc_callback( $args ) {
+	global $ata_settings;
+	$html = '';
+
+	foreach ( $args['options'] as $option ) {
+		$checked = false;
+
+		if ( isset( $ata_settings[ $args['id'] ] ) && $ata_settings[ $args['id'] ] === $option['id'] ) {
+			$checked = true;
+		} elseif ( isset( $args['default'] ) && $args['default'] === $option['id'] && ! isset( $ata_settings[ $args['id'] ] ) ) {
+			$checked = true;
+		}
+
+		$html .= sprintf( '<input name="ata_settings[%1$s]" id="ata_settings[%1$s][%2$s]" type="radio" value="%2$s" %3$s /> ', sanitize_key( $args['id'] ), $option['id'], checked( true, $checked, false ) );
+		$html .= sprintf( '<label for="ata_settings[%1$s][%2$s]">%3$s</label>', sanitize_key( $args['id'] ), $option['id'], $option['name'] );
+		$html .= ': <em>' . wp_kses_post( $option['description'] ) . '</em> <br />';
+	}
+
+	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
+
+	/** This filter has been defined in settings-page.php */
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
 }
 
 

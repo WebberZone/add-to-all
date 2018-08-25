@@ -38,14 +38,15 @@ function ata_settings_sanitize( $input = array() ) {
 	parse_str( sanitize_text_field( wp_unslash( $_POST['_wp_http_referer'] ) ), $referrer ); // WPCS: CSRF ok.
 
 	// Get the various settings we've registered.
-	$settings = ata_get_registered_settings();
+	$settings       = ata_get_registered_settings();
+	$settings_types = ata_get_registered_settings_types();
 
 	// Check if we need to set to defaults.
 	$reset = isset( $_POST['settings_reset'] ); // WPCS: CSRF ok.
 
 	if ( $reset ) {
 		ata_settings_reset();
-		$ata_settings = get_option( 'ata_settings' );
+		$ata_settings = ata_get_settings();
 
 		add_settings_error( 'ata-notices', '', __( 'Settings have been reset to their default values. Reload this page to view the updated settings', 'add-to-all' ), 'error' );
 
@@ -65,48 +66,66 @@ function ata_settings_sanitize( $input = array() ) {
 	 */
 	$input = apply_filters( 'ata_settings_' . $tab . '_sanitize', $input );
 
+	// Create out output array by merging the existing settings with the ones submitted.
+	$output = array_merge( $ata_settings, $input );
+
 	// Loop through each setting being saved and pass it through a sanitization filter.
-	foreach ( $input as $key => $value ) {
+	foreach ( $settings_types as $key => $type ) {
 
-		// Get the setting type (checkbox, select, etc).
-		$type = isset( $settings[ $tab ][ $key ]['type'] ) ? $settings[ $tab ][ $key ]['type'] : false;
+		/**
+		 * Skip settings that are not really settings.
+		 *
+		 * @since 1.3.0
+		 * @param  array $non_setting_types Array of types which are not settings.
+		 */
+		$non_setting_types = apply_filters( 'ata_non_setting_types', array( 'header', 'descriptive_text' ) );
 
-		if ( $type ) {
+		if ( in_array( $type, $non_setting_types, true ) ) {
+			continue;
+		}
+
+		if ( array_key_exists( $key, $output ) ) {
 
 			/**
-			 * Field type specific filter.
+			 * Field type filter.
 			 *
-			 * @since  1.2.0
-			 * @param  array $value Setting value.
-			 * @paaram array $key Setting key.
+			 * @since 1.2.0
+			 * @param array $output[$key] Setting value.
+			 * @param array $key Setting key.
 			 */
-			$input[ $key ] = apply_filters( 'ata_settings_sanitize_' . $type, $value, $key );
+			$output[ $key ] = apply_filters( 'ata_settings_sanitize_' . $type, $output[ $key ], $key );
 		}
 
 		/**
-		 * Field type general filter.
+		 * Field type filter for a specific key.
 		 *
-		 * @since  1.2.0
-		 * @paaram array $key Setting key.
+		 * @since 1.3.0
+		 * @param array $output[$key] Setting value.
+		 * @param array $key Setting key.
 		 */
-		$input[ $key ] = apply_filters( 'ata_settings_sanitize', $input[ $key ], $key );
-	}
+		$output[ $key ] = apply_filters( 'ata_settings_sanitize' . $key, $output[ $key ], $key );
 
-	// Loop through the whitelist and unset any that are empty for the tab being saved.
-	if ( ! empty( $settings[ $tab ] ) ) {
-		foreach ( $settings[ $tab ] as $key => $value ) {
-			if ( empty( $input[ $key ] ) && ! empty( $ata_settings[ $key ] ) ) {
-				unset( $ata_settings[ $key ] );
-			}
+		// Delete any key that is not present when we submit the input array.
+		if ( ! isset( $input[ $key ] ) ) {
+			unset( $output[ $key ] );
 		}
 	}
 
-	// Merge our new settings with the existing. Force (array) in case it is empty.
-	$ata_settings = array_merge( (array) $ata_settings, $input );
+	// Delete any settings that are no longer part of our registered settings.
+	if ( array_key_exists( $key, $output ) && ! array_key_exists( $key, $settings_types ) ) {
+		unset( $output[ $key ] );
+	}
 
 	add_settings_error( 'ata-notices', '', __( 'Settings updated.', 'add-to-all' ), 'updated' );
 
-	return $ata_settings;
+	/**
+	 * Filter the settings array before it is returned.
+	 *
+	 * @since 1.3.0
+	 * @param array $output Settings array.
+	 * @param array $input Input settings array.
+	 */
+	return apply_filters( 'ata_settings_sanitize', $output, $input );
 
 }
 
@@ -126,6 +145,20 @@ add_filter( 'ata_settings_sanitize_text', 'ata_sanitize_text_field' );
 
 
 /**
+ * Sanitize number fields
+ *
+ * @since 1.3.0
+ *
+ * @param  array $value The field value.
+ * @return string  $value  Sanitized value
+ */
+function ata_sanitize_number_field( $value ) {
+	return filter_var( $value, FILTER_SANITIZE_NUMBER_INT );
+}
+add_filter( 'ata_settings_sanitize_number', 'ata_sanitize_number_field' );
+
+
+/**
  * Sanitize CSV fields
  *
  * @since 1.2.0
@@ -138,6 +171,20 @@ function ata_sanitize_csv_field( $input ) {
 	return implode( ',', array_map( 'trim', explode( ',', sanitize_text_field( wp_unslash( $input ) ) ) ) );
 }
 add_filter( 'ata_settings_sanitize_csv', 'ata_sanitize_csv_field' );
+
+
+/**
+ * Sanitize CSV fields which hold numbers e.g. IDs
+ *
+ * @since 1.3.0
+ *
+ * @param  array $value The field value.
+ * @return string  $value  Sanitized value
+ */
+function ata_sanitize_numbercsv_field( $value ) {
+	return implode( ',', array_filter( array_map( 'absint', explode( ',', sanitize_text_field( wp_unslash( $value ) ) ) ) ) );
+}
+add_filter( 'ata_settings_sanitize_numbercsv', 'ata_sanitize_numbercsv_field' );
 
 
 /**
@@ -176,10 +223,55 @@ function ata_sanitize_textarea_field( $input ) {
 		),
 	);
 
-	$allowedatatags = array_merge( $allowedposttags, $moretags );
+	$allowedtags = array_merge( $allowedposttags, $moretags );
 
-	return wp_kses( wp_unslash( $input ), $allowedatatags );
+	/**
+	 * Filter allowed tags allowed when sanitizing text and textarea fields.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param array $allowedtags Allowed tags array.
+	 * @param array $value The field value.
+	 */
+	$allowedtags = apply_filters( 'ata_sanitize_allowed_tags', $allowedtags, $value );
+
+	return wp_kses( wp_unslash( $input ), $allowedtags );
 
 }
-// add_filter( 'ata_settings_sanitize_textarea', 'ata_sanitize_textarea_field' );.
+/* add_filter( 'ata_settings_sanitize_textarea', 'ata_sanitize_textarea_field' ); */
+
+
+/**
+ * Sanitize checkbox fields
+ *
+ * @since 1.3.0
+ *
+ * @param  array $value The field value.
+ * @return string|int  $value  Sanitized value
+ */
+function ata_sanitize_checkbox_field( $value ) {
+
+	$value = ( -1 === (int) $value ) ? 0 : 1;
+
+	return $value;
+}
+add_filter( 'ata_settings_sanitize_checkbox', 'ata_sanitize_checkbox_field' );
+
+
+/**
+ * Sanitize post_types fields
+ *
+ * @since 1.3.0
+ *
+ * @param  array $value The field value.
+ * @return string  $value  Sanitized value
+ */
+function ata_sanitize_posttypes_field( $value ) {
+
+	$post_types = is_array( $value ) ? array_map( 'sanitize_text_field', wp_unslash( $value ) ) : array( 'post', 'page' );
+
+	return implode( ',', $post_types );
+}
+add_filter( 'ata_settings_sanitize_posttypes', 'ata_sanitize_posttypes_field' );
+
 

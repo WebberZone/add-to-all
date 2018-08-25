@@ -200,6 +200,35 @@ add_action( 'admin_init', 'ata_register_settings' );
 
 
 /**
+ * Flattens ata_get_registered_settings() into $setting[id] => $setting[type] format.
+ *
+ * @since 1.3.0
+ *
+ * @return array Default settings
+ */
+function ata_get_registered_settings_types() {
+
+	$options = array();
+
+	// Populate some default values.
+	foreach ( ata_get_registered_settings() as $tab => $settings ) {
+		foreach ( $settings as $option ) {
+			$options[ $option['id'] ] = $option['type'];
+		}
+	}
+
+	/**
+	 * Filters the settings array.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param array   $options Default settings.
+	 */
+	return apply_filters( 'ata_get_settings_types', $options );
+}
+
+
+/**
  * Default settings.
  *
  * @since 1.2.0
@@ -215,11 +244,16 @@ function ata_settings_defaults() {
 		foreach ( $settings as $option ) {
 			// When checkbox is set to true, set this to 1.
 			if ( 'checkbox' === $option['type'] && ! empty( $option['options'] ) ) {
-				$options[ $option['id'] ] = '1';
+				$options[ $option['id'] ] = 1;
+			} else {
+				$options[ $option['id'] ] = 0;
 			}
 			// If an option is set.
-			if ( in_array( $option['type'], array( 'textarea', 'text', 'csv' ), true ) && ! empty( $option['options'] ) ) {
+			if ( in_array( $option['type'], array( 'textarea', 'text', 'csv', 'numbercsv', 'posttypes', 'number' ), true ) && isset( $option['options'] ) ) {
 				$options[ $option['id'] ] = $option['options'];
+			}
+			if ( in_array( $option['type'], array( 'multicheck', 'radio', 'select', 'radiodesc', 'thumbsizes' ), true ) && isset( $option['default'] ) ) {
+				$options[ $option['id'] ] = $option['default'];
 			}
 		}
 	}
@@ -238,6 +272,27 @@ function ata_settings_defaults() {
 	 * @param array $options Default settings.
 	 */
 	return apply_filters( 'ata_settings_defaults', $options );
+}
+
+
+/**
+ * Get the default option for a specific key
+ *
+ * @since 1.3.0
+ *
+ * @param string $key Key of the option to fetch.
+ * @return mixed
+ */
+function ata_get_default_option( $key = '' ) {
+
+	$default_settings = ata_settings_defaults();
+
+	if ( array_key_exists( $key, $default_settings ) ) {
+		return $default_settings[ $key ];
+	} else {
+		return false;
+	}
+
 }
 
 
