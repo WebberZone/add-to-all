@@ -157,6 +157,13 @@ function ata_get_registered_settings() {
 					'type'    => 'text',
 					'options' => 999,
 				),
+				'exclude_on_post_ids'            => array(
+					'id'      => 'exclude_on_post_ids',
+					'name'    => esc_html__( 'Exclude display on these post IDs', 'add-to-all' ),
+					'desc'    => esc_html__( 'Comma-separated list of post or page IDs to exclude displaying the above content. e.g. 188,320,500', 'add-to-all' ),
+					'type'    => 'numbercsv',
+					'options' => '',
+				),
 				'content_process_shortcode'      => array(
 					'id'      => 'content_process_shortcode',
 					'name'    => esc_html__( 'Process shortcodes in content', 'add-to-all' ),

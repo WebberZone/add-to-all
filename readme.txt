@@ -72,6 +72,7 @@ If you would like a feature to be added, or if you already have the code for the
 = 1.3.0 =
 * Features:
 	* New option to enable processing of shortcode in content, footer or feed HTML fields
+	* New option to exclude display of content HTML fields on certain posts
 
 * Enhancements:
 	* New functions and filters for content, feed, header and footer

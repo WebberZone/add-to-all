@@ -32,7 +32,15 @@ add_action( 'template_redirect', 'ata_content_prepare_filter' );
  * @return string Filtered post content
  */
 function ata_content( $content ) {
-	global $ata_settings;
+	global $post, $ata_settings;
+
+	$exclude_on_post_ids = explode( ',', ata_get_option( 'exclude_on_post_ids' ) );
+
+	if ( isset( $post ) ) {
+		if ( in_array( $post->ID, $exclude_on_post_ids ) ) {
+			return $content;    // Exit without adding content.
+		}
+	}
 
 	if ( ( is_singular() ) || ( is_home() ) || ( is_archive() ) ) {
 		$str_before = '';
