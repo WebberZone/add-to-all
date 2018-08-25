@@ -157,6 +157,13 @@ function ata_get_registered_settings() {
 					'type'    => 'text',
 					'options' => 999,
 				),
+				'content_process_shortcode'      => array(
+					'id'      => 'content_process_shortcode',
+					'name'    => esc_html__( 'Process shortcodes in content', 'add-to-all' ),
+					'desc'    => esc_html__( 'Check this box to execute any shortcodes that you enter in the options below.', 'add-to-all' ),
+					'type'    => 'checkbox',
+					'options' => false,
+				),
 				'content_header_all'             => array(
 					'id'   => 'content_header_all',
 					'name' => '<h3>' . esc_html__( 'Home and other views', 'easy-digital-downloads' ) . '</h3>',
@@ -231,7 +238,14 @@ function ata_get_registered_settings() {
 		'footer'      => apply_filters(
 			'ata_settings_footer',
 			array(
-				'footer_other_html' => array(
+				'footer_process_shortcode' => array(
+					'id'      => 'footer_process_shortcode',
+					'name'    => esc_html__( 'Process shortcodes in footer', 'add-to-all' ),
+					'desc'    => esc_html__( 'Check this box to execute any shortcodes that you enter in the option below.', 'add-to-all' ),
+					'type'    => 'checkbox',
+					'options' => false,
+				),
+				'footer_other_html'        => array(
 					'id'      => 'footer_other_html',
 					'name'    => esc_html__( 'HTML to add to the footer', 'add-to-all' ),
 					/* translators: 1: Code. */
@@ -245,28 +259,28 @@ function ata_get_registered_settings() {
 		'feed'        => apply_filters(
 			'ata_settings_feed',
 			array(
-				'feed_add_copyright'   => array(
+				'feed_add_copyright'     => array(
 					'id'      => 'feed_add_copyright',
 					'name'    => esc_html__( 'Add copyright notice?', 'add-to-all' ),
 					'desc'    => esc_html__( 'Check this to add the below copyright notice to your feed.', 'add-to-all' ),
 					'type'    => 'checkbox',
 					'options' => true,
 				),
-				'feed_copyrightnotice' => array(
+				'feed_copyrightnotice'   => array(
 					'id'      => 'feed_copyrightnotice',
 					'name'    => esc_html__( 'Coyright text', 'add-to-all' ),
 					'desc'    => esc_html__( 'Enter valid HTML only. This copyright notice is added as the last item of your feed.', 'add-to-all' ),
 					'type'    => 'textarea',
 					'options' => ata_get_copyright_text(),
 				),
-				'feed_add_title'       => array(
+				'feed_add_title'         => array(
 					'id'      => 'feed_add_title',
 					'name'    => esc_html__( 'Add post title?', 'add-to-all' ),
 					'desc'    => esc_html__( 'Add a link to the title of the post in the feed.', 'add-to-all' ),
 					'type'    => 'checkbox',
 					'options' => true,
 				),
-				'feed_title_text'      => array(
+				'feed_title_text'        => array(
 					'id'      => 'feed_title_text',
 					'name'    => esc_html__( 'Title text', 'add-to-all' ),
 					/* translators: No strings here. */
@@ -275,35 +289,42 @@ function ata_get_registered_settings() {
 					/* translators: No strings here. */
 					'options' => esc_html__( '%title% was first posted on %date% at %time%.', 'add-to-all' ),
 				),
-				'feed_add_html_before' => array(
+				'feed_process_shortcode' => array(
+					'id'      => 'feed_process_shortcode',
+					'name'    => esc_html__( 'Process shortcodes in feed', 'add-to-all' ),
+					'desc'    => esc_html__( 'Check this box to execute any shortcodes that you enter in the options below.', 'add-to-all' ),
+					'type'    => 'checkbox',
+					'options' => false,
+				),
+				'feed_add_html_before'   => array(
 					'id'      => 'feed_add_html_before',
 					'name'    => esc_html__( 'Add HTML before content?', 'add-to-all' ),
 					'desc'    => esc_html__( 'Check this to add the HTML below before the content of your post.', 'add-to-all' ),
 					'type'    => 'checkbox',
 					'options' => false,
 				),
-				'feed_html_before'     => array(
+				'feed_html_before'       => array(
 					'id'      => 'feed_html_before',
 					'name'    => esc_html__( 'HTML to add before the content', 'add-to-all' ),
 					'desc'    => esc_html__( 'Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed.', 'add-to-all' ),
 					'type'    => 'textarea',
 					'options' => '',
 				),
-				'feed_add_html_after'  => array(
+				'feed_add_html_after'    => array(
 					'id'      => 'feed_add_html_after',
 					'name'    => esc_html__( 'Add HTML after content?', 'add-to-all' ),
 					'desc'    => esc_html__( 'Check this to add the HTML below before the content of your post.', 'add-to-all' ),
 					'type'    => 'checkbox',
 					'options' => false,
 				),
-				'feed_html_after'      => array(
+				'feed_html_after'        => array(
 					'id'      => 'feed_html_after',
 					'name'    => esc_html__( 'HTML to add after the content', 'add-to-all' ),
 					'desc'    => esc_html__( 'Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed.', 'add-to-all' ),
 					'type'    => 'textarea',
 					'options' => '',
 				),
-				'add_credit'           => array(
+				'add_credit'             => array(
 					'id'      => 'add_credit',
 					'name'    => esc_html__( 'Add a link to "Add to All" plugin page', 'add-to-all' ),
 					'desc'    => '',

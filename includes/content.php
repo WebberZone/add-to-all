@@ -146,3 +146,20 @@ function ata_content_html_after_single() {
 	 */
 	return apply_filters( 'ata_content_html_after_single', $output );
 }
+
+
+if ( ata_get_option( 'content_process_shortcode' ) ) {
+
+	add_filter( 'ata_content_html_before', 'shortcode_unautop' );
+	add_filter( 'ata_content_html_before', 'do_shortcode' );
+
+	add_filter( 'ata_content_html_after', 'shortcode_unautop' );
+	add_filter( 'ata_content_html_after', 'do_shortcode' );
+
+	add_filter( 'ata_content_html_before_single', 'shortcode_unautop' );
+	add_filter( 'ata_content_html_before_single', 'do_shortcode' );
+
+	add_filter( 'ata_content_html_after_single', 'shortcode_unautop' );
+	add_filter( 'ata_content_html_after_single', 'do_shortcode' );
+
+}

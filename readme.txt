@@ -70,6 +70,9 @@ If you would like a feature to be added, or if you already have the code for the
 == Changelog ==
 
 = 1.3.0 =
+* Features:
+	* New option to enable processing of shortcode in content, footer or feed HTML fields
+
 * Enhancements:
 	* New functions and filters for content, feed, header and footer
 	* Admin interface: switch between tabs without reloading

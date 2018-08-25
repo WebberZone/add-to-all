@@ -58,3 +58,9 @@ function ata_footer_other_html() {
 	return apply_filters( 'ata_footer_other_html', $output );
 }
 
+if ( ata_get_option( 'footer_process_shortcode' ) ) {
+
+	add_filter( 'ata_footer_other_html', 'shortcode_unautop' );
+	add_filter( 'ata_footer_other_html', 'do_shortcode' );
+
+}
