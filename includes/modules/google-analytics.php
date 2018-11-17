@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 function ata_ga( $ga_uacct, $ga_linker, $ga_anonymize_ip ) {
 
 	if ( '' !== $ga_uacct ) {
-?>
+		?>
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr( $ga_uacct ); ?>"></script>
@@ -38,9 +38,9 @@ function ata_ga( $ga_uacct, $ga_linker, $ga_anonymize_ip ) {
 
 		<?php
 		if ( $ga_anonymize_ip ) {
-		?>
+			?>
 		'anonymize_ip': true,
-		<?php
+			<?php
 		}
 
 		if ( '' !== $ga_linker ) {
@@ -53,13 +53,13 @@ function ata_ga( $ga_uacct, $ga_linker, $ga_anonymize_ip ) {
 
 			$ga_linker = implode( ', ', $ga_linkers );
 
-		?>
+			?>
 
 		'linker': {
 			'domains': [<?php echo $ga_linker; ?>]
 		}
 
-		<?php
+			<?php
 		}
 
 		?>
@@ -68,7 +68,7 @@ function ata_ga( $ga_uacct, $ga_linker, $ga_anonymize_ip ) {
 	</script>
 	<!-- End Google Analytics // Added by Add to All WordPress plugin -->
 
-<?php
+		<?php
 	}
 
 }

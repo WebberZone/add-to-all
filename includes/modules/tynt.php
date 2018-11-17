@@ -24,7 +24,7 @@ function ata_tynt( $ata_tynt_id ) {
 
 	// Add Tynt code to Header.
 	if ( '' !== $ata_tynt_id ) {
-	?>
+		?>
 
 	<!-- Begin 33Across SiteCTRL - Inserted by Add to All WordPress Plugin -->
 	<script>
@@ -37,7 +37,7 @@ function ata_tynt( $ata_tynt_id ) {
 	</script>
 	<!-- End 33Across SiteCTRL - Inserted by Add to All WordPress Plugin -->
 
-	<?php
+		<?php
 	}
 
 }

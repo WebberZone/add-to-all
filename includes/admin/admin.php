@@ -48,7 +48,7 @@ function ata_adminhead() {
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'jquery-ui-autocomplete' );
 	wp_enqueue_script( 'jquery-ui-tabs' );
-?>
+	?>
 	<script type="text/javascript">
 	//<![CDATA[
 		// Function to clear the cache.
@@ -190,7 +190,7 @@ function ata_adminhead() {
 
 	//]]>
 	</script>
-<?php
+	<?php
 }
 
 
