@@ -1,9 +1,8 @@
 <?php
 /**
- * Register settings.
+ * Default settings.
  *
- * Functions to register, read, write and update settings.
- * Portions of this code have been inspired by Easy Digital Downloads, WordPress Settings Sandbox, etc.
+ * Functions to get the default settings for the plugin.
  *
  * @link  https://ajaydsouza.com
  * @since 1.3.0
