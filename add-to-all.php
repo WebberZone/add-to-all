@@ -165,7 +165,7 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 		$content = get_post( $id )->post_content;
 	}
 
-	$output = strip_tags( strip_shortcodes( $content ) );
+	$output = wp_strip_all_tags( strip_shortcodes( $content ) );
 
 	if ( $excerpt_length > 0 ) {
 		$output = wp_trim_words( $output, $excerpt_length );
