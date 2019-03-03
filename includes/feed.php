@@ -47,7 +47,7 @@ function ald_ata_rss( $content ) {
 		}
 
 		if ( isset( $ata_settings['add_credit'] ) && $ata_settings['add_credit'] ) {
-			$str_after .= $creditline;
+			$str_after .= ata_creditline();
 			$str_after .= '<br />';
 		}
 
