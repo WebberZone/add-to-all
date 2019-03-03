@@ -37,7 +37,7 @@ function ata_content( $content ) {
 	$exclude_on_post_ids = explode( ',', ata_get_option( 'exclude_on_post_ids' ) );
 
 	if ( isset( $post ) ) {
-		if ( in_array( $post->ID, $exclude_on_post_ids ) ) {
+		if ( in_array( $post->ID, $exclude_on_post_ids ) ) { // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 			return $content;    // Exit without adding content.
 		}
 	}

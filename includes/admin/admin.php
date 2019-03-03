@@ -105,7 +105,7 @@ function ata_adminhead() {
 							$.ajax({
 								type: 'POST',
 								dataType: 'json',
-								url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
+								url: '<?php echo admin_url( 'admin-ajax.php' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>',
 								data: {
 									action: 'ata_tag_search',
 									tax: taxonomy,

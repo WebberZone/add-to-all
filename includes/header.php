@@ -24,7 +24,7 @@ function ald_ata_header() {
 
 	// Add CSS to header.
 	if ( '' !== $ata_head_css ) {
-		echo '<style type="text/css">' . $ata_head_css . '</style>'; // WPCS: XSS OK.
+		echo '<style type="text/css">' . $ata_head_css . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	// Add Tynt.
@@ -32,7 +32,7 @@ function ald_ata_header() {
 
 	// Add other header.
 	if ( '' !== $ata_head_other_html ) {
-		echo $ata_head_other_html; // WPCS: XSS OK.
+		echo $ata_head_other_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 }

@@ -27,7 +27,7 @@ function ald_ata_footer() {
 
 	// Add other footer.
 	if ( '' !== $footer_other_html ) {
-		echo $footer_other_html; // WPCS: XSS OK.
+		echo $footer_other_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	// Add Statcounter code.

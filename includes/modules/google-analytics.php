@@ -56,7 +56,7 @@ function ata_ga( $ga_uacct, $ga_linker, $ga_anonymize_ip ) {
 			?>
 
 		'linker': {
-			'domains': [<?php echo $ga_linker; ?>]
+			'domains': [<?php echo $ga_linker; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>]
 		}
 
 			<?php

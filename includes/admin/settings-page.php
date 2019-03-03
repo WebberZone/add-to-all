@@ -24,7 +24,7 @@ if ( ! defined( 'WPINC' ) ) {
  * @return void
  */
 function ata_options_page() {
-	$active_tab = isset( $_GET['tab'] ) && array_key_exists( sanitize_key( wp_unslash( $_GET['tab'] ) ), ata_get_settings_sections() ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general'; // WPCS: CSRF ok.
+	$active_tab = isset( $_GET['tab'] ) && array_key_exists( sanitize_key( wp_unslash( $_GET['tab'] ) ), ata_get_settings_sections() ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general'; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
 
 	ob_start();
 	?>
@@ -108,7 +108,7 @@ function ata_options_page() {
 	</div><!-- /.wrap -->
 
 	<?php
-	echo ob_get_clean(); // WPCS: XSS OK.
+	echo ob_get_clean(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 
@@ -175,7 +175,7 @@ function ata_header_callback( $args ) {
 	 * @param string $html HTML string.
 	 * @param array Arguments array.
 	 */
-	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 
@@ -215,7 +215,7 @@ function ata_text_callback( $args ) {
 	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 }
 
@@ -271,7 +271,7 @@ function ata_textarea_callback( $args ) {
 	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 
@@ -310,11 +310,11 @@ function ata_checkbox_callback( $args ) {
 
 	$html  = sprintf( '<input type="hidden" name="ata_settings[%1$s]" value="-1" />', sanitize_key( $args['id'] ) );
 	$html .= sprintf( '<input type="checkbox" id="ata_settings[%1$s]" name="ata_settings[%1$s]" value="1" %2$s />', sanitize_key( $args['id'] ), $checked );
-	$html .= ( $set <> $default ) ? '<em style="color:orange"> ' . esc_html__( 'Modified from default setting', 'add-to-all' ) . '</em>' : ''; // WPCS: loose comparison ok.
+	$html .= ( $set <> $default ) ? '<em style="color:orange"> ' . esc_html__( 'Modified from default setting', 'add-to-all' ) . '</em>' : ''; // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
 	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 }
 
@@ -351,7 +351,7 @@ function ata_multicheck_callback( $args ) {
 	}
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 }
 
@@ -387,7 +387,7 @@ function ata_radio_callback( $args ) {
 	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 }
 
@@ -423,7 +423,7 @@ function ata_radiodesc_callback( $args ) {
 	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 
@@ -456,7 +456,7 @@ function ata_number_callback( $args ) {
 	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 }
 
@@ -496,7 +496,7 @@ function ata_select_callback( $args ) {
 	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 }
 
@@ -515,7 +515,7 @@ function ata_descriptive_text_callback( $args ) {
 	$html = '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 
@@ -564,6 +564,6 @@ function ata_posttypes_callback( $args ) {
 	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
 
 	/** This filter has been defined in settings-page.php */
-	echo apply_filters( 'ata_after_setting_output', $html, $args ); // WPCS: XSS OK.
+	echo apply_filters( 'ata_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
