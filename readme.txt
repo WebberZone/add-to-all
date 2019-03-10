@@ -69,6 +69,11 @@ If you would like a feature to be added, or if you already have the code for the
 
 == Changelog ==
 
+= 1.4.0 =
+
+* Features:
+	* Deleting the plugin on WordPress Multisite will remove the settings from all blogs
+
 = 1.3.0 =
 * Features:
 	* New option to enable processing of shortcode in content, footer or feed HTML fields
