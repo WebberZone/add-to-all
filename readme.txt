@@ -3,8 +3,8 @@ Tags: header, footer, feed, Google Analytics, Statcounter, Tynt, content, Adsens
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
 Stable tag: trunk
-Requires at least: 4.2
-Tested up to: 4.9
+Requires at least: 4.5
+Tested up to: 5.1
 License: GPLv2 or later
 
 A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
@@ -73,6 +73,12 @@ If you would like a feature to be added, or if you already have the code for the
 
 * Features:
 	* Deleting the plugin on WordPress Multisite will remove the settings from all blogs
+
+* Modifications:
+	* Deprecated `ald_ata_header()`, `ald_ata_footer()`, `ald_ata_rss()`
+
+* Bug fixes:
+	* Fixed bug with displaying the credit line in feed
 
 = 1.3.0 =
 * Features:
