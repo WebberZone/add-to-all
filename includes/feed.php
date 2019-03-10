@@ -16,10 +16,12 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Function to add content to RSS feeds. Filters `the_excerpt_rss` and `the_content_feed`.
  *
+ * @since 1.0.3
+ *
  * @param string $content Post content.
  * @return string Filtered post content
  */
-function ald_ata_rss( $content ) {
+function ata_rss( $content ) {
 	global $ata_settings;
 
 	if ( isset( $ata_settings['feed_add_html_before'] ) || isset( $ata_settings['feed_add_html_after'] ) || isset( $ata_settings['feed_add_title'] ) || isset( $ata_settings['feed_add_copyright'] ) || isset( $ata_settings['add_credit'] ) ) {
@@ -57,8 +59,8 @@ function ald_ata_rss( $content ) {
 	}
 
 }
-add_filter( 'the_excerpt_rss', 'ald_ata_rss', 99999999 );
-add_filter( 'the_content_feed', 'ald_ata_rss', 99999999 );
+add_filter( 'the_excerpt_rss', 'ata_rss', 99999999 );
+add_filter( 'the_content_feed', 'ata_rss', 99999999 );
 
 
 /**

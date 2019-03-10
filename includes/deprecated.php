@@ -18,6 +18,8 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Default options.
  *
+ * @since 1.0
+ *
  * @return return Array with default options
  */
 function ata_default_options() {
@@ -31,14 +33,30 @@ function ata_default_options() {
 /**
  * Function to read options from the database and add any new ones.
  *
+ * @since 1.0
+ *
  * @return array Options array
  */
 function ata_read_options() {
 
 	_deprecated_function( __FUNCTION__, '1.2.0', 'ata_get_settings()' );
 
-	global $ata_settings;
+	return ata_get_settings();
+}
 
-	return $ata_settings;
+
+/**
+ * Function to add content to RSS feeds. Filters `the_excerpt_rss` and `the_content_feed`.
+ *
+ * @since 1.0.3
+ *
+ * @param string $content Post content.
+ * @return string Filtered post content
+ */
+function ald_ata_rss( $content ) {
+
+	_deprecated_function( __FUNCTION__, '1.3.0', 'ata_rss()' );
+
+	return ata_rss( $content );
 }
 

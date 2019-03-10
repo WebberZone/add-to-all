@@ -15,6 +15,8 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Function to modify the_content filter priority.
+ *
+ * @since 1.0.3
  */
 function ata_content_prepare_filter() {
 
@@ -27,6 +29,8 @@ add_action( 'template_redirect', 'ata_content_prepare_filter' );
 
 /**
  * Function to add custom HTML before and after the post content. Filters `the_content`.
+ *
+ * @since 1.0
  *
  * @param string $content Post content.
  * @return string Filtered post content
