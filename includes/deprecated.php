@@ -55,8 +55,32 @@ function ata_read_options() {
  */
 function ald_ata_rss( $content ) {
 
-	_deprecated_function( __FUNCTION__, '1.3.0', 'ata_rss()' );
+	_deprecated_function( __FUNCTION__, '1.4.0', 'ata_rss()' );
 
 	return ata_rss( $content );
+}
+
+/**
+ * Function to add custom code to the header. Filters `wp_head`.
+ *
+ * @since 1.0
+ */
+function ald_ata_header() {
+
+	_deprecated_function( __FUNCTION__, '1.4.0', 'ata_header()' );
+
+	return ata_header();
+}
+
+/**
+ * Function to add custom code to the header. Filters `wp_head`.
+ *
+ * @since 1.0
+ */
+function ald_ata_footer() {
+
+	_deprecated_function( __FUNCTION__, '1.4.0', 'ata_footer()' );
+
+	return ata_footer();
 }
 

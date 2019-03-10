@@ -15,8 +15,10 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Function to add custom code to the header. Filters `wp_head`.
+ *
+ * @since 1.4.0
  */
-function ald_ata_header() {
+function ata_header() {
 
 	$ata_head_other_html = ata_head_other_html();
 	$ata_head_css        = ata_get_option( 'head_css', '' );
@@ -36,7 +38,7 @@ function ald_ata_header() {
 	}
 
 }
-add_action( 'wp_head', 'ald_ata_header' );
+add_action( 'wp_head', 'ata_header' );
 
 
 /**

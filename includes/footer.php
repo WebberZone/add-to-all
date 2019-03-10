@@ -15,8 +15,10 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Function to add the necessary code to `wp_footer`.
+ *
+ * @since 1.0
  */
-function ald_ata_footer() {
+function ata_footer() {
 
 	$footer_other_html = ata_footer_other_html();
 	$sc_project        = ata_get_option( 'sc_project', '' );
@@ -37,7 +39,7 @@ function ald_ata_footer() {
 	ata_ga( $ga_uacct, $ga_linker, $ga_anonymize_ip );
 
 }
-add_action( 'wp_footer', 'ald_ata_footer' );
+add_action( 'wp_footer', 'ata_footer' );
 
 
 /**
