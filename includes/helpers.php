@@ -15,6 +15,8 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Function to get the post thumbnail.
  *
+ * @since 1.0
+ *
  * @param integer $postid Post ID.
  * @return string Image tag with the post thumbnail
  */
@@ -66,6 +68,8 @@ function ata_get_the_post_thumbnail( $postid ) {
 /**
  * Function to create an excerpt for the post.
  *
+ * @since 1.0
+ *
  * @param integer $id Post ID.
  * @param mixed   $excerpt_length Length of the excerpt in words.
  * @param bool    $use_excerpt Use excerpt.
@@ -89,3 +93,81 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 	return apply_filters( 'ata_excerpt', $output, $id, $excerpt_length, $use_excerpt );
 }
 
+
+/**
+ * Replace placeholders with their content.
+ *
+ * @since 1.4.0
+ *
+ * @param string $input Content with placeholders to be replaced.
+ * @return string Content with placeholders replaced.
+ */
+function ata_process_placeholders( $input ) {
+
+	$placeholders = array(
+		'%year%'       => date( 'Y' ), // A full numeric representation of a year, 4 digits.
+		'%month%'      => date( 'F' ), // January through December.
+		'%date%'       => date( 'j' ), // Date - 01 to 31.
+		'%first_year%' => ata_get_first_post_year(),
+		'%home_url%'   => get_home_url(),
+	);
+
+	/**
+	 * Filters array of placeholders in the format 'placeholder' => 'replaced_text'.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @param array $placeholders Array of placeholders.
+	 */
+	$placeholders = apply_filters( 'ata_placeholders', $placeholders );
+
+	$search  = array_keys( $placeholders );
+	$replace = array_values( $placeholders );
+
+	$output = str_replace( $search, $replace, $input );
+
+	/**
+	 * Filters content with placeholders replaced.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @param string $output Content with placeholders replaced.
+	 * @param string $input Content with placeholders to be replaced.
+	 * @param array  $placeholders Placeholders.
+	 */
+	return apply_filters( 'ata_process_placeholders', $output, $input, $placeholders );
+}
+add_filter( 'ata_content_html_before', 'ata_process_placeholders', 99 );
+add_filter( 'ata_content_html_after', 'ata_process_placeholders', 99 );
+add_filter( 'ata_content_html_before_single', 'ata_process_placeholders', 99 );
+add_filter( 'ata_content_html_after_single', 'ata_process_placeholders', 99 );
+add_filter( 'ata_feed_html_before', 'ata_process_placeholders', 99 );
+add_filter( 'ata_feed_html_after', 'ata_process_placeholders', 99 );
+add_filter( 'ata_footer_other_html', 'ata_process_placeholders', 99 );
+
+
+/**
+ * Get the year of the first post.
+ *
+ * @since 1.4.0
+ *
+ * @return string|bool Year fo the first post or false if error.
+ */
+function ata_get_first_post_year() {
+	global $wpdb;
+
+	$year = get_transient( 'ata_first_post_year' );
+
+	if ( false === $year ) {
+
+		$year = $wpdb->get_results( " SELECT YEAR(min(post_date_gmt)) AS firstyear FROM {$wpdb->posts} WHERE post_status = 'publish' " ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+
+		set_transient( 'ata_first_post_year', $year, WEEK_IN_SECONDS );
+	}
+
+	if ( $year ) {
+		return $year[0]->firstyear;
+	}
+
+	return false;
+}

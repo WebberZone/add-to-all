@@ -73,6 +73,7 @@ If you would like a feature to be added, or if you already have the code for the
 
 * Features:
 	* Deleting the plugin on WordPress Multisite will remove the settings from all blogs
+	* Use `%home_url%`, `%year%`, `%month%`, `%date%` and `%first_year%` to display the URL for a given site, current year, current month (text), current date and year of first blog post respectively. You can add more replacement terms by creating a function filtering `ata_placeholders`
 
 * Modifications:
 	* Deprecated `ald_ata_header()`, `ald_ata_footer()`, `ald_ata_rss()`
