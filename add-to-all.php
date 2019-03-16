@@ -6,7 +6,7 @@
  *
  * @wordpress-plugin
  * Plugin Name: Add to All
- * Version:     1.4.0-beta1
+ * Version:     1.4.0
  * Plugin URI:  https://ajaydsouza.com/wordpress/plugins/add-to-all/
  * Description: A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
  * Author:      Ajay D'Souza
