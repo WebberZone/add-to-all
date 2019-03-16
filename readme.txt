@@ -71,6 +71,8 @@ If you would like a feature to be added, or if you already have the code for the
 
 = 1.4.0 =
 
+Release post: [https://wzn.io/2F54D6t](https://wzn.io/2F54D6t)
+
 * Features:
 	* Deleting the plugin on WordPress Multisite will remove the settings from all blogs
 	* Use `%home_url%`, `%year%`, `%month%`, `%date%` and `%first_year%` to display the URL for a given site, current year, current month (text), current date and year of first blog post respectively. You can add more replacement terms by creating a function filtering `ata_placeholders`
@@ -116,7 +118,7 @@ Check changelog.txt for older entries.
 
 == Upgrade Notice ==
 
-= 1.2.2 =
-New plugin settings interface. Verify your settings on upgrade; Site verification support, bug fixes;
+= 1.4.0 =
+New options for placeholders; Bug fixes;
 Check out the Changelog for more details
 
