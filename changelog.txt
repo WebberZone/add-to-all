@@ -2,6 +2,26 @@
 
 This is an archive of older changelog entries. Most recent entries are maintained in readme.txt
 
+= 1.2.2 =
+* Bug fix:
+	* Disable aggressive textarea filter in Settings page
+
+= 1.2.1 =
+* Enhancements:
+	* Admin settings page will allow more attributes and tags for `script`, `style` and `link` allowing you to use favicons, async, etc.
+
+= 1.2.0 =
+* Features:
+	* Settings now uses the WordPress Settings API. Verify your site options by visiting the Add to All settings page
+	* Site verification for Google, Bing and Pinterest
+
+* Enhancements:
+	* Google Analytics code now supports cross domain tracking using the Linker Plugin
+	* Updated code for Statcounter and Tynt
+
+* Deprecated:
+	* Removed support for Kontera. If you'd like to continue using Kontera, please get the code from [the Kontera setup page](https://publishers.kontera.com/main/tag) and then add this under <strong>Footer settings</strong>
+
 = 1.1 =
 * New: Support for Google's Universal Analytics code
 * New: Customize the text used when linking to the title in the blog feed. You can use `%title%` to add a link to the post, `%date%` and `%time%` to display the date and time of the post respectively

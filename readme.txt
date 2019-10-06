@@ -3,7 +3,7 @@ Tags: header, footer, feed, Google Analytics, Statcounter, Tynt, content, Adsens
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
 Stable tag: trunk
-Requires at least: 4.5
+Requires at least: 4.7
 Tested up to: 5.2
 License: GPLv2 or later
 
@@ -102,31 +102,10 @@ Release post: [https://wzn.io/2F54D6t](https://wzn.io/2F54D6t)
 	* Google Analytics now use gtag.js implementation instead of analytics.js
 	* Google Analytics: new option to anonymize IPs
 
-= 1.2.2 =
-* Bug fix:
-	* Disable aggressive textarea filter in Settings page
-
-= 1.2.1 =
-* Enhancements:
-	* Admin settings page will allow more attributes and tags for `script`, `style` and `link` allowing you to use favicons, async, etc.
-
-= 1.2.0 =
-* Features:
-	* Settings now uses the WordPress Settings API. Verify your site options by visiting the Add to All settings page
-	* Site verification for Google, Bing and Pinterest
-
-* Enhancements:
-	* Google Analytics code now supports cross domain tracking using the Linker Plugin
-	* Updated code for Statcounter and Tynt
-
-* Deprecated:
-	* Removed support for Kontera. If you'd like to continue using Kontera, please get the code from [the Kontera setup page](https://publishers.kontera.com/main/tag) and then add this under <strong>Footer settings</strong>
-
-Check changelog.txt for older entries.
+Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 
 == Upgrade Notice ==
 
-= 1.4.0 =
-New options for placeholders; Bug fixes;
-Check out the Changelog for more details
+= 1.5.0 =
+New options for posts and pages; Check out the Changelog for more details
 

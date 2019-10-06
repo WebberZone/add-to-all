@@ -431,7 +431,8 @@ function ata_settings_feed() {
 		'feed_copyrightnotice'   => array(
 			'id'      => 'feed_copyrightnotice',
 			'name'    => esc_html__( 'Coyright text', 'add-to-all' ),
-			'desc'    => esc_html__( 'Enter valid HTML only. This copyright notice is added as the last item of your feed.', 'add-to-all' ),
+			/* translators: No strings here. */
+			'desc'    => esc_html__( 'Enter valid HTML only. This copyright notice is added as the last item of your feed. You can also use %year% for the year or %first_year% for the year of the first post,', 'add-to-all' ),
 			'type'    => 'textarea',
 			'options' => ata_get_copyright_text(),
 		),
