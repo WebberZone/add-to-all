@@ -71,6 +71,8 @@ If you would like a feature to be added, or if you already have the code for the
 
 = 1.5.0 =
 
+Release post: [https://wzn.io/30RNpCD](https://wzn.io/30RNpCD)
+
 * Features:
 	* New options for displaying content before and after on posts and pages only
 
