@@ -4,7 +4,7 @@ Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
 Stable tag: trunk
 Requires at least: 4.5
-Tested up to: 5.1
+Tested up to: 5.2
 License: GPLv2 or later
 
 A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
@@ -68,6 +68,11 @@ If you would like a feature to be added, or if you already have the code for the
 
 
 == Changelog ==
+
+= 1.5.0 =
+
+* Bug fixes:
+	* Delete first year transient on uninstall
 
 = 1.4.0 =
 

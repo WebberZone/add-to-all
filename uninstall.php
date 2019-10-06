@@ -41,6 +41,7 @@ function ata_delete_data() {
 
 	delete_option( 'ata_settings' );
 	delete_option( 'ald_ata_settings' );
+	delete_transient( 'ata_first_post_year' );
 
 }
 
