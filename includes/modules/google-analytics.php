@@ -28,7 +28,7 @@ function ata_ga( $ga_uacct, $ga_linker, $ga_anonymize_ip ) {
 		?>
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr( $ga_uacct ); ?>"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr( $ga_uacct ); ?>"></script> <?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript ?>
 	<script>
 	window.dataLayer = window.dataLayer || [];
 	function gtag(){dataLayer.push(arguments);}
