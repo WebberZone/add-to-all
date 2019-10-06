@@ -71,6 +71,9 @@ If you would like a feature to be added, or if you already have the code for the
 
 = 1.5.0 =
 
+* Features:
+	* New options for displaying content before and after on posts and pages only
+
 * Bug fixes:
 	* Delete first year transient on uninstall
 
