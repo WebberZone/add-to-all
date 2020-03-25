@@ -71,7 +71,7 @@ If you would like a feature to be added, or if you already have the code for the
 
 = 1.5.0 =
 
-Release post: [https://wzn.io/30RNpCD](https://wzn.io/30RNpCD)
+Release post: [https://ajaydsouza.com/add-to-all-v1-5-0/](https://ajaydsouza.com/add-to-all-v1-5-0/)
 
 * Features:
 	* New options for displaying content before and after on posts and pages only
@@ -81,7 +81,7 @@ Release post: [https://wzn.io/30RNpCD](https://wzn.io/30RNpCD)
 
 = 1.4.0 =
 
-Release post: [https://wzn.io/2F54D6t](https://wzn.io/2F54D6t)
+Release post: [https://ajaydsouza.com/add-to-all-v1-4-0/](https://ajaydsouza.com/add-to-all-v1-4-0/)
 
 * Features:
 	* Deleting the plugin on WordPress Multisite will remove the settings from all blogs
@@ -94,6 +94,9 @@ Release post: [https://wzn.io/2F54D6t](https://wzn.io/2F54D6t)
 	* Fixed bug with displaying the credit line in feed
 
 = 1.3.0 =
+
+Release post: [https://ajaydsouza.com/add-to-all-v1-3-0/](https://ajaydsouza.com/add-to-all-v1-3-0/)
+
 * Features:
 	* New option to enable processing of shortcode in content, footer or feed HTML fields
 	* New option to exclude display of content HTML fields on certain posts
