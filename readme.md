@@ -6,7 +6,6 @@
 [![License](https://img.shields.io/badge/license-GPL_v2%2B-orange.svg?style=flat-square)](http://opensource.org/licenses/GPL-2.0)
 [![WordPress Tested](https://img.shields.io/wordpress/v/add-to-all.svg?style=flat-square)](https://wordpress.org/plugins/add-to-all/)
 [![Build Status](https://travis-ci.org/WebberZone/add-to-all.svg?branch=master)](https://travis-ci.org/WebberZone/add-to-all)
-[![Code Climate](https://codeclimate.com/github/WebberZone/add-to-all/badges/gpa.svg)](https://codeclimate.com/github/WebberZone/add-to-all)
 
 __Requires:__ 4.7
 
