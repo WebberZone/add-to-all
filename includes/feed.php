@@ -2,7 +2,7 @@
 /**
  * Functions to add to the feed.
  *
- * @link  https://ajaydsouza.com
+ * @link  https://webberzone.com
  * @since 1.2.0
  *
  * @package Add_to_All
@@ -140,7 +140,7 @@ function ata_creditline() {
 
 	$output  = '<br /><span style="font-size: 0.8em">';
 	$output .= __( 'Feed enhanced by ', 'add-to-all' );
-	$output .= '<a href="https://ajaydsouza.com/wordpress/plugins/add-to-all/" rel="nofollow">Add To All</a>';
+	$output .= '<a href="https://webberzone.com/plugins/add-to-all/" rel="nofollow">Add To All</a>';
 	$output .= '</span>';
 
 	/**

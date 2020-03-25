@@ -2,7 +2,7 @@
 /**
  * Google Analytics.
  *
- * @link  https://ajaydsouza.com
+ * @link  https://webberzone.com
  * @since 1.2.0
  *
  * @package Add_to_All

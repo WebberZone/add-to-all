@@ -13,13 +13,13 @@ __Tested up to:__ 5.4
 
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
-__Plugin page:__ [Add to All](https://ajaydsouza.com/wordpress/plugins/add-to-all/) | [WordPress Plugin page](https://wordpress.org/plugins/add-to-all/)
+__Plugin page:__ [Add to All](https://webberzone.com/plugins/add-to-all/) | [WordPress Plugin page](https://wordpress.org/plugins/add-to-all/)
 
 Add custom code or CSS to your header, footer, sidebar, content or feed. Site verification and more...
 
 ## Description
 
-[Add to All](https://ajaydsouza.com/wordpress/plugins/add-to-all/) is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
+[Add to All](https://webberzone.com/plugins/add-to-all/) is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
 
 It comes with out of the box support for Google Analytics, Statcounter and Tynt. Additionally, it supports site verification for Google, Bing and Pinterest via their HTML tag methods.
 
@@ -55,6 +55,6 @@ With this plugin installed, you do not need to edit your theme files every time 
 
 ## Frequently Asked Questions
 
-If your question isn't listed here, please post a comment at the [WordPress.org support forum](https://wordpress.org/support/plugin/add-to-all). I monitor the forums on an ongoing basis. If you're looking for more advanced **paid** support, please see [details here](https://ajaydsouza.com/support/).
+If your question isn't listed here, please post a comment at the [WordPress.org support forum](https://wordpress.org/support/plugin/add-to-all). I monitor the forums on an ongoing basis. If you're looking for more advanced **paid** support, please see [details here](https://webberzone.com/support/).
 
 If you would like a feature to be added, or if you already have the code for the feature, you can let me know by [posting in this forum](https://wordpress.org/support/plugin/add-to-all) or creating an issue in the [Github repository](https://github.com/ajaydsouza/add-to-all/issues).

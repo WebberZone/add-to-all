@@ -4,7 +4,7 @@
  *
  * Functions to generated the help tab on the Settings page.
  *
- * @link  https://ajaydsouza.com
+ * @link  https://webberzone.com
  * @since 1.2.0
  *
  * @package Add_to_All
@@ -34,7 +34,7 @@ function ata_settings_help() {
 	// Set the text in the help sidebar.
 	$screen->set_help_sidebar(
 		/* translators: 1: Plugin support site link. */
-		'<p>' . sprintf( __( 'For more information or how to get support visit the <a href="%s">support site</a>.', 'add-to-all' ), esc_url( 'https://ajaydsouza.com/support/' ) ) . '</p>' .
+		'<p>' . sprintf( __( 'For more information or how to get support visit the <a href="%s">support site</a>.', 'add-to-all' ), esc_url( 'https://webberzone.com/support/' ) ) . '</p>' .
 		/* translators: 1: WordPress.org support forums link. */
 			'<p>' . sprintf( __( 'Support queries should be posted in the <a href="%s">WordPress.org support forums</a>.', 'add-to-all' ), esc_url( 'https://wordpress.org/support/plugin/add-to-all' ) ) . '</p>' .
 		'<p>' . sprintf(

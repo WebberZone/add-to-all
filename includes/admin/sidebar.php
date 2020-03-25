@@ -2,7 +2,7 @@
 /**
  * Sidebar
  *
- * @link  https://ajaydsouza.com
+ * @link  https://webberzone.com
  * @since 1.2.0
  *
  * @package    Add_to_All
@@ -31,7 +31,7 @@
 			<div id="quick-links">
 				<ul class="subsub">
 					<li>
-						<a href="https://ajaydsouza.com/wordpress/plugins/add-to-all/"><?php esc_html_e( 'Add to All plugin homepage', 'add-to-all' ); ?></a>
+						<a href="https://webberzone.com/plugins/add-to-all/"><?php esc_html_e( 'Add to All plugin homepage', 'add-to-all' ); ?></a>
 					</li>
 
 					<li>
@@ -51,11 +51,11 @@
 					</li>
 
 					<li>
-						<a href="https://ajaydsouza.com/wordpress/plugins/"><?php esc_html_e( 'Other plugins', 'add-to-all' ); ?></a>
+						<a href="https://webberzone.com/plugins/"><?php esc_html_e( 'Other plugins', 'add-to-all' ); ?></a>
 					</li>
 
 					<li>
-						<a href="https://ajaydsouza.com/"><?php esc_html_e( "Ajay's blog", 'add-to-all' ); ?></a>
+						<a href="https://webberzone.com/"><?php esc_html_e( "Ajay's blog", 'add-to-all' ); ?></a>
 					</li>
 				</ul>
 			</div><br>

@@ -4,7 +4,7 @@
  *
  * Functions to get the default settings for the plugin.
  *
- * @link  https://ajaydsouza.com
+ * @link  https://webberzone.com
  * @since 1.3.0
  *
  * @package Add_to_All

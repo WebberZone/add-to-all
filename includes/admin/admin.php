@@ -2,7 +2,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link  https://ajaydsouza.com
+ * @link  https://webberzone.com
  * @since 1.2.0
  *
  * @package    Add_to_All
@@ -211,7 +211,7 @@ function ata_admin_footer( $footer_text ) {
 		$text = sprintf(
 			/* translators: 1: Plugin page link, 2: Review link. */
 			__( 'Thank you for using <a href="%1$s" target="_blank">Add to All</a>! Please <a href="%2$s" target="_blank">rate us</a> on <a href="%2$s" target="_blank">WordPress.org</a>', 'add-to-all' ),
-			'https://ajaydsouza.com/wordpress/plugins/add-to-all',
+			'https://webberzone.com/plugins/add-to-all',
 			'https://wordpress.org/support/plugin/add-to-all/reviews/#new-post'
 		);
 
@@ -256,7 +256,7 @@ function ata_plugin_actions( $links, $file ) {
 
 	if ( false !== strpos( $file, 'add-to-all.php' ) ) {
 		$links[] = '<a href="http://wordpress.org/support/plugin/add-to-all">' . esc_html__( 'Support', 'add-to-all' ) . '</a>';
-		$links[] = '<a href="https://ajaydsouza.com/donate/">' . esc_html__( 'Donate', 'add-to-all' ) . '</a>';
+		$links[] = '<a href="https://webberzone.com/donate/">' . esc_html__( 'Donate', 'add-to-all' ) . '</a>';
 	}
 	return $links;
 }
