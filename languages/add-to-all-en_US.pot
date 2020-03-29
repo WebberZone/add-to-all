@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Contextual Related Posts\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-06 22:24+0100\n"
+"POT-Creation-Date: 2020-03-29 22:58+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Ajay D'Souza <me@ajaydsouza.com>\n"
 "Language-Team: me@ajaydsouza.com\n"
@@ -14,18 +14,14 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_c;__ngettext;_x;esc_html__;esc_attr__;"
 "esc_html_e;esc_attr_e\n"
 "X-Poedit-Basepath: ..\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: includes/admin/admin.php:30
 msgid "Add to All"
 msgstr ""
 
-#: includes/admin/admin.php:169
-msgid "New information not saved. Do you wish to leave the page?"
-msgstr ""
-
-#: includes/admin/admin.php:213
+#: includes/admin/admin.php:54
 #, php-format
 msgid ""
 "Thank you for using <a href=\"%1$s\" target=\"_blank\">Add to All</a>! "
@@ -33,15 +29,15 @@ msgid ""
 "target=\"_blank\">WordPress.org</a>"
 msgstr ""
 
-#: includes/admin/admin.php:239
+#: includes/admin/admin.php:80
 msgid "Settings"
 msgstr ""
 
-#: includes/admin/admin.php:258 includes/admin/sidebar.php:42
+#: includes/admin/admin.php:99 includes/admin/sidebar.php:42
 msgid "Support"
 msgstr ""
 
-#: includes/admin/admin.php:259
+#: includes/admin/admin.php:100
 msgid "Donate"
 msgstr ""
 
@@ -156,210 +152,210 @@ msgstr ""
 msgid "Add the CSS code without the <style></style> tags."
 msgstr ""
 
-#: includes/admin/default-settings.php:180
+#: includes/admin/default-settings.php:181
 msgid "HTML to add to the header"
 msgstr ""
 
-#: includes/admin/default-settings.php:182
-#: includes/admin/default-settings.php:398
+#: includes/admin/default-settings.php:183
+#: includes/admin/default-settings.php:408
 #, php-format
 msgid ""
 "The code entered here is added to %1$s. Please ensure that you enter valid "
 "HTML or JavaScript."
 msgstr ""
 
-#: includes/admin/default-settings.php:210
+#: includes/admin/default-settings.php:212
 msgid "Content filter priority"
 msgstr ""
 
-#: includes/admin/default-settings.php:211
+#: includes/admin/default-settings.php:213
 msgid ""
 "A higher number will cause the Add to All output to be processed after "
 "other filters. Number below 10 is not recommended."
 msgstr ""
 
-#: includes/admin/default-settings.php:217
+#: includes/admin/default-settings.php:219
 msgid "Exclude display on these post IDs"
 msgstr ""
 
-#: includes/admin/default-settings.php:218
+#: includes/admin/default-settings.php:220
 msgid ""
 "Comma-separated list of post or page IDs to exclude displaying the above "
 "content. e.g. 188,320,500"
 msgstr ""
 
-#: includes/admin/default-settings.php:224
+#: includes/admin/default-settings.php:226
 msgid "Process shortcodes in content"
 msgstr ""
 
-#: includes/admin/default-settings.php:225
-#: includes/admin/default-settings.php:458
+#: includes/admin/default-settings.php:227
+#: includes/admin/default-settings.php:470
 msgid ""
 "Check this box to execute any shortcodes that you enter in the options "
 "below."
 msgstr ""
 
-#: includes/admin/default-settings.php:231
+#: includes/admin/default-settings.php:233
 msgid "Home and other views"
 msgstr ""
 
-#: includes/admin/default-settings.php:232
+#: includes/admin/default-settings.php:234
 msgid ""
 "Displays when viewing single posts, home, category, tag and other archives."
 msgstr ""
 
-#: includes/admin/default-settings.php:237
-#: includes/admin/default-settings.php:271
-#: includes/admin/default-settings.php:305
-#: includes/admin/default-settings.php:339
-#: includes/admin/default-settings.php:464
+#: includes/admin/default-settings.php:239
+#: includes/admin/default-settings.php:275
+#: includes/admin/default-settings.php:311
+#: includes/admin/default-settings.php:347
+#: includes/admin/default-settings.php:476
 msgid "Add HTML before content?"
 msgstr ""
 
-#: includes/admin/default-settings.php:238
-#: includes/admin/default-settings.php:252
-#: includes/admin/default-settings.php:272
-#: includes/admin/default-settings.php:286
-#: includes/admin/default-settings.php:306
-#: includes/admin/default-settings.php:320
-#: includes/admin/default-settings.php:465
-#: includes/admin/default-settings.php:479
+#: includes/admin/default-settings.php:240
+#: includes/admin/default-settings.php:255
+#: includes/admin/default-settings.php:276
+#: includes/admin/default-settings.php:291
+#: includes/admin/default-settings.php:312
+#: includes/admin/default-settings.php:327
+#: includes/admin/default-settings.php:477
+#: includes/admin/default-settings.php:492
 msgid "Check this to add the HTML below before the content of your post."
 msgstr ""
 
-#: includes/admin/default-settings.php:244
-#: includes/admin/default-settings.php:278
-#: includes/admin/default-settings.php:312
-#: includes/admin/default-settings.php:346
-#: includes/admin/default-settings.php:471
+#: includes/admin/default-settings.php:246
+#: includes/admin/default-settings.php:282
+#: includes/admin/default-settings.php:318
+#: includes/admin/default-settings.php:354
+#: includes/admin/default-settings.php:483
 msgid "HTML to add before the content"
 msgstr ""
 
-#: includes/admin/default-settings.php:245
-#: includes/admin/default-settings.php:259
-#: includes/admin/default-settings.php:279
-#: includes/admin/default-settings.php:293
-#: includes/admin/default-settings.php:313
-#: includes/admin/default-settings.php:327
-#: includes/admin/default-settings.php:347
-#: includes/admin/default-settings.php:361
-#: includes/admin/default-settings.php:472
-#: includes/admin/default-settings.php:486
+#: includes/admin/default-settings.php:247
+#: includes/admin/default-settings.php:262
+#: includes/admin/default-settings.php:283
+#: includes/admin/default-settings.php:298
+#: includes/admin/default-settings.php:319
+#: includes/admin/default-settings.php:334
+#: includes/admin/default-settings.php:355
+#: includes/admin/default-settings.php:370
+#: includes/admin/default-settings.php:484
+#: includes/admin/default-settings.php:499
 msgid ""
 "Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed."
 msgstr ""
 
-#: includes/admin/default-settings.php:251
-#: includes/admin/default-settings.php:285
-#: includes/admin/default-settings.php:319
-#: includes/admin/default-settings.php:353
-#: includes/admin/default-settings.php:478
+#: includes/admin/default-settings.php:254
+#: includes/admin/default-settings.php:290
+#: includes/admin/default-settings.php:326
+#: includes/admin/default-settings.php:362
+#: includes/admin/default-settings.php:491
 msgid "Add HTML after content?"
 msgstr ""
 
-#: includes/admin/default-settings.php:258
-#: includes/admin/default-settings.php:292
-#: includes/admin/default-settings.php:326
-#: includes/admin/default-settings.php:360
-#: includes/admin/default-settings.php:485
+#: includes/admin/default-settings.php:261
+#: includes/admin/default-settings.php:297
+#: includes/admin/default-settings.php:333
+#: includes/admin/default-settings.php:369
+#: includes/admin/default-settings.php:498
 msgid "HTML to add after the content"
 msgstr ""
 
-#: includes/admin/default-settings.php:265
+#: includes/admin/default-settings.php:269
 msgid "Single posts views"
 msgstr ""
 
-#: includes/admin/default-settings.php:266
+#: includes/admin/default-settings.php:270
 msgid ""
 "Displays when viewing single views including posts, pages, custom-post-"
 "types."
 msgstr ""
 
-#: includes/admin/default-settings.php:299
+#: includes/admin/default-settings.php:305
 msgid "Post only views"
 msgstr ""
 
-#: includes/admin/default-settings.php:300
+#: includes/admin/default-settings.php:306
 msgid "Displays only on posts"
 msgstr ""
 
-#: includes/admin/default-settings.php:333
+#: includes/admin/default-settings.php:341
 msgid "Page only views"
 msgstr ""
 
-#: includes/admin/default-settings.php:334
+#: includes/admin/default-settings.php:342
 msgid "Displays only on pages"
 msgstr ""
 
-#: includes/admin/default-settings.php:340
-#: includes/admin/default-settings.php:354
+#: includes/admin/default-settings.php:348
+#: includes/admin/default-settings.php:363
 msgid "Check this to add the HTML below before the content of your page."
 msgstr ""
 
-#: includes/admin/default-settings.php:389
+#: includes/admin/default-settings.php:399
 msgid "Process shortcodes in footer"
 msgstr ""
 
-#: includes/admin/default-settings.php:390
+#: includes/admin/default-settings.php:400
 msgid ""
 "Check this box to execute any shortcodes that you enter in the option below."
 msgstr ""
 
-#: includes/admin/default-settings.php:396
+#: includes/admin/default-settings.php:406
 msgid "HTML to add to the footer"
 msgstr ""
 
-#: includes/admin/default-settings.php:426
+#: includes/admin/default-settings.php:437
 msgid "Add copyright notice?"
 msgstr ""
 
-#: includes/admin/default-settings.php:427
+#: includes/admin/default-settings.php:438
 msgid "Check this to add the below copyright notice to your feed."
 msgstr ""
 
-#: includes/admin/default-settings.php:433
+#: includes/admin/default-settings.php:444
 msgid "Coyright text"
 msgstr ""
 
-#: includes/admin/default-settings.php:435
+#: includes/admin/default-settings.php:446
 msgid ""
 "Enter valid HTML only. This copyright notice is added as the last item of "
 "your feed. You can also use %year% for the year or %first_year% for the "
 "year of the first post,"
 msgstr ""
 
-#: includes/admin/default-settings.php:441
+#: includes/admin/default-settings.php:453
 msgid "Add post title?"
 msgstr ""
 
-#: includes/admin/default-settings.php:442
+#: includes/admin/default-settings.php:454
 msgid "Add a link to the title of the post in the feed."
 msgstr ""
 
-#: includes/admin/default-settings.php:448
+#: includes/admin/default-settings.php:460
 msgid "Title text"
 msgstr ""
 
-#: includes/admin/default-settings.php:450
+#: includes/admin/default-settings.php:462
 msgid ""
 "The above text will be added to the feed. You can use %title% to add a link "
 "to the post, %date% and %time% to display the date and time of the post "
 "respectively."
 msgstr ""
 
-#: includes/admin/default-settings.php:453
+#: includes/admin/default-settings.php:465
 msgid "%title% was first posted on %date% at %time%."
 msgstr ""
 
-#: includes/admin/default-settings.php:457
+#: includes/admin/default-settings.php:469
 msgid "Process shortcodes in feed"
 msgstr ""
 
-#: includes/admin/default-settings.php:492
+#: includes/admin/default-settings.php:506
 msgid "Add a link to \"Add to All\" plugin page"
 msgstr ""
 
-#: includes/admin/default-settings.php:518
+#: includes/admin/default-settings.php:532
 msgid ""
 "Use of this feed is for personal non-commercial use only. If you are not "
 "reading this article in your feed reader, then the site is guilty of "
@@ -511,7 +507,7 @@ msgstr ""
 msgid "The callback function used for the %1$s setting is missing."
 msgstr ""
 
-#: includes/admin/settings-page.php:313
+#: includes/admin/settings-page.php:315
 msgid "Modified from default setting"
 msgstr ""
 
