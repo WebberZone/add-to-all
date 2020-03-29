@@ -3,7 +3,7 @@ Tags: header, footer, feed, Google Analytics, Statcounter, Tynt, content, Adsens
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
 Stable tag: trunk
-Requires at least: 4.7
+Requires at least: 4.9
 Tested up to: 5.4
 License: GPLv2 or later
 
@@ -69,6 +69,11 @@ If you would like a feature to be added, or if you already have the code for the
 
 == Changelog ==
 
+= 1.6.0 =
+
+* Features:
+	* Added CodeMirror highlighting for the HTML and CSS fields in the settings page
+
 = 1.5.0 =
 
 Release post: [https://ajaydsouza.com/add-to-all-v1-5-0/](https://ajaydsouza.com/add-to-all-v1-5-0/)
@@ -111,6 +116,6 @@ Check changelog.txt for older entries the [Releases page on Github](https://gith
 
 == Upgrade Notice ==
 
-= 1.5.0 =
-New options for posts and pages; Check out the Changelog for more details
+= 1.6.0 =
+Highlighted settings; Check out the Changelog for more details
 

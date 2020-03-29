@@ -7,7 +7,7 @@
 [![WordPress Tested](https://img.shields.io/wordpress/v/add-to-all.svg?style=flat-square)](https://wordpress.org/plugins/add-to-all/)
 [![Build Status](https://travis-ci.org/WebberZone/add-to-all.svg?branch=master)](https://travis-ci.org/WebberZone/add-to-all)
 
-__Requires:__ 4.7
+__Requires:__ 4.9
 
 __Tested up to:__ 5.4
 
