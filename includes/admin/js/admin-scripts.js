@@ -128,7 +128,7 @@ jQuery(document).ready(function($) {
 
 	// Initialise CodeMirror.
 	$( ".codemirror_html" ).each( function( index, element ) {
-		if( $( element ).length ) {
+		if( $( element ).length && typeof wp.codeEditor === 'object' ) {
 			var editorSettings = wp.codeEditor.defaultSettings ? _.clone( wp.codeEditor.defaultSettings ) : {};
 			editorSettings.codemirror = _.extend(
 				{},
@@ -142,7 +142,7 @@ jQuery(document).ready(function($) {
 	});
 
 	$( ".codemirror_js" ).each( function( index, element ) {
-		if( $( element ).length ) {
+		if( $( element ).length && typeof wp.codeEditor === 'object' ) {
 			var editorSettings = wp.codeEditor.defaultSettings ? _.clone( wp.codeEditor.defaultSettings ) : {};
 			editorSettings.codemirror = _.extend(
 				{},
@@ -157,7 +157,7 @@ jQuery(document).ready(function($) {
 	});
 
 	$( ".codemirror_css" ).each( function( index, element ) {
-		if( $( element ).length ) {
+		if( $( element ).length && typeof wp.codeEditor === 'object' ) {
 			var editorSettings = wp.codeEditor.defaultSettings ? _.clone( wp.codeEditor.defaultSettings ) : {};
 			editorSettings.codemirror = _.extend(
 				{},
