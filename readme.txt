@@ -71,6 +71,8 @@ If you would like a feature to be added, or if you already have the code for the
 
 = 1.6.0 =
 
+Release post: [https://webberzone.com/blog/add-to-all-v1-6-0/](https://webberzone.com/blog/add-to-all-v1-6-0/)
+
 * Features:
 	* Added CodeMirror highlighting for the HTML and CSS fields in the settings page
 
