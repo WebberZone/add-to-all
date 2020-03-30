@@ -117,5 +117,5 @@ Check changelog.txt for older entries the [Releases page on Github](https://gith
 == Upgrade Notice ==
 
 = 1.6.0 =
-Highlighted settings; Check out the Changelog for more details
+Implemented CodeMirror for code highlighting; Minimum WordPress supported version bumped up to v4.9; Check out the Changelog for more details
 

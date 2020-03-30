@@ -2,9 +2,9 @@
 
 ![Add to All](https://raw.githubusercontent.com/WebberZone/add-to-all/master/wporg-assets/banner-1544x500.png)
 
-[![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/add-to-all.svg?style=flat-square)](https://wordpress.org/plugins/add-to-all/)
+[![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/add-to-all?style=flat-square)](https://wordpress.org/plugins/add-to-all/)
 [![License](https://img.shields.io/badge/license-GPL_v2%2B-orange.svg?style=flat-square)](http://opensource.org/licenses/GPL-2.0)
-[![WordPress Tested](https://img.shields.io/wordpress/v/add-to-all.svg?style=flat-square)](https://wordpress.org/plugins/add-to-all/)
+[![WordPress Tested](https://img.shields.io/wordpress/plugin/tested/add-to-all?style=flat-square)](https://wordpress.org/plugins/add-to-all/)
 [![Build Status](https://travis-ci.org/WebberZone/add-to-all.svg?branch=master)](https://travis-ci.org/WebberZone/add-to-all)
 
 __Requires:__ 4.9
