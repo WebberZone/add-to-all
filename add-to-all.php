@@ -6,7 +6,7 @@
  *
  * @wordpress-plugin
  * Plugin Name: Add to All
- * Version:     1.6.0
+ * Version:     1.7.0-beta1
  * Plugin URI:  https://webberzone.com/plugins/add-to-all/
  * Description: A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
  * Author:      Ajay D'Souza
@@ -58,12 +58,23 @@ if ( ! defined( 'ATA_PLUGIN_URL' ) ) {
 
 /*
  *----------------------------------------------------------------------------
- * Add to All Settings
+ * Include files
  *----------------------------------------------------------------------------
  */
 
-require_once ATA_PLUGIN_DIR . 'includes/admin/default-settings.php';
-require_once ATA_PLUGIN_DIR . 'includes/admin/register-settings.php';
+require_once ATA_PLUGIN_DIR . 'includes/admin/class-settings-api.php';
+require_once ATA_PLUGIN_DIR . 'includes/admin/class-ata-settings.php';
+require_once ATA_PLUGIN_DIR . 'includes/admin/options-api.php';
+require_once ATA_PLUGIN_DIR . 'includes/i10n.php';
+require_once ATA_PLUGIN_DIR . 'includes/helpers.php';
+require_once ATA_PLUGIN_DIR . 'includes/content.php';
+require_once ATA_PLUGIN_DIR . 'includes/header.php';
+require_once ATA_PLUGIN_DIR . 'includes/footer.php';
+require_once ATA_PLUGIN_DIR . 'includes/feed.php';
+require_once ATA_PLUGIN_DIR . 'includes/modules/statcounter.php';
+require_once ATA_PLUGIN_DIR . 'includes/modules/google-analytics.php';
+require_once ATA_PLUGIN_DIR . 'includes/modules/tynt.php';
+require_once ATA_PLUGIN_DIR . 'includes/modules/site-verification.php';
 
 
 /**
@@ -99,39 +110,6 @@ function ata_get_settings() {
 	return apply_filters( 'ata_get_settings', $settings );
 }
 
-
-/*
- *----------------------------------------------------------------------------
- * Include files
- *----------------------------------------------------------------------------
- */
-
-	require_once ATA_PLUGIN_DIR . 'includes/i10n.php';
-	require_once ATA_PLUGIN_DIR . 'includes/helpers.php';
-	require_once ATA_PLUGIN_DIR . 'includes/content.php';
-	require_once ATA_PLUGIN_DIR . 'includes/header.php';
-	require_once ATA_PLUGIN_DIR . 'includes/footer.php';
-	require_once ATA_PLUGIN_DIR . 'includes/feed.php';
-	require_once ATA_PLUGIN_DIR . 'includes/modules/statcounter.php';
-	require_once ATA_PLUGIN_DIR . 'includes/modules/google-analytics.php';
-	require_once ATA_PLUGIN_DIR . 'includes/modules/tynt.php';
-	require_once ATA_PLUGIN_DIR . 'includes/modules/site-verification.php';
-
-
-/*
- *----------------------------------------------------------------------------
- * Dashboard and Administrative Functionality
- *----------------------------------------------------------------------------
- */
-
-if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
-
-	require_once ATA_PLUGIN_DIR . 'includes/admin/admin.php';
-	require_once ATA_PLUGIN_DIR . 'includes/admin/settings-page.php';
-	require_once ATA_PLUGIN_DIR . 'includes/admin/save-settings.php';
-	require_once ATA_PLUGIN_DIR . 'includes/admin/help-tab.php';
-
-}
 
 /*
  *----------------------------------------------------------------------------

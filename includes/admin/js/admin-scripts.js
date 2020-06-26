@@ -1,4 +1,28 @@
 jQuery(document).ready(function($) {
+	// File browser.
+	$('.file-browser').on('click', function (event) {
+		event.preventDefault();
+
+		var self = $(this);
+
+		// Create the media frame.
+		var file_frame = wp.media.frames.file_frame = wp.media({
+			title: self.data('uploader_title'),
+			button: {
+				text: self.data('uploader_button_text'),
+			},
+			multiple: false
+		});
+
+		file_frame.on('select', function () {
+			attachment = file_frame.state().get('selection').first().toJSON();
+			self.prev('.file-url').val(attachment.url).change();
+		});
+
+		// Finally, open the modal
+		file_frame.open();
+	});
+
 	// Function to add auto suggest.
 	$.fn.ataTagsSuggest = function( options ) {
 
@@ -106,13 +130,19 @@ jQuery(document).ready(function($) {
 		}
 	}
 
+	function formNotModified() {
+		formmodified = 0;
+	}
+
 	$('form *').change( confirmFormChange );
 
 	window.onbeforeunload = confirmExit;
 
-	$( "input[name='submit']" ).click( function() {
-		formmodified = 0;
-	});
+	$( "input[name='submit']" ).click(formNotModified);
+	$( "input[id='search-submit']" ).click(formNotModified);
+	$( "input[id='doaction']" ).click(formNotModified);
+	$( "input[id='doaction2']" ).click(formNotModified);
+	$( "input[name='filter_action']" ).click(formNotModified);
 
 	$( function() {
 		$( "#post-body-content" ).tabs({
@@ -169,6 +199,11 @@ jQuery(document).ready(function($) {
 			var editor = wp.codeEditor.initialize( $( element ), editorSettings );
 			editor.codemirror.on( 'change', confirmFormChange );
 		}
+	});
+
+	// Initialise ColorPicker.
+	$( '.color-field' ).each( function ( i, element ) {
+		$( element ).wpColorPicker();
 	});
 
 });
