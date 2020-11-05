@@ -35,7 +35,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		 *
 		 * @since 1.7.0
 		 *
-		 * @var string Settings API.
+		 * @var object Settings API.
 		 */
 		public $settings_api;
 
