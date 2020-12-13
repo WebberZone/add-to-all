@@ -154,6 +154,8 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		 */
 		public function admin_enqueue_scripts( $hook ) {
 
+			$minimize = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
 			if ( $hook !== $this->settings_page ) {
 				return;
 			}
@@ -176,7 +178,9 @@ if ( ! class_exists( 'Settings_API' ) ) :
 				)
 			);
 
-			wp_enqueue_script( 'wz-admin-js', plugins_url( 'js/admin-scripts.min.js', __FILE__ ), array( 'jquery' ), '1.0', true );
+			wp_enqueue_script( 'wz-admin-js', plugins_url( 'js/admin-scripts' . $minimize . '.js', __FILE__ ), array( 'jquery' ), '1.0', true );
+			wp_enqueue_script( 'wz-codemirror-js', plugins_url( 'js/apply-codemirror' . $minimize . '.js', __FILE__ ), array( 'jquery' ), '1.0', true );
+			wp_enqueue_script( 'wz-taxonomy-suggest-js', plugins_url( 'js/taxonomy-suggest' . $minimize . '.js', __FILE__ ), array( 'jquery' ), '1.0', true );
 		}
 
 		/**
@@ -337,7 +341,7 @@ if ( ! class_exists( 'Settings_API' ) ) :
 						$options[ $option['id'] ] = 0;
 					}
 					// If an option is set.
-					if ( in_array( $option['type'], array( 'textarea', 'css', 'html', 'text', 'url', 'csv', 'color', 'numbercsv', 'posttypes', 'number', 'wysiwyg', 'file', 'password' ), true ) && isset( $option['options'] ) ) {
+					if ( in_array( $option['type'], array( 'textarea', 'css', 'html', 'text', 'url', 'csv', 'color', 'numbercsv', 'postids', 'posttypes', 'number', 'wysiwyg', 'file', 'password' ), true ) && isset( $option['options'] ) ) {
 						$options[ $option['id'] ] = $option['options'];
 					}
 					if ( in_array( $option['type'], array( 'multicheck', 'radio', 'select', 'radiodesc', 'thumbsizes' ), true ) && isset( $option['default'] ) ) {
@@ -527,6 +531,14 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			$this->callback_text( $args );
 		}
 
+		/**
+		 * Display postids fields.
+		 *
+		 * @param array $args Array of arguments.
+		 */
+		public function callback_postids( $args ) {
+			$this->callback_text( $args );
+		}
 
 		/**
 		 * Display textarea.
@@ -974,11 +986,11 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		/**
 		 * Sanitize text fields
 		 *
-		 * @param  array $input The field value.
-		 * @return string  $input  Sanitizied value
+		 * @param string $value The field value.
+		 * @return string Sanitizied value
 		 */
-		public function sanitize_text_field( $input ) {
-			return sanitize_text_field( $input );
+		public function sanitize_text_field( $value ) {
+			return sanitize_text_field( $value );
 		}
 
 		/**
@@ -994,30 +1006,48 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		/**
 		 * Sanitize CSV fields
 		 *
-		 * @param  array $input The field value.
-		 * @return string  $input  Sanitizied value
+		 * @param string $value The field value.
+		 * @return string Sanitizied value
 		 */
-		public function sanitize_csv_field( $input ) {
-			return implode( ',', array_map( 'trim', explode( ',', sanitize_text_field( wp_unslash( $input ) ) ) ) );
+		public function sanitize_csv_field( $value ) {
+			return implode( ',', array_map( 'trim', explode( ',', sanitize_text_field( wp_unslash( $value ) ) ) ) );
 		}
 
 		/**
-		 * Sanitize CSV fields which hold numbers e.g. IDs
+		 * Sanitize CSV fields which hold numbers
 		 *
-		 * @param  array $value The field value.
-		 * @return string  $value  Sanitized value
+		 * @param string $value The field value.
+		 * @return string Sanitized value
 		 */
 		public function sanitize_numbercsv_field( $value ) {
 			return implode( ',', array_filter( array_map( 'absint', explode( ',', sanitize_text_field( wp_unslash( $value ) ) ) ) ) );
 		}
 
 		/**
+		 * Sanitize CSV fields which hold post IDs
+		 *
+		 * @param string $value The field value.
+		 * @return string Sanitized value
+		 */
+		public function sanitize_postids_field( $value ) {
+			$ids = array_filter( array_map( 'absint', explode( ',', sanitize_text_field( wp_unslash( $value ) ) ) ) );
+
+			foreach ( $ids as $key => $value ) {
+				if ( false === get_post_status( $value ) ) {
+					unset( $ids[ $key ] );
+				}
+			}
+
+			return implode( ',', $ids );
+		}
+
+		/**
 		 * Sanitize textarea fields
 		 *
-		 * @param  array $input The field value.
-		 * @return string  $input  Sanitizied value
+		 * @param string $value The field value.
+		 * @return string Sanitized value
 		 */
-		public function sanitize_textarea_field( $input ) {
+		public function sanitize_textarea_field( $value ) {
 
 			global $allowedposttags;
 
@@ -1054,15 +1084,15 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			 */
 			$allowedtags = apply_filters( $this->prefix . '_sanitize_allowed_tags', $allowedtags );
 
-			return wp_kses( wp_unslash( $input ), $allowedtags );
+			return wp_kses( wp_unslash( $value ), $allowedtags );
 
 		}
 
 		/**
 		 * Sanitize checkbox fields
 		 *
-		 * @param  array $value The field value.
-		 * @return string|int  $value  Sanitized value
+		 * @param mixed $value The field value.
+		 * @return int  Sanitized value
 		 */
 		public function sanitize_checkbox_field( $value ) {
 

@@ -105,9 +105,9 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
 function ata_process_placeholders( $input ) {
 
 	$placeholders = array(
-		'%year%'       => date( 'Y' ), // A full numeric representation of a year, 4 digits.
-		'%month%'      => date( 'F' ), // January through December.
-		'%date%'       => date( 'j' ), // Date - 01 to 31.
+		'%year%'       => gmdate( 'Y' ), // A full numeric representation of a year, 4 digits.
+		'%month%'      => gmdate( 'F' ), // January through December.
+		'%date%'       => gmdate( 'j' ), // Date - 01 to 31.
 		'%first_year%' => ata_get_first_post_year(),
 		'%home_url%'   => get_home_url(),
 	);
@@ -175,3 +175,65 @@ function ata_get_first_post_year() {
 
 	return false;
 }
+
+
+/**
+ * Convert a string to CSV.
+ *
+ * @since 2.9.0
+ *
+ * @param array  $array Input string.
+ * @param string $delimiter Delimiter.
+ * @param string $enclosure Enclosure.
+ * @param string $terminator Terminating string.
+ * @return string CSV string.
+ */
+function ata_str_putcsv( $array, $delimiter = ',', $enclosure = '"', $terminator = "\n" ) {
+	// First convert associative array to numeric indexed array.
+	$work_array = array();
+	foreach ( $array as $key => $value ) {
+		$work_array[] = $value;
+	}
+
+	$string     = '';
+	$array_size = count( $work_array );
+
+	for ( $i = 0; $i < $array_size; $i++ ) {
+		// Nested array, process nest item.
+		if ( is_array( $work_array[ $i ] ) ) {
+			$string .= ata_str_putcsv( $work_array[ $i ], $delimiter, $enclosure, $terminator );
+		} else {
+			switch ( gettype( $work_array[ $i ] ) ) {
+				// Manually set some strings.
+				case 'NULL':
+					$sp_format = '';
+					break;
+				case 'boolean':
+					$sp_format = ( true === $work_array[ $i ] ) ? 'true' : 'false';
+					break;
+				// Make sure sprintf has a good datatype to work with.
+				case 'integer':
+					$sp_format = '%i';
+					break;
+				case 'double':
+					$sp_format = '%0.2f';
+					break;
+				case 'string':
+					$sp_format        = '%s';
+					$work_array[ $i ] = str_replace( "$enclosure", "$enclosure$enclosure", $work_array[ $i ] );
+					break;
+				// Unknown or invalid items for a csv - note: the datatype of array is already handled above, assuming the data is nested.
+				case 'object':
+				case 'resource':
+				default:
+					$sp_format = '';
+					break;
+			}
+			$string .= sprintf( '%2$s' . $sp_format . '%2$s', $work_array[ $i ], $enclosure );
+			$string .= ( $i < ( $array_size - 1 ) ) ? $delimiter : $terminator;
+		}
+	}
+
+	return $string;
+}
+

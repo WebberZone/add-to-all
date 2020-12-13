@@ -175,7 +175,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			$settings = array(
 				'statcounter_header'      => array(
 					'id'   => 'statcounter_header',
-					'name' => '<h3>' . esc_html__( 'StatCounter', 'easy-digital-downloads' ) . '</h3>',
+					'name' => '<h3>' . esc_html__( 'StatCounter', 'add-to-all' ) . '</h3>',
 					'desc' => '',
 					'type' => 'header',
 				),
@@ -195,7 +195,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 				),
 				'google_analytics_header' => array(
 					'id'   => 'google_analytics_header',
-					'name' => '<h3>' . esc_html__( 'Google Analytics', 'easy-digital-downloads' ) . '</h3>',
+					'name' => '<h3>' . esc_html__( 'Google Analytics', 'add-to-all' ) . '</h3>',
 					'desc' => '',
 					'type' => 'header',
 				),
@@ -222,7 +222,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 				),
 				'tynt_header'             => array(
 					'id'   => 'tynt_header',
-					'name' => '<h3>' . esc_html__( '33 Across (Tynt)', 'easy-digital-downloads' ) . '</h3>',
+					'name' => '<h3>' . esc_html__( '33 Across (Tynt)', 'add-to-all' ) . '</h3>',
 					'desc' => '',
 					'type' => 'header',
 				),
@@ -236,7 +236,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 				),
 				'verification_header'     => array(
 					'id'   => 'verification_header',
-					'name' => '<h3>' . esc_html__( 'Site verification', 'easy-digital-downloads' ) . '</h3>',
+					'name' => '<h3>' . esc_html__( 'Site verification', 'add-to-all' ) . '</h3>',
 					'desc' => '',
 					'type' => 'header',
 				),
@@ -336,7 +336,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 					'id'      => 'exclude_on_post_ids',
 					'name'    => esc_html__( 'Exclude display on these post IDs', 'add-to-all' ),
 					'desc'    => esc_html__( 'Comma-separated list of post or page IDs to exclude displaying the above content. e.g. 188,320,500', 'add-to-all' ),
-					'type'    => 'numbercsv',
+					'type'    => 'postids',
 					'options' => '',
 				),
 				'content_process_shortcode'      => array(
@@ -348,7 +348,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 				),
 				'content_header_all'             => array(
 					'id'   => 'content_header_all',
-					'name' => '<h3>' . esc_html__( 'Home and other views', 'easy-digital-downloads' ) . '</h3>',
+					'name' => '<h3>' . esc_html__( 'Home and other views', 'add-to-all' ) . '</h3>',
 					'desc' => esc_html__( 'Displays when viewing single posts, home, category, tag and other archives.', 'add-to-all' ),
 					'type' => 'header',
 				),
@@ -384,7 +384,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 				),
 				'content_header_single'          => array(
 					'id'   => 'content_header_single',
-					'name' => '<h3>' . esc_html__( 'Single posts views', 'easy-digital-downloads' ) . '</h3>',
+					'name' => '<h3>' . esc_html__( 'Single posts views', 'add-to-all' ) . '</h3>',
 					'desc' => esc_html__( 'Displays when viewing single views including posts, pages, custom-post-types.', 'add-to-all' ),
 					'type' => 'header',
 				),
@@ -420,7 +420,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 				),
 				'content_header_post'            => array(
 					'id'   => 'content_header_post',
-					'name' => '<h3>' . esc_html__( 'Post only views', 'easy-digital-downloads' ) . '</h3>',
+					'name' => '<h3>' . esc_html__( 'Post only views', 'add-to-all' ) . '</h3>',
 					'desc' => esc_html__( 'Displays only on posts', 'add-to-all' ),
 					'type' => 'header',
 				),
@@ -456,7 +456,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 				),
 				'content_header_page'            => array(
 					'id'   => 'content_header_page',
-					'name' => '<h3>' . esc_html__( 'Page only views', 'easy-digital-downloads' ) . '</h3>',
+					'name' => '<h3>' . esc_html__( 'Page only views', 'add-to-all' ) . '</h3>',
 					'desc' => esc_html__( 'Displays only on pages', 'add-to-all' ),
 					'type' => 'header',
 				),

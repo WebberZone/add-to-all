@@ -138,27 +138,6 @@ function ata_delete_option( $key = '' ) {
 
 
 /**
- * Get the default option for a specific key
- *
- * @since 1.3.0
- *
- * @param string $key Key of the option to fetch.
- * @return mixed
- */
-function ata_get_default_option( $key = '' ) {
-
-	$default_settings = ata_settings_defaults();
-
-	if ( array_key_exists( $key, $default_settings ) ) {
-		return $default_settings[ $key ];
-	} else {
-		return false;
-	}
-
-}
-
-
-/**
  * Reset settings.
  *
  * @since 1.2.0
@@ -169,3 +148,64 @@ function ata_settings_reset() {
 	delete_option( 'ata_settings' );
 }
 
+
+/**
+ * Function to add an action to search for tags using Ajax.
+ *
+ * @since 2.6.0
+ *
+ * @return void
+ */
+function ata_tag_search() {
+
+	if ( ! isset( $_REQUEST['tax'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		wp_die( 0 );
+	}
+
+	$taxonomy = sanitize_key( $_REQUEST['tax'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$tax      = get_taxonomy( $taxonomy );
+	if ( ! $tax ) {
+		wp_die( 0 );
+	}
+
+	if ( ! current_user_can( $tax->cap->assign_terms ) ) {
+		wp_die( -1 );
+	}
+
+	$s = isset( $_REQUEST['q'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['q'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+	$comma = _x( ',', 'tag delimiter' );
+	if ( ',' !== $comma ) {
+		$s = str_replace( $comma, ',', $s );
+	}
+	if ( false !== strpos( $s, ',' ) ) {
+		$s = explode( ',', $s );
+		$s = $s[ count( $s ) - 1 ];
+	}
+	$s = trim( $s );
+
+	/** This filter has been defined in /wp-admin/includes/ajax-actions.php */
+	$term_search_min_chars = (int) apply_filters( 'term_search_min_chars', 2, $tax, $s );
+
+	/*
+	 * Require $term_search_min_chars chars for matching (default: 2)
+	 * ensure it's a non-negative, non-zero integer.
+	 */
+	if ( ( 0 === $term_search_min_chars ) || ( strlen( $s ) < $term_search_min_chars ) ) {
+		wp_die();
+	}
+
+	$results = get_terms(
+		array(
+			'taxonomy'   => $taxonomy,
+			'name__like' => $s,
+			'fields'     => 'names',
+			'hide_empty' => false,
+		)
+	);
+
+	echo wp_json_encode( $results );
+	wp_die();
+
+}
+add_action( 'wp_ajax_ata_tag_search', 'ata_tag_search' );
