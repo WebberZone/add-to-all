@@ -649,8 +649,6 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			$value = $this->get_option( $args['id'], $args['default'] );
 
 			foreach ( $args['options'] as $key => $option ) {
-				$checked = false;
-
 				$html .= sprintf( '<input name="%1$s[%2$s]" id="%1$s[%2$s][%3$s]" type="radio" value="%3$s" %4$s /> ', $this->settings_key, sanitize_key( $args['id'] ), $key, checked( $value, $key, false ) );
 				$html .= sprintf( '<label for="%1$s[%2$s][%3$s]">%3$s</label> <br />', $this->settings_key, sanitize_key( $args['id'] ), $key, $option );
 			}
@@ -675,8 +673,6 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			$value = $this->get_option( $args['id'], $args['default'] );
 
 			foreach ( $args['options'] as $option ) {
-				$checked = false;
-
 				$html .= sprintf( '<input name="%1$s[%2$s]" id="%1$s[%2$s][%3$s]" type="radio" value="%3$s" %4$s /> ', $this->settings_key, sanitize_key( $args['id'] ), $option['id'], checked( $value, $option['id'], false ) );
 				$html .= sprintf( '<label for="%1$s[%2$s][%3$s]">%3$s</label> <br />', $this->settings_key, sanitize_key( $args['id'] ), $option['id'], $option['name'] );
 
