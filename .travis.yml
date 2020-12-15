@@ -55,13 +55,9 @@ before_script:
         echo "Using PHPUnit 7.x"
         travis_retry composer global require "phpunit/phpunit:^7"
         ;;
-      7.0)
+      7.0|5.6)
         echo "Using PHPUnit 6.x"
         travis_retry composer global require "phpunit/phpunit:^6"
-        ;;
-      5.6)
-        echo "Using PHPUnit 4.x"
-        travis_retry composer global require "phpunit/phpunit:^4"
         ;;
       *)
         echo "No PHPUnit version handling for PHP version $TRAVIS_PHP_VERSION"
