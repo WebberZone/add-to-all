@@ -23,7 +23,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Holds the filesystem directory path (with trailing slash) for Top 10
+ * Holds the plugin file path
  *
  * @since 1.2.0
  *
@@ -35,7 +35,7 @@ if ( ! defined( 'ATA_PLUGIN_FILE' ) ) {
 
 
 /**
- * Holds the filesystem directory path (with trailing slash) for Top 10
+ * Holds the filesystem directory path (with trailing slash)
  *
  * @since 1.2.0
  *
@@ -46,7 +46,7 @@ if ( ! defined( 'ATA_PLUGIN_DIR' ) ) {
 }
 
 /**
- * Holds the filesystem directory path (with trailing slash) for Top 10
+ * Holds the URL directory path (with trailing slash)
  *
  * @since 1.2.0
  *
@@ -75,6 +75,11 @@ require_once ATA_PLUGIN_DIR . 'includes/modules/statcounter.php';
 require_once ATA_PLUGIN_DIR . 'includes/modules/google-analytics.php';
 require_once ATA_PLUGIN_DIR . 'includes/modules/tynt.php';
 require_once ATA_PLUGIN_DIR . 'includes/modules/site-verification.php';
+require_once ATA_PLUGIN_DIR . 'includes/modules/snippets/class-ata-snippets.php';
+require_once ATA_PLUGIN_DIR . 'includes/modules/snippets/snippets-op.php';
+require_once ATA_PLUGIN_DIR . 'includes/modules/snippets/class-ata-snippets-shortcode.php';
+require_once ATA_PLUGIN_DIR . 'includes/admin/class-ata-metabox.php';
+require_once ATA_PLUGIN_DIR . 'includes/admin/class-ata-admin-columns.php';
 
 
 /**
@@ -117,5 +122,5 @@ function ata_get_settings() {
  *----------------------------------------------------------------------------
  */
 
-	require_once ATA_PLUGIN_DIR . '/includes/deprecated.php';
+require_once ATA_PLUGIN_DIR . '/includes/deprecated.php';
 
