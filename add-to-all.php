@@ -75,12 +75,6 @@ require_once ATA_PLUGIN_DIR . 'includes/modules/statcounter.php';
 require_once ATA_PLUGIN_DIR . 'includes/modules/google-analytics.php';
 require_once ATA_PLUGIN_DIR . 'includes/modules/tynt.php';
 require_once ATA_PLUGIN_DIR . 'includes/modules/site-verification.php';
-require_once ATA_PLUGIN_DIR . 'includes/modules/snippets/class-ata-snippets.php';
-require_once ATA_PLUGIN_DIR . 'includes/modules/snippets/snippets-op.php';
-require_once ATA_PLUGIN_DIR . 'includes/modules/snippets/class-ata-snippets-shortcode.php';
-require_once ATA_PLUGIN_DIR . 'includes/admin/class-ata-metabox.php';
-require_once ATA_PLUGIN_DIR . 'includes/admin/class-ata-admin-columns.php';
-
 
 /**
  * Declare $ata_settings global so that it can be accessed in every function
@@ -113,6 +107,19 @@ function ata_get_settings() {
 	 * @param array $settings Settings array
 	 */
 	return apply_filters( 'ata_get_settings', $settings );
+}
+
+/*
+ *----------------------------------------------------------------------------
+ * Snippets Manager
+ *----------------------------------------------------------------------------
+ */
+if ( ata_get_option( 'enable_snippets' ) ) {
+	require_once ATA_PLUGIN_DIR . 'includes/modules/snippets/class-ata-snippets.php';
+	require_once ATA_PLUGIN_DIR . 'includes/modules/snippets/snippets-op.php';
+	require_once ATA_PLUGIN_DIR . 'includes/modules/snippets/class-ata-snippets-shortcode.php';
+	require_once ATA_PLUGIN_DIR . 'includes/admin/class-ata-metabox.php';
+	require_once ATA_PLUGIN_DIR . 'includes/admin/class-ata-admin-columns.php';
 }
 
 
