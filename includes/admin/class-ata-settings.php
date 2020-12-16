@@ -83,7 +83,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			$args = array(
 				'reset_message'   => __( 'Settings have been reset to their default values. Reload this page to view the updated settings.', 'add-to-all' ),
 				'success_message' => __( 'Settings updated.', 'add-to-all' ),
-				'default_tab'     => 'third_party',
+				'default_tab'     => 'general',
 				'settings_page'   => $this->settings_page,
 			);
 
@@ -116,6 +116,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		 */
 		public function get_settings_sections() {
 			$ata_settings_sections = array(
+				'general'     => esc_html__( 'General', 'add-to-all' ),
 				'third_party' => esc_html__( 'Third Party', 'add-to-all' ),
 				'head'        => esc_html__( 'Header', 'add-to-all' ),
 				'content'     => esc_html__( 'Content', 'add-to-all' ),
@@ -142,14 +143,15 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		 *
 		 * @return array Settings array
 		 */
-		public function get_registered_settings() {
+		public static function get_registered_settings() {
 
 			$ata_settings = array(
-				'third_party' => $this->settings_third_party(),
-				'head'        => $this->settings_head(),
-				'content'     => $this->settings_content(),
-				'footer'      => $this->settings_footer(),
-				'feed'        => $this->settings_feed(),
+				'general'     => self::settings_general(),
+				'third_party' => self::settings_third_party(),
+				'head'        => self::settings_head(),
+				'content'     => self::settings_content(),
+				'footer'      => self::settings_footer(),
+				'feed'        => self::settings_feed(),
 			);
 
 			/**
@@ -164,13 +166,42 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		}
 
 		/**
+		 * Returns the Header settings.
+		 *
+		 * @since 1.7.0
+		 *
+		 * @return array Header settings.
+		 */
+		public static function settings_general() {
+
+			$settings = array(
+				'enable_snippets' => array(
+					'id'      => 'enable_snippets',
+					'name'    => esc_html__( 'Enable Snippets Manager', 'add-to-all' ),
+					'desc'    => esc_html__( 'Disabling this will turn off the Snippets manager and any of the associated functionality. This will not delete any snippets data that was created before this was turned off.', 'add-to-all' ),
+					'type'    => 'checkbox',
+					'options' => true,
+				),
+			);
+
+			/**
+			 * Filters the Header settings array
+			 *
+			 * @since 1.7.0
+			 *
+			 * @param array $settings Header Settings array
+			 */
+			return apply_filters( 'ata_settings_general', $settings );
+		}
+
+		/**
 		 * Returns the Third party settings.
 		 *
 		 * @since 1.5.0
 		 *
 		 * @return array Third party settings.
 		 */
-		public function settings_third_party() {
+		public static function settings_third_party() {
 
 			$settings = array(
 				'statcounter_header'      => array(
@@ -283,7 +314,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		 *
 		 * @return array Header settings.
 		 */
-		public function settings_head() {
+		public static function settings_head() {
 
 			$settings = array(
 				'head_css'        => array(
@@ -322,7 +353,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		 *
 		 * @return array Content settings.
 		 */
-		public function settings_content() {
+		public static function settings_content() {
 
 			$settings = array(
 				'content_filter_priority'        => array(
@@ -509,7 +540,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		 *
 		 * @return array Footer settings.
 		 */
-		public function settings_footer() {
+		public static function settings_footer() {
 
 			$settings = array(
 				'footer_process_shortcode' => array(
@@ -547,7 +578,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		 *
 		 * @return array Feed settings.
 		 */
-		public function settings_feed() {
+		public static function settings_feed() {
 
 			$settings = array(
 				'feed_add_copyright'     => array(
@@ -563,7 +594,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 					/* translators: No strings here. */
 					'desc'        => esc_html__( 'Enter valid HTML only. This copyright notice is added as the last item of your feed. You can also use %year% for the year or %first_year% for the year of the first post,', 'add-to-all' ),
 					'type'        => 'html',
-					'options'     => $this->get_copyright_text(),
+					'options'     => self::get_copyright_text(),
 					'field_class' => 'codemirror_html',
 				),
 				'feed_add_title'         => array(
@@ -644,7 +675,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		 * @since 1.7.0
 		 * @return string Copyright notice
 		 */
-		public function get_copyright_text() {
+		public static function get_copyright_text() {
 
 			$copyrightnotice  = '&copy;' . gmdate( 'Y' ) . ' &quot;<a href="' . get_option( 'home' ) . '">' . get_option( 'blogname' ) . '</a>&quot;. ';
 			$copyrightnotice .= esc_html__( 'Use of this feed is for personal non-commercial use only. If you are not reading this article in your feed reader, then the site is guilty of copyright infringement. Please contact me at ', 'ald_ata_plugin' );
