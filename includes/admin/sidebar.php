@@ -17,7 +17,7 @@
 		<div class="inside" style="text-align: center">
 			<div id="donate-form">
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-					<input type="hidden" name="cmd" value="_xclick"> <input type="hidden" name="business" value="donate@ajaydsouza.com"> <input type="hidden" name="lc" value="IN"> <input type="hidden" name="item_name" value="<?php esc_attr_e( 'Donation for Add to All', 'add-to-all' ); ?>"> <input type="hidden" name="item_number" value="crp_plugin_settings"> <strong><?php esc_attr_e( 'Enter amount in USD', 'add-to-all' ); ?>:</strong> <input name="amount" value="10.00" size="6" type="text"><br>
+					<input type="hidden" name="cmd" value="_xclick"> <input type="hidden" name="business" value="donate@ajaydsouza.com"> <input type="hidden" name="lc" value="IN"> <input type="hidden" name="item_name" value="<?php esc_attr_e( 'Donation for Add to All', 'add-to-all' ); ?>"> <input type="hidden" name="item_number" value="ata_plugin_settings"> <strong><?php esc_attr_e( 'Enter amount in USD', 'add-to-all' ); ?>:</strong> <input name="amount" value="10.00" size="6" type="text"><br>
 					<input type="hidden" name="currency_code" value="USD"> <input type="hidden" name="button_subtype" value="services"> <input type="hidden" name="bn" value="PP-BuyNowBF:btn_donate_LG.gif:NonHosted"> <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="<?php esc_attr_e( 'Send your donation to the author of Add to All', 'add-to-all' ); ?>"> <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
 				</form>
 			</div><!-- /#donate-form -->
@@ -58,8 +58,7 @@
 						<a href="https://webberzone.com/"><?php esc_html_e( "Ajay's blog", 'add-to-all' ); ?></a>
 					</li>
 				</ul>
-			</div><br>
-			&nbsp;
+			</div>
 		</div><!-- /.inside -->
 	</div><!-- /.postbox -->
 </div>
