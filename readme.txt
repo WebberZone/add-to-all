@@ -1,10 +1,10 @@
 === Add to All ===
-Tags: header, footer, feed, Google Analytics, Statcounter, Tynt, content, Adsense, site verification
+Tags: header, footer, feed, snippets, Google Analytics, Statcounter, Tynt, content, Adsense, site verification
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
 Stable tag: trunk
 Requires at least: 4.9
-Tested up to: 5.4
+Tested up to: 5.6
 License: GPLv2 or later
 
 A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
@@ -12,6 +12,8 @@ A powerful plugin that will allow you to add custom code or CSS to your header, 
 == Description ==
 
 [Add to All](https://webberzone.com/plugins/add-to-all/) is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
+
+The Snippets Manager introduced in v1.7.0 also allows you to add create and manage custom snippets of code that can be added to the header, footer and content. You can selectively include this based on different criteria including specific post IDs, post types and/or categories/tags.
 
 It comes with out of the box support for Google Analytics, Statcounter and Tynt. Additionally, it supports site verification for Google, Bing and Pinterest via their HTML tag methods.
 
@@ -24,10 +26,11 @@ With this plugin installed, you do not need to edit your theme files every time 
 
 = Key features =
 
+* Snippets manager: Create custom snippets that can be added to Header, Footer and Content based on inclusion criteria
+* Add any HTML or JavaScript code to your header, content, footer and feed
 * Inbuilt support for Google Analytics, Statcounter and Tynt
 * Site verification for Google, Bing and Pinterest
 * Add custom CSS code to your header
-* Add any HTML or JavaScript code to your header, content, footer and feed
 * Add a copyright notice and a link to the post in your site's feed
 * Tonnes of actions and filters to easily extend the plugin.
 
@@ -68,6 +71,14 @@ If you would like a feature to be added, or if you already have the code for the
 
 
 == Changelog ==
+
+= 1.7.0 =
+
+Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzone.com/blog/add-to-all-v1-7-0/)
+
+* Features:
+	* New Settings API class to control the plugins settings
+	* New Snippets Manager - create custom snippets that can be added to Header, Footer and Content based on inclusion criteria
 
 = 1.6.0 =
 

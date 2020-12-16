@@ -9,7 +9,7 @@
 
 __Requires:__ 4.9
 
-__Tested up to:__ 5.4
+__Tested up to:__ 5.6
 
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -20,6 +20,8 @@ Add custom code or CSS to your header, footer, sidebar, content or feed. Site ve
 ## Description
 
 [Add to All](https://webberzone.com/plugins/add-to-all/) is a simple, yet powerful plugin that will allow you to add HTML, JavaScript or CSS to your header, footer, content or feed.
+
+The Snippets Manager introduced in v1.7.0 also allows you to add create and manage custom snippets of code that can be added to the header, footer and content. You can selectively include this based on different criteria including specific post IDs, post types and/or categories/tags.
 
 It comes with out of the box support for Google Analytics, Statcounter and Tynt. Additionally, it supports site verification for Google, Bing and Pinterest via their HTML tag methods.
 
