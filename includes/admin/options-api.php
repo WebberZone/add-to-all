@@ -26,11 +26,14 @@ if ( ! defined( 'WPINC' ) ) {
  * @param mixed  $default Default option.
  * @return mixed
  */
-function ata_get_option( $key = '', $default = false ) {
-
+function ata_get_option( $key = '', $default = null ) {
 	global $ata_settings;
 
-	$value = ! empty( $ata_settings[ $key ] ) ? $ata_settings[ $key ] : $default;
+	if ( is_null( $default ) ) {
+		$default = ata_get_default_option( $key );
+	}
+
+	$value = isset( $ata_settings[ $key ] ) ? $ata_settings[ $key ] : $default;
 
 	/**
 	 * Filter the value for the option being fetched.
@@ -138,6 +141,68 @@ function ata_delete_option( $key = '' ) {
 
 
 /**
+ * Default settings.
+ *
+ * @since 1.2.0
+ *
+ * @return array Default settings
+ */
+function ata_settings_defaults() {
+
+	$options = array();
+
+	// Populate some default values.
+	foreach ( ATA_Settings::get_registered_settings() as $tab => $settings ) {
+		foreach ( $settings as $option ) {
+			// When checkbox is set to true, set this to 1.
+			if ( 'checkbox' === $option['type'] && ! empty( $option['options'] ) ) {
+				$options[ $option['id'] ] = 1;
+			} else {
+				$options[ $option['id'] ] = 0;
+			}
+			// If an option is set.
+			if ( in_array( $option['type'], array( 'textarea', 'text', 'csv', 'numbercsv', 'posttypes', 'number' ), true ) && isset( $option['options'] ) ) {
+				$options[ $option['id'] ] = $option['options'];
+			}
+			if ( in_array( $option['type'], array( 'multicheck', 'radio', 'select', 'radiodesc', 'thumbsizes' ), true ) && isset( $option['default'] ) ) {
+				$options[ $option['id'] ] = $option['default'];
+			}
+		}
+	}
+
+	/**
+	 * Filters the default settings array.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @param array   $options Default settings.
+	 */
+	return apply_filters( 'ata_settings_defaults', $options );
+}
+
+
+/**
+ * Get the default option for a specific key
+ *
+ * @since 1.3.0
+ *
+ * @param string $key Key of the option to fetch.
+ * @return mixed
+ */
+function ata_get_default_option( $key = '' ) {
+
+	$default_settings = ata_settings_defaults();
+
+	if ( array_key_exists( $key, $default_settings ) ) {
+		return $default_settings[ $key ];
+	} else {
+		return false;
+	}
+
+}
+
+
+/**
  * Reset settings.
  *
  * @since 1.2.0
@@ -152,7 +217,7 @@ function ata_settings_reset() {
 /**
  * Function to add an action to search for tags using Ajax.
  *
- * @since 2.6.0
+ * @since 1.7.0
  *
  * @return void
  */
