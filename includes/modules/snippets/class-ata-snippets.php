@@ -106,7 +106,17 @@ if ( ! class_exists( 'ATA_Snippets' ) ) :
 				'exclude_from_search' => true,
 				'publicly_queryable'  => true,
 				'rewrite'             => $rewrite,
-				'capability_type'     => 'post',
+				'capabilities'        => array(
+					'publish_posts'       => 'manage_options',
+					'edit_posts'          => 'manage_options',
+					'edit_others_posts'   => 'manage_options',
+					'delete_posts'        => 'manage_options',
+					'delete_others_posts' => 'manage_options',
+					'read_private_posts'  => 'manage_options',
+					'edit_post'           => 'manage_options',
+					'delete_post'         => 'manage_options',
+					'read_post'           => 'manage_options',
+				),
 				'show_in_rest'        => false,
 			);
 
