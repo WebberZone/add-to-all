@@ -89,48 +89,10 @@ Release post: [https://webberzone.com/blog/add-to-all-v1-6-0/](https://webberzon
 * Features:
 	* Added CodeMirror highlighting for the HTML and CSS fields in the settings page
 
-= 1.5.0 =
-
-Release post: [https://ajaydsouza.com/add-to-all-v1-5-0/](https://ajaydsouza.com/add-to-all-v1-5-0/)
-
-* Features:
-	* New options for displaying content before and after on posts and pages only
-
-* Bug fixes:
-	* Delete first year transient on uninstall
-
-= 1.4.0 =
-
-Release post: [https://ajaydsouza.com/add-to-all-v1-4-0/](https://ajaydsouza.com/add-to-all-v1-4-0/)
-
-* Features:
-	* Deleting the plugin on WordPress Multisite will remove the settings from all blogs
-	* Use `%home_url%`, `%year%`, `%month%`, `%date%` and `%first_year%` to display the URL for a given site, current year, current month (text), current date and year of first blog post respectively. You can add more replacement terms by creating a function filtering `ata_placeholders`
-
-* Modifications:
-	* Deprecated `ald_ata_header()`, `ald_ata_footer()`, `ald_ata_rss()`
-
-* Bug fixes:
-	* Fixed bug with displaying the credit line in feed
-
-= 1.3.0 =
-
-Release post: [https://ajaydsouza.com/add-to-all-v1-3-0/](https://ajaydsouza.com/add-to-all-v1-3-0/)
-
-* Features:
-	* New option to enable processing of shortcode in content, footer or feed HTML fields
-	* New option to exclude display of content HTML fields on certain posts
-
-* Enhancements:
-	* New functions and filters for content, feed, header and footer
-	* Admin interface: switch between tabs without reloading
-	* Google Analytics now use gtag.js implementation instead of analytics.js
-	* Google Analytics: new option to anonymize IPs
-
 Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 
 == Upgrade Notice ==
 
-= 1.6.0 =
-Implemented CodeMirror for code highlighting; Minimum WordPress supported version bumped up to v4.9; Check out the Changelog for more details
+= 1.7.0 =
+New Snippets Manager; Check out the Changelog for more details
 
