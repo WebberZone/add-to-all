@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Contextual Related Posts\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-29 22:58+0100\n"
+"POT-Creation-Date: 2020-12-17 20:21+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: me@ajaydsouza.com\n"
@@ -18,11 +18,495 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: includes/admin/admin.php:30
+#: includes/admin/class-ata-admin-columns.php:48
+msgid "Shortcode"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:56
+#: includes/admin/class-ata-settings.php:104
 msgid "Add to All"
 msgstr ""
 
-#: includes/admin/admin.php:54
+#: includes/admin/class-ata-metabox.php:207
+msgid "Step 1: Select where should this be displayed"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:213
+msgid "Add to Header"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:220
+msgid "Add to Footer"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:227
+msgid "Add before Content"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:228
+msgid ""
+"When enabled the contents of this snippet are automatically added before the "
+"content of posts based on the selection below."
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:234
+msgid "Add after Content"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:235
+msgid ""
+"When enabled the contents of this snippet are automatically added after the "
+"content of posts based on the selection below."
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:241
+msgid "Step 2: Select the conditions where this will be displayed"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:242
+msgid "Leaving any option blank will not apply the filter"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:247
+msgid "The logical relationship between each condition below"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:248
+msgid ""
+"Selecting OR would match any of the condition below and selecting AND would "
+"match all the conditions below."
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:252
+msgid "OR"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:253
+msgid "AND"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:258
+msgid "Include on these post types"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:259
+msgid "Select on which post types to display the contents of this snippet."
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:265
+msgid "Include on these Post IDs"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:266
+msgid ""
+"Enter a comma-separated list of post, page or custom post type IDs on which "
+"to include the code. Any incorrect ids will be removed when saving."
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:273
+msgid "Include on these Categories"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:274
+msgid ""
+"Comma separated list of category slugs. The field above has an autocomplete "
+"so simply start typing in the starting letters and it will prompt you with "
+"options. Does not support custom taxonomies."
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:285
+msgid "Include on these Tags"
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:286
+msgid ""
+"Comma separated list of tag slugs. The field above has an autocomplete so "
+"simply start typing in the starting letters and it will prompt you with "
+"options. Does not support custom taxonomies."
+msgstr ""
+
+#: includes/admin/class-ata-metabox.php:315
+#: includes/admin/class-settings-api.php:437
+#, php-format
+msgid "The callback function used for the %1$s setting is missing."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:84
+#: includes/admin/class-settings-api.php:136
+msgid ""
+"Settings have been reset to their default values. Reload this page to view "
+"the updated settings."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:85
+#: includes/admin/class-settings-api.php:137
+msgid "Settings updated."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:119
+msgid "General"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:120
+#: includes/admin/class-ata-settings.php:893
+msgid "Third Party"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:121
+#: includes/admin/class-ata-settings.php:910
+msgid "Header"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:122
+#: includes/admin/class-ata-settings.php:922
+msgid "Content"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:123
+#: includes/admin/class-ata-settings.php:934
+msgid "Footer"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:124
+#: includes/admin/class-ata-settings.php:946
+msgid "Feed"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:180
+msgid "Enable Snippets Manager"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:181
+msgid ""
+"Disabling this will turn off the Snippets manager and any of the associated "
+"functionality. This will not delete any snippets data that was created "
+"before this was turned off."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:209
+msgid "StatCounter"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:215
+msgid "Project ID"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:216
+msgid "This is the value of sc_project in your StatCounter code."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:222
+msgid "Security ID"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:223
+msgid "This is the value of sc_security in your StatCounter code."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:229
+msgid "Google Analytics"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:235
+msgid "Tracking ID"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:236
+msgid ""
+"You can find this under Admin &raquo; Tracking Info &raquo; Tracking Code "
+"when viewing your project settings and is of the form UA-XXXX-Y."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:242
+msgid "Anonymize IP"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:243
+msgid ""
+"Check this box to anonymize IPs before they are sent to Google Analytics."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:249
+msgid "Linker domains"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:250
+msgid ""
+"If you'd like to implement cross-domain tracking, enter a comma-separated "
+"list of domains, e.g. ajaydsouza.com,webberzone.com"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:256
+msgid "33 Across (Tynt)"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:262
+msgid "Tynt ID"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:264
+#, php-format
+msgid ""
+"This is the text between the brackets in %1$s  in the SiteCTRL client script"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:270
+msgid "Site verification"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:276
+msgid "Google"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:278
+#: includes/admin/class-ata-settings.php:286
+#, php-format
+msgid "Value of the content portion of the HTML tag method on the %s"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:278
+#: includes/admin/class-ata-settings.php:286
+msgid "verification details page"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:284
+msgid "Bing"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:292
+msgid "Pinterest"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:294
+#, php-format
+msgid "Read how to get the Meta Tag from the %s"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:294
+msgid "Pinterest help page"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:322
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:323
+msgid "Add the CSS code without the <style></style> tags."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:330
+msgid "HTML to add to the header"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:332
+#: includes/admin/class-ata-settings.php:557
+#, php-format
+msgid ""
+"The code entered here is added to %1$s. Please ensure that you enter valid "
+"HTML or JavaScript."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:361
+msgid "Content filter priority"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:362
+msgid ""
+"A higher number will cause the Add to All output to be processed after other "
+"filters. Number below 10 is not recommended."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:368
+msgid "Exclude display on these post IDs"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:369
+msgid ""
+"Comma-separated list of post or page IDs to exclude displaying the above "
+"content. e.g. 188,320,500"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:375
+msgid "Process shortcodes in content"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:376
+#: includes/admin/class-ata-settings.php:619
+msgid ""
+"Check this box to execute any shortcodes that you enter in the options below."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:382
+msgid "Home and other views"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:383
+msgid ""
+"Displays when viewing single posts, home, category, tag and other archives."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:388
+#: includes/admin/class-ata-settings.php:424
+#: includes/admin/class-ata-settings.php:460
+#: includes/admin/class-ata-settings.php:496
+#: includes/admin/class-ata-settings.php:625
+msgid "Add HTML before content?"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:389
+#: includes/admin/class-ata-settings.php:404
+#: includes/admin/class-ata-settings.php:425
+#: includes/admin/class-ata-settings.php:440
+#: includes/admin/class-ata-settings.php:461
+#: includes/admin/class-ata-settings.php:476
+#: includes/admin/class-ata-settings.php:626
+#: includes/admin/class-ata-settings.php:641
+msgid "Check this to add the HTML below before the content of your post."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:395
+#: includes/admin/class-ata-settings.php:431
+#: includes/admin/class-ata-settings.php:467
+#: includes/admin/class-ata-settings.php:503
+#: includes/admin/class-ata-settings.php:632
+msgid "HTML to add before the content"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:396
+#: includes/admin/class-ata-settings.php:411
+#: includes/admin/class-ata-settings.php:432
+#: includes/admin/class-ata-settings.php:447
+#: includes/admin/class-ata-settings.php:468
+#: includes/admin/class-ata-settings.php:483
+#: includes/admin/class-ata-settings.php:504
+#: includes/admin/class-ata-settings.php:519
+#: includes/admin/class-ata-settings.php:633
+#: includes/admin/class-ata-settings.php:648
+msgid ""
+"Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:403
+#: includes/admin/class-ata-settings.php:439
+#: includes/admin/class-ata-settings.php:475
+#: includes/admin/class-ata-settings.php:511
+#: includes/admin/class-ata-settings.php:640
+msgid "Add HTML after content?"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:410
+#: includes/admin/class-ata-settings.php:446
+#: includes/admin/class-ata-settings.php:482
+#: includes/admin/class-ata-settings.php:518
+#: includes/admin/class-ata-settings.php:647
+msgid "HTML to add after the content"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:418
+msgid "Single posts views"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:419
+msgid ""
+"Displays when viewing single views including posts, pages, custom-post-types."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:454
+msgid "Post only views"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:455
+msgid "Displays only on posts"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:490
+msgid "Page only views"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:491
+msgid "Displays only on pages"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:497
+#: includes/admin/class-ata-settings.php:512
+msgid "Check this to add the HTML below before the content of your page."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:548
+msgid "Process shortcodes in footer"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:549
+msgid ""
+"Check this box to execute any shortcodes that you enter in the option below."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:555
+msgid "HTML to add to the footer"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:586
+msgid "Add copyright notice?"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:587
+msgid "Check this to add the below copyright notice to your feed."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:593
+msgid "Coyright text"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:595
+msgid ""
+"Enter valid HTML only. This copyright notice is added as the last item of "
+"your feed. You can also use %year% for the year or %first_year% for the year "
+"of the first post,"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:602
+msgid "Add post title?"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:603
+msgid "Add a link to the title of the post in the feed."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:609
+msgid "Title text"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:611
+msgid ""
+"The above text will be added to the feed. You can use %title% to add a link "
+"to the post, %date% and %time% to display the date and time of the post "
+"respectively."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:614
+msgid "%title% was first posted on %date% at %time%."
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:618
+msgid "Process shortcodes in feed"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:655
+msgid "Add a link to \"Add to All\" plugin page"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:681
+msgid ""
+"Use of this feed is for personal non-commercial use only. If you are not "
+"reading this article in your feed reader, then the site is guilty of "
+"copyright infringement. Please contact me at "
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:768
+msgid "Add to All Settings"
+msgstr ""
+
+#: includes/admin/class-ata-settings.php:810
 #, php-format
 msgid ""
 "Thank you for using <a href=\"%1$s\" target=\"_blank\">Add to All</a>! "
@@ -30,483 +514,131 @@ msgid ""
 "target=\"_blank\">WordPress.org</a>"
 msgstr ""
 
-#: includes/admin/admin.php:80
+#: includes/admin/class-ata-settings.php:836
 msgid "Settings"
 msgstr ""
 
-#: includes/admin/admin.php:99 includes/admin/sidebar.php:42
+#: includes/admin/class-ata-settings.php:855 includes/admin/sidebar.php:42
 msgid "Support"
 msgstr ""
 
-#: includes/admin/admin.php:100
+#: includes/admin/class-ata-settings.php:856
 msgid "Donate"
 msgstr ""
 
-#: includes/admin/default-settings.php:60
-msgid "StatCounter"
-msgstr ""
-
-#: includes/admin/default-settings.php:66
-msgid "Project ID"
-msgstr ""
-
-#: includes/admin/default-settings.php:67
-msgid "This is the value of sc_project in your StatCounter code."
-msgstr ""
-
-#: includes/admin/default-settings.php:73
-msgid "Security ID"
-msgstr ""
-
-#: includes/admin/default-settings.php:74
-msgid "This is the value of sc_security in your StatCounter code."
-msgstr ""
-
-#: includes/admin/default-settings.php:80
-msgid "Google Analytics"
-msgstr ""
-
-#: includes/admin/default-settings.php:86
-msgid "Tracking ID"
-msgstr ""
-
-#: includes/admin/default-settings.php:87
-msgid ""
-"You can find this under Admin &raquo; Tracking Info &raquo; Tracking Code "
-"when viewing your project settings and is of the form UA-XXXX-Y."
-msgstr ""
-
-#: includes/admin/default-settings.php:93
-msgid "Anonymize IP"
-msgstr ""
-
-#: includes/admin/default-settings.php:94
-msgid ""
-"Check this box to anonymize IPs before they are sent to Google Analytics."
-msgstr ""
-
-#: includes/admin/default-settings.php:100
-msgid "Linker domains"
-msgstr ""
-
-#: includes/admin/default-settings.php:101
-msgid ""
-"If you'd like to implement cross-domain tracking, enter a comma-separated "
-"list of domains, e.g. ajaydsouza.com,webberzone.com"
-msgstr ""
-
-#: includes/admin/default-settings.php:107
-msgid "33 Across (Tynt)"
-msgstr ""
-
-#: includes/admin/default-settings.php:113
-msgid "Tynt ID"
-msgstr ""
-
-#: includes/admin/default-settings.php:115
-#, php-format
-msgid ""
-"This is the text between the brackets in %1$s  in the SiteCTRL client script"
-msgstr ""
-
-#: includes/admin/default-settings.php:121
-msgid "Site verification"
-msgstr ""
-
-#: includes/admin/default-settings.php:127
-msgid "Google"
-msgstr ""
-
-#: includes/admin/default-settings.php:129
-#: includes/admin/default-settings.php:137
-#, php-format
-msgid "Value of the content portion of the HTML tag method on the %s"
-msgstr ""
-
-#: includes/admin/default-settings.php:129
-#: includes/admin/default-settings.php:137
-msgid "verification details page"
-msgstr ""
-
-#: includes/admin/default-settings.php:135
-msgid "Bing"
-msgstr ""
-
-#: includes/admin/default-settings.php:143
-msgid "Pinterest"
-msgstr ""
-
-#: includes/admin/default-settings.php:145
-#, php-format
-msgid "Read how to get the Meta Tag from the %s"
-msgstr ""
-
-#: includes/admin/default-settings.php:145
-msgid "Pinterest help page"
-msgstr ""
-
-#: includes/admin/default-settings.php:173
-msgid "Custom CSS"
-msgstr ""
-
-#: includes/admin/default-settings.php:174
-msgid "Add the CSS code without the <style></style> tags."
-msgstr ""
-
-#: includes/admin/default-settings.php:181
-msgid "HTML to add to the header"
-msgstr ""
-
-#: includes/admin/default-settings.php:183
-#: includes/admin/default-settings.php:408
-#, php-format
-msgid ""
-"The code entered here is added to %1$s. Please ensure that you enter valid "
-"HTML or JavaScript."
-msgstr ""
-
-#: includes/admin/default-settings.php:212
-msgid "Content filter priority"
-msgstr ""
-
-#: includes/admin/default-settings.php:213
-msgid ""
-"A higher number will cause the Add to All output to be processed after other "
-"filters. Number below 10 is not recommended."
-msgstr ""
-
-#: includes/admin/default-settings.php:219
-msgid "Exclude display on these post IDs"
-msgstr ""
-
-#: includes/admin/default-settings.php:220
-msgid ""
-"Comma-separated list of post or page IDs to exclude displaying the above "
-"content. e.g. 188,320,500"
-msgstr ""
-
-#: includes/admin/default-settings.php:226
-msgid "Process shortcodes in content"
-msgstr ""
-
-#: includes/admin/default-settings.php:227
-#: includes/admin/default-settings.php:470
-msgid ""
-"Check this box to execute any shortcodes that you enter in the options below."
-msgstr ""
-
-#: includes/admin/default-settings.php:233
-msgid "Home and other views"
-msgstr ""
-
-#: includes/admin/default-settings.php:234
-msgid ""
-"Displays when viewing single posts, home, category, tag and other archives."
-msgstr ""
-
-#: includes/admin/default-settings.php:239
-#: includes/admin/default-settings.php:275
-#: includes/admin/default-settings.php:311
-#: includes/admin/default-settings.php:347
-#: includes/admin/default-settings.php:476
-msgid "Add HTML before content?"
-msgstr ""
-
-#: includes/admin/default-settings.php:240
-#: includes/admin/default-settings.php:255
-#: includes/admin/default-settings.php:276
-#: includes/admin/default-settings.php:291
-#: includes/admin/default-settings.php:312
-#: includes/admin/default-settings.php:327
-#: includes/admin/default-settings.php:477
-#: includes/admin/default-settings.php:492
-msgid "Check this to add the HTML below before the content of your post."
-msgstr ""
-
-#: includes/admin/default-settings.php:246
-#: includes/admin/default-settings.php:282
-#: includes/admin/default-settings.php:318
-#: includes/admin/default-settings.php:354
-#: includes/admin/default-settings.php:483
-msgid "HTML to add before the content"
-msgstr ""
-
-#: includes/admin/default-settings.php:247
-#: includes/admin/default-settings.php:262
-#: includes/admin/default-settings.php:283
-#: includes/admin/default-settings.php:298
-#: includes/admin/default-settings.php:319
-#: includes/admin/default-settings.php:334
-#: includes/admin/default-settings.php:355
-#: includes/admin/default-settings.php:370
-#: includes/admin/default-settings.php:484
-#: includes/admin/default-settings.php:499
-msgid ""
-"Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed."
-msgstr ""
-
-#: includes/admin/default-settings.php:254
-#: includes/admin/default-settings.php:290
-#: includes/admin/default-settings.php:326
-#: includes/admin/default-settings.php:362
-#: includes/admin/default-settings.php:491
-msgid "Add HTML after content?"
-msgstr ""
-
-#: includes/admin/default-settings.php:261
-#: includes/admin/default-settings.php:297
-#: includes/admin/default-settings.php:333
-#: includes/admin/default-settings.php:369
-#: includes/admin/default-settings.php:498
-msgid "HTML to add after the content"
-msgstr ""
-
-#: includes/admin/default-settings.php:269
-msgid "Single posts views"
-msgstr ""
-
-#: includes/admin/default-settings.php:270
-msgid ""
-"Displays when viewing single views including posts, pages, custom-post-types."
-msgstr ""
-
-#: includes/admin/default-settings.php:305
-msgid "Post only views"
-msgstr ""
-
-#: includes/admin/default-settings.php:306
-msgid "Displays only on posts"
-msgstr ""
-
-#: includes/admin/default-settings.php:341
-msgid "Page only views"
-msgstr ""
-
-#: includes/admin/default-settings.php:342
-msgid "Displays only on pages"
-msgstr ""
-
-#: includes/admin/default-settings.php:348
-#: includes/admin/default-settings.php:363
-msgid "Check this to add the HTML below before the content of your page."
-msgstr ""
-
-#: includes/admin/default-settings.php:399
-msgid "Process shortcodes in footer"
-msgstr ""
-
-#: includes/admin/default-settings.php:400
-msgid ""
-"Check this box to execute any shortcodes that you enter in the option below."
-msgstr ""
-
-#: includes/admin/default-settings.php:406
-msgid "HTML to add to the footer"
-msgstr ""
-
-#: includes/admin/default-settings.php:437
-msgid "Add copyright notice?"
-msgstr ""
-
-#: includes/admin/default-settings.php:438
-msgid "Check this to add the below copyright notice to your feed."
-msgstr ""
-
-#: includes/admin/default-settings.php:444
-msgid "Coyright text"
-msgstr ""
-
-#: includes/admin/default-settings.php:446
-msgid ""
-"Enter valid HTML only. This copyright notice is added as the last item of "
-"your feed. You can also use %year% for the year or %first_year% for the year "
-"of the first post,"
-msgstr ""
-
-#: includes/admin/default-settings.php:453
-msgid "Add post title?"
-msgstr ""
-
-#: includes/admin/default-settings.php:454
-msgid "Add a link to the title of the post in the feed."
-msgstr ""
-
-#: includes/admin/default-settings.php:460
-msgid "Title text"
-msgstr ""
-
-#: includes/admin/default-settings.php:462
-msgid ""
-"The above text will be added to the feed. You can use %title% to add a link "
-"to the post, %date% and %time% to display the date and time of the post "
-"respectively."
-msgstr ""
-
-#: includes/admin/default-settings.php:465
-msgid "%title% was first posted on %date% at %time%."
-msgstr ""
-
-#: includes/admin/default-settings.php:469
-msgid "Process shortcodes in feed"
-msgstr ""
-
-#: includes/admin/default-settings.php:506
-msgid "Add a link to \"Add to All\" plugin page"
-msgstr ""
-
-#: includes/admin/default-settings.php:532
-msgid ""
-"Use of this feed is for personal non-commercial use only. If you are not "
-"reading this article in your feed reader, then the site is guilty of "
-"copyright infringement. Please contact me at "
-msgstr ""
-
-#: includes/admin/help-tab.php:37
+#: includes/admin/class-ata-settings.php:878
 #, php-format
 msgid ""
 "For more information or how to get support visit the <a href=\"%s\">support "
 "site</a>."
 msgstr ""
 
-#: includes/admin/help-tab.php:39
+#: includes/admin/class-ata-settings.php:880
 #, php-format
 msgid ""
 "Support queries should be posted in the <a href=\"%s\">WordPress.org support "
 "forums</a>."
 msgstr ""
 
-#: includes/admin/help-tab.php:42
+#: includes/admin/class-ata-settings.php:883
 #, php-format
 msgid ""
 "<a href=\"%1$s\">Post an issue</a> on <a href=\"%2$s\">GitHub</a> (bug "
 "reports only)."
 msgstr ""
 
-#: includes/admin/help-tab.php:52 includes/admin/settings-page.php:124
-msgid "Third Party"
-msgstr ""
-
-#: includes/admin/help-tab.php:54
+#: includes/admin/class-ata-settings.php:895
 msgid ""
 "This screen provides the settings for configuring the integration with third "
 "party scripts."
 msgstr ""
 
-#: includes/admin/help-tab.php:57
+#: includes/admin/class-ata-settings.php:898
 #, php-format
 msgid "Google Analytics tracking can be found by visiting this %s"
 msgstr ""
 
-#: includes/admin/help-tab.php:58
+#: includes/admin/class-ata-settings.php:899
 msgid "article"
 msgstr ""
 
-#: includes/admin/help-tab.php:61 includes/admin/help-tab.php:73
-#: includes/admin/help-tab.php:85 includes/admin/help-tab.php:97
-#: includes/admin/help-tab.php:109
+#: includes/admin/class-ata-settings.php:902
+#: includes/admin/class-ata-settings.php:914
+#: includes/admin/class-ata-settings.php:926
+#: includes/admin/class-ata-settings.php:938
+#: includes/admin/class-ata-settings.php:950
 msgid ""
 "You must click the Save Changes button at the bottom of the screen for new "
 "settings to take effect."
 msgstr ""
 
-#: includes/admin/help-tab.php:69 includes/admin/settings-page.php:125
-msgid "Header"
-msgstr ""
-
-#: includes/admin/help-tab.php:71
+#: includes/admin/class-ata-settings.php:912
 msgid ""
 "This screen allows you to control what content is added to the header of "
 "your site."
 msgstr ""
 
-#: includes/admin/help-tab.php:72
+#: includes/admin/class-ata-settings.php:913
 msgid ""
 "You can add custom CSS or HTML code. Useful for adding meta tags for site "
 "verification, etc."
 msgstr ""
 
-#: includes/admin/help-tab.php:81 includes/admin/settings-page.php:126
-msgid "Content"
-msgstr ""
-
-#: includes/admin/help-tab.php:83
+#: includes/admin/class-ata-settings.php:924
 msgid ""
 "This screen allows you to control what content is added to the content of "
 "posts, pages and custom post types."
 msgstr ""
 
-#: includes/admin/help-tab.php:84
+#: includes/admin/class-ata-settings.php:925
 msgid ""
 "You can set the priority of the filter and choose if you want this to be "
 "displayed on either all content (including archives) or just single posts/"
 "pages."
 msgstr ""
 
-#: includes/admin/help-tab.php:93 includes/admin/settings-page.php:127
-msgid "Footer"
-msgstr ""
-
-#: includes/admin/help-tab.php:95
+#: includes/admin/class-ata-settings.php:936
 msgid ""
 "This screen allows you to control what content is added to the footer of "
 "your site."
 msgstr ""
 
-#: includes/admin/help-tab.php:96
+#: includes/admin/class-ata-settings.php:937
 msgid ""
 "You can add custom HTML code. Useful for adding tracking code for analytics, "
 "etc."
 msgstr ""
 
-#: includes/admin/help-tab.php:105 includes/admin/settings-page.php:128
-msgid "Feed"
-msgstr ""
-
-#: includes/admin/help-tab.php:107
+#: includes/admin/class-ata-settings.php:948
 msgid ""
 "This screen allows you to control what content is added to the feed of your "
 "site."
 msgstr ""
 
-#: includes/admin/help-tab.php:108
+#: includes/admin/class-ata-settings.php:949
 msgid ""
 "You can add copyright text, a link to the title and date of the post, and "
 "HTML before and after the content"
 msgstr ""
 
-#: includes/admin/save-settings.php:51
-msgid ""
-"Settings have been reset to their default values. Reload this page to view "
-"the updated settings"
+#: includes/admin/class-settings-api.php:821
+msgid "Choose File"
 msgstr ""
 
-#: includes/admin/save-settings.php:119
-msgid "Settings updated."
-msgstr ""
-
-#: includes/admin/settings-page.php:32
-msgid "Add to All Settings"
-msgstr ""
-
-#: includes/admin/settings-page.php:68
+#: includes/admin/class-settings-api.php:1172
 msgid "Save Changes"
 msgstr ""
 
-#: includes/admin/settings-page.php:77
+#: includes/admin/class-settings-api.php:1181
 msgid "Do you really want to reset all these settings to their default values?"
 msgstr ""
 
-#: includes/admin/settings-page.php:79
+#: includes/admin/class-settings-api.php:1183
 msgid "Reset all settings"
 msgstr ""
 
-#: includes/admin/settings-page.php:153
-#, php-format
-msgid "The callback function used for the %1$s setting is missing."
-msgstr ""
-
-#: includes/admin/settings-page.php:315
-msgid "Modified from default setting"
+#: includes/admin/options-api.php:242
+msgid ","
 msgstr ""
 
 #: includes/admin/sidebar.php:15
@@ -553,10 +685,203 @@ msgstr ""
 msgid "Ajay's blog"
 msgstr ""
 
-#: includes/admin/sidebar.php:69
+#: includes/admin/sidebar.php:68
 msgid "Follow me"
 msgstr ""
 
 #: includes/feed.php:142
 msgid "Feed enhanced by "
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:56
+#: includes/modules/snippets/class-ata-snippets.php:58
+msgid "Snippets"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:57
+#: includes/modules/snippets/class-ata-snippets.php:59
+#: includes/modules/snippets/class-ata-snippets.php:91
+msgid "Snippet"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:60
+msgid "Snippet Archives"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:61
+msgid "Snippet Attributes"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:62
+msgid "Parent Snippet:"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:63
+msgid "All Snippets"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:64
+#: includes/modules/snippets/class-ata-snippets.php:65
+msgid "Add New Snippet"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:66
+msgid "New Snippet"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:67
+msgid "Edit Snippet"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:68
+msgid "Update Snippet"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:69
+msgid "View Snippet"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:70
+msgid "View Snippets"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:71
+msgid "Search Snippet"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:72
+msgid "Not found"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:73
+msgid "Not found in Trash"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:74
+msgid "Featured Image"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:75
+msgid "Set featured image"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:76
+msgid "Remove featured image"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:77
+msgid "Use as featured image"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:78
+msgid "Insert into snippet"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:79
+msgid "Uploaded to this snippet"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:80
+msgid "Snippets list"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:81
+msgid "Snippets list navigation"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:82
+msgid "Filter snippets list"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:92
+msgid "Add to All Snippets"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:144
+msgid "Snippet Categories"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:145
+#: includes/modules/snippets/class-ata-snippets.php:146
+msgid "Snippet Category"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:147
+msgid "All Categories"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:148
+msgid "Parent Category"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:149
+msgid "Parent Category:"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:150
+msgid "New Snippet Category"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:151
+msgid "Add New Snippet Category"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:152
+msgid "Edit Snippet Category"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:153
+msgid "Update Snippet Category"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:154
+msgid "View Snippet Category"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:155
+msgid "Separate snippet categories with commas"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:156
+msgid "Add or remove snippet categories"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:157
+msgid "Choose from the most used"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:158
+msgid "Popular Snippet Categories"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:159
+msgid "Search Snippet Categories"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:160
+msgid "Not Found"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:161
+msgid "No categories"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:162
+msgid "Categories list"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:163
+msgid "Categories list navigation"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:270
+msgid "Add Media"
+msgstr ""
+
+#: includes/modules/snippets/class-ata-snippets.php:289
+msgid "Insert into editor"
+msgstr ""
+
+#: includes/modules/snippets/snippets-op.php:84
+msgid "Incorrect snippet ID"
 msgstr ""
