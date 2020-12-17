@@ -63,11 +63,13 @@ If you would like a feature to be added, or if you already have the code for the
 
 == Screenshots ==
 
-1. Add to All options in WP-Admin - 3rd Party Options
-2. Add to All options in WP-Admin - Header Options
-3. Add to All options in WP-Admin - Content Options
-4. Add to All options in WP-Admin - Footer Options
-5. Add to All options in WP-Admin - Feed Options
+1. Snippets Manager
+2. General Options
+3. 3rd Party Options
+4. Header Options
+5. Content Options
+6. Footer Options
+7. Feed Options
 
 
 == Changelog ==
