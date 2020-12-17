@@ -256,7 +256,7 @@ if ( ! class_exists( 'ATA_Snippets' ) ) :
 		public function media_buttons( $post ) {
 			if ( get_post_type( $post ) === $this->post_type ) {
 				printf(
-					'<br /><button type="button" class="button insert-codemirror-media add_media" data-editor="content">%3$s</button><br /><br />',
+					'<br /><button type="button" class="button insert-codemirror-media add_media" data-editor="content">%1$s</button><br /><br />',
 					esc_html__( 'Add Media', 'add-to-all' )
 				);
 			}
