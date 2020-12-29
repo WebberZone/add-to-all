@@ -29,6 +29,10 @@ if ( ! defined( 'WPINC' ) ) {
 function ata_get_option( $key = '', $default = null ) {
 	global $ata_settings;
 
+	if ( empty( $ata_settings ) ) {
+		$ata_settings = ata_get_settings();
+	}
+
 	if ( is_null( $default ) ) {
 		$default = ata_get_default_option( $key );
 	}
