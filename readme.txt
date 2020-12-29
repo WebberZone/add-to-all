@@ -2,7 +2,7 @@
 Tags: header, footer, feed, snippets, Google Analytics, Statcounter, Tynt, content, Adsense, site verification
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 Requires at least: 4.9
 Tested up to: 5.6
 Requires PHP: 5.6
@@ -74,6 +74,13 @@ If you would like a feature to be added, or if you already have the code for the
 
 
 == Changelog ==
+
+= 1.7.2 =
+
+Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzone.com/blog/add-to-all-v1-7-0/)
+
+* Bug fixes:
+	* Fixes PHP error introduced in v1.7.1
 
 = 1.7.1 =
 
