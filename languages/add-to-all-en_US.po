@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Contextual Related Posts\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-17 20:21+0000\n"
+"POT-Creation-Date: 2020-12-29 18:37+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: me@ajaydsouza.com\n"
@@ -637,7 +637,7 @@ msgstr ""
 msgid "Reset all settings"
 msgstr ""
 
-#: includes/admin/options-api.php:242
+#: includes/admin/options-api.php:246
 msgid ","
 msgstr ""
 

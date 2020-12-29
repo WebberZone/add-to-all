@@ -3,11 +3,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Contextual Related Posts\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-17 20:21+0000\n"
+"POT-Creation-Date: 2020-12-29 18:36+0000\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Ajay D'Souza <me@ajaydsouza.com>\n"
+"Last-Translator: \n"
 "Language-Team: me@ajaydsouza.com\n"
-"Language: en\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,6 +15,8 @@ msgstr ""
 "esc_html_e;esc_attr_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: includes/admin/class-ata-admin-columns.php:48
@@ -44,8 +46,8 @@ msgstr ""
 
 #: includes/admin/class-ata-metabox.php:228
 msgid ""
-"When enabled the contents of this snippet are automatically added before "
-"the content of posts based on the selection below."
+"When enabled the contents of this snippet are automatically added before the "
+"content of posts based on the selection below."
 msgstr ""
 
 #: includes/admin/class-ata-metabox.php:234
@@ -311,8 +313,8 @@ msgstr ""
 
 #: includes/admin/class-ata-settings.php:362
 msgid ""
-"A higher number will cause the Add to All output to be processed after "
-"other filters. Number below 10 is not recommended."
+"A higher number will cause the Add to All output to be processed after other "
+"filters. Number below 10 is not recommended."
 msgstr ""
 
 #: includes/admin/class-ata-settings.php:368
@@ -332,8 +334,7 @@ msgstr ""
 #: includes/admin/class-ata-settings.php:376
 #: includes/admin/class-ata-settings.php:619
 msgid ""
-"Check this box to execute any shortcodes that you enter in the options "
-"below."
+"Check this box to execute any shortcodes that you enter in the options below."
 msgstr ""
 
 #: includes/admin/class-ata-settings.php:382
@@ -408,8 +409,7 @@ msgstr ""
 
 #: includes/admin/class-ata-settings.php:419
 msgid ""
-"Displays when viewing single views including posts, pages, custom-post-"
-"types."
+"Displays when viewing single views including posts, pages, custom-post-types."
 msgstr ""
 
 #: includes/admin/class-ata-settings.php:454
@@ -461,8 +461,8 @@ msgstr ""
 #: includes/admin/class-ata-settings.php:595
 msgid ""
 "Enter valid HTML only. This copyright notice is added as the last item of "
-"your feed. You can also use %year% for the year or %first_year% for the "
-"year of the first post,"
+"your feed. You can also use %year% for the year or %first_year% for the year "
+"of the first post,"
 msgstr ""
 
 #: includes/admin/class-ata-settings.php:602
@@ -537,8 +537,8 @@ msgstr ""
 #: includes/admin/class-ata-settings.php:880
 #, php-format
 msgid ""
-"Support queries should be posted in the <a href=\"%s\">WordPress.org "
-"support forums</a>."
+"Support queries should be posted in the <a href=\"%s\">WordPress.org support "
+"forums</a>."
 msgstr ""
 
 #: includes/admin/class-ata-settings.php:883
@@ -550,8 +550,8 @@ msgstr ""
 
 #: includes/admin/class-ata-settings.php:895
 msgid ""
-"This screen provides the settings for configuring the integration with "
-"third party scripts."
+"This screen provides the settings for configuring the integration with third "
+"party scripts."
 msgstr ""
 
 #: includes/admin/class-ata-settings.php:898
@@ -606,8 +606,8 @@ msgstr ""
 
 #: includes/admin/class-ata-settings.php:937
 msgid ""
-"You can add custom HTML code. Useful for adding tracking code for "
-"analytics, etc."
+"You can add custom HTML code. Useful for adding tracking code for analytics, "
+"etc."
 msgstr ""
 
 #: includes/admin/class-ata-settings.php:948
@@ -631,15 +631,14 @@ msgid "Save Changes"
 msgstr ""
 
 #: includes/admin/class-settings-api.php:1181
-msgid ""
-"Do you really want to reset all these settings to their default values?"
+msgid "Do you really want to reset all these settings to their default values?"
 msgstr ""
 
 #: includes/admin/class-settings-api.php:1183
 msgid "Reset all settings"
 msgstr ""
 
-#: includes/admin/options-api.php:242
+#: includes/admin/options-api.php:246
 msgid ","
 msgstr ""
 
@@ -887,14 +886,3 @@ msgstr ""
 #: includes/modules/snippets/snippets-op.php:84
 msgid "Incorrect snippet ID"
 msgstr ""
-
-#, fuzzy
-#~ msgid "plugin settings page"
-#~ msgstr "Opciones"
-
-#, fuzzy
-#~ msgid ""
-#~ "Add to All plugin has just been installed / upgraded. Please visit the "
-#~ msgstr ""
-#~ "No se puede deshacer. Asegurate de que has realizado una copia de "
-#~ "seguridad de la base de datos antes de proceder"
