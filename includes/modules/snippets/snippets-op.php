@@ -332,8 +332,15 @@ function ata_snippets_content( $content ) {
 	$before = ata_snippets_credit() . '<div class="ata_snippets">';
 	$after  = '</div>';
 
-	$str_before = ata_get_snippets_content_by_location( 'content_before', $before );
-	$str_after  = ata_get_snippets_content_by_location( 'content_after', '', $after );
+	$str_before = ata_get_snippets_content_by_location( 'content_before' );
+	if ( $str_before ) {
+		$str_before = $before . $str_before . $after;
+	}
+
+	$str_after = ata_get_snippets_content_by_location( 'content_after', );
+	if ( $str_after ) {
+		$str_after = $before . $str_after . $after;
+	}
 
 	return $str_before . $content . $str_after;
 }
