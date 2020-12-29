@@ -277,14 +277,31 @@ function ata_get_snippets_content_by_location( $location, $before = '', $after =
 				$include_code = false;
 			}
 		} else {
-			if ( ( ! empty( $include_on_posts ) && in_array( $post->ID, $include_on_posts ) ) // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
-			&& ( ! empty( $include_on_posttypes ) && in_array( $post->post_type, $include_on_posttypes ) ) // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
-			&& ( ! empty( $include_on_terms ) && 0 !== count( array_intersect( $all_terms, $include_on_terms ) ) ) // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
-			) {
-				$include_code = true;
-			} else {
-				$include_code = false;
+			if ( ! empty( $include_on_posts ) ) {
+				$condition[] = 1;
+				if ( in_array( $post->ID, $include_on_posts ) ) { // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+					$include_code[] = 1;
+				} else {
+					$include_code[] = 0;
+				}
 			}
+			if ( ! empty( $include_on_posttypes ) ) {
+				$condition[] = 1;
+				if ( in_array( $post->post_type, $include_on_posttypes ) ) { // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+					$include_code[] = 1;
+				} else {
+					$include_code[] = 0;
+				}
+			}
+			if ( ! empty( $include_on_terms ) ) {
+				$condition[] = 1;
+				if ( count( array_intersect( $all_terms, $include_on_terms ) ) ) {
+					$include_code[] = 1;
+				} else {
+					$include_code[] = 0;
+				}
+			}
+			$include_code = ( array_sum( $condition ) === array_sum( $include_code ) ) ? true : false;
 		}
 		if ( $include_code ) {
 			$output .= do_shortcode( $snippet->post_content );
