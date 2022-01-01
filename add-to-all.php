@@ -6,7 +6,7 @@
  *
  * @wordpress-plugin
  * Plugin Name: Add to All
- * Version:     1.7.2
+ * Version:     1.7.3-beta1
  * Plugin URI:  https://webberzone.com/plugins/add-to-all/
  * Description: A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
  * Author:      Ajay D'Souza
@@ -130,4 +130,3 @@ if ( ata_get_option( 'enable_snippets' ) ) {
  */
 
 require_once ATA_PLUGIN_DIR . '/includes/deprecated.php';
-

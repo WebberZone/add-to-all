@@ -1,0 +1,24 @@
+{
+    "name": "webberzone/add-to-all",
+    "description": "A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.",
+    "type": "wordpress-plugin",
+    "keywords": [
+        "add-to-all",
+        "header",
+        "footer",
+        "feed",
+        "snippets",
+        "code snippets"
+    ],
+    "license": "gpl-2.0-or-later",
+    "authors": [
+        {
+            "name": "WebberZone",
+            "email": "plugins@webberzone.com",
+            "role": "Developer"
+        }
+    ],
+    "requires": {
+        "php": ">=7"
+    }
+}

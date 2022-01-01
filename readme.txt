@@ -2,10 +2,10 @@
 Tags: header, footer, feed, snippets, Google Analytics, Statcounter, Tynt, content, Adsense, site verification
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
-Stable tag: 1.7.2
-Requires at least: 4.9
-Tested up to: 5.6
-Requires PHP: 5.6
+Stable tag: 1.7.3
+Requires at least: 5.1
+Tested up to: 5.9
+Requires PHP: 7.1
 License: GPLv2 or later
 
 A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
@@ -75,9 +75,11 @@ If you would like a feature to be added, or if you already have the code for the
 
 == Changelog ==
 
-= 1.7.2 =
+= 1.7.3 =
 
 Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzone.com/blog/add-to-all-v1-7-0/)
+
+= 1.7.2 =
 
 * Bug fixes:
 	* Fixes PHP error introduced in v1.7.1
@@ -109,6 +111,6 @@ Check changelog.txt for older entries the [Releases page on Github](https://gith
 
 == Upgrade Notice ==
 
-= 1.7.1 =
-New Snippets Manager; Check out the Changelog for more details
+= 1.7.3 =
+Bug fixes; Check out the Changelog for more details
 
