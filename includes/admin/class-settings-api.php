@@ -551,7 +551,7 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			$value = $this->get_option( $args['id'], $args['options'] );
 			$class = sanitize_html_class( $args['field_class'] );
 
-			$html  = sprintf( '<textarea class="%4$s" cols="50" rows="20" id="%1$s[%2$s]" name="%1$s[%2$s]">%3$s</textarea>', $this->settings_key, sanitize_key( $args['id'] ), esc_textarea( stripslashes( $value ) ), 'large-text ' . $class );
+			$html  = sprintf( '<textarea class="%4$s" cols="50" rows="5" id="%1$s[%2$s]" name="%1$s[%2$s]">%3$s</textarea>', $this->settings_key, sanitize_key( $args['id'] ), esc_textarea( stripslashes( $value ) ), 'large-text ' . $class );
 			$html .= $this->get_field_description( $args );
 
 			/** This filter has been defined in class-settings-api.php */
