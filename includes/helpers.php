@@ -147,6 +147,7 @@ add_filter( 'ata_content_html_before_page', 'ata_process_placeholders', 99 );
 add_filter( 'ata_content_html_after_page', 'ata_process_placeholders', 99 );
 add_filter( 'ata_feed_html_before', 'ata_process_placeholders', 99 );
 add_filter( 'ata_feed_html_after', 'ata_process_placeholders', 99 );
+add_filter( 'ata_feed_copyrightnotice', 'ata_process_placeholders', 99 );
 add_filter( 'ata_footer_other_html', 'ata_process_placeholders', 99 );
 
 

@@ -44,7 +44,7 @@ function ata_rss( $content ) {
 		}
 
 		if ( isset( $ata_settings['feed_add_copyright'] ) && $ata_settings['feed_add_copyright'] ) {
-			$str_after .= ata_get_option( 'feed_copyrightnotice', '' );
+			$str_after .= ata_feed_copyrightnotice();
 			$str_after .= '<br />';
 		}
 
@@ -79,6 +79,25 @@ function ata_feed_html_before() {
 	 * @param $output HTML added before the feed
 	 */
 	return apply_filters( 'ata_feed_html_before', $output );
+}
+
+
+/**
+ * Get the HTML to be added as the copyright notice.
+ *
+ * @since 1.7.3
+ */
+function ata_feed_copyrightnotice() {
+
+	$output = ata_get_option( 'feed_copyrightnotice', '' );
+
+	/**
+	 * Filters the HTML to be added as the copyright notice.
+	 *
+	 * @since 1.7.3
+	 * @param $output HTML added as the copyright notice
+	 */
+	return apply_filters( 'ata_feed_copyrightnotice', $output );
 }
 
 

@@ -79,6 +79,9 @@ If you would like a feature to be added, or if you already have the code for the
 
 Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzone.com/blog/add-to-all-v1-7-0/)
 
+* Bug fixes:
+	* Feed copyright placeholders were not processed
+
 = 1.7.2 =
 
 * Bug fixes:
