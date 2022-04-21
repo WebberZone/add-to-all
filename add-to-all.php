@@ -1,12 +1,20 @@
 <?php
 /**
+ *
+ * Add to All
+ *
  * Add to All lets you add custom text or HTML to your WordPress header, footer, sidebar, content or feed.
  *
  * @package Add_to_All
  *
+ * @author    Ajay D'Souza
+ * @license   GPL-2.0+
+ * @link      https://webberzone.com
+ * @copyright 2012-2022 Ajay D'Souza
+ *
  * @wordpress-plugin
  * Plugin Name: Add to All
- * Version:     1.7.3
+ * Version:     1.8.0-beta1
  * Plugin URI:  https://webberzone.com/plugins/add-to-all/
  * Description: A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
  * Author:      Ajay D'Souza
@@ -21,6 +29,18 @@
 if ( ! defined( 'WPINC' ) ) {
 	die( "Aren't you supposed to come here via WP-Admin?" );
 }
+
+/**
+ * Holds the version of Add to All.
+ *
+ * @since 1.8.0
+ *
+ * @var string Add to All version.
+ */
+if ( ! defined( 'ADD_TO_ALL_VERSION' ) ) {
+	define( 'ADD_TO_ALL_VERSION', '1.8.0' );
+}
+
 
 /**
  * Holds the plugin file path
