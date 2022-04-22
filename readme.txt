@@ -79,6 +79,7 @@ If you would like a feature to be added, or if you already have the code for the
 
 * New feature:
 	* New constant `ATA_DISABLE_SNIPPETS` can be added to your wp-config.php to disable snippets. Perfect for WordPress multisite
+	* New placeholder `%updated_time%` to display the updated date
 
 = 1.7.3 =
 

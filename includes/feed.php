@@ -132,11 +132,13 @@ function ata_feed_title_text() {
 		'%title%',
 		'%date%',
 		'%time%',
+		'%updated_time%',
 	);
 	$replace_array = array(
 		$title,
 		get_the_time( 'F j, Y' ),
 		get_the_time( 'g:i a' ),
+		get_the_modified_date(),
 	);
 
 	$output = str_replace( $search_array, $replace_array, ata_get_option( 'feed_title_text', '' ) );
