@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * }
  * @return WP_Post[]|int[] Array of snippet objects or snippet IDs.
  */
-function ata_get_snippets( $args = null ) {
+function ata_get_snippets( $args = array() ) {
 	$defaults = array(
 		'numberposts' => -1,
 		'include'     => array(),
