@@ -1,6 +1,6 @@
 <?php
 /**
- * Functions to add to the footer.
+ * Statcounter.
  *
  * @link  https://webberzone.com
  * @since 1.2.0
