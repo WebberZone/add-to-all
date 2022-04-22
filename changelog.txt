@@ -2,6 +2,13 @@
 
 This is an archive of older changelog entries. Most recent entries are maintained in readme.txt
 
+= 1.6.0 =
+
+Release post: [https://webberzone.com/blog/add-to-all-v1-6-0/](https://webberzone.com/blog/add-to-all-v1-6-0/)
+
+* Features:
+	* Added CodeMirror highlighting for the HTML and CSS fields in the settings page
+
 = 1.5.0 =
 
 Release post: [https://ajaydsouza.com/add-to-all-v1-5-0/](https://ajaydsouza.com/add-to-all-v1-5-0/)

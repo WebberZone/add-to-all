@@ -2,8 +2,8 @@
 Tags: header, footer, feed, snippets, Google Analytics, Statcounter, Tynt, content, Adsense, site verification
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
-Stable tag: 1.7.3
-Requires at least: 5.1
+Stable tag: 1.8.0
+Requires at least: 5.6
 Tested up to: 5.9
 Requires PHP: 7.1
 License: GPLv2 or later
@@ -75,6 +75,11 @@ If you would like a feature to be added, or if you already have the code for the
 
 == Changelog ==
 
+= 1.8.0 =
+
+* New feature:
+	* New constant `ATA_DISABLE_SNIPPETS` can be added to your wp-config.php to disable snippets. Perfect for WordPress multisite
+
 = 1.7.3 =
 
 Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzone.com/blog/add-to-all-v1-7-0/)
@@ -102,13 +107,6 @@ Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzon
 * Features:
 	* New Settings API class to control the plugins settings
 	* New Snippets Manager - create custom snippets that can be added to Header, Footer and Content based on inclusion criteria
-
-= 1.6.0 =
-
-Release post: [https://webberzone.com/blog/add-to-all-v1-6-0/](https://webberzone.com/blog/add-to-all-v1-6-0/)
-
-* Features:
-	* Added CodeMirror highlighting for the HTML and CSS fields in the settings page
 
 Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 

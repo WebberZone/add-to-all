@@ -134,7 +134,8 @@ function ata_get_settings() {
  * Snippets Manager
  *----------------------------------------------------------------------------
  */
-if ( ata_get_option( 'enable_snippets' ) ) {
+$ata_disable_snippets = ( defined( 'ATA_DISABLE_SNIPPETS' ) && ATA_DISABLE_SNIPPETS ) ? true : false;
+if ( ata_get_option( 'enable_snippets' ) && ! $ata_disable_snippets ) {
 	require_once ATA_PLUGIN_DIR . 'includes/modules/snippets/class-ata-snippets.php';
 	require_once ATA_PLUGIN_DIR . 'includes/modules/snippets/snippets-op.php';
 	require_once ATA_PLUGIN_DIR . 'includes/modules/snippets/class-ata-snippets-shortcode.php';
