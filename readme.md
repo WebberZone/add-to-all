@@ -8,7 +8,7 @@
 [![Required PHP](https://img.shields.io/wordpress/plugin/required-php/add-to-all?style=flat-square)](https://wordpress.org/plugins/add-to-all/)
 [![Active installs](https://img.shields.io/wordpress/plugin/installs/add-to-all?style=flat-square)](https://wordpress.org/plugins/add-to-all/)
 
-__Requires:__ 5.1
+__Requires:__ 5.6
 
 __Tested up to:__ 5.9
 
@@ -58,6 +58,6 @@ With this plugin installed, you do not need to edit your theme files every time 
 
 ## Frequently Asked Questions
 
-If your question isn't listed here, please post a comment at the [WordPress.org support forum](https://wordpress.org/support/plugin/add-to-all). I monitor the forums on an ongoing basis. If you're looking for more advanced **paid** support, please see [details here](https://webberzone.com/support/).
+If your question isn't listed here, please post a comment at the [WordPress.org support forum](https://wordpress.org/support/plugin/add-to-all). I monitor the forums on an ongoing basis. If you're looking for more advanced __paid__ support, please see [details here](https://webberzone.com/support/).
 
 If you would like a feature to be added, or if you already have the code for the feature, you can let me know by [posting in this forum](https://wordpress.org/support/plugin/add-to-all) or creating an issue in the [Github repository](https://github.com/ajaydsouza/add-to-all/issues).
