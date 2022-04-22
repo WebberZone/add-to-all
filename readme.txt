@@ -80,6 +80,7 @@ If you would like a feature to be added, or if you already have the code for the
 * New feature:
 	* New constant `ATA_DISABLE_SNIPPETS` can be added to your wp-config.php to disable snippets. Perfect for WordPress multisite
 	* New placeholder `%updated_time%` to display the updated date
+	* New feature to display the estimated reading time. You can use `%reading_time%` in the Settings page. Alternatively use the shortcode `[ata_reading_time]` to display the reading time
 
 = 1.7.3 =
 

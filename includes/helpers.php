@@ -103,13 +103,15 @@ function ata_excerpt( $id, $excerpt_length = 0, $use_excerpt = true ) {
  * @return string Content with placeholders replaced.
  */
 function ata_process_placeholders( $input ) {
+	$content = get_post_field( 'post_content' );
 
 	$placeholders = array(
-		'%year%'       => gmdate( 'Y' ), // A full numeric representation of a year, 4 digits.
-		'%month%'      => gmdate( 'F' ), // January through December.
-		'%date%'       => gmdate( 'j' ), // Date - 01 to 31.
-		'%first_year%' => ata_get_first_post_year(),
-		'%home_url%'   => get_home_url(),
+		'%year%'         => gmdate( 'Y' ), // A full numeric representation of a year, 4 digits.
+		'%month%'        => gmdate( 'F' ), // January through December.
+		'%date%'         => gmdate( 'j' ), // Date - 01 to 31.
+		'%first_year%'   => ata_get_first_post_year(),
+		'%home_url%'     => get_home_url(),
+		'%reading_time%' => ata_get_reading_time( $content ),
 	);
 
 	/**
@@ -238,3 +240,55 @@ function ata_str_putcsv( $array, $delimiter = ',', $enclosure = '"', $terminator
 	return $string;
 }
 
+/**
+ * Calculate the estimated reading time for a given piece of $content.
+ *
+ * @since 1.8.0
+ *
+ * @param string $content Content use to determine reading time.
+ * @param array  $args {
+ *      Optional. Arguments to configure the reading time.
+ *
+ *     @type int        $wpm      Words per minute.
+ *     @type string     $before   Text to display before.
+ *     @type string     $after    Text to display after.
+ * }
+ * @return string Estimated reading time if $args['echo'] set to false, void if true.
+ */
+function ata_get_reading_time( $content = '', $args = array() ) {
+	$defaults = array(
+		'wpm'    => 200,
+		'before' => '',
+		'after'  => '',
+		'echo'   => false,
+	);
+
+	$parsed_args = wp_parse_args( $args, $defaults );
+
+	$content = wp_strip_all_tags( strip_shortcodes( $content ) );
+	$words   = str_word_count( $content );
+	$minutes = floor( $words / $parsed_args['wpm'] );
+	$seconds = floor( ( $words % $parsed_args['wpm'] ) / ( $parsed_args['wpm'] / 60 ) );
+
+	$minutes_text = sprintf( _n( '%s minute', '%s minutes', $minutes, 'add-to-all' ), number_format_i18n( $minutes ) );
+	$seconds_text = sprintf( _n( '%s second', '%s seconds', $seconds, 'add-to-all' ), number_format_i18n( $seconds ) );
+	$time         = $minutes_text . ', ' . $seconds_text;
+	$time         = $parsed_args['before'] . $time . $parsed_args['after'];
+
+	/**
+	 * Filters the reading time.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param string $time Estimated reading time.
+	 * @param string $content Content.
+	 * @param array $parse_args Parsed arguments array.
+	 */
+	$time = apply_filters( 'ata_get_reading_time', $time, $content, $parsed_args );
+
+	if ( $parsed_args['echo'] ) {
+		echo esc_html( $time );
+	} else {
+		return $time;
+	}
+}

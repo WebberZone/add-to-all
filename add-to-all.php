@@ -95,6 +95,7 @@ require_once ATA_PLUGIN_DIR . 'includes/modules/statcounter.php';
 require_once ATA_PLUGIN_DIR . 'includes/modules/google-analytics.php';
 require_once ATA_PLUGIN_DIR . 'includes/modules/tynt.php';
 require_once ATA_PLUGIN_DIR . 'includes/modules/site-verification.php';
+require_once ATA_PLUGIN_DIR . 'includes/modules/class-ata-shortcodes.php';
 
 /**
  * Declare $ata_settings global so that it can be accessed in every function
