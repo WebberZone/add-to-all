@@ -252,6 +252,7 @@ function ata_str_putcsv( $array, $delimiter = ',', $enclosure = '"', $terminator
  *     @type int        $wpm      Words per minute.
  *     @type string     $before   Text to display before.
  *     @type string     $after    Text to display after.
+ *     @type bool       $echo     Whether to echo or return.
  * }
  * @return string Estimated reading time if $args['echo'] set to false, void if true.
  */
