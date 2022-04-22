@@ -49,14 +49,63 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		public $settings_page;
 
 		/**
+		 * Prefix which is used for creating the unique filters and actions.
+		 *
+		 * @since 1.7.0
+		 *
+		 * @var string Prefix.
+		 */
+		public static $prefix;
+
+		/**
+		 * Settings Key.
+		 *
+		 * @since 1.7.0
+		 *
+		 * @var string Settings Key.
+		 */
+		public $settings_key;
+
+		/**
+		 * The slug name to refer to this menu by (should be unique for this menu).
+		 *
+		 * @since 1.7.0
+		 *
+		 * @var string Menu slug.
+		 */
+		public $menu_slug;
+
+		/**
 		 * Main constructor class.
 		 *
 		 * @since 1.7.0
 		 */
 		protected function __construct() {
-			add_action( 'admin_init', array( $this, 'admin_init' ) );
-			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-			add_action( 'admin_footer_text', array( $this, 'admin_footer_text' ) );
+			$this->settings_key = 'ata_settings';
+			self::$prefix       = 'ata';
+			$this->menu_slug    = 'ata_options_page';
+
+			$args = array(
+				'menu_slug'         => $this->menu_slug,
+				'default_tab'       => 'general',
+				'help_sidebar'      => $this->get_help_sidebar(),
+				'help_tabs'         => $this->get_help_tabs(),
+				'admin_footer_text' => sprintf(
+					/* translators: 1: Opening achor tag with Plugin page link, 2: Closing anchor tag, 3: Opening anchor tag with review link. */
+					__( 'Thank you for using %1$sAdd to All%2$s! Please %3$srate us%2$s on %3$sWordPress.org%2$s', 'add-to-all' ),
+					'<a href="https://webberzone.com/plugins/add-to-all/" target="_blank">',
+					'</a>',
+					'<a href="https://wordpress.org/support/plugin/add-to-all/reviews/#new-post" target="_blank">'
+				),
+			);
+
+			$this->settings_api = new ATA_Admin\Settings_API( $this->settings_key, self::$prefix );
+			$this->settings_api->set_translation_strings( $this->get_translation_strings() );
+			$this->settings_api->set_props( $args );
+			$this->settings_api->set_sections( $this->get_settings_sections() );
+			$this->settings_api->set_registered_settings( $this->get_registered_settings() );
+			$this->settings_api->set_upgraded_settings( $this->get_upgrade_settings() );
+
 			add_action( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
 			add_filter( 'plugin_action_links_' . plugin_basename( ATA_PLUGIN_FILE ), array( $this, 'plugin_actions_links' ) );
 		}
@@ -74,37 +123,34 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		}
 
 		/**
-		 * Init function.
+		 * Array containing the settings' sections.
 		 *
-		 * @since 1.7.0
+		 * @since 1.8.0
+		 *
+		 * @return array Settings array
 		 */
-		public function admin_init() {
-
-			$args = array(
-				'reset_message'   => __( 'Settings have been reset to their default values. Reload this page to view the updated settings.', 'add-to-all' ),
-				'success_message' => __( 'Settings updated.', 'add-to-all' ),
-				'default_tab'     => 'general',
-				'settings_page'   => $this->settings_page,
+		public function get_translation_strings() {
+			$strings = array(
+				'page_title'           => esc_html__( 'Add to All', 'add-to-all' ),
+				'menu_title'           => esc_html__( 'Add to All', 'add-to-all' ),
+				'page_header'          => esc_html__( 'Add to All Settings', 'add-to-all' ),
+				'reset_message'        => esc_html__( 'Settings have been reset to their default values. Reload this page to view the updated settings.', 'add-to-all' ),
+				'success_message'      => esc_html__( 'Settings updated.', 'add-to-all' ),
+				'save_changes'         => esc_html__( 'Save Changes', 'add-to-all' ),
+				'reset_settings'       => esc_html__( 'Reset all settings', 'add-to-all' ),
+				'reset_button_confirm' => esc_html__( 'Do you really want to reset all these settings to their default values?', 'add-to-all' ),
+				'checkbox_modified'    => esc_html__( 'Modified from default setting', 'add-to-all' ),
 			);
 
-			$this->settings_api = new ATA_Admin\Settings_API( 'ata_settings', 'ata', $args );
-			$this->settings_api->set_sections( $this->get_settings_sections() );
-			$this->settings_api->set_registered_settings( $this->get_registered_settings() );
-			$this->settings_api->set_upgraded_settings( $this->get_upgrade_settings() );
+			/**
+			 * Filter the array containing the settings' sections.
+			 *
+			 * @since 1.8.0
+			 *
+			 * @param array $strings Translation strings.
+			 */
+			return apply_filters( self::$prefix . '_translation_strings', $strings );
 
-			$this->settings_api->admin_init();
-		}
-
-		/**
-		 * Add admin menu.
-		 *
-		 * @since 1.7.0
-		 */
-		public function admin_menu() {
-			$this->settings_page = add_options_page( __( 'Add to All', 'add-to-all' ), __( 'Add to All', 'add-to-all' ), 'manage_options', 'ata_options_page', array( $this, 'plugin_settings' ) );
-
-			// Load the settings contextual help.
-			add_action( 'load-' . $this->settings_page, array( $this, 'settings_help' ) );
 		}
 
 		/**
@@ -131,7 +177,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			 *
 			 * @param array $ata_settings_sections Settings array
 			 */
-			return apply_filters( 'ata_settings_sections', $ata_settings_sections );
+			return apply_filters( self::$prefix . '_settings_sections', $ata_settings_sections );
 
 		}
 
@@ -161,7 +207,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			 *
 			 * @param array $ata_setings Settings array
 			 */
-			return apply_filters( 'ata_registered_settings', $ata_settings );
+			return apply_filters( self::$prefix . '_registered_settings', $ata_settings );
 
 		}
 
@@ -191,7 +237,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			 *
 			 * @param array $settings Header Settings array
 			 */
-			return apply_filters( 'ata_settings_general', $settings );
+			return apply_filters( self::$prefix . '_settings_general', $settings );
 		}
 
 		/**
@@ -304,7 +350,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			 *
 			 * @param array $settings Third party Settings array
 			 */
-			return apply_filters( 'ata_settings_third_party', $settings );
+			return apply_filters( self::$prefix . '_settings_third_party', $settings );
 		}
 
 		/**
@@ -343,7 +389,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			 *
 			 * @param array $settings Header Settings array
 			 */
-			return apply_filters( 'ata_settings_head', $settings );
+			return apply_filters( self::$prefix . '_settings_head', $settings );
 		}
 
 		/**
@@ -530,7 +576,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			 *
 			 * @param array $settings Content Settings array
 			 */
-			return apply_filters( 'ata_settings_content', $settings );
+			return apply_filters( self::$prefix . '_settings_content', $settings );
 		}
 
 		/**
@@ -568,7 +614,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			 *
 			 * @param array $settings Footer Settings array
 			 */
-			return apply_filters( 'ata_settings_footer', $settings );
+			return apply_filters( self::$prefix . '_settings_footer', $settings );
 		}
 
 		/**
@@ -666,7 +712,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			 *
 			 * @param array $settings Feed Settings array
 			 */
-			return apply_filters( 'ata_settings_feed', $settings );
+			return apply_filters( self::$prefix . '_settings_feed', $settings );
 		}
 
 		/**
@@ -687,7 +733,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			 * @since 1.2.0
 			 * @param string $copyrightnotice Copyright notice
 			 */
-			return apply_filters( 'ata_copyright_text', $copyrightnotice );
+			return apply_filters( self::$prefix . '_copyright_text', $copyrightnotice );
 		}
 
 
@@ -753,75 +799,6 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		}
 
 		/**
-		 * Render the settings page.
-		 *
-		 * @since 1.7.0
-		 *
-		 * @return void
-		 */
-		public function plugin_settings() {
-			$active_tab = isset( $_GET['tab'] ) && array_key_exists( sanitize_key( wp_unslash( $_GET['tab'] ) ), $this->get_settings_sections() ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general'; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
-
-			ob_start();
-			?>
-			<div class="wrap">
-				<h1><?php esc_html_e( 'Add to All Settings', 'add-to-all' ); ?></h1>
-
-				<div id="poststuff">
-				<div id="post-body" class="metabox-holder columns-2">
-				<div id="post-body-content">
-
-					<?php $this->settings_api->show_navigation(); ?>
-					<?php $this->settings_api->show_form(); ?>
-
-				</div><!-- /#post-body-content -->
-
-				<div id="postbox-container-1" class="postbox-container">
-
-					<div id="side-sortables" class="meta-box-sortables ui-sortable">
-						<?php include_once 'sidebar.php'; ?>
-					</div><!-- /#side-sortables -->
-
-				</div><!-- /#postbox-container-1 -->
-				</div><!-- /#post-body -->
-				<br class="clear" />
-				</div><!-- /#poststuff -->
-
-			</div><!-- /.wrap -->
-
-			<?php
-			echo ob_get_clean(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		}
-
-		/**
-		 * Add rating links to the admin dashboard
-		 *
-		 * @since 1.7.0
-		 *
-		 * @param string $footer_text The existing footer text.
-		 * @return string Updated Footer text
-		 */
-		public function admin_footer_text( $footer_text ) {
-
-			if ( get_current_screen()->id === $this->settings_page ) {
-
-				$text = sprintf(
-					/* translators: 1: Plugin page link, 2: Review link. */
-					__( 'Thank you for using <a href="%1$s" target="_blank">Add to All</a>! Please <a href="%2$s" target="_blank">rate us</a> on <a href="%2$s" target="_blank">WordPress.org</a>', 'add-to-all' ),
-					'https://webberzone.com/plugins/add-to-all',
-					'https://wordpress.org/support/plugin/add-to-all/reviews/#new-post'
-				);
-
-				return str_replace( '</span>', '', $footer_text ) . ' | ' . $text . '</span>';
-
-			} else {
-
-				return $footer_text;
-
-			}
-		}
-
-		/**
 		 * Adding WordPress plugin action links.
 		 *
 		 * @since 1.7.0
@@ -833,11 +810,10 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 
 			return array_merge(
 				array(
-					'settings' => '<a href="' . admin_url( 'options-general.php?page=ata_options_page' ) . '">' . esc_html__( 'Settings', 'add-to-all' ) . '</a>',
+					'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->menu_slug ) . '">' . esc_html__( 'Settings', 'add-to-all' ) . '</a>',
 				),
 				$links
 			);
-
 		}
 
 		/**
@@ -852,28 +828,25 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		public function plugin_row_meta( $links, $file ) {
 
 			if ( false !== strpos( $file, 'add-to-all.php' ) ) {
-				$links[] = '<a href="http://wordpress.org/support/plugin/add-to-all">' . esc_html__( 'Support', 'add-to-all' ) . '</a>';
-				$links[] = '<a href="https://webberzone.com/donate/">' . esc_html__( 'Donate', 'add-to-all' ) . '</a>';
+				$new_links = array(
+					'support'    => '<a href = "https://wordpress.org/support/plugin/add-to-all">' . esc_html__( 'Support', 'add-to-all' ) . '</a>',
+					'donate'     => '<a href = "https://ajaydsouza.com/donate/">' . esc_html__( 'Donate', 'add-to-all' ) . '</a>',
+					'contribute' => '<a href = "https://github.com/WebberZone/add-to-all">' . esc_html__( 'Contribute', 'add-to-all' ) . '</a>',
+				);
+
+				$links = array_merge( $links, $new_links );
 			}
 			return $links;
 		}
 
-
-
 		/**
-		 * Function to add the content of the help tab.
+		 * Get the help sidebar content to display on the plugin settings page.
 		 *
-		 * @since 1.7.0
+		 * @since 1.8.0
 		 */
-		public function settings_help() {
-			$screen = get_current_screen();
+		public function get_help_sidebar() {
 
-			if ( $screen->id !== $this->settings_page ) {
-				return;
-			}
-
-			// Set the text in the help sidebar.
-			$screen->set_help_sidebar(
+			$help_sidebar =
 				/* translators: 1: Plugin support site link. */
 				'<p>' . sprintf( __( 'For more information or how to get support visit the <a href="%s">support site</a>.', 'add-to-all' ), esc_url( 'https://webberzone.com/support/' ) ) . '</p>' .
 				/* translators: 1: WordPress.org support forums link. */
@@ -883,11 +856,26 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 					__( '<a href="%1$s">Post an issue</a> on <a href="%2$s">GitHub</a> (bug reports only).', 'add-to-all' ),
 					esc_url( 'https://github.com/ajaydsouza/add-to-all/issues' ),
 					esc_url( 'https://github.com/ajaydsouza/add-to-all' )
-				) . '</p>'
-			);
+				) . '</p>';
 
-			// Add third party help tab.
-			$screen->add_help_tab(
+			/**
+			 * Filter to modify the help sidebar content.
+			 *
+			 * @since 1.8.0
+			 *
+			 * @param array $help_sidebar Help sidebar content.
+			 */
+			return apply_filters( self::$prefix . '_settings_help', $help_sidebar );
+		}
+
+		/**
+		 * Get the help tabs to display on the plugin settings page.
+		 *
+		 * @since 1.8.0
+		 */
+		public function get_help_tabs() {
+
+			$help_tabs = array(
 				array(
 					'id'      => 'ata-settings-third-party-help',
 					'title'   => esc_html__( 'Third Party', 'add-to-all' ),
@@ -900,11 +888,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 						) .
 						'</p>',
 					'<p>' . esc_html__( 'You must click the Save Changes button at the bottom of the screen for new settings to take effect.', 'add-to-all' ) . '</p>',
-				)
-			);
-
-			// Add Header help tab.
-			$screen->add_help_tab(
+				),
 				array(
 					'id'      => 'ata-settings-header-help',
 					'title'   => esc_html__( 'Header', 'add-to-all' ),
@@ -912,11 +896,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 						'<p><strong>' . esc_html__( 'This screen allows you to control what content is added to the header of your site.', 'add-to-all' ) . '</strong></p>' .
 						'<p>' . esc_html__( 'You can add custom CSS or HTML code. Useful for adding meta tags for site verification, etc.', 'add-to-all' ) . '</p>' .
 						'<p>' . esc_html__( 'You must click the Save Changes button at the bottom of the screen for new settings to take effect.', 'add-to-all' ) . '</p>',
-				)
-			);
-
-			// Add Content help tab.
-			$screen->add_help_tab(
+				),
 				array(
 					'id'      => 'ata-settings-content-help',
 					'title'   => esc_html__( 'Content', 'add-to-all' ),
@@ -924,11 +904,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 						'<p><strong>' . esc_html__( 'This screen allows you to control what content is added to the content of posts, pages and custom post types.', 'add-to-all' ) . '</strong></p>' .
 						'<p>' . esc_html__( 'You can set the priority of the filter and choose if you want this to be displayed on either all content (including archives) or just single posts/pages.', 'add-to-all' ) . '</p>' .
 						'<p>' . esc_html__( 'You must click the Save Changes button at the bottom of the screen for new settings to take effect.', 'add-to-all' ) . '</p>',
-				)
-			);
-
-			// Add Footer help tab.
-			$screen->add_help_tab(
+				),
 				array(
 					'id'      => 'ata-settings-footer-help',
 					'title'   => esc_html__( 'Footer', 'add-to-all' ),
@@ -936,11 +912,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 						'<p><strong>' . esc_html__( 'This screen allows you to control what content is added to the footer of your site.', 'add-to-all' ) . '</strong></p>' .
 						'<p>' . esc_html__( 'You can add custom HTML code. Useful for adding tracking code for analytics, etc.', 'add-to-all' ) . '</p>' .
 						'<p>' . esc_html__( 'You must click the Save Changes button at the bottom of the screen for new settings to take effect.', 'add-to-all' ) . '</p>',
-				)
-			);
-
-			// Add Feed help tab.
-			$screen->add_help_tab(
+				),
 				array(
 					'id'      => 'ata-settings-feed-help',
 					'title'   => esc_html__( 'Feed', 'add-to-all' ),
@@ -948,15 +920,17 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 						'<p><strong>' . esc_html__( 'This screen allows you to control what content is added to the feed of your site.', 'add-to-all' ) . '</strong></p>' .
 						'<p>' . esc_html__( 'You can add copyright text, a link to the title and date of the post, and HTML before and after the content', 'add-to-all' ) . '</p>' .
 						'<p>' . esc_html__( 'You must click the Save Changes button at the bottom of the screen for new settings to take effect.', 'add-to-all' ) . '</p>',
-				)
+				),
 			);
 
 			/**
-			 * Action to add more help settings.
+			 * Filter to add more help tabs.
 			 *
-			 * @since 1.2.0
+			 * @since 1.8.0
+			 *
+			 * @param array $help_tabs Associative array of help tabs.
 			 */
-			do_action( 'ata_settings_help', $screen );
+			return apply_filters( self::$prefix . '_settings_help', $help_tabs );
 		}
 	}
 

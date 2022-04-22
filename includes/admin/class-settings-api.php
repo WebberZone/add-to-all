@@ -23,7 +23,7 @@ if ( ! class_exists( 'Settings_API' ) ) :
 	/**
 	 * Settings API wrapper class
 	 *
-	 * @version 1.0.0
+	 * @version 2.0.0
 	 * @since   1.7.0
 	 */
 	class Settings_API {
@@ -33,7 +33,7 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		 *
 		 * @var   string
 		 */
-		const VERSION = '1.0.0';
+		const VERSION = '2.0.0';
 
 		/**
 		 * Settings Key.
@@ -50,18 +50,18 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		public $prefix;
 
 		/**
-		 * Reset message.
+		 * Translation strings.
 		 *
-		 * @var string Reset message.
+		 * @var array Translation strings.
 		 */
-		public $reset_message;
+		public $translation_strings;
 
 		/**
-		 * Success message.
+		 * The slug name to refer to this menu by (should be unique for this menu).
 		 *
-		 * @var string Success message.
+		 * @var string Menu slug.
 		 */
-		public $success_message;
+		public $menu_slug;
 
 		/**
 		 * Default navigation tab.
@@ -76,6 +76,13 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		 * @var string Settings page.
 		 */
 		protected $settings_page;
+
+		/**
+		 * Admin Footer Text. Displayed at the bottom of the plugin settings page.
+		 *
+		 * @var string Admin Footer Text.
+		 */
+		protected $admin_footer_text;
 
 		/**
 		 * Array containing the settings' sections.
@@ -99,18 +106,26 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		protected $upgraded_settings = array();
 
 		/**
+		 * Help sidebar content.
+		 *
+		 * @var string Admin Footer Text.
+		 */
+		protected $help_sidebar;
+
+		/**
+		 * Array of help tabs.
+		 *
+		 * @var array Settings sections array.
+		 */
+		protected $help_tabs = array();
+
+		/**
 		 * Main constructor class.
 		 *
-		 * @param string       $settings_key Settings key.
-		 * @param string       $prefix       Prefix. Used for actions and filters.
-		 * @param array|string $args {
-		 *     Array or string of arguments. Default is blank array.
-		 *
-		 *     @type string    $reset_message     Message displayed when settings are reset.
-		 *     @type string    $success_message   Message displayed when settings are saved successfully.
-		 * }
+		 * @param string $settings_key Settings key.
+		 * @param string $prefix       Prefix. Used for actions and filters.
 		 */
-		public function __construct( $settings_key, $prefix, $args = array() ) {
+		public function __construct( $settings_key, $prefix ) {
 
 			if ( ! defined( 'WZ_SETTINGS_API_VERSION' ) ) {
 				define( 'WZ_SETTINGS_API_VERSION', self::VERSION );
@@ -118,33 +133,139 @@ if ( ! class_exists( 'Settings_API' ) ) :
 
 			$this->settings_key = $settings_key;
 			$this->prefix       = $prefix;
-			$this->set_props( $args );
 
+			$this->hooks();
+		}
+
+		/**
+		 * Adds the functions to the appropriate WordPress hooks.
+		 */
+		public function hooks() {
+			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+			add_action( 'admin_init', array( $this, 'admin_init' ) );
+			add_action( 'admin_footer_text', array( $this, 'admin_footer_text' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		}
 
 		/**
 		 * Sets properties.
 		 *
-		 * @param array|string $args Array or string of arguments.
+		 * @param array|string $args {
+		 *     Array or string of arguments. Default is blank array.
+		 *
+		 *     @type string $menu_slug         Admin menu slug.
+		 *     @type string $default_tab       Default tab.
+		 *     @type string $admin_footer_text Admin footer text.
+		 *     @type string $help_sidebar      Help sidebar.
+		 *     @type array  $help_tabs         Help tabs.
+		 * }
 		 */
 		public function set_props( $args ) {
-			$args = wp_parse_args( $args );
 
 			// Args prefixed with an underscore are reserved for internal use.
 			$defaults = array(
-				'reset_message'   => __( 'Settings have been reset to their default values. Reload this page to view the updated settings.' ),
-				'success_message' => __( 'Settings updated.' ),
-				'default_tab'     => 'general',
-				'settings_page'   => '',
+				'menu_slug'         => '',
+				'default_tab'       => 'general',
+				'admin_footer_text' => '',
+				'help_sidebar'      => '',
+				'help_tabs'         => array(),
 			);
 
-			$args = array_merge( $defaults, $args );
+			$args = wp_parse_args( $args, $defaults );
 
-			foreach ( $args as $property_name => $property_value ) {
-				$this->$property_name = $property_value;
+			foreach ( $args as $name => $value ) {
+				$this->$name = $value;
 			}
 
+		}
+
+		/**
+		 * Sets translation strings.
+		 *
+		 * @param array $strings Array of translation strings.
+		 */
+		public function set_translation_strings( $strings ) {
+
+			// Args prefixed with an underscore are reserved for internal use.
+			$defaults = array(
+				'page_title'           => '',
+				'menu_title'           => '',
+				'page_header'          => '',
+				'reset_message'        => __( 'Settings have been reset to their default values. Reload this page to view the updated settings.' ),
+				'success_message'      => __( 'Settings updated.' ),
+				'save_changes'         => __( 'Save Changes' ),
+				'reset_settings'       => __( 'Reset all settings' ),
+				'reset_button_confirm' => __( 'Do you really want to reset all these settings to their default values?' ),
+				'checkbox_modified'    => __( 'Modified from default setting' ),
+			);
+
+			$strings = wp_parse_args( $strings, $defaults );
+
+			$this->translation_strings = $strings;
+		}
+
+		/**
+		 * Set settings sections
+		 *
+		 * @param array $sections Setting sections array.
+		 * @return object Class object.
+		 */
+		public function set_sections( $sections ) {
+			$this->settings_sections = (array) $sections;
+
+			return $this;
+		}
+
+		/**
+		 * Add a single section
+		 *
+		 * @param array $section New Section.
+		 * @return object Object of the class instance.
+		 */
+		public function add_section( $section ) {
+			$this->settings_sections[] = $section;
+
+			return $this;
+		}
+
+		/**
+		 * Set the settings fields for registered settings.
+		 *
+		 * @param array $registered_settings Registered settings array.
+		 * @return object Object of the class instance.
+		 */
+		public function set_registered_settings( $registered_settings ) {
+			$this->registered_settings = (array) $registered_settings;
+
+			return $this;
+		}
+
+		/**
+		 * Set the settings fields for settings to upgrade.
+		 *
+		 * @param array $upgraded_settings Settings array.
+		 * @return object Object of the class instance.
+		 */
+		public function set_upgraded_settings( $upgraded_settings = array() ) {
+			$this->upgraded_settings = (array) $upgraded_settings;
+
+			return $this;
+		}
+
+		/**
+		 * Add admin menu.
+		 */
+		public function admin_menu() {
+			$this->settings_page = add_options_page(
+				$this->translation_strings['page_title'],
+				$this->translation_strings['menu_title'],
+				'manage_options',
+				$this->menu_slug,
+				array( $this, 'plugin_settings' )
+			);
+
+			// Load the settings contextual help.
+			add_action( 'load-' . $this->settings_page, array( $this, 'settings_help' ) );
 		}
 
 		/**
@@ -181,54 +302,6 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			wp_enqueue_script( 'wz-admin-js', plugins_url( 'js/admin-scripts' . $minimize . '.js', __FILE__ ), array( 'jquery' ), '1.0', true );
 			wp_enqueue_script( 'wz-codemirror-js', plugins_url( 'js/apply-codemirror' . $minimize . '.js', __FILE__ ), array( 'jquery' ), '1.0', true );
 			wp_enqueue_script( 'wz-taxonomy-suggest-js', plugins_url( 'js/taxonomy-suggest' . $minimize . '.js', __FILE__ ), array( 'jquery' ), '1.0', true );
-		}
-
-		/**
-		 * Set settings sections
-		 *
-		 * @param array $sections Setting sections array.
-		 * @return object Class object.
-		 */
-		public function set_sections( $sections ) {
-			$this->settings_sections = $sections;
-
-			return $this;
-		}
-
-		/**
-		 * Add a single section
-		 *
-		 * @param array $section New Section.
-		 * @return object Object of the class instance.
-		 */
-		public function add_section( $section ) {
-			$this->settings_sections[] = $section;
-
-			return $this;
-		}
-
-		/**
-		 * Set the settings fields for registered settings.
-		 *
-		 * @param array $registered_settings Registered settings array.
-		 * @return object Object of the class instance.
-		 */
-		public function set_registered_settings( $registered_settings ) {
-			$this->registered_settings = $registered_settings;
-
-			return $this;
-		}
-
-		/**
-		 * Set the settings fields for settings to upgrade.
-		 *
-		 * @param array $upgraded_settings Settings array.
-		 * @return object Object of the class instance.
-		 */
-		public function set_upgraded_settings( $upgraded_settings = array() ) {
-			$this->upgraded_settings = $upgraded_settings;
-
-			return $this;
 		}
 
 		/**
@@ -405,6 +478,13 @@ if ( ! class_exists( 'Settings_API' ) ) :
 				$desc = '';
 			}
 
+			/**
+			 * After Settings Output filter
+			 *
+			 * @param string $desc Description of the field.
+			 * @param array Arguments array.
+			 */
+			$desc = apply_filters( $this->prefix . '_setting_field_description', $desc, $args );
 			return $desc;
 		}
 
@@ -488,7 +568,15 @@ if ( ! class_exists( 'Settings_API' ) ) :
 				$attributes .= sprintf( ' %1$s="%2$s"', $attribute, esc_attr( $val ) );
 			}
 
-			$html  = sprintf( '<input type="text" id="%1$s[%2$s]" name="%1$s[%2$s]" class="%3$s" value="%4$s" %5$s %6$s />', $this->settings_key, sanitize_key( $args['id'] ), $class . ' ' . $size . '-text', esc_attr( stripslashes( $value ) ), $attributes, $placeholder );
+			$html  = sprintf(
+				'<input type="text" id="%1$s[%2$s]" name="%1$s[%2$s]" class="%3$s" value="%4$s" %5$s %6$s />',
+				$this->settings_key,
+				sanitize_key( $args['id'] ),
+				$class . ' ' . $size . '-text',
+				esc_attr( stripslashes( $value ) ),
+				$attributes,
+				$placeholder
+			);
 			$html .= $this->get_field_description( $args );
 
 			/** This filter has been defined in class-settings-api.php */
@@ -551,7 +639,13 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			$value = $this->get_option( $args['id'], $args['options'] );
 			$class = sanitize_html_class( $args['field_class'] );
 
-			$html  = sprintf( '<textarea class="%4$s" cols="50" rows="5" id="%1$s[%2$s]" name="%1$s[%2$s]">%3$s</textarea>', $this->settings_key, sanitize_key( $args['id'] ), esc_textarea( stripslashes( $value ) ), 'large-text ' . $class );
+			$html  = sprintf(
+				'<textarea class="%4$s" cols="50" rows="5" id="%1$s[%2$s]" name="%1$s[%2$s]">%3$s</textarea>',
+				$this->settings_key,
+				sanitize_key( $args['id'] ),
+				esc_textarea( stripslashes( $value ) ),
+				'large-text ' . $class
+			);
 			$html .= $this->get_field_description( $args );
 
 			/** This filter has been defined in class-settings-api.php */
@@ -592,7 +686,7 @@ if ( ! class_exists( 'Settings_API' ) ) :
 
 			$html  = sprintf( '<input type="hidden" name="%1$s[%2$s]" value="-1" />', $this->settings_key, sanitize_key( $args['id'] ) );
 			$html .= sprintf( '<input type="checkbox" id="%1$s[%2$s]" name="%1$s[%2$s]" value="1" %3$s />', $this->settings_key, sanitize_key( $args['id'] ), $checked );
-			$html .= ( $value <> $default ) ? '<em style="color:orange">***</em>' : ''; // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+			$html .= ( $value <> $default ) ? '<em style="color:orange">' . $this->translation_strings['checkbox_modified'] . '</em>' : ''; // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
 			$html .= $this->get_field_description( $args );
 
 			/** This filter has been defined in class-settings-api.php */
@@ -623,8 +717,21 @@ if ( ! class_exists( 'Settings_API' ) ) :
 						$enabled = null;
 					}
 
-					$html .= sprintf( '<input name="%1$s[%2$s][%3$s]" id="%1$s[%2$s][%3$s]" type="checkbox" value="%4$s" %5$s /> ', $this->settings_key, sanitize_key( $args['id'] ), sanitize_key( $key ), esc_attr( $key ), checked( $key, $enabled, false ) );
-					$html .= sprintf( '<label for="%1$s[%2$s][%3$s]">%4$s</label> <br />', $this->settings_key, sanitize_key( $args['id'] ), sanitize_key( $key ), $option );
+					$html .= sprintf(
+						'<input name="%1$s[%2$s][%3$s]" id="%1$s[%2$s][%3$s]" type="checkbox" value="%4$s" %5$s /> ',
+						$this->settings_key,
+						sanitize_key( $args['id'] ),
+						sanitize_key( $key ),
+						esc_attr( $key ),
+						checked( $key, $enabled, false )
+					);
+					$html .= sprintf(
+						'<label for="%1$s[%2$s][%3$s]">%4$s</label> <br />',
+						$this->settings_key,
+						sanitize_key( $args['id'] ),
+						sanitize_key( $key ),
+						$option
+					);
 				}
 
 				$html .= $this->get_field_description( $args );
@@ -649,8 +756,20 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			$value = $this->get_option( $args['id'], $args['default'] );
 
 			foreach ( $args['options'] as $key => $option ) {
-				$html .= sprintf( '<input name="%1$s[%2$s]" id="%1$s[%2$s][%3$s]" type="radio" value="%3$s" %4$s /> ', $this->settings_key, sanitize_key( $args['id'] ), $key, checked( $value, $key, false ) );
-				$html .= sprintf( '<label for="%1$s[%2$s][%3$s]">%3$s</label> <br />', $this->settings_key, sanitize_key( $args['id'] ), $key, $option );
+				$html .= sprintf(
+					'<input name="%1$s[%2$s]" id="%1$s[%2$s][%3$s]" type="radio" value="%3$s" %4$s /> ',
+					$this->settings_key,
+					sanitize_key( $args['id'] ),
+					$key,
+					checked( $value, $key, false )
+				);
+				$html .= sprintf(
+					'<label for="%1$s[%2$s][%3$s]">%4$s</label> <br />',
+					$this->settings_key,
+					sanitize_key( $args['id'] ),
+					$key,
+					$option
+				);
 			}
 
 			$html .= $this->get_field_description( $args );
@@ -673,10 +792,60 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			$value = $this->get_option( $args['id'], $args['default'] );
 
 			foreach ( $args['options'] as $option ) {
-				$html .= sprintf( '<input name="%1$s[%2$s]" id="%1$s[%2$s][%3$s]" type="radio" value="%3$s" %4$s /> ', $this->settings_key, sanitize_key( $args['id'] ), $option['id'], checked( $value, $option['id'], false ) );
-				$html .= sprintf( '<label for="%1$s[%2$s][%3$s]">%3$s</label> <br />', $this->settings_key, sanitize_key( $args['id'] ), $option['id'], $option['name'] );
+				$html .= sprintf(
+					'<input name="%1$s[%2$s]" id="%1$s[%2$s][%3$s]" type="radio" value="%3$s" %4$s /> ',
+					$this->settings_key,
+					sanitize_key( $args['id'] ),
+					$option['id'],
+					checked( $value, $option['id'], false )
+				);
+				$html .= sprintf(
+					'<label for="%1$s[%2$s][%3$s]">%4$s</label>',
+					$this->settings_key,
+					sanitize_key( $args['id'] ),
+					$option['id'],
+					$option['name']
+				);
 
 				$html .= ': <em>' . wp_kses_post( $option['description'] ) . '</em> <br />';
+			}
+
+			$html .= $this->get_field_description( $args );
+
+			/** This filter has been defined in class-settings-api.php */
+			echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+
+		/**
+		 * Radio callback with description.
+		 *
+		 * Renders radio boxes with each item having it separate description.
+		 *
+		 * @param array $args Array of arguments.
+		 * @return void
+		 */
+		public function callback_thumbsizes( $args ) {
+			$html = '';
+
+			$value = $this->get_option( $args['id'], $args['default'] );
+
+			foreach ( $args['options'] as $name => $option ) {
+				$html .= sprintf(
+					'<input name="%1$s[%2$s]" id="%1$s[%2$s][%3$s]" type="radio" value="%3$s" %4$s /> ',
+					$this->settings_key,
+					sanitize_key( $args['id'] ),
+					$name,
+					checked( $value, $name, false )
+				);
+				$html .= sprintf(
+					'<label for="%1$s[%2$s][%3$s]">%3$s (%4$sx%5$s%6$s)</label> <br />',
+					$this->settings_key,
+					sanitize_key( $args['id'] ),
+					$name,
+					(int) $option['width'],
+					(int) $option['height'],
+					(bool) $option['crop'] ? ' ' . __( 'cropped' ) : ''
+				);
 			}
 
 			$html .= $this->get_field_description( $args );
@@ -695,13 +864,23 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		 */
 		public function callback_number( $args ) {
 			$value       = $this->get_option( $args['id'], $args['options'] );
-			$max         = isset( $args['max'] ) ? $args['max'] : 999999;
-			$min         = isset( $args['min'] ) ? $args['min'] : 0;
-			$step        = isset( $args['step'] ) ? $args['step'] : 1;
+			$max         = isset( $args['max'] ) ? absint( $args['max'] ) : 999999;
+			$min         = isset( $args['min'] ) ? absint( $args['min'] ) : 0;
+			$step        = isset( $args['step'] ) ? absint( $args['step'] ) : 1;
 			$size        = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
-			$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . $args['placeholder'] . '"';
+			$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . esc_attr( $args['placeholder'] ) . '"';
 
-			$html  = sprintf( '<input type="number" step="%1$s" max="%2$s" min="%3$s" class="%4$s" id="%8$s[%5$s]" name="%8$s[%5$s]" value="%6$s" %7$s />', esc_attr( $step ), esc_attr( $max ), esc_attr( $min ), sanitize_html_class( $size ) . '-text', sanitize_key( $args['id'] ), esc_attr( stripslashes( $value ) ), $placeholder, $this->settings_key );
+			$html  = sprintf(
+				'<input type="number" step="%1$s" max="%2$s" min="%3$s" class="%4$s" id="%8$s[%5$s]" name="%8$s[%5$s]" value="%6$s" %7$s />',
+				esc_attr( $step ),
+				esc_attr( $max ),
+				esc_attr( $min ),
+				sanitize_html_class( $size ) . '-text',
+				sanitize_key( $args['id'] ),
+				esc_attr( stripslashes( $value ) ),
+				$placeholder,
+				$this->settings_key
+			);
 			$html .= $this->get_field_description( $args );
 
 			/** This filter has been defined in class-settings-api.php */
@@ -749,13 +928,11 @@ if ( ! class_exists( 'Settings_API' ) ) :
 
 			$options = $this->get_option( $args['id'], $args['options'] );
 
-			// If post_types is empty or contains a query string then use parse_str else consider it comma-separated.
-			if ( is_array( $options ) ) {
-				$post_types = $options;
-			} elseif ( ! is_array( $options ) && false === strpos( $options, '=' ) ) {
-				$post_types = explode( ',', $options );
+			// If post_types contains a query string then parse it with wp_parse_args.
+			if ( is_string( $options ) && strpos( $options, '=' ) ) {
+				$post_types = wp_parse_args( $options );
 			} else {
-				parse_str( $options, $post_types );
+				$post_types = wp_parse_list( $options );
 			}
 
 			$wp_post_types   = get_post_types(
@@ -767,8 +944,68 @@ if ( ! class_exists( 'Settings_API' ) ) :
 
 			foreach ( $wp_post_types as $wp_post_type ) {
 
-				$html .= sprintf( '<input name="%4$s[%1$s][%2$s]" id="%4$s[%1$s][%2$s]" type="checkbox" value="%2$s" %3$s /> ', sanitize_key( $args['id'] ), esc_attr( $wp_post_type ), checked( true, in_array( $wp_post_type, $posts_types_inc, true ), false ), $this->settings_key );
+				$html .= sprintf(
+					'<input name="%4$s[%1$s][%2$s]" id="%4$s[%1$s][%2$s]" type="checkbox" value="%2$s" %3$s /> ',
+					sanitize_key( $args['id'] ),
+					esc_attr( $wp_post_type ),
+					checked( true, in_array( $wp_post_type, $posts_types_inc, true ), false ),
+					$this->settings_key
+				);
 				$html .= sprintf( '<label for="%3$s[%1$s][%2$s]">%2$s</label> <br />', sanitize_key( $args['id'] ), $wp_post_type, $this->settings_key );
+
+			}
+
+			$html .= $this->get_field_description( $args );
+
+			/** This filter has been defined in class-settings-api.php */
+			echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+
+
+		/**
+		 * Display taxonomies fields.
+		 *
+		 * @param array $args Array of arguments.
+		 * @return void
+		 */
+		public function callback_taxonomies( $args ) {
+			$html = '';
+
+			$options = $this->get_option( $args['id'], $args['options'] );
+
+			// If taxonomies contains a query string then parse it with wp_parse_args.
+			if ( is_string( $options ) && strpos( $options, '=' ) ) {
+				$taxonomies = wp_parse_args( $options );
+			} else {
+				$taxonomies = wp_parse_list( $options );
+			}
+
+			/* Fetch taxonomies */
+			$argsc         = array(
+				'public' => true,
+			);
+			$output        = 'objects';
+			$operator      = 'and';
+			$wp_taxonomies = get_taxonomies( $argsc, $output, $operator );
+
+			$taxonomies_inc = array_intersect( wp_list_pluck( (array) $wp_taxonomies, 'name' ), $taxonomies );
+
+			foreach ( $wp_taxonomies as $wp_taxonomy ) {
+
+				$html .= sprintf(
+					'<input name="%4$s[%1$s][%2$s]" id="%4$s[%1$s][%2$s]" type="checkbox" value="%2$s" %3$s /> ',
+					sanitize_key( $args['id'] ),
+					esc_attr( $wp_taxonomy->name ),
+					checked( true, in_array( $wp_taxonomy->name, $taxonomies_inc, true ), false ),
+					$this->settings_key
+				);
+				$html .= sprintf(
+					'<label for="%4$s[%1$s][%2$s]">%3$s (%2$s)</label> <br />',
+					sanitize_key( $args['id'] ),
+					esc_attr( $wp_taxonomy->name ),
+					$wp_taxonomy->labels->name,
+					$this->settings_key
+				);
 
 			}
 
@@ -820,7 +1057,13 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			$class = sanitize_html_class( $args['field_class'] );
 			$label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File' );
 
-			$html  = sprintf( '<input type="text" class="%1$s" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $class . ' ' . $size . '-text file-url', $this->settings_key, sanitize_key( $args['id'] ), esc_attr( $value ) );
+			$html  = sprintf(
+				'<input type="text" class="%1$s" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>',
+				$class . ' ' . $size . '-text file-url',
+				$this->settings_key,
+				sanitize_key( $args['id'] ),
+				esc_attr( $value )
+			);
 			$html .= '<input type="button" class="button button-secondary file-browser" value="' . $label . '" />';
 			$html .= $this->get_field_description( $args );
 
@@ -839,7 +1082,13 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			$size  = sanitize_html_class( ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular' );
 			$class = sanitize_html_class( $args['field_class'] );
 
-			$html  = sprintf( '<input type="password" class="%1$s" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $class . ' ' . $size . '-text', $this->settings_key, sanitize_key( $args['id'] ), esc_attr( $value ) );
+			$html  = sprintf(
+				'<input type="password" class="%1$s" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>',
+				$class . ' ' . $size . '-text',
+				$this->settings_key,
+				sanitize_key( $args['id'] ),
+				esc_attr( $value )
+			);
 			$html .= $this->get_field_description( $args );
 
 			/** This filter has been defined in class-settings-api.php */
@@ -868,7 +1117,7 @@ if ( ! class_exists( 'Settings_API' ) ) :
 				$this->settings_reset();
 				$settings = get_option( $this->settings_key );
 
-				add_settings_error( $this->prefix . '-notices', '', $this->reset_message, 'error' );
+				add_settings_error( $this->prefix . '-notices', '', $this->translation_strings['reset_message'], 'error' );
 
 				return $settings;
 			}
@@ -928,7 +1177,7 @@ if ( ! class_exists( 'Settings_API' ) ) :
 				unset( $output[ $key ] );
 			}
 
-			add_settings_error( $this->prefix . '-notices', '', $this->success_message, 'updated' );
+			add_settings_error( $this->prefix . '-notices', '', $this->translation_strings['success_message'], 'updated' );
 
 			/**
 			 * Filter the settings array before it is returned.
@@ -986,7 +1235,7 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		 * @return string Sanitizied value
 		 */
 		public function sanitize_text_field( $value ) {
-			return sanitize_text_field( $value );
+			return $this->sanitize_textarea_field( $value );
 		}
 
 		/**
@@ -1081,7 +1330,6 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			$allowedtags = apply_filters( $this->prefix . '_sanitize_allowed_tags', $allowedtags );
 
 			return wp_kses( wp_unslash( $value ), $allowedtags );
-
 		}
 
 		/**
@@ -1091,7 +1339,6 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		 * @return int  Sanitized value
 		 */
 		public function sanitize_checkbox_field( $value ) {
-
 			$value = ( -1 === (int) $value ) ? 0 : 1;
 
 			return $value;
@@ -1104,10 +1351,58 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		 * @return string  $value  Sanitized value
 		 */
 		public function sanitize_posttypes_field( $value ) {
-
 			$post_types = is_array( $value ) ? array_map( 'sanitize_text_field', wp_unslash( $value ) ) : array( 'post', 'page' );
 
 			return implode( ',', $post_types );
+		}
+
+		/**
+		 * Sanitize post_types fields
+		 *
+		 * @param  array $value The field value.
+		 * @return string  $value  Sanitized value
+		 */
+		public function sanitize_taxonomies_field( $value ) {
+			$taxonomies = is_array( $value ) ? array_map( 'sanitize_text_field', wp_unslash( $value ) ) : array();
+
+			return implode( ',', $taxonomies );
+		}
+
+		/**
+		 * Render the settings page.
+		 *
+		 * @since 3.0.0
+		 */
+		public function plugin_settings() {
+			ob_start();
+			?>
+			<div class="wrap">
+				<h1><?php echo esc_html( $this->translation_strings['page_header'] ); ?></h1>
+
+				<div id="poststuff">
+				<div id="post-body" class="metabox-holder columns-2">
+				<div id="post-body-content">
+
+					<?php $this->show_navigation(); ?>
+					<?php $this->show_form(); ?>
+
+				</div><!-- /#post-body-content -->
+
+				<div id="postbox-container-1" class="postbox-container">
+
+					<div id="side-sortables" class="meta-box-sortables ui-sortable">
+						<?php include_once 'sidebar.php'; ?>
+					</div><!-- /#side-sortables -->
+
+				</div><!-- /#postbox-container-1 -->
+				</div><!-- /#post-body -->
+				<br class="clear" />
+				</div><!-- /#poststuff -->
+
+			</div><!-- /.wrap -->
+
+			<?php
+			echo ob_get_clean(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		/**
@@ -1148,9 +1443,7 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		 * This public function displays every sections in a different form
 		 */
 		public function show_form() {
-			global $wp_settings_fields;
 			ob_start();
-
 			?>
 
 			<form method="post" action="options.php">
@@ -1169,7 +1462,7 @@ if ( ! class_exists( 'Settings_API' ) ) :
 					<?php
 						// Default submit button.
 						submit_button(
-							__( 'Save Changes', 'add-to-all' ),
+							$this->translation_strings['save_changes'],
 							'primary',
 							'submit',
 							false
@@ -1178,9 +1471,9 @@ if ( ! class_exists( 'Settings_API' ) ) :
 					echo '&nbsp;&nbsp;';
 
 					// Reset button.
-					$confirm = esc_js( __( 'Do you really want to reset all these settings to their default values?', 'add-to-all' ) );
+					$confirm = esc_js( $this->translation_strings['reset_button_confirm'] );
 					submit_button(
-						__( 'Reset all settings', 'add-to-all' ),
+						$this->translation_strings['reset_settings'],
 						'secondary',
 						'settings_reset',
 						false,
@@ -1188,6 +1481,17 @@ if ( ! class_exists( 'Settings_API' ) ) :
 							'onclick' => "return confirm('{$confirm}');",
 						)
 					);
+
+					echo '&nbsp;&nbsp;';
+
+					/**
+					 * Action to add more buttons in each tab.
+					 *
+					 * @param string $tab_id            Tab ID.
+					 * @param string $tab_name          Tab name.
+					 * @param array  $settings_sections Settings sections.
+					 */
+					do_action( $this->prefix . '_settings_form_buttons', $tab_id, $tab_name, $this->settings_sections );
 					?>
 					</p>
 				</div><!-- /#tab_id-->
@@ -1198,6 +1502,42 @@ if ( ! class_exists( 'Settings_API' ) ) :
 
 			<?php
 			echo ob_get_clean(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+
+		/**
+		 * Add rating links to the admin dashboard
+		 *
+		 * @param string $footer_text The existing footer text.
+		 * @return string Updated Footer text
+		 */
+		public function admin_footer_text( $footer_text ) {
+
+			if ( ! empty( $this->admin_footer_text ) && get_current_screen()->id === $this->settings_page ) {
+
+				$text = $this->admin_footer_text;
+
+				return str_replace( '</span>', '', $footer_text ) . ' | ' . $text . '</span>';
+			} else {
+				return $footer_text;
+			}
+		}
+
+		/**
+		 * Function to add the content of the help tab.
+		 */
+		public function settings_help() {
+			$screen = get_current_screen();
+
+			if ( $screen->id !== $this->settings_page ) {
+				return;
+			}
+
+			$screen->set_help_sidebar( $this->help_sidebar );
+
+			foreach ( $this->help_tabs as $tab ) {
+				$screen->add_help_tab( $tab );
+			}
+
 		}
 
 	}

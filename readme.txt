@@ -82,6 +82,9 @@ If you would like a feature to be added, or if you already have the code for the
 	* New placeholder `%updated_time%` to display the updated date
 	* New feature to display the estimated reading time. You can use `%reading_time%` in the Settings page. Alternatively use the shortcode `[ata_reading_time]` to display the reading time
 
+* Enhancements/modifications:
+	* Upgraded Settings_API to v2
+
 = 1.7.3 =
 
 Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzone.com/blog/add-to-all-v1-7-0/)
