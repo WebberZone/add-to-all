@@ -77,6 +77,8 @@ If you would like a feature to be added, or if you already have the code for the
 
 = 1.8.0 =
 
+Release post: [https://webberzone.com/blog/add-to-all-v1-8-0/](https://webberzone.com/blog/add-to-all-v1-8-0/)
+
 * New feature:
 	* New constant `ATA_DISABLE_SNIPPETS` can be added to your wp-config.php to disable snippets. Perfect for WordPress multisite
 	* New placeholder `%updated_time%` to display the updated date
