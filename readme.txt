@@ -117,6 +117,6 @@ Check changelog.txt for older entries the [Releases page on Github](https://gith
 
 == Upgrade Notice ==
 
-= 1.7.3 =
-Bug fixes; Check out the Changelog for more details
+= 1.8.0 =
+New features; Check out the Changelog for more details.
 

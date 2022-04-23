@@ -34,10 +34,11 @@ With this plugin installed, you do not need to edit your theme files every time 
 
 ## Key features
 
+* Snippets manager: Create custom snippets that can be added to Header, Footer and Content based on inclusion criteria
+* Add any HTML or JavaScript code to your header, content, footer and feed
 * Inbuilt support for Google Analytics, Statcounter and Tynt
 * Site verification for Google, Bing and Pinterest
 * Add custom CSS code to your header
-* Add any HTML or JavaScript code to your header, content, footer and feed
 * Add a copyright notice and a link to the post in your site's feed
 * Tonnes of actions and filters to easily extend the plugin.
 
