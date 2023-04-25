@@ -53,10 +53,12 @@ function ata_get_the_post_thumbnail( $postid ) {
 		if ( ! $postimage ) {
 			// If no other thumbnail set, try to get the custom video thumbnail set by the Video Thumbnails plugin.
 			$postimage = get_post_meta( $result->ID, '_video_thumbnail', true );
-		}       if ( $ata_settings['thumb_default_show'] && ! $postimage ) {
+		}
+		if ( $ata_settings['thumb_default_show'] && ! $postimage ) {
 			// If no thumb found and settings permit, use default thumb.
 			$postimage = $ata_settings['thumb_default'];
-		}       if ( $postimage ) {
+		}
+		if ( $postimage ) {
 			$output .= '<img src="' . $postimage . '" alt="' . $title . '" title="' . $title . '" style="max-width:' . $ata_settings['thumb_width'] . 'px;max-height:' . $ata_settings['thumb_height'] . 'px; border:0;" class="ata_thumb" />';
 		}
 	}
@@ -185,16 +187,16 @@ function ata_get_first_post_year() {
  *
  * @since 2.9.0
  *
- * @param array  $array Input string.
- * @param string $delimiter Delimiter.
- * @param string $enclosure Enclosure.
+ * @param array  $input      Input string.
+ * @param string $delimiter  Delimiter.
+ * @param string $enclosure  Enclosure.
  * @param string $terminator Terminating string.
  * @return string CSV string.
  */
-function ata_str_putcsv( $array, $delimiter = ',', $enclosure = '"', $terminator = "\n" ) {
+function ata_str_putcsv( $input, $delimiter = ',', $enclosure = '"', $terminator = "\n" ) {
 	// First convert associative array to numeric indexed array.
 	$work_array = array();
-	foreach ( $array as $key => $value ) {
+	foreach ( $input as $key => $value ) {
 		$work_array[] = $value;
 	}
 
@@ -207,14 +209,14 @@ function ata_str_putcsv( $array, $delimiter = ',', $enclosure = '"', $terminator
 			$string .= ata_str_putcsv( $work_array[ $i ], $delimiter, $enclosure, $terminator );
 		} else {
 			switch ( gettype( $work_array[ $i ] ) ) {
-				// Manually set some strings.
+					// Manually set some strings.
 				case 'NULL':
 					$sp_format = '';
 					break;
 				case 'boolean':
 					$sp_format = ( true === $work_array[ $i ] ) ? 'true' : 'false';
 					break;
-				// Make sure sprintf has a good datatype to work with.
+					// Make sure sprintf has a good datatype to work with.
 				case 'integer':
 					$sp_format = '%i';
 					break;
@@ -225,7 +227,7 @@ function ata_str_putcsv( $array, $delimiter = ',', $enclosure = '"', $terminator
 					$sp_format        = '%s';
 					$work_array[ $i ] = str_replace( "$enclosure", "$enclosure$enclosure", $work_array[ $i ] );
 					break;
-				// Unknown or invalid items for a csv - note: the datatype of array is already handled above, assuming the data is nested.
+					// Unknown or invalid items for a csv - note: the datatype of array is already handled above, assuming the data is nested.
 				case 'object':
 				case 'resource':
 				default:

@@ -489,11 +489,11 @@ if ( ! class_exists( 'Settings_API' ) ) :
 		/**
 		 * Get the value of a settings field.
 		 *
-		 * @param string $option  Settings field name.
-		 * @param string $default Default text if it's not found.
+		 * @param string $option        Settings field name.
+		 * @param string $default_value Default text if it's not found.
 		 * @return string
 		 */
-		public function get_option( $option, $default = '' ) {
+		public function get_option( $option, $default_value = '' ) {
 
 			$options = get_option( $this->settings_key );
 
@@ -501,7 +501,7 @@ if ( ! class_exists( 'Settings_API' ) ) :
 				return $options[ $option ];
 			}
 
-			return $default;
+			return $default_value;
 		}
 
 		/**
@@ -684,7 +684,7 @@ if ( ! class_exists( 'Settings_API' ) ) :
 
 			$html  = sprintf( '<input type="hidden" name="%1$s[%2$s]" value="-1" />', $this->settings_key, sanitize_key( $args['id'] ) );
 			$html .= sprintf( '<input type="checkbox" id="%1$s[%2$s]" name="%1$s[%2$s]" value="1" %3$s />', $this->settings_key, sanitize_key( $args['id'] ), $checked );
-			$html .= ( $value <> $default ) ? '<em style="color:orange">' . $this->translation_strings['checkbox_modified'] . '</em>' : ''; // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+			$html .= ( (bool) $value !== (bool) $default ) ? '<em style="color:orange">' . $this->translation_strings['checkbox_modified'] . '</em>' : ''; // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
 			$html .= $this->get_field_description( $args );
 
 			/** This filter has been defined in class-settings-api.php */

@@ -23,21 +23,21 @@ if ( ! defined( 'WPINC' ) ) {
  * @since  1.2.0
  *
  * @param string $key Option to fetch.
- * @param mixed  $default Default option.
+ * @param mixed  $default_value Default option.
  * @return mixed
  */
-function ata_get_option( $key = '', $default = null ) {
+function ata_get_option( $key = '', $default_value = null ) {
 	global $ata_settings;
 
 	if ( empty( $ata_settings ) ) {
 		$ata_settings = ata_get_settings();
 	}
 
-	if ( is_null( $default ) ) {
-		$default = ata_get_default_option( $key );
+	if ( is_null( $default_value ) ) {
+		$default_value = ata_get_default_option( $key );
 	}
 
-	$value = isset( $ata_settings[ $key ] ) ? $ata_settings[ $key ] : $default;
+	$value = isset( $ata_settings[ $key ] ) ? $ata_settings[ $key ] : $default_value;
 
 	/**
 	 * Filter the value for the option being fetched.
@@ -46,9 +46,9 @@ function ata_get_option( $key = '', $default = null ) {
 	 *
 	 * @param mixed $value  Value of the option
 	 * @param mixed $key  Name of the option
-	 * @param mixed $default Default value
+	 * @param mixed $default_value Default value
 	 */
-	$value = apply_filters( 'ata_get_option', $value, $key, $default );
+	$value = apply_filters( 'ata_get_option', $value, $key, $default_value );
 
 	/**
 	 * Key specific filter for the value of the option being fetched.
@@ -57,9 +57,9 @@ function ata_get_option( $key = '', $default = null ) {
 	 *
 	 * @param mixed $value  Value of the option
 	 * @param mixed $key  Name of the option
-	 * @param mixed $default Default value
+	 * @param mixed $default_value Default value
 	 */
-	return apply_filters( 'ata_get_option_' . $key, $value, $key, $default );
+	return apply_filters( 'ata_get_option_' . $key, $value, $key, $default_value );
 }
 
 
