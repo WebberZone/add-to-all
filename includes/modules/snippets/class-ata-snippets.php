@@ -130,7 +130,6 @@ if ( ! class_exists( 'ATA_Snippets' ) ) :
 			$args = apply_filters( $this->post_type . '_args', $args );
 
 			register_post_type( $this->post_type, $args );
-
 		}
 
 		/**
@@ -189,7 +188,6 @@ if ( ! class_exists( 'ATA_Snippets' ) ) :
 			$args = apply_filters( 'ata_snippets_category_args', $args );
 
 			register_taxonomy( 'ata_snippets_category', array( $this->post_type ), $args );
-
 		}
 
 		/**

@@ -383,7 +383,6 @@ if ( ! class_exists( 'ATA_Metabox' ) ) :
 
 			/** This filter has been defined in class-settings-api.php */
 			echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
 		}
 
 		/**

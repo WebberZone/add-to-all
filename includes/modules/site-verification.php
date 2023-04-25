@@ -48,7 +48,6 @@ function ata_site_verification_google() {
 		<meta name="google-site-verification" content="<?php echo esc_attr( $verification_code ); ?>" />
 		<?php
 	}
-
 }
 
 /**
@@ -65,7 +64,6 @@ function ata_site_verification_bing() {
 		<meta name="msvalidate.01" content="<?php echo esc_attr( $verification_code ); ?>" />
 		<?php
 	}
-
 }
 
 /**
@@ -82,5 +80,4 @@ function ata_site_verification_pinterest() {
 		<meta name="p:domain_verify" content="<?php echo esc_attr( $verification_code ); ?>" />
 		<?php
 	}
-
 }

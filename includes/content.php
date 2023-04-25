@@ -102,7 +102,6 @@ function ata_content( $content ) {
 	} else {
 		return $content;
 	}
-
 }
 
 

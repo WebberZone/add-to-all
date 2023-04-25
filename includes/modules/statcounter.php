@@ -40,6 +40,5 @@ function ata_statcounter( $sc_project, $sc_security ) {
 	<!-- End of StatCounter Code // by Add to All WordPress Plugin -->
 		<?php
 	}
-
 }
 

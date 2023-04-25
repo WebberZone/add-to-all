@@ -176,7 +176,6 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			foreach ( $args as $name => $value ) {
 				$this->$name = $value;
 			}
-
 		}
 
 		/**
@@ -453,7 +452,6 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			} else {
 				return false;
 			}
-
 		}
 
 
@@ -691,7 +689,6 @@ if ( ! class_exists( 'Settings_API' ) ) :
 
 			/** This filter has been defined in class-settings-api.php */
 			echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
 		}
 
 		/**
@@ -739,7 +736,6 @@ if ( ! class_exists( 'Settings_API' ) ) :
 
 			/** This filter has been defined in class-settings-api.php */
 			echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
 		}
 
 		/**
@@ -1186,7 +1182,6 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			 * @param array $input Input settings array.
 			 */
 			return apply_filters( $this->prefix . '_settings_sanitize', $output, $input );
-
 		}
 
 		/**
@@ -1537,7 +1532,6 @@ if ( ! class_exists( 'Settings_API' ) ) :
 			foreach ( $this->help_tabs as $tab ) {
 				$screen->add_help_tab( $tab );
 			}
-
 		}
 
 	}

@@ -57,7 +57,6 @@ function ata_rss( $content ) {
 	} else {
 		return $content;
 	}
-
 }
 add_filter( 'the_excerpt_rss', 'ata_rss', 99999999 );
 add_filter( 'the_content_feed', 'ata_rss', 99999999 );

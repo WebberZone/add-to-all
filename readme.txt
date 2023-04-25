@@ -1,10 +1,10 @@
-=== Add to All ===
+=== Add to All - Headers, Footers, Everywhere ===
 Tags: header, footer, feed, snippets, Google Analytics, Statcounter, Tynt, content, Adsense, site verification
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
 Stable tag: 1.8.0
 Requires at least: 5.6
-Tested up to: 5.9
+Tested up to: 6.2
 Requires PHP: 7.1
 License: GPLv2 or later
 

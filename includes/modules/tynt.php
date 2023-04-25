@@ -39,6 +39,5 @@ function ata_tynt( $ata_tynt_id ) {
 
 		<?php
 	}
-
 }
 

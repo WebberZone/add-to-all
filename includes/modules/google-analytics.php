@@ -70,5 +70,4 @@ function ata_ga( $ga_uacct, $ga_linker, $ga_anonymize_ip ) {
 
 		<?php
 	}
-
 }

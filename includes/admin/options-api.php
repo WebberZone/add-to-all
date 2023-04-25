@@ -202,7 +202,6 @@ function ata_get_default_option( $key = '' ) {
 	} else {
 		return false;
 	}
-
 }
 
 
@@ -275,6 +274,5 @@ function ata_tag_search() {
 
 	echo wp_json_encode( $results );
 	wp_die();
-
 }
 add_action( 'wp_ajax_ata_tag_search', 'ata_tag_search' );

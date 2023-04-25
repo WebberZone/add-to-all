@@ -36,7 +36,6 @@ function ata_header() {
 	if ( '' !== $ata_head_other_html ) {
 		echo $ata_head_other_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
-
 }
 add_action( 'wp_head', 'ata_header' );
 

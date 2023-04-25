@@ -37,7 +37,6 @@ function ata_footer() {
 
 	// Add Google Analytics.
 	ata_ga( $ga_uacct, $ga_linker, $ga_anonymize_ip );
-
 }
 add_action( 'wp_footer', 'ata_footer' );
 

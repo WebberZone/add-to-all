@@ -71,7 +71,6 @@ if ( ! class_exists( 'ATA_Admin_Columns' ) ) :
 					echo trim( $output ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					break;
 			}
-
 		}
 
 		/**
@@ -85,7 +84,6 @@ if ( ! class_exists( 'ATA_Admin_Columns' ) ) :
 				echo '<style>#shortcode{width:200px}</style>';
 
 			}
-
 		}
 
 	}

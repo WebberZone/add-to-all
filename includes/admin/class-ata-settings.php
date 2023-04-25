@@ -150,7 +150,6 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			 * @param array $strings Translation strings.
 			 */
 			return apply_filters( self::$prefix . '_translation_strings', $strings );
-
 		}
 
 		/**
@@ -178,7 +177,6 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			 * @param array $ata_settings_sections Settings array
 			 */
 			return apply_filters( self::$prefix . '_settings_sections', $ata_settings_sections );
-
 		}
 
 
@@ -208,7 +206,6 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 			 * @param array $ata_setings Settings array
 			 */
 			return apply_filters( self::$prefix . '_registered_settings', $ata_settings );
-
 		}
 
 		/**
@@ -795,7 +792,6 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 
 				return $settings;
 			}
-
 		}
 
 		/**
