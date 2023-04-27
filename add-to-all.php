@@ -1,9 +1,9 @@
 <?php
 /**
  *
- * Add to All
+ * WebberZone Snippetz (formerly Add to All)
  *
- * Add to All lets you add custom text or HTML to your WordPress header, footer, sidebar, content or feed.
+ * WebberZone Snippetz lets you add custom text or HTML to your WordPress header, footer, sidebar, content or feed.
  *
  * @package Add_to_All
  *
@@ -13,7 +13,7 @@
  * @copyright 2012-2022 Ajay D'Souza
  *
  * @wordpress-plugin
- * Plugin Name: Add to All
+ * Plugin Name: WebberZone Snippetz
  * Version:     1.8.0
  * Plugin URI:  https://webberzone.com/plugins/add-to-all/
  * Description: A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.
@@ -31,11 +31,11 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Holds the version of Add to All.
+ * Holds the version of WebberZone Snippetz.
  *
  * @since 1.8.0
  *
- * @var string Add to All version.
+ * @var string WebberZone Snippetz version.
  */
 if ( ! defined( 'ADD_TO_ALL_VERSION' ) ) {
 	define( 'ADD_TO_ALL_VERSION', '1.8.0' );
@@ -101,7 +101,7 @@ require_once ATA_PLUGIN_DIR . 'includes/modules/class-ata-shortcodes.php';
  * Declare $ata_settings global so that it can be accessed in every function
  *
  * @since 1.0
- * @var $ata_settings Add to All settings array.
+ * @var $ata_settings WebberZone Snippetz settings array.
  */
 global $ata_settings;
 $ata_settings = ata_get_settings();
@@ -113,7 +113,7 @@ $ata_settings = ata_get_settings();
  * Retrieves all plugin settings
  *
  * @since  1.2.0
- * @return array Add to All settings
+ * @return array WebberZone Snippetz settings
  */
 function ata_get_settings() {
 

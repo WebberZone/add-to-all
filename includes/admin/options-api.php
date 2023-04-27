@@ -1,6 +1,6 @@
 <?php
 /**
- * Add to All Options API.
+ * WebberZone Snippetz Options API.
  *
  * @link  https://webberzone.com
  * @since 1.2.0

@@ -152,7 +152,7 @@ function ata_feed_title_text() {
 }
 
 /**
- * Get the credit line - link to Add to All plugin page.
+ * Get the credit line - link to WebberZone Snippetz plugin page.
  *
  * @since 1.3.0
  */
@@ -160,7 +160,7 @@ function ata_creditline() {
 
 	$output  = '<br /><span style="font-size: 0.8em">';
 	$output .= __( 'Feed enhanced by ', 'add-to-all' );
-	$output .= '<a href="https://webberzone.com/plugins/add-to-all/" rel="nofollow">Add To All</a>';
+	$output .= '<a href="https://webberzone.com/plugins/add-to-all/" rel="nofollow">WebberZone Snippetz</a>';
 	$output .= '</span>';
 
 	/**

@@ -26,7 +26,7 @@ function ata_tynt( $ata_tynt_id ) {
 	if ( '' !== $ata_tynt_id ) {
 		?>
 
-	<!-- Begin 33Across SiteCTRL - Inserted by Add to All WordPress Plugin -->
+	<!-- Begin 33Across SiteCTRL - Inserted by WebberZone Snippetz WordPress Plugin -->
 	<script>
 	var Tynt=Tynt||[];Tynt.push('<?php	echo esc_attr( $ata_tynt_id ); ?>');
 	(function(){var h,s=document.createElement('script');
@@ -35,7 +35,7 @@ function ata_tynt( $ata_tynt_id ) {
 	h=document.getElementsByTagName('script')[0];
 	h.parentNode.insertBefore(s,h);})();
 	</script>
-	<!-- End 33Across SiteCTRL - Inserted by Add to All WordPress Plugin -->
+	<!-- End 33Across SiteCTRL - Inserted by WebberZone Snippetz WordPress Plugin -->
 
 		<?php
 	}

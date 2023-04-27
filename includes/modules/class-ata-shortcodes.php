@@ -1,6 +1,6 @@
 <?php
 /**
- * Add to all Shortcodes.
+ * WebberZone Snippetz Shortcodes.
  *
  * @since 1.8.0
  *

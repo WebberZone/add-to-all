@@ -53,7 +53,7 @@ if ( ! class_exists( 'ATA_Metabox' ) ) :
 		public function add_meta_boxes() {
 			add_meta_box(
 				$this->prefix . '_metabox_id',
-				__( 'Add to All', 'add-to-all' ),
+				__( 'WebberZone Snippetz', 'add-to-all' ),
 				array( $this, 'html' ),
 				$this->prefix . '_snippets'
 			);
@@ -184,7 +184,7 @@ if ( ! class_exists( 'ATA_Metabox' ) ) :
 			}
 
 			/**
-			 * Action triggered when displaying Add to All meta box
+			 * Action triggered when displaying WebberZone Snippetz meta box
 			 *
 			 * @since 1.7.0
 			 *

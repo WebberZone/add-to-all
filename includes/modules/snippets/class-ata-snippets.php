@@ -89,7 +89,7 @@ if ( ! class_exists( 'ATA_Snippets' ) ) :
 			);
 			$args    = array(
 				'label'               => __( 'Snippet', 'add-to-all' ),
-				'description'         => __( 'Add to All Snippets', 'add-to-all' ),
+				'description'         => __( 'WebberZone Snippetz Snippets', 'add-to-all' ),
 				'labels'              => $labels,
 				'supports'            => array( 'title', 'editor', 'revisions', 'custom-fields' ),
 				'taxonomies'          => array( 'ata_snippets_category' ),
@@ -133,7 +133,7 @@ if ( ! class_exists( 'ATA_Snippets' ) ) :
 		}
 
 		/**
-		 * Register Add to All Snippet Category taxonomy
+		 * Register WebberZone Snippetz Snippet Category taxonomy
 		 *
 		 * @return void
 		 */

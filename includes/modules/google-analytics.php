@@ -66,7 +66,7 @@ function ata_ga( $ga_uacct, $ga_linker, $ga_anonymize_ip ) {
 
 	});
 	</script>
-	<!-- End Google Analytics // Added by Add to All WordPress plugin -->
+	<!-- End Google Analytics // Added by WebberZone Snippetz WordPress plugin -->
 
 		<?php
 	}

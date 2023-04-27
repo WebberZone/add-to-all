@@ -37,7 +37,7 @@ function ata_statcounter( $sc_project, $sc_security ) {
 	</script>
 	<script type="text/javascript" src="https://secure.statcounter.com/counter/counter.js"></script> <?php // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript ?>
 	<noscript><div class="statcounter"><a title="WordPress hit counter" href="https://statcounter.com/wordpress.org/" class="statcounter"><img class="statcounter" src="//c.statcounter.com/<?php echo esc_attr( $sc_project ); ?>/0/<?php echo esc_attr( $sc_security ); ?>/1/" alt="WordPress hit counter" /></a></div></noscript>
-	<!-- End of StatCounter Code // by Add to All WordPress Plugin -->
+	<!-- End of StatCounter Code // by WebberZone Snippetz WordPress Plugin -->
 		<?php
 	}
 }

@@ -57,7 +57,7 @@ Release post: [https://ajaydsouza.com/add-to-all-v1-3-0/](https://ajaydsouza.com
 
 = 1.2.0 =
 * Features:
-	* Settings now uses the WordPress Settings API. Verify your site options by visiting the Add to All settings page
+	* Settings now uses the WordPress Settings API. Verify your site options by visiting the WebberZone Snippetz settings page
 	* Site verification for Google, Bing and Pinterest
 
 * Enhancements:

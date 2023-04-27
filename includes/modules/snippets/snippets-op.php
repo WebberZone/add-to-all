@@ -380,6 +380,6 @@ function ata_snippets_credit() {
 	 *
 	 * @param string $text Snippets credit line.
 	 */
-	return apply_filters( 'ata_snippets_credit', '<!-- Snippets by Add to All -->' );
+	return apply_filters( 'ata_snippets_credit', '<!-- Snippets by WebberZone Snippetz -->' );
 }
 

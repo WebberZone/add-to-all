@@ -92,7 +92,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 				'help_tabs'         => $this->get_help_tabs(),
 				'admin_footer_text' => sprintf(
 					/* translators: 1: Opening achor tag with Plugin page link, 2: Closing anchor tag, 3: Opening anchor tag with review link. */
-					__( 'Thank you for using %1$sAdd to All%2$s! Please %3$srate us%2$s on %3$sWordPress.org%2$s', 'add-to-all' ),
+					__( 'Thank you for using %1$sWebberZone Snippetz%2$s! Please %3$srate us%2$s on %3$sWordPress.org%2$s', 'add-to-all' ),
 					'<a href="https://webberzone.com/plugins/add-to-all/" target="_blank">',
 					'</a>',
 					'<a href="https://wordpress.org/support/plugin/add-to-all/reviews/#new-post" target="_blank">'
@@ -131,9 +131,9 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 		 */
 		public function get_translation_strings() {
 			$strings = array(
-				'page_title'           => esc_html__( 'Add to All', 'add-to-all' ),
-				'menu_title'           => esc_html__( 'Add to All', 'add-to-all' ),
-				'page_header'          => esc_html__( 'Add to All Settings', 'add-to-all' ),
+				'page_title'           => esc_html__( 'WebberZone Snippetz', 'add-to-all' ),
+				'menu_title'           => esc_html__( 'WebberZone Snippetz', 'add-to-all' ),
+				'page_header'          => esc_html__( 'WebberZone Snippetz Settings', 'add-to-all' ),
 				'reset_message'        => esc_html__( 'Settings have been reset to their default values. Reload this page to view the updated settings.', 'add-to-all' ),
 				'success_message'      => esc_html__( 'Settings updated.', 'add-to-all' ),
 				'save_changes'         => esc_html__( 'Save Changes', 'add-to-all' ),
@@ -402,7 +402,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 				'content_filter_priority'        => array(
 					'id'      => 'content_filter_priority',
 					'name'    => esc_html__( 'Content filter priority', 'add-to-all' ),
-					'desc'    => esc_html__( 'A higher number will cause the Add to All output to be processed after other filters. Number below 10 is not recommended.', 'add-to-all' ),
+					'desc'    => esc_html__( 'A higher number will cause the WebberZone Snippetz output to be processed after other filters. Number below 10 is not recommended.', 'add-to-all' ),
 					'type'    => 'text',
 					'options' => 999,
 				),
@@ -695,7 +695,7 @@ if ( ! class_exists( 'ATA_Settings' ) ) :
 				),
 				'add_credit'             => array(
 					'id'      => 'add_credit',
-					'name'    => esc_html__( 'Add a link to "Add to All" plugin page', 'add-to-all' ),
+					'name'    => esc_html__( 'Add a link to "WebberZone Snippetz" plugin page', 'add-to-all' ),
 					'desc'    => '',
 					'type'    => 'checkbox',
 					'options' => false,
