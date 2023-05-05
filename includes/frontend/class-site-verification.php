@@ -8,7 +8,7 @@
  * @package WebberZone\Snippetz
  */
 
-namespace WebberZone\Snippetz\Public;
+namespace WebberZone\Snippetz\Frontend;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

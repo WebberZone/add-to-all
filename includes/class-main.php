@@ -101,9 +101,9 @@ final class Main {
 	 */
 	private function init() {
 		$this->settings          = new \WebberZone\Snippetz\Admin\Settings();
-		$this->shortcodes        = new \WebberZone\Snippetz\Public\Shortcodes();
-		$this->site_verification = new \WebberZone\Snippetz\Public\Site_Verification();
-		$this->third_party       = new \WebberZone\Snippetz\Public\Third_Party();
+		$this->shortcodes        = new \WebberZone\Snippetz\Frontend\Shortcodes();
+		$this->site_verification = new \WebberZone\Snippetz\Frontend\Site_Verification();
+		$this->third_party       = new \WebberZone\Snippetz\Frontend\Third_Party();
 
 		// Selectively enable snippets.
 		$ata_disable_snippets = ( defined( 'ATA_DISABLE_SNIPPETS' ) && \ATA_DISABLE_SNIPPETS ) ? true : false;
