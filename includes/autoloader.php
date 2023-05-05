@@ -38,10 +38,6 @@ function autoload( $class_name ) {
 		$location   = $classes_dir . $class_file;
 
 		if ( ! is_file( $location ) ) {
-			// TODO: Remove this in the final version once we're happy our code is working.
-			wp_die(
-				esc_html( "The file attempting to be loaded at $location does not exist." )
-			);
 			return;
 		}
 
