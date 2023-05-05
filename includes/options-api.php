@@ -5,8 +5,7 @@
  * @link  https://webberzone.com
  * @since 1.2.0
  *
- * @package Add_to_All
- * @subpackage Admin/Register_Settings
+ * @package WebberZone\Snippetz
  */
 
 // If this file is called directly, abort.
@@ -14,6 +13,29 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+
+/**
+ * Get Settings.
+ *
+ * Retrieves all plugin settings
+ *
+ * @since  1.2.0
+ * @return array WebberZone Snippetz settings
+ */
+function ata_get_settings() {
+
+	$settings = get_option( 'ata_settings' );
+
+	/**
+	 * Settings array
+	 *
+	 * Retrieves all plugin settings
+	 *
+	 * @since 1.2.0
+	 * @param array $settings Settings array
+	 */
+	return apply_filters( 'ata_get_settings', $settings );
+}
 
 /**
  * Get an option
@@ -156,7 +178,7 @@ function ata_settings_defaults() {
 	$options = array();
 
 	// Populate some default values.
-	foreach ( ATA_Settings::get_registered_settings() as $tab => $settings ) {
+	foreach ( \WebberZone\Snippetz\Admin\Settings::get_registered_settings() as $tab => $settings ) {
 		foreach ( $settings as $option ) {
 			// When checkbox is set to true, set this to 1.
 			if ( 'checkbox' === $option['type'] && ! empty( $option['options'] ) ) {
