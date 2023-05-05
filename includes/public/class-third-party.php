@@ -49,7 +49,7 @@ class Third_Party {
 		$gtm_id = ata_get_option( 'ga_uacct' );
 
 		if ( $gtm_id ) {
-			wp_enqueue_script(
+			wp_enqueue_script( // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 				'wz-snippetz-gtm',
 				'https://www.googletagmanager.com/gtm.js?id=' . $gtm_id,
 				array(),
@@ -79,7 +79,7 @@ class Third_Party {
 		$sc_security = ata_get_option( 'sc_security', '' );
 
 		if ( $sc_project && $sc_security ) {
-			wp_enqueue_script(
+			wp_enqueue_script( // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 				'wz-snippetz-statcounter',
 				'https://www.statcounter.com/counter/counter.js',
 				array(),
