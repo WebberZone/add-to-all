@@ -106,6 +106,9 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 *Add to All* plugin has now been rebranded to *WebberZone Snippetz*. The plugin code has also been rewritten to use OOP.
 
+* New feature:
+	* Add Meta verification. Read how to verify your domain in the [Meta Business Help Centre](https://www.facebook.com/business/help/321167023127050)
+
 * Enhancements:
 	* Google Analytics code has been updated to GA4. Please update your [Google Tag ID](https://support.google.com/analytics/answer/9539598?hl=en)
 	* *uninstall.php* now uses `get_sites()` function

@@ -226,74 +226,46 @@ class Settings {
 	public static function settings_third_party() {
 
 		$settings = array(
-			'statcounter_header'      => array(
+			'statcounter_header'           => array(
 				'id'   => 'statcounter_header',
 				'name' => '<h3>' . esc_html__( 'StatCounter', 'add-to-all' ) . '</h3>',
 				'desc' => '',
 				'type' => 'header',
 			),
-			'sc_project'              => array(
+			'sc_project'                   => array(
 				'id'      => 'sc_project',
 				'name'    => esc_html__( 'Project ID', 'add-to-all' ),
 				'desc'    => esc_html__( 'This is the value of sc_project in your StatCounter code.', 'add-to-all' ),
 				'type'    => 'text',
 				'options' => '',
 			),
-			'sc_security'             => array(
+			'sc_security'                  => array(
 				'id'      => 'sc_security',
 				'name'    => esc_html__( 'Security ID', 'add-to-all' ),
 				'desc'    => esc_html__( 'This is the value of sc_security in your StatCounter code.', 'add-to-all' ),
 				'type'    => 'text',
 				'options' => '',
 			),
-			'google_analytics_header' => array(
+			'google_analytics_header'      => array(
 				'id'   => 'google_analytics_header',
 				'name' => '<h3>' . esc_html__( 'Google Analytics', 'add-to-all' ) . '</h3>',
 				'desc' => '',
 				'type' => 'header',
 			),
-			'ga_uacct'                => array(
+			'ga_uacct'                     => array(
 				'id'      => 'ga_uacct',
 				'name'    => esc_html__( 'Tracking ID', 'add-to-all' ),
-				'desc'    => esc_html__( 'You can find this under Admin &raquo; Tracking Info &raquo; Tracking Code when viewing your project settings and is of the form UA-XXXX-Y.', 'add-to-all' ),
+				'desc'    => sprintf( esc_html__( 'Find your %s', 'add-to-all' ), '<a href="https://www.google.com/webmasters/verification/verification" target="_blank">' . esc_html__( 'Google Tag ID', 'add-to-all' ) . '</a>' ),
 				'type'    => 'text',
 				'options' => '',
 			),
-			'ga_anonymize_ip'         => array(
-				'id'      => 'ga_anonymize_ip',
-				'name'    => esc_html__( 'Anonymize IP', 'add-to-all' ),
-				'desc'    => esc_html__( 'Check this box to anonymize IPs before they are sent to Google Analytics.', 'add-to-all' ),
-				'type'    => 'checkbox',
-				'options' => false,
-			),
-			'ga_linker'               => array(
-				'id'      => 'ga_linker',
-				'name'    => esc_html__( 'Linker domains', 'add-to-all' ),
-				'desc'    => esc_html__( "If you'd like to implement cross-domain tracking, enter a comma-separated list of domains, e.g. ajaydsouza.com,webberzone.com", 'add-to-all' ),
-				'type'    => 'csv',
-				'options' => '',
-			),
-			'tynt_header'             => array(
-				'id'   => 'tynt_header',
-				'name' => '<h3>' . esc_html__( '33 Across (Tynt)', 'add-to-all' ) . '</h3>',
-				'desc' => '',
-				'type' => 'header',
-			),
-			'tynt_id'                 => array(
-				'id'      => 'tynt_id',
-				'name'    => esc_html__( 'Tynt ID', 'add-to-all' ),
-				/* translators: 1: Code. */
-				'desc'    => sprintf( esc_html__( 'This is the text between the brackets in %1$s  in the SiteCTRL client script', 'add-to-all' ), "<code>Tynt.push('ID HERE')</code>" ),
-				'type'    => 'text',
-				'options' => '',
-			),
-			'verification_header'     => array(
+			'verification_header'          => array(
 				'id'   => 'verification_header',
 				'name' => '<h3>' . esc_html__( 'Site verification', 'add-to-all' ) . '</h3>',
 				'desc' => '',
 				'type' => 'header',
 			),
-			'google_verification'     => array(
+			'google_verification'          => array(
 				'id'      => 'google_verification',
 				'name'    => esc_html__( 'Google', 'add-to-all' ),
 				/* translators: 1: Google verification details page. */
@@ -301,7 +273,7 @@ class Settings {
 				'type'    => 'text',
 				'options' => '',
 			),
-			'bing_verification'       => array(
+			'bing_verification'            => array(
 				'id'      => 'bing_verification',
 				'name'    => esc_html__( 'Bing', 'add-to-all' ),
 				/* translators: 1: Bing verification details page. */
@@ -309,7 +281,15 @@ class Settings {
 				'type'    => 'text',
 				'options' => '',
 			),
-			'pinterest_verification'  => array(
+			'facebook_domain_verification' => array(
+				'id'      => 'facebook_domain_verification',
+				'name'    => esc_html__( 'Meta', 'add-to-all' ),
+				/* translators: 1: Meta tag details page. */
+				'desc'    => sprintf( esc_html__( 'Value of the content portion of the Meta tag method. Read how to verify your domain in the %s', 'add-to-all' ), '<a href="https://www.facebook.com/business/help/321167023127050" target="_blank">' . esc_html__( 'Meta Business Help Centre', 'add-to-all' ) . '</a>' ),
+				'type'    => 'text',
+				'options' => '',
+			),
+			'pinterest_verification'       => array(
 				'id'      => 'pinterest_verification',
 				'name'    => esc_html__( 'Pinterest', 'add-to-all' ),
 				/* translators: 1: Pinterest meta tag details page. */
