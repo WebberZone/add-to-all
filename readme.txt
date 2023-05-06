@@ -102,6 +102,17 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 == Changelog ==
 
+= 2.0.0 =
+
+*Add to All* plugin has now been rebranded to *WebberZone Snippetz*. The plugin code has also been rewritten to use OOP.
+
+* Enhancements:
+	* Google Analytics code has been updated to GA4. Please update your [Google Tag ID](https://support.google.com/analytics/answer/9539598?hl=en)
+	* *uninstall.php* now uses `get_sites()` function
+
+* Deprecated:
+	* Support for Tynt has been removed. If you are using Tynt, you will need to directly use the full code in the *Footer* tab.
+
 = 1.8.0 =
 
 Release post: [https://webberzone.com/blog/add-to-all-v1-8-0/](https://webberzone.com/blog/add-to-all-v1-8-0/)
