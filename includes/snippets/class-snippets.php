@@ -98,7 +98,7 @@ class Snippets {
 		$labels  = array(
 			'name'                  => _x( 'Snippets', 'Post Type General Name', 'add-to-all' ),
 			'singular_name'         => _x( 'Snippet', 'Post Type Singular Name', 'add-to-all' ),
-			'menu_name'             => __( 'Snippets', 'add-to-all' ),
+			'menu_name'             => __( 'Snippetz', 'add-to-all' ),
 			'name_admin_bar'        => __( 'Snippet', 'add-to-all' ),
 			'archives'              => __( 'Snippet Archives', 'add-to-all' ),
 			'attributes'            => __( 'Snippet Attributes', 'add-to-all' ),

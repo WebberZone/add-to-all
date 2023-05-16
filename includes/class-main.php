@@ -100,15 +100,12 @@ final class Main {
 	 * @since 2.0.0
 	 */
 	private function init() {
-		$this->settings          = new \WebberZone\Snippetz\Admin\Settings();
+		$this->settings          = new \WebberZone\Snippetz\Admin\Settings\Settings();
 		$this->shortcodes        = new \WebberZone\Snippetz\Frontend\Shortcodes();
 		$this->site_verification = new \WebberZone\Snippetz\Frontend\Site_Verification();
 		$this->third_party       = new \WebberZone\Snippetz\Frontend\Third_Party();
 
-		// Selectively enable snippets.
-		$ata_disable_snippets = ( defined( 'ATA_DISABLE_SNIPPETS' ) && \ATA_DISABLE_SNIPPETS ) ? true : false;
-
-		if ( ata_get_option( 'enable_snippets' ) && ! $ata_disable_snippets ) {
+		if ( ata_get_option( 'enable_snippets' ) && ! ( defined( '\ATA_DISABLE_SNIPPETS' ) && \ATA_DISABLE_SNIPPETS ) ) {
 			$this->snippets = new \WebberZone\Snippetz\Snippets\Snippets();
 		}
 
