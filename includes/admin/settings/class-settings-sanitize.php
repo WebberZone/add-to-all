@@ -27,6 +27,16 @@ class Settings_Sanitize {
 	}
 
 	/**
+	 * Miscellaneous sanitize function
+	 *
+	 * @param mixed $value Setting Value.
+	 * @return string Sanitized value.
+	 */
+	public function sanitize_missing( $value ) {
+		return $value;
+	}
+
+	/**
 	 * Sanitize text fields
 	 *
 	 * @param string $value The field value.

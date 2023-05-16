@@ -35,13 +35,11 @@ class Settings_Form {
 	public $prefix;
 
 	/**
-	 * Translation strings.
+	 * Text to show to indicate a checkbox has been modified from its default value.
 	 *
-	 * @see set_translation_strings()
-	 *
-	 * @var array Translation strings.
+	 * @var string Checkbox Modified Text.
 	 */
-	public $translation_strings;
+	public $checkbox_modified_text;
 
 	/**
 	 * Main constructor class.
@@ -54,15 +52,15 @@ class Settings_Form {
 	 */
 	public function __construct( $args ) {
 		$defaults = array(
-			'settings_key'        => '',
-			'prefix'              => '',
-			'translation_strings' => array(),
+			'settings_key'           => '',
+			'prefix'                 => '',
+			'checkbox_modified_text' => '',
 		);
 		$args     = wp_parse_args( $args, $defaults );
 
-		$this->settings_key        = $args['settings_key'];
-		$this->prefix              = $args['prefix'];
-		$this->translation_strings = $args['translation_strings'];
+		foreach ( $args as $name => $value ) {
+			$this->$name = $value;
+		}
 	}
 
 	/**
@@ -157,7 +155,7 @@ class Settings_Form {
 	 */
 	public function callback_text( $args ) {
 
-		$value       = $this->get_option( $args['id'], $args['options'] );
+		$value       = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
 		$size        = sanitize_html_class( ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular' );
 		$class       = sanitize_html_class( $args['field_class'] );
 		$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . $args['placeholder'] . '"';
@@ -237,7 +235,7 @@ class Settings_Form {
 	 */
 	public function callback_textarea( $args ) {
 
-		$value = $this->get_option( $args['id'], $args['options'] );
+		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
 		$class = sanitize_html_class( $args['field_class'] );
 
 		$html  = sprintf(
@@ -281,13 +279,13 @@ class Settings_Form {
 	 */
 	public function callback_checkbox( $args ) {
 
-		$value   = $this->get_option( $args['id'], $args['options'] );
+		$value   = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
 		$checked = ! empty( $value ) ? checked( 1, $value, false ) : '';
 		$default = isset( $args['options'] ) ? (int) $args['options'] : '';
 
 		$html  = sprintf( '<input type="hidden" name="%1$s[%2$s]" value="-1" />', $this->settings_key, sanitize_key( $args['id'] ) );
 		$html .= sprintf( '<input type="checkbox" id="%1$s[%2$s]" name="%1$s[%2$s]" value="1" %3$s />', $this->settings_key, sanitize_key( $args['id'] ), $checked );
-		$html .= ( (bool) $value !== (bool) $default ) ? '<em style="color:orange">' . $this->translation_strings['checkbox_modified'] . '</em>' : ''; // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+		$html .= ( (bool) $value !== (bool) $default ) ? '<em style="color:orange">' . $this->checkbox_modified_text . '</em>' : '';
 		$html .= $this->get_field_description( $args );
 
 		/** This filter has been defined in class-settings-api.php */
@@ -305,7 +303,7 @@ class Settings_Form {
 	public function callback_multicheck( $args ) {
 		$html = '';
 
-		$value = $this->get_option( $args['id'], $args['options'] );
+		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
 
 		if ( ! empty( $args['options'] ) ) {
 			$html .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="-1" />', $this->settings_key, $args['id'] );
@@ -352,7 +350,7 @@ class Settings_Form {
 	public function callback_radio( $args ) {
 		$html = '';
 
-		$value = $this->get_option( $args['id'], $args['default'] );
+		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['default'] );
 
 		foreach ( $args['options'] as $key => $option ) {
 			$html .= sprintf(
@@ -388,7 +386,7 @@ class Settings_Form {
 	public function callback_radiodesc( $args ) {
 		$html = '';
 
-		$value = $this->get_option( $args['id'], $args['default'] );
+		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['default'] );
 
 		foreach ( $args['options'] as $option ) {
 			$html .= sprintf(
@@ -426,7 +424,7 @@ class Settings_Form {
 	public function callback_thumbsizes( $args ) {
 		$html = '';
 
-		$value = $this->get_option( $args['id'], $args['default'] );
+		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['default'] );
 
 		foreach ( $args['options'] as $name => $option ) {
 			$html .= sprintf(
@@ -462,7 +460,7 @@ class Settings_Form {
 	 * @return void
 	 */
 	public function callback_number( $args ) {
-		$value       = $this->get_option( $args['id'], $args['options'] );
+		$value       = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
 		$max         = isset( $args['max'] ) ? intval( $args['max'] ) : 999999;
 		$min         = isset( $args['min'] ) ? intval( $args['min'] ) : 0;
 		$step        = isset( $args['step'] ) ? intval( $args['step'] ) : 1;
@@ -495,7 +493,7 @@ class Settings_Form {
 	 * @return void
 	 */
 	public function callback_select( $args ) {
-		$value = $this->get_option( $args['id'], $args['options'] );
+		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
 
 		if ( isset( $args['chosen'] ) ) {
 			$chosen = 'class="chosen"';
@@ -525,7 +523,7 @@ class Settings_Form {
 	public function callback_posttypes( $args ) {
 		$html = '';
 
-		$options = $this->get_option( $args['id'], $args['options'] );
+		$options = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
 
 		// If post_types contains a query string then parse it with wp_parse_args.
 		if ( is_string( $options ) && strpos( $options, '=' ) ) {
@@ -570,7 +568,7 @@ class Settings_Form {
 	public function callback_taxonomies( $args ) {
 		$html = '';
 
-		$options = $this->get_option( $args['id'], $args['options'] );
+		$options = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
 
 		// If taxonomies contains a query string then parse it with wp_parse_args.
 		if ( is_string( $options ) && strpos( $options, '=' ) ) {
@@ -622,7 +620,7 @@ class Settings_Form {
 	 */
 	public function callback_wysiwyg( $args ) {
 
-		$value = $this->get_option( $args['id'], $args['options'] );
+		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
 		$size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : '500px';
 
 		echo '<div style="max-width: ' . esc_attr( $size ) . ';">';
@@ -651,7 +649,7 @@ class Settings_Form {
 	 */
 	public function callback_file( $args ) {
 
-		$value = $this->get_option( $args['id'], $args['options'] );
+		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
 		$size  = sanitize_html_class( ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular' );
 		$class = sanitize_html_class( $args['field_class'] );
 		$label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File' );
@@ -677,7 +675,7 @@ class Settings_Form {
 	 */
 	public function callback_password( $args ) {
 
-		$value = $this->get_option( $args['id'], $args['options'] );
+		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
 		$size  = sanitize_html_class( ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular' );
 		$class = sanitize_html_class( $args['field_class'] );
 

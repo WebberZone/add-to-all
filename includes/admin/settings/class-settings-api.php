@@ -507,9 +507,9 @@ class Settings_API {
 
 		$this->settings_form = new Settings_Form(
 			array(
-				'settings_key'        => $settings_key,
-				'prefix'              => $this->prefix,
-				'translation_strings' => $this->translation_strings,
+				'settings_key'           => $settings_key,
+				'prefix'                 => $this->prefix,
+				'checkbox_modified_text' => $this->translation_strings['checkbox_modified'],
 			)
 		);
 
@@ -532,6 +532,7 @@ class Settings_API {
 						'name'             => '',
 						'desc'             => '',
 						'type'             => null,
+						'default'          => '',
 						'options'          => '',
 						'max'              => null,
 						'min'              => null,
