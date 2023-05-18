@@ -8,7 +8,7 @@
  * @package WebberZone\Snippetz\Admin
  */
 
-namespace WebberZone\Snippetz\Admin;
+namespace WebberZone\Snippetz\Admin\Settings;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -95,10 +95,11 @@ class Settings {
 			'upgraded_settings'   => array(),
 		);
 
-		$this->settings_api = new \WebberZone\Snippetz\Admin\Settings_API( $this->settings_key, self::$prefix, $args );
+		$this->settings_api = new Settings_API( $this->settings_key, self::$prefix, $args );
 
 		add_action( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 11, 2 );
 		add_filter( 'plugin_action_links_' . plugin_basename( WZ_SNIPPETZ_FILE ), array( $this, 'plugin_actions_links' ) );
+		add_action( 'ata_settings_sanitize', array( $this, 'change_settings_on_save' ), 99 );
 	}
 
 	/**
@@ -903,5 +904,17 @@ class Settings {
 		);
 	}
 
+	/**
+	 * Modify settings when they are being saved.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param  array $settings Settings array.
+	 * @return string  $settings  Sanitized settings array.
+	 */
+	public function change_settings_on_save( $settings ) {
+
+		return $settings;
+	}
 
 }

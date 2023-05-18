@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
 	});
 
 	// Prompt the user when they leave the page without saving the form.
-	formmodified=0;
+	var formmodified=0;
 
 	function confirmFormChange() {
 		formmodified=1;

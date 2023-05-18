@@ -11,7 +11,7 @@
  * @package WebberZone\Snippetz
  */
 
-namespace WebberZone\Snippetz\Admin;
+namespace WebberZone\Snippetz\Admin\Settings;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -48,6 +48,8 @@ class Settings_API {
 
 	/**
 	 * Translation strings.
+	 *
+	 * @see set_translation_strings()
 	 *
 	 * @var array Translation strings.
 	 */
@@ -131,6 +133,15 @@ class Settings_API {
 	 * @var array Settings sections array.
 	 */
 	protected $help_tabs = array();
+
+	/**
+	 * Settings form.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @var object Settings form.
+	 */
+	public $settings_form;
 
 	/**
 	 * Main constructor class.
@@ -258,7 +269,7 @@ class Settings_API {
 	/**
 	 * Set settings sections
 	 *
-	 * @param array $sections Setting sections array.
+	 * @param array $sections Setting sections array in the format of: id => Title.
 	 * @return object Class object.
 	 */
 	public function set_sections( $sections ) {
@@ -282,7 +293,24 @@ class Settings_API {
 	/**
 	 * Set the settings fields for registered settings.
 	 *
-	 * @param array $registered_settings Registered settings array.
+	 * @param array $registered_settings {
+	 *     Array of settings in format id => attributes.
+	 *          @type string $section           Section title.
+	 *          @type string $id                Field ID.
+	 *          @type string $name              Field name.
+	 *          @type string $desc              Field description.
+	 *          @type string $type              Field type.
+	 *          @type string $options           Field default option(s).
+	 *          @type string $max               Field max. Applicable for numbers.
+	 *          @type string $min               Field min. Applicable for numbers.
+	 *          @type string $step              Field step. Applicable for numbers.
+	 *          @type string $size              Field size. Applicable for text and textarea.
+	 *          @type string $field_class       CSS class.
+	 *          @type array  $field_attributes  HTML Attributes in the form of attribute => value.
+	 *          @type string $placeholder       Placeholder. Applicable for text and textarea.
+	 *    }
+	 * }
+	 *                                   }
 	 * @return object Object of the class instance.
 	 */
 	public function set_registered_settings( $registered_settings ) {
@@ -409,14 +437,14 @@ class Settings_API {
 	public function admin_enqueue_scripts( $hook ) {
 
 		if ( $hook === $this->settings_page ) {
-			$this->enqueue_scripts_styles();
+			self::enqueue_scripts_styles();
 		}
 	}
 
 	/**
 	 * Enqueues all scripts, styles, settings, and templates necessary to use the Settings API.
 	 */
-	public function enqueue_scripts_styles() {
+	public static function enqueue_scripts_styles() {
 
 		$minimize = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
@@ -477,6 +505,14 @@ class Settings_API {
 			add_option( $settings_key, $this->settings_defaults() );
 		}
 
+		$this->settings_form = new Settings_Form(
+			array(
+				'settings_key'           => $settings_key,
+				'prefix'                 => $this->prefix,
+				'checkbox_modified_text' => $this->translation_strings['checkbox_modified'],
+			)
+		);
+
 		foreach ( $this->registered_settings as $section => $settings ) {
 
 			add_settings_section(
@@ -496,6 +532,7 @@ class Settings_API {
 						'name'             => '',
 						'desc'             => '',
 						'type'             => null,
+						'default'          => '',
 						'options'          => '',
 						'max'              => null,
 						'min'              => null,
@@ -510,7 +547,7 @@ class Settings_API {
 				$id       = $args['id'];
 				$name     = $args['name'];
 				$type     = isset( $args['type'] ) ? $args['type'] : 'text';
-				$callback = method_exists( $this, "callback_{$type}" ) ? array( $this, "callback_{$type}" ) : array( $this, 'callback_missing' );
+				$callback = method_exists( $this->settings_form, "callback_{$type}" ) ? array( $this->settings_form, "callback_{$type}" ) : array( $this->settings_form, 'callback_missing' );
 
 				add_settings_field(
 					"{$settings_key}[{$id}]",     // ID of the settings field. We save it within the settings array.
@@ -623,633 +660,6 @@ class Settings_API {
 	}
 
 	/**
-	 * Get field description for display.
-	 *
-	 * @param array $args settings Arguments array.
-	 */
-	public function get_field_description( $args ) {
-		if ( ! empty( $args['desc'] ) ) {
-			$desc = '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
-		} else {
-			$desc = '';
-		}
-
-		/**
-		 * After Settings Output filter
-		 *
-		 * @param string $desc Description of the field.
-		 * @param array Arguments array.
-		 */
-		$desc = apply_filters( $this->prefix . '_setting_field_description', $desc, $args );
-		return $desc;
-	}
-
-	/**
-	 * Get the value of a settings field.
-	 *
-	 * @param string $option  Settings field name.
-	 * @param string $default_value Default text if it's not found.
-	 * @return string
-	 */
-	public function get_option( $option, $default_value = '' ) {
-
-		$options = get_option( $this->settings_key );
-
-		if ( isset( $options[ $option ] ) ) {
-			return $options[ $option ];
-		}
-
-		return $default_value;
-	}
-
-	/**
-	 * Miscellaneous callback funcion
-	 *
-	 * @param array $args Arguments array.
-	 * @return void
-	 */
-	public function callback_missing( $args ) {
-		/* translators: 1: Code. */
-		printf( esc_html__( 'The callback function used for the %1$s setting is missing.' ), '<strong>' . esc_attr( $args['id'] ) . '</strong>' );
-	}
-
-	/**
-	 * Header Callback
-	 *
-	 * Renders the header.
-	 *
-	 * @param array $args Arguments passed by the setting.
-	 * @return void
-	 */
-	public function callback_header( $args ) {
-		$html = $this->get_field_description( $args );
-
-		/**
-		 * After Settings Output filter
-		 *
-		 * @param string $html HTML string.
-		 * @param array Arguments array.
-		 */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Descriptive text callback.
-	 *
-	 * Renders descriptive text onto the settings field.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_descriptive_text( $args ) {
-		$this->callback_header( $args );
-	}
-
-	/**
-	 * Display text fields.
-	 *
-	 * @param array $args Array of arguments.
-	 */
-	public function callback_text( $args ) {
-
-		$value       = $this->get_option( $args['id'], $args['options'] );
-		$size        = sanitize_html_class( ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular' );
-		$class       = sanitize_html_class( $args['field_class'] );
-		$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . $args['placeholder'] . '"';
-		$disabled    = ! empty( $args['disabled'] ) ? ' disabled="disabled"' : '';
-		$readonly    = ( isset( $args['readonly'] ) && true === $args['readonly'] ) ? ' readonly="readonly"' : '';
-		$attributes  = $disabled . $readonly;
-
-		foreach ( (array) $args['field_attributes'] as $attribute => $val ) {
-			$attributes .= sprintf( ' %1$s="%2$s"', $attribute, esc_attr( $val ) );
-		}
-
-		$html  = sprintf(
-			'<input type="text" id="%1$s[%2$s]" name="%1$s[%2$s]" class="%3$s" value="%4$s" %5$s %6$s />',
-			$this->settings_key,
-			sanitize_key( $args['id'] ),
-			$class . ' ' . $size . '-text',
-			esc_attr( stripslashes( $value ) ),
-			$attributes,
-			$placeholder
-		);
-		$html .= $this->get_field_description( $args );
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Display url fields.
-	 *
-	 * @param array $args Array of arguments.
-	 */
-	public function callback_url( $args ) {
-		$this->callback_text( $args );
-	}
-
-	/**
-	 * Display csv fields.
-	 *
-	 * @param array $args Array of arguments.
-	 */
-	public function callback_csv( $args ) {
-		$this->callback_text( $args );
-	}
-
-	/**
-	 * Display color fields.
-	 *
-	 * @param array $args Array of arguments.
-	 */
-	public function callback_color( $args ) {
-		$this->callback_text( $args );
-	}
-
-	/**
-	 * Display numbercsv fields.
-	 *
-	 * @param array $args Array of arguments.
-	 */
-	public function callback_numbercsv( $args ) {
-		$this->callback_text( $args );
-	}
-
-	/**
-	 * Display postids fields.
-	 *
-	 * @param array $args Array of arguments.
-	 */
-	public function callback_postids( $args ) {
-		$this->callback_text( $args );
-	}
-
-	/**
-	 * Display textarea.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_textarea( $args ) {
-
-		$value = $this->get_option( $args['id'], $args['options'] );
-		$class = sanitize_html_class( $args['field_class'] );
-
-		$html  = sprintf(
-			'<textarea class="%4$s" cols="50" rows="5" id="%1$s[%2$s]" name="%1$s[%2$s]">%3$s</textarea>',
-			$this->settings_key,
-			sanitize_key( $args['id'] ),
-			esc_textarea( stripslashes( $value ) ),
-			'large-text ' . $class
-		);
-		$html .= $this->get_field_description( $args );
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Display CSS fields.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_css( $args ) {
-		$this->callback_textarea( $args );
-	}
-
-	/**
-	 * Display HTML fields.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_html( $args ) {
-		$this->callback_textarea( $args );
-	}
-
-	/**
-	 * Display checkboxes.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_checkbox( $args ) {
-
-		$value   = $this->get_option( $args['id'], $args['options'] );
-		$checked = ! empty( $value ) ? checked( 1, $value, false ) : '';
-		$default = isset( $args['options'] ) ? (int) $args['options'] : '';
-
-		$html  = sprintf( '<input type="hidden" name="%1$s[%2$s]" value="-1" />', $this->settings_key, sanitize_key( $args['id'] ) );
-		$html .= sprintf( '<input type="checkbox" id="%1$s[%2$s]" name="%1$s[%2$s]" value="1" %3$s />', $this->settings_key, sanitize_key( $args['id'] ), $checked );
-		$html .= ( (bool) $value !== (bool) $default ) ? '<em style="color:orange">' . $this->translation_strings['checkbox_modified'] . '</em>' : ''; // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
-		$html .= $this->get_field_description( $args );
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Multicheck Callback
-	 *
-	 * Renders multiple checkboxes.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_multicheck( $args ) {
-		$html = '';
-
-		$value = $this->get_option( $args['id'], $args['options'] );
-
-		if ( ! empty( $args['options'] ) ) {
-			$html .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="-1" />', $this->settings_key, $args['id'] );
-
-			foreach ( $args['options'] as $key => $option ) {
-				if ( isset( $value[ $key ] ) ) {
-					$enabled = $key;
-				} else {
-					$enabled = null;
-				}
-
-				$html .= sprintf(
-					'<input name="%1$s[%2$s][%3$s]" id="%1$s[%2$s][%3$s]" type="checkbox" value="%4$s" %5$s /> ',
-					$this->settings_key,
-					sanitize_key( $args['id'] ),
-					sanitize_key( $key ),
-					esc_attr( $key ),
-					checked( $key, $enabled, false )
-				);
-				$html .= sprintf(
-					'<label for="%1$s[%2$s][%3$s]">%4$s</label> <br />',
-					$this->settings_key,
-					sanitize_key( $args['id'] ),
-					sanitize_key( $key ),
-					$option
-				);
-			}
-
-			$html .= $this->get_field_description( $args );
-		}
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Radio Callback
-	 *
-	 * Renders radio boxes.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_radio( $args ) {
-		$html = '';
-
-		$value = $this->get_option( $args['id'], $args['default'] );
-
-		foreach ( $args['options'] as $key => $option ) {
-			$html .= sprintf(
-				'<input name="%1$s[%2$s]" id="%1$s[%2$s][%3$s]" type="radio" value="%3$s" %4$s /> ',
-				$this->settings_key,
-				sanitize_key( $args['id'] ),
-				$key,
-				checked( $value, $key, false )
-			);
-			$html .= sprintf(
-				'<label for="%1$s[%2$s][%3$s]">%4$s</label> <br />',
-				$this->settings_key,
-				sanitize_key( $args['id'] ),
-				$key,
-				$option
-			);
-		}
-
-		$html .= $this->get_field_description( $args );
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Radio callback with description.
-	 *
-	 * Renders radio boxes with each item having it separate description.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_radiodesc( $args ) {
-		$html = '';
-
-		$value = $this->get_option( $args['id'], $args['default'] );
-
-		foreach ( $args['options'] as $option ) {
-			$html .= sprintf(
-				'<input name="%1$s[%2$s]" id="%1$s[%2$s][%3$s]" type="radio" value="%3$s" %4$s /> ',
-				$this->settings_key,
-				sanitize_key( $args['id'] ),
-				$option['id'],
-				checked( $value, $option['id'], false )
-			);
-			$html .= sprintf(
-				'<label for="%1$s[%2$s][%3$s]">%4$s</label>',
-				$this->settings_key,
-				sanitize_key( $args['id'] ),
-				$option['id'],
-				$option['name']
-			);
-
-			$html .= ': <em>' . wp_kses_post( $option['description'] ) . '</em> <br />';
-		}
-
-		$html .= $this->get_field_description( $args );
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Radio callback with description.
-	 *
-	 * Renders radio boxes with each item having it separate description.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_thumbsizes( $args ) {
-		$html = '';
-
-		$value = $this->get_option( $args['id'], $args['default'] );
-
-		foreach ( $args['options'] as $name => $option ) {
-			$html .= sprintf(
-				'<input name="%1$s[%2$s]" id="%1$s[%2$s][%3$s]" type="radio" value="%3$s" %4$s /> ',
-				$this->settings_key,
-				sanitize_key( $args['id'] ),
-				$name,
-				checked( $value, $name, false )
-			);
-			$html .= sprintf(
-				'<label for="%1$s[%2$s][%3$s]">%3$s (%4$sx%5$s%6$s)</label> <br />',
-				$this->settings_key,
-				sanitize_key( $args['id'] ),
-				$name,
-				(int) $option['width'],
-				(int) $option['height'],
-				(bool) $option['crop'] ? ' ' . __( 'cropped' ) : ''
-			);
-		}
-
-		$html .= $this->get_field_description( $args );
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Number Callback
-	 *
-	 * Renders number fields.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_number( $args ) {
-		$value       = $this->get_option( $args['id'], $args['options'] );
-		$max         = isset( $args['max'] ) ? intval( $args['max'] ) : 999999;
-		$min         = isset( $args['min'] ) ? intval( $args['min'] ) : 0;
-		$step        = isset( $args['step'] ) ? intval( $args['step'] ) : 1;
-		$size        = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
-		$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . esc_attr( $args['placeholder'] ) . '"';
-
-		$html  = sprintf(
-			'<input type="number" step="%1$s" max="%2$s" min="%3$s" class="%4$s" id="%8$s[%5$s]" name="%8$s[%5$s]" value="%6$s" %7$s />',
-			esc_attr( $step ),
-			esc_attr( $max ),
-			esc_attr( $min ),
-			sanitize_html_class( $size ) . '-text',
-			sanitize_key( $args['id'] ),
-			esc_attr( stripslashes( $value ) ),
-			$placeholder,
-			$this->settings_key
-		);
-		$html .= $this->get_field_description( $args );
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Select Callback
-	 *
-	 * Renders select fields.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_select( $args ) {
-		$value = $this->get_option( $args['id'], $args['options'] );
-
-		if ( isset( $args['chosen'] ) ) {
-			$chosen = 'class="chosen"';
-		} else {
-			$chosen = '';
-		}
-
-		$html = sprintf( '<select id="%1$s[%2$s]" name="%1$s[%2$s]" %2$s />', $this->settings_key, sanitize_key( $args['id'] ), $chosen );
-
-		foreach ( $args['options'] as $option => $name ) {
-			$html .= sprintf( '<option value="%1$s" %2$s>%3$s</option>', sanitize_key( $option ), selected( $option, $value, false ), $name );
-		}
-
-		$html .= '</select>';
-		$html .= $this->get_field_description( $args );
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Display posttypes fields.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_posttypes( $args ) {
-		$html = '';
-
-		$options = $this->get_option( $args['id'], $args['options'] );
-
-		// If post_types contains a query string then parse it with wp_parse_args.
-		if ( is_string( $options ) && strpos( $options, '=' ) ) {
-			$post_types = wp_parse_args( $options );
-		} else {
-			$post_types = wp_parse_list( $options );
-		}
-
-		$wp_post_types   = get_post_types(
-			array(
-				'public' => true,
-			)
-		);
-		$posts_types_inc = array_intersect( $wp_post_types, $post_types );
-
-		foreach ( $wp_post_types as $wp_post_type ) {
-
-			$html .= sprintf(
-				'<input name="%4$s[%1$s][%2$s]" id="%4$s[%1$s][%2$s]" type="checkbox" value="%2$s" %3$s /> ',
-				sanitize_key( $args['id'] ),
-				esc_attr( $wp_post_type ),
-				checked( true, in_array( $wp_post_type, $posts_types_inc, true ), false ),
-				$this->settings_key
-			);
-			$html .= sprintf( '<label for="%3$s[%1$s][%2$s]">%2$s</label> <br />', sanitize_key( $args['id'] ), $wp_post_type, $this->settings_key );
-
-		}
-
-		$html .= $this->get_field_description( $args );
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-
-	/**
-	 * Display taxonomies fields.
-	 *
-	 * @param array $args Array of arguments.
-	 * @return void
-	 */
-	public function callback_taxonomies( $args ) {
-		$html = '';
-
-		$options = $this->get_option( $args['id'], $args['options'] );
-
-		// If taxonomies contains a query string then parse it with wp_parse_args.
-		if ( is_string( $options ) && strpos( $options, '=' ) ) {
-			$taxonomies = wp_parse_args( $options );
-		} else {
-			$taxonomies = wp_parse_list( $options );
-		}
-
-		/* Fetch taxonomies */
-		$argsc         = array(
-			'public' => true,
-		);
-		$output        = 'objects';
-		$operator      = 'and';
-		$wp_taxonomies = get_taxonomies( $argsc, $output, $operator );
-
-		$taxonomies_inc = array_intersect( wp_list_pluck( (array) $wp_taxonomies, 'name' ), $taxonomies );
-
-		foreach ( $wp_taxonomies as $wp_taxonomy ) {
-
-			$html .= sprintf(
-				'<input name="%4$s[%1$s][%2$s]" id="%4$s[%1$s][%2$s]" type="checkbox" value="%2$s" %3$s /> ',
-				sanitize_key( $args['id'] ),
-				esc_attr( $wp_taxonomy->name ),
-				checked( true, in_array( $wp_taxonomy->name, $taxonomies_inc, true ), false ),
-				$this->settings_key
-			);
-			$html .= sprintf(
-				'<label for="%4$s[%1$s][%2$s]">%3$s (%2$s)</label> <br />',
-				sanitize_key( $args['id'] ),
-				esc_attr( $wp_taxonomy->name ),
-				$wp_taxonomy->labels->name,
-				$this->settings_key
-			);
-
-		}
-
-		$html .= $this->get_field_description( $args );
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-
-	/**
-	 * Displays a rich text textarea for a settings field.
-	 *
-	 * @param array $args Array of arguments.
-	 */
-	public function callback_wysiwyg( $args ) {
-
-		$value = $this->get_option( $args['id'], $args['options'] );
-		$size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : '500px';
-
-		echo '<div style="max-width: ' . esc_attr( $size ) . ';">';
-
-		$editor_settings = array(
-			'teeny'         => true,
-			'textarea_name' => $args['section'] . '[' . $args['id'] . ']',
-			'textarea_rows' => 10,
-		);
-
-		if ( isset( $args['options'] ) && is_array( $args['options'] ) ) {
-			$editor_settings = array_merge( $editor_settings, $args['options'] );
-		}
-
-		wp_editor( $value, $args['section'] . '-' . $args['id'], $editor_settings );
-
-		echo '</div>';
-
-		echo $this->get_field_description( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Displays a file upload field for a settings field.
-	 *
-	 * @param array $args Array of arguments.
-	 */
-	public function callback_file( $args ) {
-
-		$value = $this->get_option( $args['id'], $args['options'] );
-		$size  = sanitize_html_class( ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular' );
-		$class = sanitize_html_class( $args['field_class'] );
-		$label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File' );
-
-		$html  = sprintf(
-			'<input type="text" class="%1$s" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>',
-			$class . ' ' . $size . '-text file-url',
-			$this->settings_key,
-			sanitize_key( $args['id'] ),
-			esc_attr( $value )
-		);
-		$html .= '<input type="button" class="button button-secondary file-browser" value="' . $label . '" />';
-		$html .= $this->get_field_description( $args );
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Displays a password field for a settings field.
-	 *
-	 * @param array $args Array of arguments.
-	 */
-	public function callback_password( $args ) {
-
-		$value = $this->get_option( $args['id'], $args['options'] );
-		$size  = sanitize_html_class( ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular' );
-		$class = sanitize_html_class( $args['field_class'] );
-
-		$html  = sprintf(
-			'<input type="password" class="%1$s" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>',
-			$class . ' ' . $size . '-text',
-			$this->settings_key,
-			sanitize_key( $args['id'] ),
-			esc_attr( $value )
-		);
-		$html .= $this->get_field_description( $args );
-
-		/** This filter has been defined in class-settings-api.php */
-		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
 	 * Sanitize the form data being submitted.
 	 *
 	 * @param  array $input Input unclean array.
@@ -1354,6 +764,8 @@ class Settings_API {
 			return false;
 		}
 
+		$settings_sanitize = new Settings_Sanitize();
+
 		// Iterate over registered fields and see if we can find proper callback.
 		foreach ( $this->registered_settings as $section => $settings ) {
 			foreach ( $settings as $option ) {
@@ -1369,8 +781,8 @@ class Settings_API {
 					return $sanitize_callback;
 				}
 
-				if ( is_callable( array( $this, 'sanitize_' . $option['type'] . '_field' ) ) ) {
-					$sanitize_callback = array( $this, 'sanitize_' . $option['type'] . '_field' );
+				if ( is_callable( array( $settings_sanitize, 'sanitize_' . $option['type'] . '_field' ) ) ) {
+					$sanitize_callback = array( $settings_sanitize, 'sanitize_' . $option['type'] . '_field' );
 					return $sanitize_callback;
 				}
 
@@ -1379,146 +791,6 @@ class Settings_API {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Sanitize text fields
-	 *
-	 * @param string $value The field value.
-	 * @return string Sanitizied value
-	 */
-	public function sanitize_text_field( $value ) {
-		return $this->sanitize_textarea_field( $value );
-	}
-
-	/**
-	 * Sanitize number fields
-	 *
-	 * @param  array $value The field value.
-	 * @return string  $value  Sanitized value
-	 */
-	public function sanitize_number_field( $value ) {
-		return filter_var( $value, FILTER_SANITIZE_NUMBER_INT );
-	}
-
-	/**
-	 * Sanitize CSV fields
-	 *
-	 * @param string $value The field value.
-	 * @return string Sanitizied value
-	 */
-	public function sanitize_csv_field( $value ) {
-		return implode( ',', array_map( 'trim', explode( ',', sanitize_text_field( wp_unslash( $value ) ) ) ) );
-	}
-
-	/**
-	 * Sanitize CSV fields which hold numbers
-	 *
-	 * @param string $value The field value.
-	 * @return string Sanitized value
-	 */
-	public function sanitize_numbercsv_field( $value ) {
-		return implode( ',', array_filter( array_map( 'absint', explode( ',', sanitize_text_field( wp_unslash( $value ) ) ) ) ) );
-	}
-
-	/**
-	 * Sanitize CSV fields which hold post IDs
-	 *
-	 * @param string $value The field value.
-	 * @return string Sanitized value
-	 */
-	public function sanitize_postids_field( $value ) {
-		$ids = array_filter( array_map( 'absint', explode( ',', sanitize_text_field( wp_unslash( $value ) ) ) ) );
-
-		foreach ( $ids as $key => $value ) {
-			if ( false === get_post_status( $value ) ) {
-				unset( $ids[ $key ] );
-			}
-		}
-
-		return implode( ',', $ids );
-	}
-
-	/**
-	 * Sanitize textarea fields
-	 *
-	 * @param string $value The field value.
-	 * @return string Sanitized value
-	 */
-	public function sanitize_textarea_field( $value ) {
-
-		global $allowedposttags;
-
-		// We need more tags to allow for script and style.
-		$moretags = array(
-			'script' => array(
-				'type'    => true,
-				'src'     => true,
-				'async'   => true,
-				'defer'   => true,
-				'charset' => true,
-			),
-			'style'  => array(
-				'type'   => true,
-				'media'  => true,
-				'scoped' => true,
-			),
-			'link'   => array(
-				'rel'      => true,
-				'type'     => true,
-				'href'     => true,
-				'media'    => true,
-				'sizes'    => true,
-				'hreflang' => true,
-			),
-		);
-
-		$allowedtags = array_merge( $allowedposttags, $moretags );
-
-		/**
-		 * Filter allowed tags allowed when sanitizing text and textarea fields.
-		 *
-		 * @param array $allowedtags Allowed tags array.
-		 */
-		$allowedtags = apply_filters( $this->prefix . '_sanitize_allowed_tags', $allowedtags );
-
-		return wp_kses( wp_unslash( $value ), $allowedtags );
-	}
-
-	/**
-	 * Sanitize checkbox fields
-	 *
-	 * @param mixed $value The field value.
-	 * @return int  Sanitized value
-	 */
-	public function sanitize_checkbox_field( $value ) {
-		$value = ( -1 === (int) $value ) ? 0 : 1;
-
-		return $value;
-	}
-
-	/**
-	 * Sanitize post_types fields
-	 *
-	 * @param  array $value The field value.
-	 * @return string  $value  Sanitized value
-	 */
-	public function sanitize_posttypes_field( $value ) {
-		$post_types = is_array( $value ) ? array_map( 'sanitize_text_field', wp_unslash( $value ) ) : array( 'post', 'page' );
-
-		return implode( ',', $post_types );
-	}
-
-	/**
-	 * Sanitize post_types fields
-	 *
-	 * @param  array $value The field value.
-	 * @return string  $value  Sanitized value
-	 */
-	public function sanitize_taxonomies_field( $value ) {
-		$taxonomies = is_array( $value ) ? array_map( 'sanitize_text_field', wp_unslash( $value ) ) : array();
-
-		return implode( ',', $taxonomies );
 	}
 
 	/**
