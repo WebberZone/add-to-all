@@ -82,7 +82,6 @@ class Snippets {
 		add_action( 'init', array( $this, 'register_taxonomy' ), 0 );
 
 		add_filter( 'wp_editor_settings', array( $this, 'wp_editor_settings' ), 10, 2 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_filter( 'the_content', array( $this, 'remove_wpautop' ), 0 );
 		add_action( 'edit_form_after_title', array( $this, 'media_buttons' ) );
 		add_filter( 'media_view_strings', array( $this, 'media_view_strings' ), 10, 2 );
@@ -250,59 +249,6 @@ class Snippets {
 		}
 
 		return $settings;
-	}
-
-	/**
-	 * Enqueue scripts and styles.
-	 *
-	 * @param string $hook The current admin page.
-	 */
-	public function admin_enqueue_scripts( $hook ) {
-
-		$minimize = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-
-		if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) || get_current_screen()->post_type !== $this->post_type ) {
-			return;
-		}
-
-		wp_enqueue_style( 'wp-color-picker' );
-
-		wp_enqueue_media();
-		wp_enqueue_script( 'wp-color-picker' );
-		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'jquery-ui-autocomplete' );
-
-		wp_enqueue_code_editor(
-			array(
-				'type'       => 'text/html',
-				'codemirror' => array(
-					'indentUnit' => 2,
-					'tabSize'    => 2,
-				),
-			)
-		);
-
-		wp_enqueue_script(
-			'ata-codemirror-js',
-			WZ_SNIPPETZ_URL . 'includes/admin/js/apply-codemirror' . $minimize . '.js',
-			array( 'jquery' ),
-			WZ_SNIPPETZ_VERSION,
-			true
-		);
-		wp_enqueue_script(
-			'ata-media-js',
-			WZ_SNIPPETZ_URL . 'includes/admin/js/media-selector' . $minimize . '.js',
-			array( 'jquery' ),
-			WZ_SNIPPETZ_VERSION,
-			true
-		);
-		wp_enqueue_script(
-			'ata-taxonomy-suggest-js',
-			WZ_SNIPPETZ_URL . 'includes/admin/js/taxonomy-suggest' . $minimize . '.js',
-			array( 'jquery' ),
-			WZ_SNIPPETZ_VERSION,
-			true
-		);
 	}
 
 	/**

@@ -175,6 +175,13 @@ class Metabox_API {
 			self::VERSION,
 			true
 		);
+		wp_enqueue_script(
+			'wz-media-selector-js',
+			plugins_url( 'js/media-selector' . $minimize . '.js', __FILE__ ),
+			array( 'jquery' ),
+			self::VERSION,
+			true
+		);
 	}
 
 	/**
