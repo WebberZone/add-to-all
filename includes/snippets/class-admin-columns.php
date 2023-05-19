@@ -63,10 +63,11 @@ class Admin_Columns {
 			case 'shortcode':
 				$shortcode = "[ata_snippet id={$post_id}]";
 
-				$output = "\n" . '<span class="ata_shortcode"><input type="text"'
-				. ' onfocus="this.select();" readonly="readonly"'
-				. ' value="' . esc_attr( $shortcode ) . '"'
-				. ' class="large-text code" /></span>';
+				$output = sprintf(
+					'<span class="ata_shortcode"><input type="text" readonly="readonly" value="%1$s" class="large-text code" onfocus="this.select();" onclick="navigator.clipboard.writeText(this.value);" title="%2$s" /></span>',
+					esc_attr( $shortcode ),
+					__( 'Copy to clipboard', 'add-to-all' )
+				);
 
 				echo trim( $output ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				break;
