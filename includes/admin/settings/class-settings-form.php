@@ -493,7 +493,7 @@ class Settings_Form {
 	 * @return void
 	 */
 	public function callback_select( $args ) {
-		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
+		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['default'] );
 
 		if ( isset( $args['chosen'] ) ) {
 			$chosen = 'class="chosen"';
