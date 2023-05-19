@@ -198,12 +198,19 @@ class Settings {
 	public static function settings_general() {
 
 		$settings = array(
-			'enable_snippets' => array(
+			'enable_snippets'  => array(
 				'id'      => 'enable_snippets',
 				'name'    => esc_html__( 'Enable Snippets Manager', 'add-to-all' ),
 				'desc'    => esc_html__( 'Disabling this will turn off the Snippets manager and any of the associated functionality. This will not delete any snippets data that was created before this was turned off.', 'add-to-all' ),
 				'type'    => 'checkbox',
 				'options' => true,
+			),
+			'snippet_priority' => array(
+				'id'      => 'snippet_priority',
+				'name'    => esc_html__( 'Snippet content priority', 'add-to-all' ),
+				'desc'    => esc_html__( 'Priority of the snippet content. Lower number means all snippets are added earlier relative to other content. Number below 10 is not recommended. At the next level, priority of each snippet is independently set from the Edit Snippets screen.', 'add-to-all' ),
+				'type'    => 'text',
+				'options' => 999,
 			),
 		);
 

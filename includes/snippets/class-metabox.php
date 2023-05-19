@@ -72,7 +72,7 @@ class Metabox {
 		$settings = array(
 			'step1_header'         => array(
 				'id'   => 'step1_header',
-				'name' => '<h3>' . esc_html__( 'Step 1: Select where should this be displayed', 'add-to-all' ) . '</h3>',
+				'name' => '<h3>' . esc_html__( 'Step 1: Where to display this', 'add-to-all' ) . '</h3>',
 				'desc' => '',
 				'type' => 'header',
 			),
@@ -106,7 +106,7 @@ class Metabox {
 			),
 			'step2_header'         => array(
 				'id'   => 'step2_header',
-				'name' => '<h3>' . esc_html__( 'Step 2: Select the conditions where this will be displayed', 'add-to-all' ) . '</h3>',
+				'name' => '<h3>' . esc_html__( 'Step 2: Conditions', 'add-to-all' ) . '</h3>',
 				'desc' => esc_html__( 'Leaving any option blank will not apply the filter', 'add-to-all' ),
 				'type' => 'header',
 			),
@@ -159,6 +159,22 @@ class Metabox {
 				'field_attributes' => array(
 					'data-wp-taxonomy' => 'post_tag',
 				),
+			),
+			'step3_header'         => array(
+				'id'   => 'step3_header',
+				'name' => '<h3>' . esc_html__( 'Step 3: Priority', 'add-to-all' ) . '</h3>',
+				'desc' => '',
+				'type' => 'header',
+			),
+			'include_priority'     => array(
+				'id'      => 'include_priority',
+				'name'    => esc_html__( 'Priority', 'add-to-all' ),
+				'desc'    => esc_html__( 'Used to specify the order in which the code snippets are added to the content. Lower numbers correspond with earlier addition, and functions with the same priority are added in the order in which they were added, typically by post ID.', 'add-to-all' ),
+				'type'    => 'number',
+				'size'    => 'small',
+				'min'     => 0,
+				'default' => 10,
+				'options' => '',
 			),
 		);
 

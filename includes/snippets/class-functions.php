@@ -29,7 +29,8 @@ class Functions {
 	public function __construct() {
 		add_action( 'wp_head', array( $this, 'snippets_header' ) );
 		add_action( 'wp_footer', array( $this, 'snippets_footer' ) );
-		add_filter( 'the_content', array( $this, 'snippets_content' ), ata_get_option( 'content_filter_priority', 10 ) );
+		$priority = ata_get_option( 'snippet_priority', ata_get_option( 'content_filter_priority', 10 ), 10 );
+		add_filter( 'the_content', array( $this, 'snippets_content' ), $priority );
 	}
 
 	/**
@@ -254,6 +255,31 @@ class Functions {
 				return '';
 		}
 
+		if ( empty( $snippets ) ) {
+			return '';
+		}
+
+		$snippets_with_priority = array();
+		foreach ( $snippets as $snippet ) {
+			$priority                 = get_post_meta( $snippet->ID, '_ata_include_priority', true );
+			$snippets_with_priority[] = array(
+				'snippet'  => $snippet,
+				'priority' => $priority,
+			);
+		}
+
+		// Sort the snippets by priority.
+		usort(
+			$snippets_with_priority,
+			function( $a, $b ) {
+				$priority_a = ! empty( $a['priority'] ) ? $a['priority'] : 10;
+				$priority_b = ! empty( $b['priority'] ) ? $b['priority'] : 10;
+
+				// Higher priority comes later.
+				return $priority_a - $priority_b;
+			}
+		);
+
 		$output    = $before;
 		$all_terms = array();
 
@@ -268,7 +294,8 @@ class Functions {
 			}
 		}
 
-		foreach ( $snippets as $snippet ) {
+		foreach ( $snippets_with_priority  as $item ) {
+			$snippet          = $item['snippet'];
 			$include_on_terms = array();
 
 			// Process post IDs and post types.
@@ -300,18 +327,18 @@ class Functions {
 				}
 			} else {
 				if ( ! empty( $include_on_posts ) ) {
-					$condition[]    = 1;
-					$include_code[] = in_array( $post->ID, $include_on_posts ) ? 1 : 0; // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+					$condition[] = 1;
+					$include[]   = in_array( $post->ID, $include_on_posts ) ? 1 : 0; // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 				}
 				if ( ! empty( $include_on_posttypes ) ) {
-					$condition[]    = 1;
-					$include_code[] = in_array( $post->post_type, $include_on_posttypes ) ? 1 : 0; // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+					$condition[] = 1;
+					$include[]   = in_array( $post->post_type, $include_on_posttypes ) ? 1 : 0; // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 				}
 				if ( ! empty( $include_on_terms ) ) {
-					$condition[]    = 1;
-					$include_code[] = count( array_intersect( $all_terms, $include_on_terms ) ) ? 1 : 0;
+					$condition[] = 1;
+					$include[]   = count( array_intersect( $all_terms, $include_on_terms ) ) ? 1 : 0;
 				}
-				$include_code = ( array_sum( $condition ) === array_sum( $include_code ) ) ? true : false;
+				$include_code = ( array_sum( $condition ) === array_sum( $include ) ) ? true : false;
 			}
 			if ( $include_code ) {
 				$output .= do_shortcode( $snippet->post_content );
