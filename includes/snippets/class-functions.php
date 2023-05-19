@@ -3,7 +3,7 @@
  * Functions to perform snippet operations.
  *
  * @link  https://webberzone.com
- * @since 1.7.0
+ * @since 2.0.0
  *
  * @package WebberZone\Snippetz
  */
@@ -19,7 +19,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Functions to perform snippet operations.
  *
  * @version 1.0
- * @since   1.7.0
+ * @since   2.0.0
  */
 class Functions {
 
@@ -37,7 +37,7 @@ class Functions {
 	 *
 	 * The defaults are as follows:
 	 *
-	 * @since 1.7.0
+	 * @since 2.0.0
 	 *
 	 * @see WP_Query::parse_query()
 	 *
@@ -66,7 +66,7 @@ class Functions {
 		/**
 		 * Override arguments passed to the get_posts function.
 		 *
-		 * @since 1.7.0
+		 * @since 2.0.0
 		 *
 		 * @param array $parse_args Arguments passed to the get_posts function.
 		 */
@@ -77,7 +77,7 @@ class Functions {
 		/**
 		 * Array of the latest snippets, or snippets matching the given criteria.
 		 *
-		 * @since 1.7.0
+		 * @since 2.0.0
 		 *
 		 * @param WP_Post[]|int[] Array of snippet objects or snippet IDs.
 		 * @param array $parse_args Arguments passed to the get_posts function.
@@ -89,7 +89,7 @@ class Functions {
 	/**
 	 * Retrieves the snippet data given a snippet ID or object.
 	 *
-	 * @since 1.7.0
+	 * @since 2.0.0
 	 *
 	 * @param int|WP_Post $snippet Snippet ID or object.
 	 * @return WP_Post|string `WP_Post` instance on success or error message on failure.
@@ -105,7 +105,7 @@ class Functions {
 		/**
 		 * Retrieves the snippet data given a snippet ID or object.
 		 *
-		 * @since 1.7.0
+		 * @since 2.0.0
 		 *
 		 * @param WP_Post     $_snippet `WP_Post` instance.
 		 * @param int|WP_Post $snippet  Snippet ID or object (input).
@@ -117,7 +117,7 @@ class Functions {
 	/**
 	 * Retrieves an array of the latest snippets based on the location specified.
 	 *
-	 * @since 1.7.0
+	 * @since 2.0.0
 	 *
 	 * @param string $location    Location of the snippet. Valid options are header, footer, content_before and content_after.
 	 * @param int    $numberposts Optional. Number of snippets to retrieve. Default is -1.
@@ -157,7 +157,7 @@ class Functions {
 		/**
 		 * Retrieves the snippet data given a snippet ID or object.
 		 *
-		 * @since 1.7.0
+		 * @since 2.0.0
 		 *
 		 * @param WP_Post[]|int[] $snippets    Array of snippet objects or snippet IDs on success or false on failure.
 		 * @param string          $location    Location of the snippet. Valid options are header, footer, content_before and content_after.
@@ -170,7 +170,7 @@ class Functions {
 	/**
 	 * Retrieves an array of the latest header snippets.
 	 *
-	 * @since 1.7.0
+	 * @since 2.0.0
 	 *
 	 * @param int $numberposts Optional. Number of snippets to retrieve. Default is -1.
 	 * @return WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
@@ -184,7 +184,7 @@ class Functions {
 	/**
 	 * Retrieves an array of the latest footer snippets.
 	 *
-	 * @since 1.7.0
+	 * @since 2.0.0
 	 *
 	 * @param int $numberposts Optional. Number of snippets to retrieve. Default is -1.
 	 * @return WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
@@ -198,7 +198,7 @@ class Functions {
 	/**
 	 * Retrieves an array of the latest content_before snippets.
 	 *
-	 * @since 1.7.0
+	 * @since 2.0.0
 	 *
 	 * @param int $numberposts Optional. Number of snippets to retrieve. Default is -1.
 	 * @return WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
@@ -212,7 +212,7 @@ class Functions {
 	/**
 	 * Retrieves an array of the latest content_after snippets.
 	 *
-	 * @since 1.7.0
+	 * @since 2.0.0
 	 *
 	 * @param int $numberposts Optional. Number of snippets to retrieve. Default is -1.
 	 * @return WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
@@ -226,14 +226,15 @@ class Functions {
 	/**
 	 * Function to add snippets code to the header. Filters `wp_head`.
 	 *
-	 * @since 1.7.0
+	 * @since 2.0.0
 	 *
-	 * @param string $location Location of the snippet. Valid options are header, footer, content_before and content_after.
-	 * @param string $before   Text to display before the output.
-	 * @param string $after    Text to display after the output.
+	 * @param string $location    Location of the snippet. Valid options are header, footer, content_before and content_after.
+	 * @param string $before      Text to display before the output.
+	 * @param string $after       Text to display after the output.
+	 * @param string $numberposts Optional. Number of snippets to retrieve. Default is -1.
 	 * @return string Content of snippets for the specified location.
 	 */
-	public static function get_snippets_content_by_location( $location, $before = '', $after = '' ) {
+	public static function get_snippets_content_by_location( $location, $before = '', $after = '', $numberposts = -1 ) {
 
 		global $post;
 
@@ -242,7 +243,12 @@ class Functions {
 			case 'footer':
 			case 'content_before':
 			case 'content_after':
-				$snippets = call_user_func( array( __CLASS__, "get_{$location}_snippets" ) );
+				$method_name = "get_{$location}_snippets";
+				if ( method_exists( __CLASS__, $method_name ) ) {
+					$snippets = self::$method_name( $numberposts );
+				} else {
+					return '';
+				}
 				break;
 			default:
 				return '';
@@ -257,11 +263,9 @@ class Functions {
 		foreach ( $taxes as $tax ) {
 			$terms = get_the_terms( $post->ID, $tax );
 			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-				$term_taxonomy_id = wp_list_pluck( $terms, 'term_taxonomy_id' );
-			} else {
-				$term_taxonomy_id = array();
+				$term_taxonomy_ids = wp_list_pluck( $terms, 'term_taxonomy_id' );
+				$all_terms         = array_merge( $all_terms, $term_taxonomy_ids );
 			}
-			$all_terms = array_merge( $all_terms, $term_taxonomy_id );
 		}
 
 		foreach ( $snippets as $snippet ) {
@@ -277,7 +281,7 @@ class Functions {
 
 			// Process taxonomies.
 			foreach ( $taxes as $tax ) {
-				$include_on       = get_post_meta( $snippet->ID, '_ata_include_on_' . $tax . '_ids', true );
+				$include_on       = get_post_meta( $snippet->ID, "_ata_include_on_{$tax}_ids", true );
 				$include_on       = $include_on ? explode( ',', $include_on ) : array();
 				$include_on_terms = array_merge( $include_on_terms, $include_on );
 			}
@@ -296,28 +300,16 @@ class Functions {
 				}
 			} else {
 				if ( ! empty( $include_on_posts ) ) {
-					$condition[] = 1;
-					if ( in_array( $post->ID, $include_on_posts ) ) { // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
-						$include_code[] = 1;
-					} else {
-						$include_code[] = 0;
-					}
+					$condition[]    = 1;
+					$include_code[] = in_array( $post->ID, $include_on_posts ) ? 1 : 0; // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 				}
 				if ( ! empty( $include_on_posttypes ) ) {
-					$condition[] = 1;
-					if ( in_array( $post->post_type, $include_on_posttypes ) ) { // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
-						$include_code[] = 1;
-					} else {
-						$include_code[] = 0;
-					}
+					$condition[]    = 1;
+					$include_code[] = in_array( $post->post_type, $include_on_posttypes ) ? 1 : 0; // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 				}
 				if ( ! empty( $include_on_terms ) ) {
-					$condition[] = 1;
-					if ( count( array_intersect( $all_terms, $include_on_terms ) ) ) {
-						$include_code[] = 1;
-					} else {
-						$include_code[] = 0;
-					}
+					$condition[]    = 1;
+					$include_code[] = count( array_intersect( $all_terms, $include_on_terms ) ) ? 1 : 0;
 				}
 				$include_code = ( array_sum( $condition ) === array_sum( $include_code ) ) ? true : false;
 			}
@@ -335,7 +327,7 @@ class Functions {
 	/**
 	 * Function to add snippets code to the header. Filters `wp_head`.
 	 *
-	 * @since 1.7.0
+	 * @since 2.0.0
 	 */
 	public static function snippets_header() {
 		echo self::get_snippets_content_by_location( 'header', self::snippets_credit() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -346,7 +338,7 @@ class Functions {
 	/**
 	 * Function to add snippets code to the footer. Filters `wp_footer`.
 	 *
-	 * @since 1.7.0
+	 * @since 2.0.0
 	 */
 	public static function snippets_footer() {
 		echo self::get_snippets_content_by_location( 'footer', self::snippets_credit() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -357,7 +349,7 @@ class Functions {
 	/**
 	 * Function to add snippets code to the footer. Filters `wp_footer`.
 	 *
-	 * @since 1.7.0
+	 * @since 2.0.0
 	 *
 	 * @param string $content Post content.
 	 * @return string Filtered post content
@@ -381,11 +373,10 @@ class Functions {
 	}
 
 
-
 	/**
 	 * Function to add snippets credit line.
 	 *
-	 * @since 1.7.0
+	 * @since 2.0.0
 	 *
 	 * @return string Snippets credit line.
 	 */
@@ -394,7 +385,7 @@ class Functions {
 		/**
 		 * Filter the snippets credit line.
 		 *
-		 * @since 1.7.0
+		 * @since 2.0.0
 		 *
 		 * @param string $text Snippets credit line.
 		 */
