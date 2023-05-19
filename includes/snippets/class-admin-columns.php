@@ -81,7 +81,7 @@ class Admin_Columns {
 
 		if ( 'edit-ata_snippets' === $screen->id ) {
 
-			echo '<style>#shortcode{width:200px}</style>';
+			echo '<style>#shortcode{width:200px}.ata_shortcode input.code{min-width:100%}</style>';
 
 		}
 	}
