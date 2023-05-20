@@ -1,8 +1,8 @@
-=== WebberZone Snippetz - Header, Footer and Body manager ===
+=== WebberZone Snippetz - Header, Body and Footer manager ===
 Tags: snippets, html, css, javascript, code, header, footer, content, body, feed
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
-Stable tag: 1.8.0
+Stable tag: 2.0.0
 Requires at least: 5.6
 Tested up to: 6.2
 Requires PHP: 7.3
@@ -131,38 +131,9 @@ Release post: [https://webberzone.com/blog/add-to-all-v1-8-0/](https://webberzon
 * Enhancements/modifications:
 	* Upgraded Settings_API to v2
 
-= 1.7.3 =
-
-Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzone.com/blog/add-to-all-v1-7-0/)
-
-* Bug fixes:
-	* Feed copyright placeholders were not processed
-
-= 1.7.2 =
-
-* Bug fixes:
-	* Fixes PHP error introduced in v1.7.1
-
-= 1.7.1 =
-
-Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzone.com/blog/add-to-all-v1-7-0/)
-
-* Bug fixes:
-	* Process shortcodes didn't work
-	* Snippets HTML was added into content were added even when no snippet was found
-
-= 1.7.0 =
-
-Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzone.com/blog/add-to-all-v1-7-0/)
-
-* Features:
-	* New Settings API class to control the plugins settings
-	* New Snippets Manager - create custom snippets that can be added to Header, Footer and Content based on inclusion criteria
-
 Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 
 == Upgrade Notice ==
 
-= 1.8.0 =
-New features; Check out the Changelog for more details.
-
+= 2.0.0 =
+Multiple new features; Check out the Changelog for more details.

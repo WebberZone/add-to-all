@@ -1,4 +1,4 @@
-# WebberZone Snippetz - Header, Footer and Body manager
+# WebberZone Snippetz - Header, Body and Footer manager
 
 ![WebberZone Snippetz](https://raw.githubusercontent.com/WebberZone/add-to-all/master/wporg-assets/banner-1544x500.png)
 
