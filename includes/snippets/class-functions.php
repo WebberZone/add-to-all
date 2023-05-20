@@ -280,7 +280,7 @@ class Functions {
 			}
 		);
 
-		$output    = $before;
+		$output[]  = $before;
 		$all_terms = array();
 
 		// Get taxonomies for the current post.
@@ -341,13 +341,16 @@ class Functions {
 				$include_code = ( array_sum( $condition ) === array_sum( $include ) ) ? true : false;
 			}
 			if ( $include_code ) {
-				$output .= do_shortcode( $snippet->post_content );
+				$output[] = self::wrap_output(
+					do_shortcode( $snippet->post_content ),
+					self::get_snippet_type( $snippet )
+				);
 			}
 		}
 
-		$output .= $after;
+		$output[] = $after;
 
-		return $output;
+		return implode( '', $output );
 	}
 
 
@@ -417,6 +420,77 @@ class Functions {
 		 * @param string $text Snippets credit line.
 		 */
 		return apply_filters( 'ata_snippets_credit', '<!-- Snippets by WebberZone Snippetz -->' );
+	}
+
+	/**
+	 * Get snippet type.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param WP_Post $snippet Snippet object.
+	 * @return string Snippet type.
+	 */
+	public static function get_snippet_type( $snippet ) {
+		$snippet_type = get_post_meta( $snippet->ID, '_ata_snippet_type', true );
+		$snippet_type = ( $snippet_type ) ? $snippet_type : 'html';
+
+		return $snippet_type;
+	}
+
+	/**
+	 * Wrap output in style or script tags depending on snippet type.
+	 *
+	 * @param string $output The output to be wrapped.
+	 * @param string $snippet_type The type of the snippet: 'css' or 'js'.
+	 * @return string The wrapped output.
+	 */
+	public static function wrap_output( $output, $snippet_type ) {
+		// Check if the snippet type is valid.
+		if ( ! in_array( $snippet_type, array( 'css', 'js' ), true ) ) {
+			return $output;
+		}
+
+		$output = str_replace( self::snippets_credit(), '', $output );
+
+		// Wrap the output in style or script tags accordingly using a switch statement.
+		switch ( $snippet_type ) {
+			case 'css':
+				return '<style type="text/css">' . $output . '</style>';
+			case 'js':
+				return '<script type="text/javascript">' . $output . '</script>';
+			default:
+				return $output;
+		}
+	}
+
+	/**
+	 * Get snippet type styles.
+	 *
+	 * @param WP_Post $snippet Snippet object.
+	 * @return array Snippet type styles. Includes four keys: 'type', 'color', 'background', 'tag'.
+	 */
+	public static function get_snippet_type_styles( $snippet ) {
+		$snippet_type   = self::get_snippet_type( $snippet );
+		$styles['type'] = $snippet_type;
+
+		switch ( $snippet_type ) {
+			case 'html':
+				$styles['color']      = '#e34c26';
+				$styles['background'] = '#ffffff';
+				$styles['tag']        = 'html';
+				break;
+			case 'css':
+				$styles['color']      = '#264de4';
+				$styles['background'] = '#ffffff';
+				$styles['tag']        = 'style';
+				break;
+			case 'js':
+				$styles['background'] = '#F0DB4F';
+				$styles['color']      = '#323330';
+				$styles['tag']        = 'script';
+				break;
+		}
+		return $styles;
 	}
 
 }

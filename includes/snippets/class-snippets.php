@@ -23,6 +23,13 @@ if ( ! defined( 'WPINC' ) ) {
 class Snippets {
 
 	/**
+	 * Holds the WP_Post object.
+	 *
+	 * @var WP_Post Post object.
+	 */
+	protected $post;
+
+	/**
 	 * Holds the name of the post type.
 	 *
 	 * @var string Post type.
@@ -241,11 +248,13 @@ class Snippets {
 	 */
 	public function wp_editor_settings( $settings, $editor_id ) {
 		if ( 'content' === $editor_id && get_current_screen()->post_type === $this->post_type ) {
+			$snippet_type = $this->get_snippet_type( get_post() );
+
 			$settings['wpautop']       = false;
 			$settings['tinymce']       = false;
 			$settings['quicktags']     = false;
 			$settings['media_buttons'] = false;
-			$settings['editor_class']  = 'codemirror_html';
+			$settings['editor_class']  = 'codemirror_' . $snippet_type;
 		}
 
 		return $settings;
@@ -270,6 +279,19 @@ class Snippets {
 	 */
 	public function media_buttons( $post ) {
 		if ( get_post_type( $post ) === $this->post_type ) {
+			$styles = Functions::get_snippet_type_styles( $post );
+
+			printf(
+				'<div style="margin-top:10px;display:block;padding:10px;background:%1$s;color:%2$s;border:1px solid %2$s;border-radius:5px;">',
+				esc_attr( $styles['background'] ),
+				esc_attr( $styles['color'] )
+			);
+			printf(
+				esc_html__( 'This is a %1$s snippet. You do not need to add %2$s tags in your code.', 'add-to-all' ),
+				'<strong>' . esc_html( strtoupper( $styles['type'] ) ) . '</strong>',
+				'<strong>' . esc_html( $styles['tag'] ) . '</strong>'
+			);
+			echo '</div>';
 			printf(
 				'<br /><button type="button" class="button insert-codemirror-media add_media" data-editor="content">%1$s</button><br /><br />',
 				esc_html__( 'Add Media', 'add-to-all' )
@@ -294,5 +316,15 @@ class Snippets {
 			$strings['insertIntoPost']           = __( 'Insert into editor', 'add-to-all' );
 		}
 		return $strings;
+	}
+
+	/**
+	 * Get snippet type.
+	 *
+	 * @param WP_Post $snippet Snippet object.
+	 * @return string Snippet type.
+	 */
+	public function get_snippet_type( $snippet ) {
+		return Functions::get_snippet_type( $snippet );
 	}
 }

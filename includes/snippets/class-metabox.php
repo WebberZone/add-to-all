@@ -70,6 +70,18 @@ class Metabox {
 	public function get_registered_settings() {
 
 		$settings = array(
+			'snippet_type'         => array(
+				'id'      => 'snippet_type',
+				'name'    => __( 'Snippet Type', 'add-to-all' ),
+				'desc'    => __( 'Select the type of snippet you want to add. You will need to update/save this page in order to update the editor format above.', 'add-to-all' ),
+				'type'    => 'select',
+				'default' => 'html',
+				'options' => array(
+					'html' => __( 'HTML', 'add-to-all' ),
+					'js'   => __( 'Javascript', 'add-to-all' ),
+					'css'  => __( 'CSS', 'add-to-all' ),
+				),
+			),
 			'step1_header'         => array(
 				'id'   => 'step1_header',
 				'name' => '<h3>' . esc_html__( 'Step 1: Where to display this', 'add-to-all' ) . '</h3>',
@@ -107,7 +119,7 @@ class Metabox {
 			'step2_header'         => array(
 				'id'   => 'step2_header',
 				'name' => '<h3>' . esc_html__( 'Step 2: Conditions', 'add-to-all' ) . '</h3>',
-				'desc' => esc_html__( 'Leaving any option blank will not apply the filter', 'add-to-all' ),
+				'desc' => esc_html__( 'Select at least one condition below to display the contents of this snippet. Leaving any of the conditions blank will ignore it. Leaving all blank will ignore the snippet. If you want to include the snippet on all posts, then you can use the Global Settings.', 'add-to-all' ),
 				'type' => 'header',
 			),
 			'include_relation'     => array(
