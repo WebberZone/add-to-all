@@ -128,63 +128,31 @@ final class Main {
 		$priority = ata_get_option( 'content_filter_priority', 10 );
 		add_filter( 'the_content', array( $this, 'the_content' ), $priority );
 
-		if ( ata_get_option( 'footer_process_shortcode' ) ) {
-			add_filter( 'ata_footer_other_html', 'shortcode_unautop' );
-			add_filter( 'ata_footer_other_html', 'do_shortcode' );
-		}
+		$footer_process_shortcode  = ata_get_option( 'footer_process_shortcode' );
+		$feed_process_shortcode    = ata_get_option( 'feed_process_shortcode' );
+		$content_process_shortcode = ata_get_option( 'content_process_shortcode' );
 
-		if ( ata_get_option( 'feed_process_shortcode' ) ) {
-			add_filter( 'ata_feed_html_before', 'shortcode_unautop' );
-			add_filter( 'ata_feed_html_before', 'do_shortcode' );
-
-			add_filter( 'ata_feed_html_after', 'shortcode_unautop' );
-			add_filter( 'ata_feed_html_after', 'do_shortcode' );
-		}
-
-		if ( ata_get_option( 'content_process_shortcode' ) ) {
-			add_filter( 'ata_content_html_before', 'shortcode_unautop' );
-			add_filter( 'ata_content_html_before', 'do_shortcode' );
-
-			add_filter( 'ata_content_html_after', 'shortcode_unautop' );
-			add_filter( 'ata_content_html_after', 'do_shortcode' );
-
-			add_filter( 'ata_content_html_before_single', 'shortcode_unautop' );
-			add_filter( 'ata_content_html_before_single', 'do_shortcode' );
-
-			add_filter( 'ata_content_html_after_single', 'shortcode_unautop' );
-			add_filter( 'ata_content_html_after_single', 'do_shortcode' );
-
-			add_filter( 'ata_content_html_before_post', 'shortcode_unautop' );
-			add_filter( 'ata_content_html_before_post', 'do_shortcode' );
-
-			add_filter( 'ata_content_html_after_post', 'shortcode_unautop' );
-			add_filter( 'ata_content_html_after_post', 'do_shortcode' );
-
-			add_filter( 'ata_content_html_before_page', 'shortcode_unautop' );
-			add_filter( 'ata_content_html_before_page', 'do_shortcode' );
-
-			add_filter( 'ata_content_html_after_page', 'shortcode_unautop' );
-			add_filter( 'ata_content_html_after_page', 'do_shortcode' );
-		}
-
-		// Replace placeholders.
-		$placeholders = array(
-			'ata_content_html_before',
-			'ata_content_html_after',
-			'ata_content_html_before_single',
-			'ata_content_html_after_single',
-			'ata_content_html_before_post',
-			'ata_content_html_after_post',
-			'ata_content_html_before_page',
-			'ata_content_html_after_page',
-			'ata_feed_html_before',
-			'ata_feed_html_after',
-			'ata_feed_copyrightnotice',
-			'ata_footer_other_html',
+		$filters = array(
+			'ata_footer_other_html'          => $footer_process_shortcode,
+			'ata_feed_html_before'           => $feed_process_shortcode,
+			'ata_feed_html_after'            => $feed_process_shortcode,
+			'ata_content_html_before'        => $content_process_shortcode,
+			'ata_content_html_after'         => $content_process_shortcode,
+			'ata_content_html_before_single' => $content_process_shortcode,
+			'ata_content_html_after_single'  => $content_process_shortcode,
+			'ata_content_html_before_post'   => $content_process_shortcode,
+			'ata_content_html_after_post'    => $content_process_shortcode,
+			'ata_content_html_before_page'   => $content_process_shortcode,
+			'ata_content_html_after_page'    => $content_process_shortcode,
+			'ata_feed_copyrightnotice'       => 1,
 		);
 
-		foreach ( $placeholders as $placeholder ) {
-			add_filter( $placeholder, array( $this, 'process_placeholders' ), 99 );
+		foreach ( $filters as $filter => $process_shortcode ) {
+			if ( $process_shortcode ) {
+				add_filter( $filter, 'shortcode_unautop' );
+				add_filter( $filter, 'do_shortcode' );
+				add_filter( $filter, array( $this, 'process_placeholders' ), 99 );
+			}
 		}
 	}
 
