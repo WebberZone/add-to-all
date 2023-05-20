@@ -120,6 +120,7 @@ final class Main {
 	public function hooks() {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		add_action( 'wp_head', array( $this, 'wp_head' ) );
+		add_action( 'wp_body_open', array( $this, 'wp_body_open' ) );
 		add_action( 'wp_footer', array( $this, 'wp_footer' ) );
 		add_action( 'the_excerpt_rss', array( $this, 'the_excerpt_rss' ), 99999999 );
 		add_action( 'the_content_feed', array( $this, 'the_excerpt_rss' ), 99999999 );
@@ -234,6 +235,21 @@ final class Main {
 		// Add other header.
 		if ( '' !== $head_other_html ) {
 			echo $head_other_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+	}
+
+	/**
+	 * Function to add custom code to `wp_body_open()`.
+	 *
+	 * @since 2.0.0
+	 */
+	public function wp_body_open() {
+
+		$html = $this->get_option_and_filter( 'wp_body_open' );
+
+		// Add other header.
+		if ( '' !== $html ) {
+			echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 

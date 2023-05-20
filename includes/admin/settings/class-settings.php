@@ -144,7 +144,7 @@ class Settings {
 			'general'     => esc_html__( 'General', 'add-to-all' ),
 			'third_party' => esc_html__( 'Third Party', 'add-to-all' ),
 			'head'        => esc_html__( 'Header', 'add-to-all' ),
-			'content'     => esc_html__( 'Content', 'add-to-all' ),
+			'body'        => esc_html__( 'Body', 'add-to-all' ),
 			'footer'      => esc_html__( 'Footer', 'add-to-all' ),
 			'feed'        => esc_html__( 'Feed', 'add-to-all' ),
 		);
@@ -173,7 +173,7 @@ class Settings {
 			'general'     => self::settings_general(),
 			'third_party' => self::settings_third_party(),
 			'head'        => self::settings_head(),
-			'content'     => self::settings_content(),
+			'body'        => self::settings_body(),
 			'footer'      => self::settings_footer(),
 			'feed'        => self::settings_feed(),
 		);
@@ -363,9 +363,29 @@ class Settings {
 	 *
 	 * @return array Content settings.
 	 */
-	public static function settings_content() {
+	public static function settings_body() {
 
 		$settings = array(
+			'wp_body_open_header'            => array(
+				'id'   => 'wp_body_open_header',
+				'name' => '<h3>' . esc_html__( 'Opening Body Tag', 'add-to-all' ) . '</h3>',
+				'desc' => '',
+				'type' => 'header',
+			),
+			'wp_body_open'                   => array(
+				'id'          => 'wp_body_open',
+				'name'        => esc_html__( 'HTML to add to wp_body_open()', 'add-to-all' ),
+				'desc'        => esc_html__( 'wp_body_open() is called after the opening body tag. Please ensure that you enter valid HTML or JavaScript. This might not work if your theme does not include the tag.', 'add-to-all' ),
+				'type'        => 'html',
+				'options'     => '',
+				'field_class' => 'codemirror_html',
+			),
+			'content_header'                 => array(
+				'id'   => 'content_header',
+				'name' => '<h3>' . esc_html__( 'Content settings', 'add-to-all' ) . '</h3>',
+				'desc' => '',
+				'type' => 'header',
+			),
 			'content_filter_priority'        => array(
 				'id'      => 'content_filter_priority',
 				'name'    => esc_html__( 'Content filter priority', 'add-to-all' ),
@@ -540,7 +560,7 @@ class Settings {
 		 *
 		 * @param array $settings Content Settings array
 		 */
-		return apply_filters( self::$prefix . '_settings_content', $settings );
+		return apply_filters( self::$prefix . '_settings_body', $settings );
 	}
 
 	/**
