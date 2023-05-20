@@ -90,7 +90,7 @@ class Settings {
 		$args = array(
 			'translation_strings' => $this->get_translation_strings(),
 			'props'               => $props,
-			'settings_sections'   => $this->get_settings_sections(),
+			'settings_sections'   => self::get_settings_sections(),
 			'registered_settings' => $this->get_registered_settings(),
 			'upgraded_settings'   => array(),
 		);
@@ -139,8 +139,8 @@ class Settings {
 	 *
 	 * @return array Settings array
 	 */
-	public function get_settings_sections() {
-		$ata_settings_sections = array(
+	public static function get_settings_sections() {
+		$settings_sections = array(
 			'general'     => esc_html__( 'General', 'add-to-all' ),
 			'third_party' => esc_html__( 'Third Party', 'add-to-all' ),
 			'head'        => esc_html__( 'Header', 'add-to-all' ),
@@ -154,9 +154,9 @@ class Settings {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array $ata_settings_sections Settings array
+		 * @param array $settings_sections Settings array
 		 */
-		return apply_filters( self::$prefix . '_settings_sections', $ata_settings_sections );
+		return apply_filters( self::$prefix . '_settings_sections', $settings_sections );
 	}
 
 
@@ -169,14 +169,14 @@ class Settings {
 	 */
 	public static function get_registered_settings() {
 
-		$ata_settings = array(
-			'general'     => self::settings_general(),
-			'third_party' => self::settings_third_party(),
-			'head'        => self::settings_head(),
-			'body'        => self::settings_body(),
-			'footer'      => self::settings_footer(),
-			'feed'        => self::settings_feed(),
-		);
+		$sections = self::get_settings_sections();
+
+		foreach ( $sections as $section => $value ) {
+			$method_name = 'settings_' . $section;
+			if ( method_exists( __CLASS__, $method_name ) ) {
+				$settings[ $section ] = self::$method_name();
+			}
+		}
 
 		/**
 		 * Filters the settings array
@@ -185,7 +185,7 @@ class Settings {
 		 *
 		 * @param array $ata_setings Settings array
 		 */
-		return apply_filters( self::$prefix . '_registered_settings', $ata_settings );
+		return apply_filters( self::$prefix . '_registered_settings', $settings );
 	}
 
 	/**
