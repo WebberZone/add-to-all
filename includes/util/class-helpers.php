@@ -208,4 +208,13 @@ class Helpers {
 		}
 	}
 
+	/**
+	 * Is snippets enabled?
+	 *
+	 * @return boolean True if snippets are enabled. False if not.
+	 */
+	public static function is_snippets_enabled() {
+		return ( ata_get_option( 'enable_snippets' ) && ! ( defined( '\ATA_DISABLE_SNIPPETS' ) && \ATA_DISABLE_SNIPPETS ) );
+	}
+
 }

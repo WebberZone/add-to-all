@@ -105,7 +105,7 @@ final class Main {
 		$this->site_verification = new \WebberZone\Snippetz\Frontend\Site_Verification();
 		$this->third_party       = new \WebberZone\Snippetz\Frontend\Third_Party();
 
-		if ( ata_get_option( 'enable_snippets' ) && ! ( defined( '\ATA_DISABLE_SNIPPETS' ) && \ATA_DISABLE_SNIPPETS ) ) {
+		if ( \WebberZone\Snippetz\Util\Helpers::is_snippets_enabled() ) {
 			$this->snippets = new \WebberZone\Snippetz\Snippets\Snippets();
 		}
 
