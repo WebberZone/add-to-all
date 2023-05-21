@@ -56,27 +56,11 @@ class Settings_API {
 	public $translation_strings;
 
 	/**
-	 * Menu type.
+	 * Menus.
 	 *
-	 * @see add_custom_menu_page()
-	 *
-	 * @var string Menu slug.
+	 * @var array Menus.
 	 */
-	public $menu_type;
-
-	/**
-	 * The slug name of the parent of the menu.
-	 *
-	 * @var string Menu slug of the parent.
-	 */
-	public $parent_slug;
-
-	/**
-	 * The slug name to refer to this menu by (should be unique for this menu).
-	 *
-	 * @var string Menu slug.
-	 */
-	public $menu_slug;
+	public $menus = array();
 
 	/**
 	 * Default navigation tab.
@@ -90,7 +74,7 @@ class Settings_API {
 	 *
 	 * @var string Settings page.
 	 */
-	public $settings_page;
+	public $settings_page = '';
 
 	/**
 	 * Admin Footer Text. Displayed at the bottom of the plugin settings page.
@@ -199,8 +183,7 @@ class Settings_API {
 	 * @param array|string $args {
 	 *     Array or string of arguments. Default is blank array.
 	 *
-	 *     @type string $menu_type         Admin menu type. See add_custom_menu_page() for options.
-	 *     @type string $menu_parent       Parent menu slug.
+	 *     @type array  $menus             Array of admin menus. See add_custom_menu_page() for more info.
 	 *     @type string $menu_slug         Admin menu slug.
 	 *     @type string $default_tab       Default tab.
 	 *     @type string $admin_footer_text Admin footer text.
@@ -211,8 +194,7 @@ class Settings_API {
 	public function set_props( $args ) {
 
 		$defaults = array(
-			'menu_type'         => 'options',
-			'parent_slug'       => 'options-general.php',
+			'menus'             => array(),
 			'menu_slug'         => '',
 			'default_tab'       => 'general',
 			'admin_footer_text' => '',
@@ -250,8 +232,6 @@ class Settings_API {
 
 		// Args prefixed with an underscore are reserved for internal use.
 		$defaults = array(
-			'page_title'           => '',
-			'menu_title'           => '',
 			'page_header'          => '',
 			'reset_message'        => __( 'Settings have been reset to their default values. Reload this page to view the updated settings.' ),
 			'success_message'      => __( 'Settings updated.' ),
@@ -413,17 +393,12 @@ class Settings_API {
 	 * Add admin menu.
 	 */
 	public function admin_menu() {
-		$menu = array(
-			'type'        => $this->menu_type,
-			'parent_slug' => $this->parent_slug,
-			'page_title'  => $this->translation_strings['page_title'],
-			'menu_title'  => $this->translation_strings['menu_title'],
-			'capability'  => 'manage_options',
-			'menu_slug'   => $this->menu_slug,
-			'function'    => array( $this, 'plugin_settings' ),
-		);
-
-		$this->settings_page = $this->add_custom_menu_page( $menu );
+		foreach ( $this->menus as $menu ) {
+			$menu_page = $this->add_custom_menu_page( $menu );
+			if ( isset( $menu['settings_page'] ) && $menu['settings_page'] ) {
+				$this->settings_page = $menu_page;
+			}
+		}
 
 		// Load the settings contextual help.
 		add_action( 'load-' . $this->settings_page, array( $this, 'settings_help' ) );

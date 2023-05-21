@@ -79,18 +79,17 @@ class Settings {
 		$this->menu_slug    = 'ata_options_page';
 
 		$props = array(
-			'menu_type'         => 'options',
-			'menu_slug'         => $this->menu_slug,
 			'default_tab'       => 'general',
 			'help_sidebar'      => $this->get_help_sidebar(),
 			'help_tabs'         => $this->get_help_tabs(),
 			'admin_footer_text' => $this->get_admin_footer_text(),
+			'menus'             => $this->get_menus(),
 		);
 
 		$args = array(
 			'translation_strings' => $this->get_translation_strings(),
 			'props'               => $props,
-			'settings_sections'   => self::get_settings_sections(),
+			'settings_sections'   => $this->get_settings_sections(),
 			'registered_settings' => $this->get_registered_settings(),
 			'upgraded_settings'   => array(),
 		);
@@ -100,6 +99,7 @@ class Settings {
 		add_action( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 11, 2 );
 		add_filter( 'plugin_action_links_' . plugin_basename( WZ_SNIPPETZ_FILE ), array( $this, 'plugin_actions_links' ) );
 		add_action( 'ata_settings_sanitize', array( $this, 'change_settings_on_save' ), 99 );
+		add_action( 'admin_menu', array( $this, 'redirect_on_save' ) );
 	}
 
 	/**
@@ -111,8 +111,6 @@ class Settings {
 	 */
 	public function get_translation_strings() {
 		$strings = array(
-			'page_title'           => esc_html__( 'WebberZone Snippetz', 'add-to-all' ),
-			'menu_title'           => esc_html__( 'WebberZone Snippetz', 'add-to-all' ),
 			'page_header'          => esc_html__( 'WebberZone Snippetz Settings', 'add-to-all' ),
 			'reset_message'        => esc_html__( 'Settings have been reset to their default values. Reload this page to view the updated settings.', 'add-to-all' ),
 			'success_message'      => esc_html__( 'Settings updated.', 'add-to-all' ),
@@ -130,6 +128,35 @@ class Settings {
 		 * @param array $strings Translation strings.
 		 */
 		return apply_filters( self::$prefix . '_translation_strings', $strings );
+	}
+
+	/**
+	 * Get the admin menus.
+	 *
+	 * @return array Admin menus.
+	 */
+	public function get_menus() {
+		$menus = array();
+		if ( \WebberZone\Snippetz\Util\Helpers::is_snippets_enabled() ) {
+			$menus[] = array(
+				'settings_page' => true,
+				'type'          => 'submenu',
+				'parent_slug'   => 'edit.php?post_type=ata_snippets',
+				'page_title'    => esc_html__( 'WebberZone Snippetz Settings', 'add-to-all' ),
+				'menu_title'    => esc_html__( 'Settings', 'add-to-all' ),
+				'menu_slug'     => $this->menu_slug,
+			);
+		} else {
+			$menus[] = array(
+				'settings_page' => true,
+				'type'          => 'submenu',
+				'parent_slug'   => 'options-general.php',
+				'page_title'    => esc_html__( 'WebberZone Snippetz Settings', 'add-to-all' ),
+				'menu_title'    => esc_html__( 'WebberZone Snippetz', 'add-to-all' ),
+				'menu_slug'     => $this->menu_slug,
+			);
+		}
+		return $menus;
 	}
 
 	/**
@@ -830,16 +857,16 @@ class Settings {
 	public function get_help_sidebar() {
 
 		$help_sidebar =
-			/* translators: 1: Plugin support site link. */
-			'<p>' . sprintf( __( 'For more information or how to get support visit the <a href="%s">support site</a>.', 'add-to-all' ), esc_url( 'https://webberzone.com/support/' ) ) . '</p>' .
-			/* translators: 1: WordPress.org support forums link. */
-				'<p>' . sprintf( __( 'Support queries should be posted in the <a href="%s">WordPress.org support forums</a>.', 'add-to-all' ), esc_url( 'https://wordpress.org/support/plugin/add-to-all' ) ) . '</p>' .
-			'<p>' . sprintf(
-				/* translators: 1: Github issues link, 2: Github plugin page link. */
-				__( '<a href="%1$s">Post an issue</a> on <a href="%2$s">GitHub</a> (bug reports only).', 'add-to-all' ),
-				esc_url( 'https://github.com/ajaydsouza/add-to-all/issues' ),
-				esc_url( 'https://github.com/ajaydsouza/add-to-all' )
-			) . '</p>';
+		/* translators: 1: Plugin support site link. */
+		'<p>' . sprintf( __( 'For more information or how to get support visit the <a href="%s">support site</a>.', 'add-to-all' ), esc_url( 'https://webberzone.com/support/' ) ) . '</p>' .
+		/* translators: 1: WordPress.org support forums link. */
+			'<p>' . sprintf( __( 'Support queries should be posted in the <a href="%s">WordPress.org support forums</a>.', 'add-to-all' ), esc_url( 'https://wordpress.org/support/plugin/add-to-all' ) ) . '</p>' .
+		'<p>' . sprintf(
+			/* translators: 1: Github issues link, 2: Github plugin page link. */
+			__( '<a href="%1$s">Post an issue</a> on <a href="%2$s">GitHub</a> (bug reports only).', 'add-to-all' ),
+			esc_url( 'https://github.com/ajaydsouza/add-to-all/issues' ),
+			esc_url( 'https://github.com/ajaydsouza/add-to-all' )
+		) . '</p>';
 
 		/**
 		 * Filter to modify the help sidebar content.
@@ -860,6 +887,13 @@ class Settings {
 
 		$help_tabs = array(
 			array(
+				'id'      => 'ata-settings-general-help',
+				'title'   => esc_html__( 'General', 'add-to-all' ),
+				'content' =>
+					'<p><strong>' . esc_html__( 'This screen provides general settings. Enable/disable the Snippets Manager and set the global priority of snippets.', 'add-to-all' ) . '</strong></p>' .
+					'<p>' . esc_html__( 'You must click the Save Changes button at the bottom of the screen for new settings to take effect.', 'add-to-all' ) . '</p>',
+			),
+			array(
 				'id'      => 'ata-settings-third-party-help',
 				'title'   => esc_html__( 'Third Party', 'add-to-all' ),
 				'content' =>
@@ -867,10 +901,10 @@ class Settings {
 					'<p>' . sprintf(
 						/* translators: 1: Google Analystics help article. */
 						esc_html__( 'Google Analytics tracking can be found by visiting this %s', 'add-to-all' ),
-						'<a href="https://support.google.com/analytics/answer/1008080?hl=en" target="_blank">' . esc_html__( 'article', 'add-to-all' ) . '</a>.'
+						'<a href="https://support.google.com/analytics/topic/9303319" target="_blank">' . esc_html__( 'article', 'add-to-all' ) . '</a>.'
 					) .
-					'</p>',
-				'<p>' . esc_html__( 'You must click the Save Changes button at the bottom of the screen for new settings to take effect.', 'add-to-all' ) . '</p>',
+					'</p>' .
+					'<p>' . esc_html__( 'You must click the Save Changes button at the bottom of the screen for new settings to take effect.', 'add-to-all' ) . '</p>',
 			),
 			array(
 				'id'      => 'ata-settings-header-help',
@@ -881,8 +915,8 @@ class Settings {
 					'<p>' . esc_html__( 'You must click the Save Changes button at the bottom of the screen for new settings to take effect.', 'add-to-all' ) . '</p>',
 			),
 			array(
-				'id'      => 'ata-settings-content-help',
-				'title'   => esc_html__( 'Content', 'add-to-all' ),
+				'id'      => 'ata-settings-body-help',
+				'title'   => esc_html__( 'Body', 'add-to-all' ),
 				'content' =>
 					'<p><strong>' . esc_html__( 'This screen allows you to control what content is added to the content of posts, pages and custom post types.', 'add-to-all' ) . '</strong></p>' .
 					'<p>' . esc_html__( 'You can set the priority of the filter and choose if you want this to be displayed on either all content (including archives) or just single posts/pages.', 'add-to-all' ) . '</p>' .
@@ -944,4 +978,21 @@ class Settings {
 		return $settings;
 	}
 
+	/**
+	 * Redirect to the correct settings page on save.
+	 *
+	 * @since 2.0.0
+	 */
+	public function redirect_on_save() {
+		if ( isset( $_GET['page'] ) && $_GET['page'] === $this->menu_slug && isset( $_GET['settings-updated'] ) && true === (bool) $_GET['settings-updated'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+			if ( \WebberZone\Snippetz\Util\Helpers::is_snippets_enabled() ) {
+				$location = admin_url( "/edit.php?post_type=ata_snippets&page={$this->menu_slug}" );
+			} else {
+				$location = admin_url( "/options-general.php?page={$this->menu_slug}" );
+			}
+			wp_safe_redirect( $location );
+			exit;
+		}
+	}
 }

@@ -115,6 +115,7 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 * Enhancements:
 	* Google Analytics code has been updated to GA4. Please update your [Google Tag ID](https://support.google.com/analytics/answer/9539598?hl=en)
 	* *uninstall.php* now uses `get_sites()` function
+	* Settings menu link is under Snippetz menu if enabled and under Settings menu when disabled
 
 * Deprecated:
 	* Support for Tynt has been removed. If you are using Tynt, you will need to directly use the full code in the *Footer* tab.
