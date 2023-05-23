@@ -48,7 +48,7 @@ class Shortcodes {
 		);
 
 		$id      = absint( $atts['id'] );
-		$snippet = ata_get_snippet( $id );
+		$snippet = Functions::get_snippet( $id );
 
 		$content = is_object( $snippet ) ? $snippet->post_content : $snippet;
 
