@@ -184,7 +184,6 @@ class Settings_API {
 	 *     Array or string of arguments. Default is blank array.
 	 *
 	 *     @type array  $menus             Array of admin menus. See add_custom_menu_page() for more info.
-	 *     @type string $menu_slug         Admin menu slug.
 	 *     @type string $default_tab       Default tab.
 	 *     @type string $admin_footer_text Admin footer text.
 	 *     @type string $help_sidebar      Help sidebar.
@@ -195,7 +194,6 @@ class Settings_API {
 
 		$defaults = array(
 			'menus'             => array(),
-			'menu_slug'         => '',
 			'default_tab'       => 'general',
 			'admin_footer_text' => '',
 			'help_sidebar'      => '',
