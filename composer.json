@@ -1,8 +1,10 @@
 {
     "name": "webberzone/add-to-all",
-    "description": "A powerful plugin that will allow you to add custom code or CSS to your header, footer, sidebar, content or feed.",
+    "description": "The ultimate snippet manager for WordPress to create and manage custom HTML, CSS or JS code snippets.",
     "type": "wordpress-plugin",
     "keywords": [
+        "webberzone",
+        "snippetz",
         "add-to-all",
         "header",
         "footer",
@@ -14,7 +16,6 @@
     "authors": [
         {
             "name": "WebberZone",
-            "email": "plugins@webberzone.com",
             "role": "Developer"
         }
     ],
