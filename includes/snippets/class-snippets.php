@@ -102,21 +102,21 @@ class Snippets {
 	public function register_post_type() {
 
 		$labels  = array(
-			'name'                  => _x( 'Snippets', 'Post Type General Name', 'add-to-all' ),
+			'name'                  => _x( 'Snippetz', 'Post Type General Name', 'add-to-all' ),
 			'singular_name'         => _x( 'Snippet', 'Post Type Singular Name', 'add-to-all' ),
 			'menu_name'             => __( 'Snippetz', 'add-to-all' ),
 			'name_admin_bar'        => __( 'Snippet', 'add-to-all' ),
 			'archives'              => __( 'Snippet Archives', 'add-to-all' ),
 			'attributes'            => __( 'Snippet Attributes', 'add-to-all' ),
 			'parent_item_colon'     => __( 'Parent Snippet:', 'add-to-all' ),
-			'all_items'             => __( 'All Snippets', 'add-to-all' ),
+			'all_items'             => __( 'All Snippetz', 'add-to-all' ),
 			'add_new_item'          => __( 'Add New Snippet', 'add-to-all' ),
 			'add_new'               => __( 'Add New Snippet', 'add-to-all' ),
 			'new_item'              => __( 'New Snippet', 'add-to-all' ),
 			'edit_item'             => __( 'Edit Snippet', 'add-to-all' ),
 			'update_item'           => __( 'Update Snippet', 'add-to-all' ),
 			'view_item'             => __( 'View Snippet', 'add-to-all' ),
-			'view_items'            => __( 'View Snippets', 'add-to-all' ),
+			'view_items'            => __( 'View Snippetz', 'add-to-all' ),
 			'search_items'          => __( 'Search Snippet', 'add-to-all' ),
 			'not_found'             => __( 'Not found', 'add-to-all' ),
 			'not_found_in_trash'    => __( 'Not found in Trash', 'add-to-all' ),
@@ -126,8 +126,8 @@ class Snippets {
 			'use_featured_image'    => __( 'Use as featured image', 'add-to-all' ),
 			'insert_into_item'      => __( 'Insert into snippet', 'add-to-all' ),
 			'uploaded_to_this_item' => __( 'Uploaded to this snippet', 'add-to-all' ),
-			'items_list'            => __( 'Snippets list', 'add-to-all' ),
-			'items_list_navigation' => __( 'Snippets list navigation', 'add-to-all' ),
+			'items_list'            => __( 'Snippetz list', 'add-to-all' ),
+			'items_list_navigation' => __( 'Snippetz list navigation', 'add-to-all' ),
 			'filter_items_list'     => __( 'Filter snippets list', 'add-to-all' ),
 		);
 		$rewrite = array(
@@ -138,7 +138,7 @@ class Snippets {
 		);
 		$args    = array(
 			'label'               => __( 'Snippet', 'add-to-all' ),
-			'description'         => __( 'WebberZone Snippetz Snippets', 'add-to-all' ),
+			'description'         => __( 'WebberZone Snippetz', 'add-to-all' ),
 			'labels'              => $labels,
 			'supports'            => array( 'title', 'editor', 'revisions', 'custom-fields' ),
 			'taxonomies'          => array( 'ata_snippets_category' ),
