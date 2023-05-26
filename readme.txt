@@ -137,4 +137,4 @@ Check changelog.txt for older entries the [Releases page on Github](https://gith
 == Upgrade Notice ==
 
 = 2.0.0 =
-Multiple new features; Check out the Changelog for more details.
+Major release; Check out the Changelog for more details.
