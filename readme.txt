@@ -108,8 +108,8 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 * New feature:
 	* Add Meta verification. Read how to verify your domain in the [Meta Business Help Centre](https://www.facebook.com/business/help/321167023127050)
-	* Snippet priority: New global option to set the priority of when snippets are added to the content. Additionally, the snippet screen allows to set a priority amongst other snippets that add to content
-	* Snippet type: New dropdown to select if the snippet is a CSS, JS or HTML snippet. If you select JS or CSS, then the `script` and `style` tags are automatically added
+	* Snippet priority: New global option to set the priority of when snippets are added to the content. Additionally, the snippet screen allows settings a priority amongst other snippets that add to the content
+	* Snippet Type: New dropdown to select if the snippet is a CSS, JS or HTML snippet. If you select JS or CSS, then the `script` and `style` tags are automatically added
 	* New option to add content to the `wp_body_open()` tag
 
 * Enhancements:
