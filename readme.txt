@@ -102,6 +102,11 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 == Changelog ==
 
+= 2.0.1 =
+
+* Bug fixes:
+	* "Exclude display on these post IDs" stopped working
+
 = 2.0.0 =
 
 *Add to All* plugin has now been rebranded to *WebberZone Snippetz*. The plugin code has also been rewritten to use OOP.

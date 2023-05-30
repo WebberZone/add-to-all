@@ -14,7 +14,7 @@
  *
  * @wordpress-plugin
  * Plugin Name: WebberZone Snippetz
- * Version:     2.0.0
+ * Version:     2.0.1-beta1
  * Plugin URI:  https://webberzone.com/plugins/add-to-all/
  * Description: A simple yet powerful plugin that allows you to insert any code snippet or script into WordPress.
  * Author:      Ajay D'Souza

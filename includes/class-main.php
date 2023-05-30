@@ -245,10 +245,10 @@ final class Main {
 	public function the_content( $content ) {
 		global $post;
 
-		$exclude_on_post_ids = explode( ',', ata_get_option( 'exclude_on_post_ids' ) );
+		$exclude_on_post_ids = array_map( 'absint', explode( ',', ata_get_option( 'exclude_on_post_ids' ) ) );
 
 		if ( isset( $post ) ) {
-			if ( in_array( $post->ID, $exclude_on_post_ids, true ) ) {
+			if ( in_array( (int) $post->ID, $exclude_on_post_ids, true ) ) {
 				return $content; // Exit without adding content.
 			}
 		}
