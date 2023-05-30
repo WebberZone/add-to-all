@@ -276,7 +276,8 @@ final class Main {
 			if ( ata_get_option( 'content_add_html_after_single' ) ) {
 				$str_after .= $this->get_option_and_filter( 'content_html_after_single' );
 			}
-		} elseif ( is_single() ) {
+		}
+		if ( is_single() ) {
 			if ( ata_get_option( 'content_add_html_before_post' ) ) {
 				$str_before .= $this->get_option_and_filter( 'content_html_before_post' );
 			}
@@ -284,7 +285,8 @@ final class Main {
 			if ( ata_get_option( 'content_add_html_after_post' ) ) {
 				$str_after .= $this->get_option_and_filter( 'content_html_after_post' );
 			}
-		} elseif ( is_page() ) {
+		}
+		if ( is_page() ) {
 			if ( ata_get_option( 'content_add_html_before_page' ) ) {
 				$str_before .= $this->get_option_and_filter( 'content_html_before_page' );
 			}
@@ -292,7 +294,8 @@ final class Main {
 			if ( ata_get_option( 'content_add_html_after_page' ) ) {
 				$str_after .= $this->get_option_and_filter( 'content_html_after_page' );
 			}
-		} elseif ( is_home() || is_archive() ) {
+		}
+		if ( is_home() || is_archive() ) {
 			if ( ata_get_option( 'content_add_html_before' ) ) {
 				$str_before .= $this->get_option_and_filter( 'content_html_before' );
 			}
