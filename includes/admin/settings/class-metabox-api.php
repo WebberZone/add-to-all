@@ -124,7 +124,7 @@ class Metabox_API {
 	 * @param string $hook The current admin page.
 	 */
 	public function admin_enqueue_scripts( $hook ) {
-		if ( in_array( $hook, array( 'post.php', 'post-new.php' ), true ) || get_current_screen()->post_type === $this->post_type ) {
+		if ( in_array( $hook, array( 'post.php', 'post-new.php' ), true ) && get_current_screen()->post_type === $this->post_type ) {
 			self::enqueue_scripts_styles();
 		}
 	}
