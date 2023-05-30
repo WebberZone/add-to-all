@@ -290,6 +290,7 @@ class Settings {
 			'ga_uacct'                     => array(
 				'id'      => 'ga_uacct',
 				'name'    => esc_html__( 'Tracking ID', 'add-to-all' ),
+				/* translators: 1: Google Tag ID link. */
 				'desc'    => sprintf( esc_html__( 'Find your %s', 'add-to-all' ), '<a href="https://www.google.com/webmasters/verification/verification" target="_blank">' . esc_html__( 'Google Tag ID', 'add-to-all' ) . '</a>' ),
 				'type'    => 'text',
 				'options' => '',
@@ -818,9 +819,10 @@ class Settings {
 	 */
 	public function plugin_actions_links( $links ) {
 
+		$location = $this->get_settings_location();
 		return array_merge(
 			array(
-				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->menu_slug ) . '">' . esc_html__( 'Settings', 'add-to-all' ) . '</a>',
+				'settings' => '<a href="' . $location . '">' . esc_html__( 'Settings', 'add-to-all' ) . '</a>',
 			),
 			$links
 		);
@@ -986,13 +988,23 @@ class Settings {
 	public function redirect_on_save() {
 		if ( isset( $_GET['page'] ) && $_GET['page'] === $this->menu_slug && isset( $_GET['settings-updated'] ) && true === (bool) $_GET['settings-updated'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-			if ( \WebberZone\Snippetz\Util\Helpers::is_snippets_enabled() ) {
-				$location = admin_url( "/edit.php?post_type=ata_snippets&page={$this->menu_slug}" );
-			} else {
-				$location = admin_url( "/options-general.php?page={$this->menu_slug}" );
-			}
+			$location = $this->get_settings_location();
 			wp_safe_redirect( $location );
 			exit;
 		}
+	}
+
+	/**
+	 * Get link of the Settings page.
+	 *
+	 * @since 2.0.1
+	 */
+	public function get_settings_location() {
+		if ( \WebberZone\Snippetz\Util\Helpers::is_snippets_enabled() ) {
+			$location = admin_url( "/edit.php?post_type=ata_snippets&page={$this->menu_slug}" );
+		} else {
+			$location = admin_url( "/options-general.php?page={$this->menu_slug}" );
+		}
+		return $location;
 	}
 }

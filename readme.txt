@@ -106,6 +106,7 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 * Bug fixes:
 	* "Exclude display on these post IDs" stopped working
+	* Fixed link to Settings page
 
 = 2.0.0 =
 
