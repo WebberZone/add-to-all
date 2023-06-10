@@ -2,9 +2,21 @@
 
 This is an archive of older changelog entries. Most recent entries are maintained in readme.txt
 
+= 1.8.0 =
+
+Release post: [https://webberzone.com/announcements/add-to-all-v1-8-0/](https://webberzone.com/announcements/add-to-all-v1-8-0/)
+
+* New feature:
+	* New constant `ATA_DISABLE_SNIPPETS` can be added to your wp-config.php to disable snippets. Perfect for WordPress multisite
+	* New placeholder `%updated_time%` to display the updated date
+	* New feature to display the estimated reading time. You can use `%reading_time%` in the Settings page. Alternatively use the shortcode `[ata_reading_time]` to display the reading time
+
+* Enhancements/modifications:
+	* Upgraded Settings_API to v2
+
 = 1.7.3 =
 
-Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzone.com/blog/add-to-all-v1-7-0/)
+Release post: [https://webberzone.com/announcements/add-to-all-v1-7-0/](https://webberzone.com/announcements/add-to-all-v1-7-0/)
 
 * Bug fixes:
 	* Feed copyright placeholders were not processed
@@ -16,7 +28,7 @@ Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzon
 
 = 1.7.1 =
 
-Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzone.com/blog/add-to-all-v1-7-0/)
+Release post: [https://webberzone.com/announcements/add-to-all-v1-7-0/](https://webberzone.com/announcements/add-to-all-v1-7-0/)
 
 * Bug fixes:
 	* Process shortcodes didn't work
@@ -24,13 +36,13 @@ Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzon
 
 = 1.7.0 =
 
-Release post: [https://webberzone.com/blog/add-to-all-v1-7-0/](https://webberzone.com/blog/add-to-all-v1-7-0/)
+Release post: [https://webberzone.com/announcements/add-to-all-v1-7-0/](https://webberzone.com/announcements/add-to-all-v1-7-0/)
 
 * Features:
 	* New Settings API class to control the plugins settings
 	* New Snippets Manager - create custom snippets that can be added to Header, Footer and Content based on inclusion criteria= 1.6.0 =
 
-Release post: [https://webberzone.com/blog/add-to-all-v1-6-0/](https://webberzone.com/blog/add-to-all-v1-6-0/)
+Release post: [https://webberzone.com/announcements/add-to-all-v1-6-0/](https://webberzone.com/announcements/add-to-all-v1-6-0/)
 
 * Features:
 	* Added CodeMirror highlighting for the HTML and CSS fields in the settings page

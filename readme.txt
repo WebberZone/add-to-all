@@ -2,7 +2,7 @@
 Tags: snippets, html, css, javascript, code, header, footer, content, body, feed
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 Requires at least: 5.6
 Tested up to: 6.2
 Requires PHP: 7.3
@@ -128,21 +128,9 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 * Deprecated:
 	* Support for Tynt has been removed. If you are using Tynt, you will need to directly use the full code in the *Footer* tab.
 
-= 1.8.0 =
-
-Release post: [https://webberzone.com/blog/add-to-all-v1-8-0/](https://webberzone.com/blog/add-to-all-v1-8-0/)
-
-* New feature:
-	* New constant `ATA_DISABLE_SNIPPETS` can be added to your wp-config.php to disable snippets. Perfect for WordPress multisite
-	* New placeholder `%updated_time%` to display the updated date
-	* New feature to display the estimated reading time. You can use `%reading_time%` in the Settings page. Alternatively use the shortcode `[ata_reading_time]` to display the reading time
-
-* Enhancements/modifications:
-	* Upgraded Settings_API to v2
-
 Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 
 == Upgrade Notice ==
 
-= 2.0.0 =
+= 2.0.1 =
 Major release; Check out the Changelog for more details.
