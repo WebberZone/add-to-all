@@ -87,9 +87,9 @@ jobs:
       - name: Determine supported PHPUnit version
         id: set_phpunit
         run: |
-          if [[ "${{ matrix.php }}" > "8.0" ]]; then
-            echo '::set-output name=PHPUNIT::9.*'
-          else
+          if [[ "${{ matrix.php }}" > "8.1" ]]; then
+            echo '::set-output name=PHPUNIT::10.*'
+          elseif [[ "${{ matrix.php }}" > "8.0" ]]; then
             echo '::set-output name=PHPUNIT::5.7.*||6.*||7.5.*'
           fi
 
