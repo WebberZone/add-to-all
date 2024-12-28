@@ -1,0 +1,13 @@
+includes:
+	- phpstan-baseline.neon
+parameters:
+    level: 5
+    scanFiles:
+        - add-to-all.php
+    scanDirectories:
+        - includes
+    paths:
+        - add-to-all.php
+        - uninstall.php
+        - includes/
+    ignoreErrors:

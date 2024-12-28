@@ -25,7 +25,7 @@ class Snippets {
 	/**
 	 * Holds the WP_Post object.
 	 *
-	 * @var WP_Post Post object.
+	 * @var \WP_Post Post object.
 	 */
 	protected $post;
 
@@ -147,7 +147,7 @@ class Snippets {
 			'show_ui'             => true,
 			'show_in_menu'        => true,
 			'menu_position'       => 5,
-			'menu_icon'           => 'dashicons-format-aside',
+			'menu_icon'           => 'dashicons-editor-code',
 			'show_in_admin_bar'   => true,
 			'show_in_nav_menus'   => true,
 			'can_export'          => true,
@@ -275,7 +275,7 @@ class Snippets {
 	/**
 	 * Add media buttons.
 	 *
-	 * @param WP_Post $post Post object.
+	 * @param \WP_Post $post Post object.
 	 */
 	public function media_buttons( $post ) {
 		if ( get_post_type( $post ) === $this->post_type ) {
@@ -287,6 +287,7 @@ class Snippets {
 				esc_attr( $styles['color'] )
 			);
 			printf(
+				/* translators: 1: snippet type, 2: tag */
 				esc_html__( 'This is a %1$s snippet. You do not need to add %2$s tags in your code.', 'add-to-all' ),
 				'<strong>' . esc_html( strtoupper( $styles['type'] ) ) . '</strong>',
 				'<strong>' . esc_html( $styles['tag'] ) . '</strong>'
@@ -303,7 +304,7 @@ class Snippets {
 	 * Edit media strings.
 	 *
 	 * @param string[] $strings Array of media view strings keyed by the name they'll be referenced by in JavaScript.
-	 * @param  WP_Post  $post    Post object.
+	 * @param \WP_Post $post    Post object.
 	 * @return string[] Updated strings array.
 	 */
 	public function media_view_strings( $strings, $post ) {
@@ -321,7 +322,7 @@ class Snippets {
 	/**
 	 * Get snippet type.
 	 *
-	 * @param WP_Post $snippet Snippet object.
+	 * @param \WP_Post $snippet Snippet object.
 	 * @return string Snippet type.
 	 */
 	public function get_snippet_type( $snippet ) {

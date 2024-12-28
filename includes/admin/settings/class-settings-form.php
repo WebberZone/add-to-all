@@ -2,9 +2,6 @@
 /**
  * Generates the settings form.
  *
- * @link  https://webberzone.com
- * @since 2.0.0
- *
  * @package WebberZone\Snippetz
  */
 
@@ -17,6 +14,8 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Generates the settings form.
+ *
+ * @version 2.5.0
  */
 class Settings_Form {
 
@@ -81,7 +80,7 @@ class Settings_Form {
 		 * After Settings Output filter
 		 *
 		 * @param string $desc Description of the field.
-		 * @param array Arguments array.
+		 * @param array  $args Arguments array.
 		 */
 		$desc = apply_filters( $this->prefix . '_setting_field_description', $desc, $args );
 		return $desc;
@@ -131,7 +130,7 @@ class Settings_Form {
 		 * After Settings Output filter
 		 *
 		 * @param string $html HTML string.
-		 * @param array Arguments array.
+		 * @param array  $args Arguments array.
 		 */
 		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
@@ -156,10 +155,10 @@ class Settings_Form {
 	public function callback_text( $args ) {
 
 		$value       = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
-		$size        = sanitize_html_class( ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular' );
+		$size        = sanitize_html_class( isset( $args['size'] ) ? $args['size'] : 'regular' );
 		$class       = sanitize_html_class( $args['field_class'] );
 		$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . $args['placeholder'] . '"';
-		$disabled    = ! empty( $args['disabled'] ) ? ' disabled="disabled"' : '';
+		$disabled    = ( ! empty( $args['disabled'] ) || $args['pro'] ) ? ' disabled="disabled"' : '';
 		$readonly    = ( isset( $args['readonly'] ) && true === $args['readonly'] ) ? ' readonly="readonly"' : '';
 		$attributes  = $disabled . $readonly;
 
@@ -235,15 +234,21 @@ class Settings_Form {
 	 */
 	public function callback_textarea( $args ) {
 
-		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
-		$class = sanitize_html_class( $args['field_class'] );
+		$value       = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
+		$class       = sanitize_html_class( $args['field_class'] );
+		$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . $args['placeholder'] . '"';
+		$disabled    = ( ! empty( $args['disabled'] ) || $args['pro'] ) ? ' disabled="disabled"' : '';
+		$readonly    = ( isset( $args['readonly'] ) && true === $args['readonly'] ) ? ' readonly="readonly"' : '';
+		$attributes  = $disabled . $readonly;
 
 		$html  = sprintf(
-			'<textarea class="%4$s" cols="50" rows="5" id="%1$s[%2$s]" name="%1$s[%2$s]">%3$s</textarea>',
+			'<textarea class="%4$s" cols="50" rows="5" id="%1$s[%2$s]" name="%1$s[%2$s]" %5$s %6$s>%3$s</textarea>',
 			$this->settings_key,
 			sanitize_key( $args['id'] ),
 			esc_textarea( stripslashes( $value ) ),
-			'large-text ' . $class
+			'large-text ' . $class,
+			$attributes,
+			$placeholder
 		);
 		$html .= $this->get_field_description( $args );
 
@@ -279,13 +284,24 @@ class Settings_Form {
 	 */
 	public function callback_checkbox( $args ) {
 
-		$value   = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
-		$checked = ! empty( $value ) ? checked( 1, $value, false ) : '';
-		$default = isset( $args['options'] ) ? (int) $args['options'] : '';
+		$value    = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
+		$checked  = ! empty( $value ) ? checked( 1, $value, false ) : '';
+		$default  = isset( $args['options'] ) ? (int) $args['options'] : '';
+		$disabled = ( ! empty( $args['disabled'] ) || $args['pro'] ) ? ' disabled="disabled"' : '';
 
-		$html  = sprintf( '<input type="hidden" name="%1$s[%2$s]" value="-1" />', $this->settings_key, sanitize_key( $args['id'] ) );
-		$html .= sprintf( '<input type="checkbox" id="%1$s[%2$s]" name="%1$s[%2$s]" value="1" %3$s />', $this->settings_key, sanitize_key( $args['id'] ), $checked );
-		$html .= ( (bool) $value !== (bool) $default ) ? '<em style="color:orange">' . $this->checkbox_modified_text . '</em>' : '';
+		$html  = sprintf(
+			'<input type="hidden" name="%1$s[%2$s]" value="-1" />',
+			$this->settings_key,
+			sanitize_key( $args['id'] )
+		);
+		$html .= sprintf(
+			'<input type="checkbox" id="%1$s[%2$s]" name="%1$s[%2$s]" value="1" %3$s %4$s />',
+			$this->settings_key,
+			sanitize_key( $args['id'] ),
+			$checked,
+			$disabled
+		);
+		$html .= ( (bool) $value !== (bool) $default ) ? '<em style="color:#9B0800">' . $this->checkbox_modified_text . '</em>' : '';
 		$html .= $this->get_field_description( $args );
 
 		/** This filter has been defined in class-settings-api.php */
@@ -306,7 +322,7 @@ class Settings_Form {
 		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
 
 		if ( ! empty( $args['options'] ) ) {
-			$html .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="-1" />', $this->settings_key, $args['id'] );
+			$html .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="-1" />', $this->settings_key, sanitize_key( $args['id'] ) );
 
 			foreach ( $args['options'] as $key => $option ) {
 				if ( isset( $value[ $key ] ) ) {
@@ -350,15 +366,17 @@ class Settings_Form {
 	public function callback_radio( $args ) {
 		$html = '';
 
-		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['default'] );
+		$value    = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['default'] );
+		$disabled = ( ! empty( $args['disabled'] ) || $args['pro'] ) ? ' disabled="disabled"' : '';
 
 		foreach ( $args['options'] as $key => $option ) {
 			$html .= sprintf(
-				'<input name="%1$s[%2$s]" id="%1$s[%2$s][%3$s]" type="radio" value="%3$s" %4$s /> ',
+				'<input name="%1$s[%2$s]" id="%1$s[%2$s][%3$s]" type="radio" value="%3$s" %4$s %5$s /> ',
 				$this->settings_key,
 				sanitize_key( $args['id'] ),
 				$key,
-				checked( $value, $key, false )
+				checked( $value, $key, false ),
+				$disabled
 			);
 			$html .= sprintf(
 				'<label for="%1$s[%2$s][%3$s]">%4$s</label> <br />',
@@ -424,6 +442,17 @@ class Settings_Form {
 	public function callback_thumbsizes( $args ) {
 		$html = '';
 
+		$thumb_size = $this->prefix . '_thumbnail';
+
+		if ( ! isset( $args['options'][ $thumb_size ] ) ) {
+			$args['options'][ $thumb_size ] = array(
+				'name'   => $thumb_size,
+				'width'  => call_user_func_array( $this->prefix . '_get_option', array( 'thumb_width', 150 ) ),
+				'height' => call_user_func_array( $this->prefix . '_get_option', array( 'thumb_height', 150 ) ),
+				'crop'   => call_user_func_array( $this->prefix . '_get_option', array( 'thumb_crop', true ) ),
+			);
+		}
+
 		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['default'] );
 
 		foreach ( $args['options'] as $name => $option ) {
@@ -464,19 +493,21 @@ class Settings_Form {
 		$max         = isset( $args['max'] ) ? intval( $args['max'] ) : 999999;
 		$min         = isset( $args['min'] ) ? intval( $args['min'] ) : 0;
 		$step        = isset( $args['step'] ) ? intval( $args['step'] ) : 1;
-		$size        = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
+		$size        = isset( $args['size'] ) ? $args['size'] : 'regular';
 		$placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . esc_attr( $args['placeholder'] ) . '"';
+		$disabled    = ( ! empty( $args['disabled'] ) || $args['pro'] ) ? ' disabled="disabled"' : '';
 
 		$html  = sprintf(
-			'<input type="number" step="%1$s" max="%2$s" min="%3$s" class="%4$s" id="%8$s[%5$s]" name="%8$s[%5$s]" value="%6$s" %7$s />',
-			esc_attr( $step ),
-			esc_attr( $max ),
-			esc_attr( $min ),
+			'<input type="number" step="%1$s" max="%2$s" min="%3$s" class="%4$s" id="%8$s[%5$s]" name="%8$s[%5$s]" value="%6$s" %7$s %9$s />',
+			esc_attr( (string) $step ),
+			esc_attr( (string) $max ),
+			esc_attr( (string) $min ),
 			sanitize_html_class( $size ) . '-text',
 			sanitize_key( $args['id'] ),
 			esc_attr( stripslashes( $value ) ),
 			$placeholder,
-			$this->settings_key
+			$this->settings_key,
+			$disabled
 		);
 		$html .= $this->get_field_description( $args );
 
@@ -501,7 +532,12 @@ class Settings_Form {
 			$chosen = '';
 		}
 
-		$html = sprintf( '<select id="%1$s[%2$s]" name="%1$s[%2$s]" %2$s />', $this->settings_key, sanitize_key( $args['id'] ), $chosen );
+		$html = sprintf(
+			'<select id="%1$s[%2$s]" name="%1$s[%2$s]" %3$s />',
+			$this->settings_key,
+			sanitize_key( $args['id'] ),
+			$chosen
+		);
 
 		foreach ( $args['options'] as $option => $name ) {
 			$html .= sprintf( '<option value="%1$s" %2$s>%3$s</option>', sanitize_key( $option ), selected( $option, $value, false ), $name );
@@ -532,23 +568,27 @@ class Settings_Form {
 			$post_types = wp_parse_list( $options );
 		}
 
-		$wp_post_types   = get_post_types(
+		$wp_post_types = get_post_types(
 			array(
 				'public' => true,
-			)
+			),
+			'objects'
 		);
-		$posts_types_inc = array_intersect( $wp_post_types, $post_types );
+
+		$posts_types_inc = array_intersect( wp_list_pluck( $wp_post_types, 'name' ), $post_types );
+
+		$html .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="-1" />', $this->settings_key, sanitize_key( $args['id'] ) );
 
 		foreach ( $wp_post_types as $wp_post_type ) {
 
 			$html .= sprintf(
-				'<input name="%4$s[%1$s][%2$s]" id="%4$s[%1$s][%2$s]" type="checkbox" value="%2$s" %3$s /> ',
+				'<label for="%4$s[%1$s][%2$s]"><input name="%4$s[%1$s][%2$s]" id="%4$s[%1$s][%2$s]" type="checkbox" value="%2$s" %3$s /> %5$s</label><br />',
 				sanitize_key( $args['id'] ),
-				esc_attr( $wp_post_type ),
-				checked( true, in_array( $wp_post_type, $posts_types_inc, true ), false ),
-				$this->settings_key
+				esc_attr( $wp_post_type->name ),
+				checked( true, in_array( $wp_post_type->name, $posts_types_inc, true ), false ),
+				$this->settings_key,
+				$wp_post_type->label
 			);
-			$html .= sprintf( '<label for="%3$s[%1$s][%2$s]">%2$s</label> <br />', sanitize_key( $args['id'] ), $wp_post_type, $this->settings_key );
 
 		}
 
@@ -587,21 +627,17 @@ class Settings_Form {
 
 		$taxonomies_inc = array_intersect( wp_list_pluck( (array) $wp_taxonomies, 'name' ), $taxonomies );
 
+		$html .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="-1" />', $this->settings_key, sanitize_key( $args['id'] ) );
+
 		foreach ( $wp_taxonomies as $wp_taxonomy ) {
 
 			$html .= sprintf(
-				'<input name="%4$s[%1$s][%2$s]" id="%4$s[%1$s][%2$s]" type="checkbox" value="%2$s" %3$s /> ',
+				'<label for="%4$s[%1$s][%2$s]"><input name="%4$s[%1$s][%2$s]" id="%4$s[%1$s][%2$s]" type="checkbox" value="%2$s" %3$s /> %5$s (%2$s)</label><br />',
 				sanitize_key( $args['id'] ),
 				esc_attr( $wp_taxonomy->name ),
 				checked( true, in_array( $wp_taxonomy->name, $taxonomies_inc, true ), false ),
-				$this->settings_key
-			);
-			$html .= sprintf(
-				'<label for="%4$s[%1$s][%2$s]">%3$s (%2$s)</label> <br />',
-				sanitize_key( $args['id'] ),
-				esc_attr( $wp_taxonomy->name ),
-				$wp_taxonomy->labels->name,
-				$this->settings_key
+				$this->settings_key,
+				$wp_taxonomy->labels->name
 			);
 
 		}
@@ -621,7 +657,7 @@ class Settings_Form {
 	public function callback_wysiwyg( $args ) {
 
 		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
-		$size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : '500px';
+		$size  = isset( $args['size'] ) ? $args['size'] : '500px';
 
 		echo '<div style="max-width: ' . esc_attr( $size ) . ';">';
 
@@ -650,7 +686,7 @@ class Settings_Form {
 	public function callback_file( $args ) {
 
 		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
-		$size  = sanitize_html_class( ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular' );
+		$size  = sanitize_html_class( isset( $args['size'] ) ? $args['size'] : 'regular' );
 		$class = sanitize_html_class( $args['field_class'] );
 		$label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File' );
 
@@ -676,7 +712,7 @@ class Settings_Form {
 	public function callback_password( $args ) {
 
 		$value = isset( $args['value'] ) ? $args['value'] : $this->get_option( $args['id'], $args['options'] );
-		$size  = sanitize_html_class( ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular' );
+		$size  = sanitize_html_class( isset( $args['size'] ) ? $args['size'] : 'regular' );
 		$class = sanitize_html_class( $args['field_class'] );
 
 		$html  = sprintf(
@@ -691,5 +727,4 @@ class Settings_Form {
 		/** This filter has been defined in class-settings-api.php */
 		echo apply_filters( $this->prefix . '_after_setting_output', $html, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
-
 }

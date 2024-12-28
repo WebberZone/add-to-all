@@ -5,9 +5,6 @@
  * Functions to register, read, write and update settings.
  * Portions of this code have been inspired by Easy Digital Downloads, WordPress Settings Sandbox, WordPress Settings API class, etc.
  *
- * @link  https://webberzone.com
- * @since 1.7.0
- *
  * @package WebberZone\Snippetz
  */
 
@@ -21,8 +18,9 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Settings API wrapper class
  *
- * @version 2.2.0
+ * @version 2.5.1
  */
+#[\AllowDynamicProperties]
 class Settings_API {
 
 	/**
@@ -30,7 +28,7 @@ class Settings_API {
 	 *
 	 * @var   string
 	 */
-	const VERSION = '2.2.0';
+	const VERSION = '2.5.1';
 
 	/**
 	 * Settings Key.
@@ -61,6 +59,13 @@ class Settings_API {
 	 * @var array Menus.
 	 */
 	public $menus = array();
+
+	/**
+	 * Menu pages.
+	 *
+	 * @var array Menu pages.
+	 */
+	public $menu_pages = array();
 
 	/**
 	 * Default navigation tab.
@@ -173,7 +178,7 @@ class Settings_API {
 	public function hooks() {
 		add_action( 'admin_menu', array( $this, 'admin_menu' ), 11 );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
-		add_action( 'admin_footer_text', array( $this, 'admin_footer_text' ) );
+		add_filter( 'admin_footer_text', array( $this, 'admin_footer_text' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 	}
 
@@ -286,6 +291,7 @@ class Settings_API {
 	 *          @type string $field_class       CSS class.
 	 *          @type array  $field_attributes  HTML Attributes in the form of attribute => value.
 	 *          @type string $placeholder       Placeholder. Applicable for text and textarea.
+	 *          @type string $sanitize_callback Sanitize callback.
 	 *    }
 	 * }
 	 *                                   }
@@ -313,9 +319,11 @@ class Settings_API {
 	 * Add a menu page to the WordPress admin area.
 	 *
 	 * @param array $menu Array of settings for the menu page.
+	 * @return string Menu page ID
 	 */
 	public function add_custom_menu_page( $menu ) {
-		$defaults = array(
+		$menu_page = '';
+		$defaults  = array(
 
 			// Modes: submenu, management, options, theme, plugins, users, dashboard, posts, media, links, pages, comments.
 			'type'        => 'submenu',
@@ -391,12 +399,17 @@ class Settings_API {
 	 * Add admin menu.
 	 */
 	public function admin_menu() {
+		global ${$this->prefix . '_menu_pages'};
+
 		foreach ( $this->menus as $menu ) {
 			$menu_page = $this->add_custom_menu_page( $menu );
+
+			$this->menu_pages[ $menu['menu_slug'] ] = $menu_page;
 			if ( isset( $menu['settings_page'] ) && $menu['settings_page'] ) {
 				$this->settings_page = $menu_page;
 			}
 		}
+		${$this->prefix . '_menu_pages'} = $this->menu_pages;
 
 		// Load the settings contextual help.
 		add_action( 'load-' . $this->settings_page, array( $this, 'settings_help' ) );
@@ -463,7 +476,7 @@ class Settings_API {
 	}
 
 	/**
-	 * Initialize and registers the settings sections and fileds to WordPress
+	 * Initialize and registers the settings sections and fields to WordPress
 	 *
 	 * Usually this should be called at `admin_init` hook.
 	 *
@@ -490,7 +503,7 @@ class Settings_API {
 
 			add_settings_section(
 				"{$settings_key}_{$section}", // ID used to identify this section and with which to register options.
-				__return_null(), // No title, we will handle this via a separate function.
+				'', // No title, we will handle this via a separate function.
 				'__return_false', // No callback function needed. We'll process this separately.
 				"{$settings_key}_{$section}"  // Page on which these options will be added.
 			);
@@ -514,6 +527,7 @@ class Settings_API {
 						'field_class'      => '',
 						'field_attributes' => '',
 						'placeholder'      => '',
+						'pro'              => false,
 					)
 				);
 
@@ -534,7 +548,14 @@ class Settings_API {
 		}
 
 		// Register the settings into the options table.
-		register_setting( $settings_key, $settings_key, array( $this, 'settings_sanitize' ) );
+		register_setting(
+			$settings_key,
+			$settings_key,
+			array(
+				'sanitize_callback' => array( $this, 'settings_sanitize' ),
+				'show_in_rest'      => true,
+			)
+		);
 	}
 
 	/**
@@ -707,11 +728,11 @@ class Settings_API {
 			if ( ! isset( $input[ $key ] ) ) {
 				unset( $output[ $key ] );
 			}
-		}
 
-		// Delete any settings that are no longer part of our registered settings.
-		if ( array_key_exists( $key, $output ) && ! array_key_exists( $key, $settings_types ) ) {
-			unset( $output[ $key ] );
+			// Delete any settings that are no longer part of our registered settings.
+			if ( array_key_exists( $key, $output ) && ! array_key_exists( $key, $settings_types ) ) {
+				unset( $output[ $key ] );
+			}
 		}
 
 		add_settings_error( $this->prefix . '-notices', '', $this->translation_strings['success_message'], 'updated' );
@@ -730,7 +751,7 @@ class Settings_API {
 	 *
 	 * @param string $key Settings key.
 	 *
-	 * @return string|bool Callback function or false if callback isn't found.
+	 * @return mixed Callback function or false if callback isn't found.
 	 */
 	public function get_sanitize_callback( $key = '' ) {
 		if ( empty( $key ) ) {
@@ -741,21 +762,21 @@ class Settings_API {
 
 		// Iterate over registered fields and see if we can find proper callback.
 		foreach ( $this->registered_settings as $section => $settings ) {
-			foreach ( $settings as $option ) {
-				if ( $option['id'] !== $key ) {
+			foreach ( $settings as $setting ) {
+				if ( $setting['id'] !== $key ) {
 					continue;
 				}
 
 				// Return the callback name.
 				$sanitize_callback = false;
 
-				if ( isset( $option['sanitize_callback'] ) && is_callable( $option['sanitize_callback'] ) ) {
-					$sanitize_callback = $option['sanitize_callback'];
+				if ( isset( $setting['sanitize_callback'] ) && is_callable( $setting['sanitize_callback'] ) ) {
+					$sanitize_callback = $setting['sanitize_callback'];
 					return $sanitize_callback;
 				}
 
-				if ( is_callable( array( $settings_sanitize, 'sanitize_' . $option['type'] . '_field' ) ) ) {
-					$sanitize_callback = array( $settings_sanitize, 'sanitize_' . $option['type'] . '_field' );
+				if ( is_callable( array( $settings_sanitize, 'sanitize_' . $setting['type'] . '_field' ) ) ) {
+					$sanitize_callback = array( $settings_sanitize, 'sanitize_' . $setting['type'] . '_field' );
 					return $sanitize_callback;
 				}
 
@@ -774,7 +795,7 @@ class Settings_API {
 		?>
 			<div class="wrap">
 				<h1><?php echo esc_html( $this->translation_strings['page_header'] ); ?></h1>
-			<?php do_action( $this->prefix . '_settings_page_header' ); ?>
+				<?php do_action( $this->prefix . '_settings_page_header' ); ?>
 
 				<div id="poststuff">
 				<div id="post-body" class="metabox-holder columns-2">
@@ -823,7 +844,7 @@ class Settings_API {
 
 			$active = $active_tab === $tab_id ? ' ' : '';
 
-			$html .= '<li><a href="#' . esc_attr( $tab_id ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab ' . sanitize_html_class( $active ) . '">';
+			$html .= '<li style="padding:0; border:0; margin:0;"><a href="#' . esc_attr( $tab_id ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab ' . sanitize_html_class( $active ) . '">';
 			$html .= esc_html( $tab_name );
 			$html .= '</a></li>';
 
@@ -935,5 +956,4 @@ class Settings_API {
 			$screen->add_help_tab( $tab );
 		}
 	}
-
 }

@@ -29,7 +29,7 @@ class Functions {
 	public function __construct() {
 		add_action( 'wp_head', array( $this, 'snippets_header' ) );
 		add_action( 'wp_footer', array( $this, 'snippets_footer' ) );
-		$priority = ata_get_option( 'snippet_priority', ata_get_option( 'content_filter_priority', 10 ), 10 );
+		$priority = ata_get_option( 'snippet_priority', ata_get_option( 'content_filter_priority', 10 ) );
 		add_filter( 'the_content', array( $this, 'snippets_content' ), $priority );
 	}
 
@@ -52,7 +52,7 @@ class Functions {
 	 *                                        Is an alias of `$post__in` in WP_Query. Default empty array.
 	 *     @type int[]      $exclude          An array of post IDs not to retrieve. Default empty array.
 	 * }
-	 * @return WP_Post[]|int[] Array of snippet objects or snippet IDs.
+	 * @return \WP_Post[]|int[] Array of snippet objects or snippet IDs.
 	 */
 	public static function get_snippets( $args = array() ) {
 		$defaults = array(
@@ -80,7 +80,7 @@ class Functions {
 		 *
 		 * @since 2.0.0
 		 *
-		 * @param WP_Post[]|int[] Array of snippet objects or snippet IDs.
+		 * @param \WP_Post[]|int[] $snippets Array of snippet objects or snippet IDs.
 		 * @param array $parse_args Arguments passed to the get_posts function.
 		 */
 		return apply_filters( 'ata_get_snippets', $snippets, $parsed_args );
@@ -92,8 +92,8 @@ class Functions {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param int|WP_Post $snippet Snippet ID or object.
-	 * @return WP_Post|string `WP_Post` instance on success or error message on failure.
+	 * @param int|\WP_Post $snippet Snippet ID or object.
+	 * @return \WP_Post|string `WP_Post` instance on success or error message on failure.
 	 */
 	public static function get_snippet( $snippet ) {
 
@@ -108,8 +108,8 @@ class Functions {
 		 *
 		 * @since 2.0.0
 		 *
-		 * @param WP_Post     $_snippet `WP_Post` instance.
-		 * @param int|WP_Post $snippet  Snippet ID or object (input).
+		 * @param \WP_Post     $_snippet `WP_Post` instance.
+		 * @param int|\WP_Post $snippet  Snippet ID or object (input).
 		 */
 		return apply_filters( 'ata_get_snippet', $_snippet, $snippet );
 	}
@@ -122,7 +122,7 @@ class Functions {
 	 *
 	 * @param string $location    Location of the snippet. Valid options are header, footer, content_before and content_after.
 	 * @param int    $numberposts Optional. Number of snippets to retrieve. Default is -1.
-	 * @return WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
+	 * @return \WP_Post[]|int[]|false Array of snippet objects or snippet IDs on success or false on failure.
 	 */
 	public static function get_snippets_by_location( $location, $numberposts = -1 ) {
 
@@ -160,7 +160,7 @@ class Functions {
 		 *
 		 * @since 2.0.0
 		 *
-		 * @param WP_Post[]|int[] $snippets    Array of snippet objects or snippet IDs on success or false on failure.
+		 * @param \WP_Post[]|int[] $snippets    Array of snippet objects or snippet IDs on success or false on failure.
 		 * @param string          $location    Location of the snippet. Valid options are header, footer, content_before and content_after.
 		 * @param int             $numberposts Optional. Number of snippets to retrieve. Default is -1.
 		 */
@@ -174,7 +174,7 @@ class Functions {
 	 * @since 2.0.0
 	 *
 	 * @param int $numberposts Optional. Number of snippets to retrieve. Default is -1.
-	 * @return WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
+	 * @return \WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
 	 */
 	public static function get_header_snippets( $numberposts = -1 ) {
 
@@ -188,7 +188,7 @@ class Functions {
 	 * @since 2.0.0
 	 *
 	 * @param int $numberposts Optional. Number of snippets to retrieve. Default is -1.
-	 * @return WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
+	 * @return \WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
 	 */
 	public static function get_footer_snippets( $numberposts = -1 ) {
 
@@ -202,7 +202,7 @@ class Functions {
 	 * @since 2.0.0
 	 *
 	 * @param int $numberposts Optional. Number of snippets to retrieve. Default is -1.
-	 * @return WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
+	 * @return \WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
 	 */
 	public static function get_content_before_snippets( $numberposts = -1 ) {
 
@@ -216,7 +216,7 @@ class Functions {
 	 * @since 2.0.0
 	 *
 	 * @param int $numberposts Optional. Number of snippets to retrieve. Default is -1.
-	 * @return WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
+	 * @return \WP_Post[]|int[] Array of snippet objects or snippet IDs on success or false on failure.
 	 */
 	public static function get_content_after_snippets( $numberposts = -1 ) {
 
@@ -232,7 +232,7 @@ class Functions {
 	 * @param string $location    Location of the snippet. Valid options are header, footer, content_before and content_after.
 	 * @param string $before      Text to display before the output.
 	 * @param string $after       Text to display after the output.
-	 * @param string $numberposts Optional. Number of snippets to retrieve. Default is -1.
+	 * @param int    $numberposts Optional. Number of snippets to retrieve. Default is -1.
 	 * @return string Content of snippets for the specified location.
 	 */
 	public static function get_snippets_content_by_location( $location, $before = '', $after = '', $numberposts = -1 ) {
@@ -271,7 +271,7 @@ class Functions {
 		// Sort the snippets by priority.
 		usort(
 			$snippets_with_priority,
-			function( $a, $b ) {
+			function ( $a, $b ) {
 				$priority_a = ! empty( $a['priority'] ) ? $a['priority'] : 10;
 				$priority_b = ! empty( $b['priority'] ) ? $b['priority'] : 10;
 
@@ -326,6 +326,8 @@ class Functions {
 					$include_code = false;
 				}
 			} else {
+				$condition = array();
+				$include   = array();
 				if ( ! empty( $include_on_posts ) ) {
 					$condition[] = 1;
 					$include[]   = in_array( $post->ID, $include_on_posts ) ? 1 : 0; // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
@@ -427,7 +429,7 @@ class Functions {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param WP_Post $snippet Snippet object.
+	 * @param \WP_Post $snippet Snippet object.
 	 * @return string Snippet type.
 	 */
 	public static function get_snippet_type( $snippet ) {
@@ -466,7 +468,7 @@ class Functions {
 	/**
 	 * Get snippet type styles.
 	 *
-	 * @param WP_Post $snippet Snippet object.
+	 * @param \WP_Post $snippet Snippet object.
 	 * @return array Snippet type styles. Includes four keys: 'type', 'color', 'background', 'tag'.
 	 */
 	public static function get_snippet_type_styles( $snippet ) {
@@ -492,5 +494,4 @@ class Functions {
 		}
 		return $styles;
 	}
-
 }

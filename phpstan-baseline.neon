@@ -1,0 +1,16 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Constant WZ_SNIPPETZ_URL not found\\.$#"
+			count: 3
+			path: includes/admin/settings/sidebar.php
+
+		-
+			message: "#^Constant WZ_SNIPPETZ_DIR not found\\.$#"
+			count: 1
+			path: includes/autoloader.php
+
+		-
+			message: "#^Constant ATA_DISABLE_SNIPPETS not found\\.$#"
+			count: 1
+			path: includes/util/class-helpers.php

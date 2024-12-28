@@ -2,9 +2,6 @@
 /**
  * Class to display and save a Metabox.
  *
- * @link  https://webberzone.com
- * @since 2.0.0
- *
  * @package WebberZone\Snippetz
  */
 
@@ -18,8 +15,9 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * ATA Metabox class to register the metabox for ata_snippets post type.
  *
- * @since 2.0.0
+ * @since 3.5.0
  */
+#[\AllowDynamicProperties]
 class Metabox_API {
 
 	/**
@@ -27,7 +25,7 @@ class Metabox_API {
 	 *
 	 * @var   string
 	 */
-	const VERSION = '2.2.0';
+	const VERSION = '2.3.0';
 
 	/**
 	 * Settings Key.
@@ -77,10 +75,11 @@ class Metabox_API {
 	 * @param array|string $args {
 	 *     Array or string of arguments. Default is blank array.
 	 *
-	 *     @type string $settings_key        Admin menu type. See add_custom_menu_page() for options.
-	 *     @type string $prefix              Parent menu slug.
-	 *     @type string $post_type           Admin menu slug.
-	 *     @type array  $registered_settings Settings fields array.
+	 *     @type string                     $settings_key           Settings key - is used to prepare the form fields. It is not the meta key.
+	 *     @type string                     $prefix                 Used to create the meta keys. The meta key format is _{$prefix}_{$setting_id}.
+	 *     @type string|array|\WP_Screen    $post_type              The post type(s) on which to show the box.
+	 *     @type array                      $registered_settings    Settings fields array.
+	 *     @type string                     $checkbox_modified_text Text to show to indicate a checkbox has been modified from its default value.
 	 * }
 	 */
 	public function __construct( $args ) {
@@ -99,9 +98,9 @@ class Metabox_API {
 			$this->$name = $value;
 		}
 
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( "save_post_{$this->post_type}", array( $this, 'save' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 	}
 
 	/**
@@ -124,7 +123,7 @@ class Metabox_API {
 	 * @param string $hook The current admin page.
 	 */
 	public function admin_enqueue_scripts( $hook ) {
-		if ( in_array( $hook, array( 'post.php', 'post-new.php' ), true ) && get_current_screen()->post_type === $this->post_type ) {
+		if ( in_array( $hook, array( 'post.php', 'post-new.php' ), true ) || get_current_screen()->post_type === $this->post_type ) {
 			self::enqueue_scripts_styles();
 		}
 	}
@@ -268,7 +267,7 @@ class Metabox_API {
 	/**
 	 * Function to display the metabox.
 	 *
-	 * @param object $post Post object.
+	 * @param \WP_Post $post Post object.
 	 */
 	public function html( $post ) {
 		// Add an nonce field so we can check for it later.
@@ -320,19 +319,19 @@ class Metabox_API {
 		echo '</table>';
 
 		/**
-		 * Action triggered when displaying WebberZone Snippetz meta box
+		 * Action triggered when displaying the meta box.
 		 *
-		 * @param object $post  Post object.
-		 * @param array  $value Value of `_ata_meta_key`.
+		 * @param object $post     Post object.
+		 * @param array  $settings Array of settings.
 		 */
-		do_action( $this->prefix . '_meta_box', $post, $value );
+		do_action( $this->prefix . '_meta_box', $post, $this->registered_settings );
 	}
 
 	/**
 	 * Sanitize Post Meta array.
 	 *
 	 * @param array $settings Post meta settings array.
-	 * @return string Sanitized value.
+	 * @return array Sanitized value.
 	 */
 	public function sanitize_post_meta( $settings ) {
 
@@ -363,8 +362,8 @@ class Metabox_API {
 						$names[] = $tax_name->name;
 					}
 				}
-				$settings[ $fields['ids_field'] ] = isset( $ids ) ? join( ',', $ids ) : '';
-				$settings[ $key ]                 = isset( $names ) ? \WebberZone\Snippetz\Util\Helpers::str_putcsv( $names ) : '';
+				$settings[ $fields['ids_field'] ] = join( ',', $ids );
+				$settings[ $key ]                 = Settings_Sanitize::str_putcsv( $names );
 			} else {
 				$settings[ $fields['ids_field'] ] = '';
 			}

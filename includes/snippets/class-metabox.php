@@ -193,11 +193,10 @@ class Metabox {
 		/**
 		 * Filter array of registered settings for metabox.
 		 *
-		 * @param array Registered settings.
+		 * @param array $settings Registered settings.
 		 */
 		$settings = apply_filters( $this->prefix . '_metabox_settings', $settings );
 
 		return $settings;
 	}
-
 }

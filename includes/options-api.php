@@ -49,17 +49,17 @@ function ata_get_settings() {
  * @return mixed
  */
 function ata_get_option( $key = '', $default_value = null ) {
-	global $ata_settings;
+	global $wz_snippetz_settings;
 
-	if ( empty( $ata_settings ) ) {
-		$ata_settings = ata_get_settings();
+	if ( empty( $wz_snippetz_settings ) ) {
+		$wz_snippetz_settings = ata_get_settings();
 	}
 
 	if ( is_null( $default_value ) ) {
 		$default_value = ata_get_default_option( $key );
 	}
 
-	$value = isset( $ata_settings[ $key ] ) ? $ata_settings[ $key ] : $default_value;
+	$value = isset( $wz_snippetz_settings[ $key ] ) ? $wz_snippetz_settings[ $key ] : $default_value;
 
 	/**
 	 * Filter the value for the option being fetched.
@@ -123,8 +123,8 @@ function ata_update_option( $key = '', $value = false ) {
 
 	// If it updated, let's update the global variable.
 	if ( $did_update ) {
-		global $ata_settings;
-		$ata_settings[ $key ] = $value;
+		global $wz_snippetz_settings;
+		$wz_snippetz_settings[ $key ] = $value;
 	}
 	return $did_update;
 }
@@ -159,8 +159,8 @@ function ata_delete_option( $key = '' ) {
 
 	// If it updated, let's update the global variable.
 	if ( $did_update ) {
-		global $ata_settings;
-		$ata_settings = $options;
+		global $wz_snippetz_settings;
+		$wz_snippetz_settings = $options;
 	}
 	return $did_update;
 }
@@ -249,17 +249,17 @@ function ata_settings_reset() {
 function ata_tag_search() {
 
 	if ( ! isset( $_REQUEST['tax'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		wp_die( 0 );
+		wp_die();
 	}
 
 	$taxonomy = sanitize_key( $_REQUEST['tax'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$tax      = get_taxonomy( $taxonomy );
 	if ( ! $tax ) {
-		wp_die( 0 );
+		wp_die();
 	}
 
 	if ( ! current_user_can( $tax->cap->assign_terms ) ) {
-		wp_die( -1 );
+		wp_die();
 	}
 
 	$s = isset( $_REQUEST['q'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['q'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended

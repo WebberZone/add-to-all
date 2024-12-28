@@ -111,5 +111,4 @@ class Site_Verification {
 			$this->get_meta_tag( 'facebook-domain-verification', $verification_code );
 		}
 	}
-
 }

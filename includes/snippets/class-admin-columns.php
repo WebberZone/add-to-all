@@ -120,7 +120,7 @@ class Admin_Columns {
 	/**
 	 * Order by or filtery by type meta value.
 	 *
-	 * @param WP_Query $query The current query object.
+	 * @param \WP_Query $query The current query object.
 	 */
 	public function pre_get_posts( $query ) {
 		// Check if we are on the admin screen for ata_snippets and sorting by type column.
@@ -143,6 +143,4 @@ class Admin_Columns {
 			$query->set( 'meta_query', $meta_query );
 		}
 	}
-
-
 }

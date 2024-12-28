@@ -77,7 +77,7 @@ final class Main {
 	 * @return Main
 	 */
 	public static function get_instance() {
-		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Main ) ) {
+		if ( null === self::$instance ) {
 			self::$instance = new self();
 			self::$instance->init();
 		}
@@ -122,8 +122,8 @@ final class Main {
 		add_action( 'wp_head', array( $this, 'wp_head' ) );
 		add_action( 'wp_body_open', array( $this, 'wp_body_open' ) );
 		add_action( 'wp_footer', array( $this, 'wp_footer' ) );
-		add_action( 'the_excerpt_rss', array( $this, 'the_excerpt_rss' ), 99999999 );
-		add_action( 'the_content_feed', array( $this, 'the_excerpt_rss' ), 99999999 );
+		add_filter( 'the_excerpt_rss', array( $this, 'the_excerpt_rss' ), 99999999 );
+		add_filter( 'the_content_feed', array( $this, 'the_excerpt_rss' ), 99999999 );
 
 		$priority = ata_get_option( 'content_filter_priority', 10 );
 		add_filter( 'the_content', array( $this, 'the_content' ), $priority );
@@ -179,9 +179,9 @@ final class Main {
 		 * Get the HTML to be added to the footer.
 		 *
 		 * @since 1.3.0
-		 * @param $output HTML added to the footer
+		 * @param string $output HTML added to the footer
 		 */
-		return apply_filters( "ata_$option", $output );
+		return apply_filters( "ata_{$option}", $output );
 	}
 
 	/**
@@ -382,7 +382,7 @@ final class Main {
 		 * Filters title text to be added after the content in the feed.
 		 *
 		 * @since 1.3.0
-		 * @param $output HTML added after the feed
+		 * @param string $output HTML added after the feed
 		 */
 		return apply_filters( 'ata_feed_title_text', $output );
 	}
@@ -403,7 +403,7 @@ final class Main {
 		 * Filters the credit line.
 		 *
 		 * @since 1.3.0
-		 * @param $output HTML added after the feed
+		 * @param string $output HTML added after the feed
 		 */
 		return apply_filters( 'ata_creditline', $output );
 	}

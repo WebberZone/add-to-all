@@ -15,12 +15,12 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-	/**
-	 * ATA Settings class to register the settings.
-	 *
-	 * @version 1.0
-	 * @since   1.7.0
-	 */
+/**
+ * ATA Settings class to register the settings.
+ *
+ * @version 1.0
+ * @since   1.7.0
+ */
 class Settings {
 
 	/**
@@ -96,9 +96,9 @@ class Settings {
 
 		$this->settings_api = new Settings_API( $this->settings_key, self::$prefix, $args );
 
-		add_action( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 11, 2 );
+		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 11, 2 );
 		add_filter( 'plugin_action_links_' . plugin_basename( WZ_SNIPPETZ_FILE ), array( $this, 'plugin_actions_links' ) );
-		add_action( 'ata_settings_sanitize', array( $this, 'change_settings_on_save' ), 99 );
+		add_filter( 'ata_settings_sanitize', array( $this, 'change_settings_on_save' ), 99 );
 		add_action( 'admin_menu', array( $this, 'redirect_on_save' ) );
 	}
 
@@ -196,6 +196,7 @@ class Settings {
 	 */
 	public static function get_registered_settings() {
 
+		$settings = array();
 		$sections = self::get_settings_sections();
 
 		foreach ( $sections as $section => $value ) {
@@ -210,7 +211,7 @@ class Settings {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array $ata_setings Settings array
+		 * @param array $settings Settings array
 		 */
 		return apply_filters( self::$prefix . '_registered_settings', $settings );
 	}
@@ -759,7 +760,7 @@ class Settings {
 		$old_settings = get_option( 'ald_ata_settings' );
 
 		if ( empty( $old_settings ) ) {
-			return false;
+			return array();
 		} else {
 			$map = array(
 				'add_credit'                     => 'addcredit',
@@ -875,7 +876,7 @@ class Settings {
 		 *
 		 * @since 1.8.0
 		 *
-		 * @param array $help_sidebar Help sidebar content.
+		 * @param string $help_sidebar Help sidebar content.
 		 */
 		return apply_filters( self::$prefix . '_settings_help', $help_sidebar );
 	}
@@ -973,10 +974,9 @@ class Settings {
 	 * @since 2.0.0
 	 *
 	 * @param  array $settings Settings array.
-	 * @return string  $settings  Sanitized settings array.
+	 * @return array Sanitized settings array.
 	 */
 	public function change_settings_on_save( $settings ) {
-
 		return $settings;
 	}
 

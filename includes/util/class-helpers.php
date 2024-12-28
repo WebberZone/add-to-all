@@ -168,7 +168,7 @@ class Helpers {
 	 *     @type string     $after    Text to display after.
 	 *     @type bool       $echo     Whether to echo or return.
 	 * }
-	 * @return string Estimated reading time if $args['echo'] set to false, void if true.
+	 * @return string|void Estimated reading time if $args['echo'] set to false, void if true.
 	 */
 	public static function get_reading_time( $content = '', $args = array() ) {
 		$defaults = array(
@@ -185,10 +185,13 @@ class Helpers {
 		$minutes = floor( $words / $parsed_args['wpm'] );
 		$seconds = floor( ( $words % $parsed_args['wpm'] ) / ( $parsed_args['wpm'] / 60 ) );
 
-		$minutes_text = sprintf( _n( '%s minute', '%s minutes', $minutes, 'add-to-all' ), number_format_i18n( $minutes ) );
-		$seconds_text = sprintf( _n( '%s second', '%s seconds', $seconds, 'add-to-all' ), number_format_i18n( $seconds ) );
-		$time         = $minutes_text . ', ' . $seconds_text;
-		$time         = $parsed_args['before'] . $time . $parsed_args['after'];
+		/* translators: 1: minutes */
+		$minutes_text = sprintf( _n( '%s minute', '%s minutes', (int) $minutes, 'add-to-all' ), number_format_i18n( $minutes ) );
+		/* translators: 1: seconds */
+		$seconds_text = sprintf( _n( '%s second', '%s seconds', (int) $seconds, 'add-to-all' ), number_format_i18n( $seconds ) );
+
+		$time = $minutes_text . ', ' . $seconds_text;
+		$time = $parsed_args['before'] . $time . $parsed_args['after'];
 
 		/**
 		 * Filters the reading time.
@@ -216,5 +219,4 @@ class Helpers {
 	public static function is_snippets_enabled() {
 		return ( ata_get_option( 'enable_snippets' ) && ! ( defined( '\ATA_DISABLE_SNIPPETS' ) && \ATA_DISABLE_SNIPPETS ) );
 	}
-
 }

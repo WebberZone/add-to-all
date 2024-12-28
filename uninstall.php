@@ -20,7 +20,7 @@ if ( is_multisite() ) {
 	);
 
 	foreach ( $sites as $site ) {
-		switch_to_blog( $site->blog_id );
+		switch_to_blog( (int) $site->blog_id );
 		ata_delete_data();
 		restore_current_blog();
 	}
@@ -53,7 +53,7 @@ function ata_delete_data() {
 
 		if ( $snippets ) {
 			foreach ( $snippets as $snippet ) {
-				wp_delete_post( $snippet->ID, false );
+				wp_delete_post( $snippet, false );
 			}
 		}
 
