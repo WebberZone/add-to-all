@@ -84,8 +84,8 @@ jobs:
       - name: Determine supported PHPUnit version
         id: set_phpunit
         run: |
-          if [[ "${{ matrix.php }}" > "8.1" ]]; then
-            echo "PHPUNIT=10.*" >> $GITHUB_ENV
+          if [[ "${{ matrix.php }}" > "8.0" ]]; then
+            echo "PHPUNIT=9.*" >> $GITHUB_ENV
           else
             echo "PHPUNIT=5.7.*||6.*||7.5.*||8.5.*" >> $GITHUB_ENV
           fi
