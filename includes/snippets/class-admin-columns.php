@@ -23,7 +23,14 @@ if ( ! defined( 'WPINC' ) ) {
 class Admin_Columns {
 
 	/**
-	 * Main constructor class.
+	 * Meta key for disable snippet.
+	 *
+	 * @var string
+	 */
+	const DISABLE_META_KEY = '_ata_disable_snippet';
+
+	/**
+	 * Constructor class.
 	 */
 	public function __construct() {
 		add_filter( 'manage_ata_snippets_posts_columns', array( $this, 'manage_post_columns' ), 10 );
@@ -31,6 +38,10 @@ class Admin_Columns {
 		add_action( 'manage_ata_snippets_posts_custom_column', array( $this, 'manage_posts_custom_column' ), 10, 2 );
 		add_action( 'admin_head', array( $this, 'custom_css' ) );
 		add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+
+		// Add AJAX action.
+		add_action( 'wp_ajax_ata_toggle_snippet', array( $this, 'ajax_toggle_snippet' ) );
 	}
 
 	/**
@@ -40,11 +51,16 @@ class Admin_Columns {
 	 */
 	public function manage_post_columns( $columns ) {
 		// Create a new array so we can modify array position.
-		$new_columns = array();
+		$new_columns = array(
+			'cb'      => $columns['cb'],
+			'enabled' => '<span class="ata-column-narrow">' . __( 'Status', 'add-to-all' ) . '</span>',
+		);
 
 		// Loop through the existing columns and evaluate the column.
 		foreach ( $columns as $key => $title ) {
-			$new_columns[ $key ] = $title;
+			if ( 'cb' !== $key ) {
+				$new_columns[ $key ] = $title;
+			}
 
 			if ( 'title' === $key ) {
 				$new_columns['type']      = __( 'Type', 'add-to-all' );
@@ -67,13 +83,31 @@ class Admin_Columns {
 	}
 
 	/**
-	 * Adds the content for the custom columns.
+	 * Add custom column content.
 	 *
-	 * @param string $column_name The name of the column to display.
-	 * @param int    $post_id     The current post ID.
+	 * @param string $column_name Column name.
+	 * @param int    $post_id    Post ID.
 	 */
 	public function manage_posts_custom_column( $column_name, $post_id ) {
 		switch ( $column_name ) {
+			case 'enabled':
+				$disabled = get_post_meta( $post_id, self::DISABLE_META_KEY, true );
+
+				printf(
+					'<div class="ata-snippet-toggle-wrapper" data-post-id="%1$s" data-nonce="%2$s"></div>',
+					esc_attr( (string) $post_id ),
+					esc_attr( wp_create_nonce( 'ata_toggle_snippet_' . $post_id ) )
+				);
+				wp_localize_script(
+					'ata-admin-snippets',
+					'ataSnippetData_' . $post_id,
+					array(
+						'disabled' => ! empty( $disabled ),
+						'ajaxurl'  => admin_url( 'admin-ajax.php' ),
+					)
+				);
+				break;
+
 			case 'type':
 				$styles       = Functions::get_snippet_type_styles( get_post( $post_id ) );
 				$snippet_type = $styles['type'];
@@ -92,6 +126,7 @@ class Admin_Columns {
 					esc_html( strtoupper( $snippet_type ) )
 				);
 				break;
+
 			case 'shortcode':
 				$shortcode = "[ata_snippet id={$post_id}]";
 
@@ -103,6 +138,9 @@ class Admin_Columns {
 
 				echo trim( $output ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				break;
+
+			default:
+				break;
 		}
 	}
 
@@ -112,9 +150,31 @@ class Admin_Columns {
 	public function custom_css() {
 		$screen = get_current_screen();
 
-		if ( 'edit-ata_snippets' === $screen->id ) {
-			echo '<style>#shortcode{width:200px}.ata_shortcode input.code{min-width:100%}</style>';
+		if ( ! $screen || 'ata_snippets' !== $screen->post_type ) {
+			return;
 		}
+		?>
+		<style>
+			.column-enabled {
+				width: max-content;
+			}
+			.column-type {
+				width: max-content;
+			}
+			.column-shortcode {
+				width: 200px;
+			}
+			.ata_shortcode input.code {
+				min-width: 100%;
+			}
+			.ata-column-narrow {
+				display: block;
+			}
+			.ata-snippet-toggle-wrapper {
+				text-align: center;
+			}
+		</style>
+		<?php
 	}
 
 	/**
@@ -142,5 +202,55 @@ class Admin_Columns {
 			// Add the meta query to the main query object.
 			$query->set( 'meta_query', $meta_query );
 		}
+	}
+
+	/**
+	 * Enqueue admin scripts.
+	 */
+	public function admin_scripts() {
+		$minimize = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		$screen   = get_current_screen();
+
+		if ( 'edit-ata_snippets' === $screen->id ) {
+			wp_enqueue_script(
+				'ata-admin-snippets',
+				plugins_url( 'includes/snippets/js/admin-snippets' . $minimize . '.js', WZ_SNIPPETZ_FILE ),
+				array( 'wp-element', 'wp-i18n', 'wp-components' ),
+				WZ_SNIPPETZ_VERSION,
+				true
+			);
+
+			wp_enqueue_style(
+				'wp-components'
+			);
+		}
+	}
+
+	/**
+	 * Toggle snippet status via AJAX.
+	 */
+	public function ajax_toggle_snippet() {
+		if ( ! isset( $_POST['post_id'] ) ) {
+			wp_send_json_error( array( 'message' => __( 'No post ID provided.', 'add-to-all' ) ) );
+		}
+
+		$post_id = absint( wp_unslash( $_POST['post_id'] ) );
+
+		check_ajax_referer( 'ata_toggle_snippet_' . $post_id, 'nonce' );
+
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			wp_send_json_error( array( 'message' => __( 'You do not have permission to edit this snippet.', 'add-to-all' ) ) );
+		}
+
+		$disabled   = get_post_meta( $post_id, self::DISABLE_META_KEY, true );
+		$new_status = ! $disabled;
+
+		update_post_meta( $post_id, self::DISABLE_META_KEY, $new_status );
+
+		wp_send_json_success(
+			array(
+				'disabled' => $new_status,
+			)
+		);
 	}
 }
