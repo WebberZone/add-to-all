@@ -528,6 +528,8 @@ class Settings_API {
 						'field_attributes' => '',
 						'placeholder'      => '',
 						'pro'              => false,
+						'disabled'         => false,
+						'readonly'         => false,
 					)
 				);
 

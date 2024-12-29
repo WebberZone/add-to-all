@@ -300,6 +300,9 @@ class Metabox_API {
 					'field_class'      => '',
 					'field_attributes' => '',
 					'placeholder'      => '',
+					'disabled'         => false,
+					'readonly'         => false,
+					'pro'              => false,
 				)
 			);
 

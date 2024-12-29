@@ -70,6 +70,15 @@ final class Main {
 	public $third_party;
 
 	/**
+	 * Blocks.
+	 *
+	 * @since 2.1.0
+	 *
+	 * @var object Blocks.
+	 */
+	public $blocks;
+
+	/**
 	 * Gets the instance of the class.
 	 *
 	 * @since 2.0.0
@@ -104,6 +113,7 @@ final class Main {
 		$this->shortcodes        = new \WebberZone\Snippetz\Frontend\Shortcodes();
 		$this->site_verification = new \WebberZone\Snippetz\Frontend\Site_Verification();
 		$this->third_party       = new \WebberZone\Snippetz\Frontend\Third_Party();
+		$this->blocks            = new \WebberZone\Snippetz\Frontend\Blocks\Blocks();
 
 		if ( \WebberZone\Snippetz\Util\Helpers::is_snippets_enabled() ) {
 			$this->snippets = new \WebberZone\Snippetz\Snippets\Snippets();

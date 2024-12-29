@@ -114,6 +114,60 @@ class Functions {
 		return apply_filters( 'ata_get_snippet', $_snippet, $snippet );
 	}
 
+	/**
+	 * Get Snippet Content by ID.
+	 *
+	 * @since 2.1.0
+	 *
+	 * @param int|\WP_Post $snippet Snippet ID or object.
+	 * @param array        $args   Arguments passed to the get_posts function.
+	 * @return string Snippet content.
+	 */
+	public static function get_snippet_content( $snippet, $args = array() ) {
+		$classes  = array();
+		$defaults = array(
+			'class'        => '',
+			'is_block'     => false,
+			'is_shortcode' => true,
+		);
+		$args     = wp_parse_args( $args, $defaults );
+
+		$snippet = get_post( $snippet );
+
+		if ( ! ( $snippet instanceof \WP_Post ) || 'ata_snippets' !== get_post_type( $snippet ) ) {
+			return __( 'Incorrect snippet ID', 'add-to-all' );
+		}
+
+		$id = $snippet->ID;
+
+		$classes[] = 'ata_snippet';
+		$classes[] = 'ata_snippet_' . $id;
+		$classes[] = $args['class'];
+		$classes[] = $args['is_block'] ? 'ata_snippet_block' : '';
+		$classes[] = $args['is_shortcode'] ? 'ata_snippet_shortcode' : '';
+		$class     = implode( ' ', $classes );
+
+		$content = do_shortcode( $snippet->post_content );
+		$type    = self::get_snippet_type( $snippet );
+
+		if ( 'html' === $type ) {
+			$output = sprintf( '<div class="%s">%s</div>', $class, $content );
+		} else {
+			$output = $content;
+		}
+
+		/**
+		 * Retrieves the snippet content given a snippet ID or object.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param string   $output  Snippet content.
+		 * @param \WP_Post $snippet Snippet ID or object (input).
+		 * @param array    $args    Arguments.
+		 */
+		return apply_filters( 'ata_get_snippet_content', $output, $snippet, $args );
+	}
+
 
 	/**
 	 * Retrieves an array of the latest snippets based on the location specified.
@@ -379,7 +433,7 @@ class Functions {
 
 
 	/**
-	 * Function to add snippets code to the footer. Filters `wp_footer`.
+	 * Function to add snippets code to the footer. Filters `the_content`.
 	 *
 	 * @since 2.0.0
 	 *
