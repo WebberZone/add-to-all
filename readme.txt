@@ -108,6 +108,9 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 	* New block to select and display any snippet in the block or site editor.
 	* New On/Off toggle button in the snippet screen to enable/disable a snippet.
 
+* Modifications:
+	* Snippets are no longer public or visible on the frontend. They are only visible in the snippet screen.
+
 = 2.0.1 =
 
 * Bug fixes:

@@ -161,17 +161,16 @@ class Snippets {
 			'supports'                  => array( 'title', 'editor', 'revisions', 'custom-fields' ),
 			'taxonomies'                => array( 'ata_snippets_category' ),
 			'hierarchical'              => false,
-			'public'                    => true,
+			'public'                    => false,
 			'show_ui'                   => true,
-			'show_in_menu'              => true,
 			'menu_position'             => 5,
 			'menu_icon'                 => 'dashicons-editor-code',
 			'show_in_admin_bar'         => true,
-			'show_in_nav_menus'         => true,
+			'show_in_nav_menus'         => false,
 			'can_export'                => true,
-			'has_archive'               => true,
+			'has_archive'               => false,
 			'exclude_from_search'       => true,
-			'publicly_queryable'        => true,
+			'publicly_queryable'        => false,
 			'rewrite'                   => $rewrite,
 			'capabilities'              => array(
 				'publish_posts'       => 'manage_options',
@@ -193,7 +192,15 @@ class Snippets {
 			'rest_namespace'            => 'webberzone/v1',
 			'rest_meta_fields'          => array( '_ata_snippet_type' ),
 			'rest_permissions_callback' => function () {
-				return current_user_can( 'manage_options' );
+				// Block access if user is not logged in or not an admin.
+				if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+					return new \WP_Error(
+						'rest_forbidden',
+						esc_html__( 'You are not allowed to access this resource.', 'add-to-all' ),
+						array( 'status' => rest_authorization_required_code() )
+					);
+				}
+				return true;
 			},
 		);
 
