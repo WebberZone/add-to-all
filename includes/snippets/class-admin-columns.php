@@ -156,10 +156,10 @@ class Admin_Columns {
 		?>
 		<style>
 			.column-enabled {
-				width: max-content;
+				width: 60px;
 			}
 			.column-type {
-				width: max-content;
+				width: 90px;
 			}
 			.column-shortcode {
 				width: 200px;
