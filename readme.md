@@ -8,30 +8,34 @@
 [![Required PHP](https://img.shields.io/wordpress/plugin/required-php/add-to-all?style=flat-square)](https://wordpress.org/plugins/add-to-all/)
 [![Active installs](https://img.shields.io/wordpress/plugin/installs/add-to-all?style=flat-square)](https://wordpress.org/plugins/add-to-all/)
 
-__Requires:__ 5.6
+__Requires:__ WordPress 6.3
 
-__Tested up to:__ 6.2
+__Tested up to:__ WordPress 6.7
 
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
 __Plugin page:__ [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) | [WordPress Plugin page](https://wordpress.org/plugins/add-to-all/)
 
-The ultimate snippet manager for WordPress to create and manage custom HTML, CSS or JS code snippets.
+The ultimate snippet manager for WordPress that allows you to create and manage custom HTML, CSS, or JS code snippets and insert them in your site's header, footer, content, etc.
 
 ## Description
 
-[WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) (formerly Add to All) is a simple, yet powerful plugin that will allow you to create and manage custom snippets of HTML, CSS or JS code and add them to your header, footer, content or feed. You can also choose where and when to display your snippets based on various criteria such as post IDs, post types, categories, tags, and more.
+Do you want to customize your site with code but don't want to edit your theme files or worry about losing your changes when you switch themes? Do you want to add analytics, site verification, custom CSS, or any other code to your site without using multiple plugins? Do you want complete control over where and when you display your code snippets on your site?
 
-WebberZone Snippetz comes with out of the box support for Google Analytics, Statcounter and Tynt. Additionally, it supports site verification for Google, Bing and Pinterest via their HTML tag methods.
+If you answered yes to any of the above questions, WebberZone Snippetz is the perfect plugin!
 
-WebberZone Snippetz also enhances your site’s feed with a copyright notice and a link to the post. Plus, it comes with tons of actions and filters to extend its functionality.
+[WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) (formerly Add to All) is a simple yet powerful plugin that allows you to create and manage custom snippets of HTML, CSS, or JS code and add them to your header, footer, content, or feed. You can also choose where and when to display your snippets based on criteria such as post IDs, post types, categories, tags, and more.
+
+WebberZone Snippetz comes with out-of-the-box support for Google Analytics and Statcounter. It lets you easily add meta tags to verify your site with Google, Bing, and Pinterest.
+
+WebberZone Snippetz also enhances your site's feed with a copyright notice and a link to the post. It also comes with many actions and filters to extend its functionality.
 
 Here are some of the key features of WebberZone Snippetz:
 
 * Create custom snippets with HTML, CSS or JS code
 * Add snippets to your header, footer, content or feed
 * Choose where and when to display your snippets based on post IDs, post types, categories, tags, and more
-* Support for Google Analytics, Statcounter and Tynt
+* Support for Google Analytics and Statcounter
 * Site verification for Google, Bing and Pinterest
 * No need to edit theme files or lose changes when switching themes
 
