@@ -82,13 +82,6 @@ To add custom CSS code to your site, go to Snippets > Add New in your WordPress 
 == Screenshots ==
 
 1. Snippets Manager
-2. General Options
-3. 3rd Party Options
-4. Header Options
-5. Content Options
-6. Footer Options
-7. Feed Options
-8. The display options meta box where you can choose where and when to display your snippets
 
 == Other Notes ==
 
