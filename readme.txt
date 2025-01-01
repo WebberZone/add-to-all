@@ -97,38 +97,14 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 = 2.1.0 =
 
+Release post: [https://webberzone.com/announcements/snippetz-v2-1-0/](https://webberzone.com/announcements/snippetz-v2-1-0/)
+
 * Features:
 	* New block to select and display any snippet in the block or site editor.
 	* New On/Off toggle button in the snippet screen to enable/disable a snippet.
 
 * Modifications:
 	* Snippets are no longer public or visible on the frontend. They are only visible in the snippet screen.
-
-= 2.0.1 =
-
-* Bug fixes:
-	* Fixed "Exclude display on these post IDs"
-	* Fixed link to Settings page
-	* Fixed Content addition on Post and Pages only
-	* Admin scripts were incorrectly added on all "Add New" post screens
-
-= 2.0.0 =
-
-*Add to All* plugin has now been rebranded to *WebberZone Snippetz*. The plugin code has also been rewritten to use OOP.
-
-* New feature:
-	* Add Meta verification. Read how to verify your domain in the [Meta Business Help Centre](https://www.facebook.com/business/help/321167023127050)
-	* Snippet priority: New global option to set the priority of when snippets are added to the content. Additionally, the snippet screen allows settings a priority amongst other snippets that add to the content
-	* Snippet Type: New dropdown to select if the snippet is a CSS, JS or HTML snippet. If you select JS or CSS, then the `script` and `style` tags are automatically added
-	* New option to add content to the `wp_body_open()` tag
-
-* Enhancements:
-	* Google Analytics code has been updated to GA4. Please update your [Google Tag ID](https://support.google.com/analytics/answer/9539598?hl=en)
-	* *uninstall.php* now uses `get_sites()` function
-	* Settings menu link is under Snippetz menu if enabled and under Settings menu when disabled
-
-* Deprecated:
-	* Support for Tynt has been removed. If you are using Tynt, you will need to directly use the full code in the *Footer* tab.
 
 Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 
