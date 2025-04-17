@@ -138,9 +138,9 @@ final class Main {
 		$priority = ata_get_option( 'content_filter_priority', 10 );
 		add_filter( 'the_content', array( $this, 'the_content' ), $priority );
 
-		$footer_process_shortcode  = ata_get_option( 'footer_process_shortcode' );
-		$feed_process_shortcode    = ata_get_option( 'feed_process_shortcode' );
-		$content_process_shortcode = ata_get_option( 'content_process_shortcode' );
+		$footer_process_shortcode  = ata_get_option( 'footer_process_shortcode', false );
+		$feed_process_shortcode    = ata_get_option( 'feed_process_shortcode', false );
+		$content_process_shortcode = ata_get_option( 'content_process_shortcode', false );
 
 		$filters = array(
 			'ata_footer_other_html'          => $footer_process_shortcode,

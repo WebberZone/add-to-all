@@ -78,6 +78,19 @@ class Settings {
 		self::$prefix       = 'ata';
 		$this->menu_slug    = 'ata_options_page';
 
+		add_action( 'admin_menu', array( $this, 'initialise_settings' ) );
+		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 11, 2 );
+		add_filter( 'plugin_action_links_' . plugin_basename( WZ_SNIPPETZ_FILE ), array( $this, 'plugin_actions_links' ) );
+		add_filter( 'ata_settings_sanitize', array( $this, 'change_settings_on_save' ), 99 );
+		add_action( 'admin_menu', array( $this, 'redirect_on_save' ) );
+	}
+
+	/**
+	 * Initialise the settings API.
+	 *
+	 * @since 3.3.0
+	 */
+	public function initialise_settings() {
 		$props = array(
 			'default_tab'       => 'general',
 			'help_sidebar'      => $this->get_help_sidebar(),
@@ -95,12 +108,9 @@ class Settings {
 		);
 
 		$this->settings_api = new Settings_API( $this->settings_key, self::$prefix, $args );
-
-		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 11, 2 );
-		add_filter( 'plugin_action_links_' . plugin_basename( WZ_SNIPPETZ_FILE ), array( $this, 'plugin_actions_links' ) );
-		add_filter( 'ata_settings_sanitize', array( $this, 'change_settings_on_save' ), 99 );
-		add_action( 'admin_menu', array( $this, 'redirect_on_save' ) );
 	}
+
+
 
 	/**
 	 * Array containing the settings' sections.
@@ -961,7 +971,7 @@ class Settings {
 	public static function get_admin_footer_text() {
 		return sprintf(
 			/* translators: 1: Opening achor tag with Plugin page link, 2: Closing anchor tag, 3: Opening anchor tag with review link. */
-			__( 'Thank you for using %1$sWebberZone Snippetz%2$s! Please %3$srate us%2$s on %3$sWordPress.org%2$s', 'knowledgebase' ),
+			__( 'Thank you for using %1$sWebberZone Snippetz%2$s! Please %3$srate us%2$s on %3$sWordPress.org%2$s', 'add-to-all' ),
 			'<a href="https://webberzone.com/plugins/add-to-all/" target="_blank">',
 			'</a>',
 			'<a href="https://wordpress.org/support/plugin/add-to-all/reviews/#new-post" target="_blank">'

@@ -50,6 +50,15 @@ class Metabox {
 		$this->settings_key = 'ata_meta';
 		$this->prefix       = 'ata';
 
+		add_action( 'admin_menu', array( $this, 'initialise_metabox_api' ) );
+	}
+
+	/**
+	 * Initialise the metabox API.
+	 *
+	 * @since 3.3.0
+	 */
+	public function initialise_metabox_api() {
 		$this->metabox_api = new \WebberZone\Snippetz\Admin\Settings\Metabox_API(
 			array(
 				'settings_key'           => $this->settings_key,
