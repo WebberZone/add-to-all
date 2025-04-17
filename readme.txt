@@ -2,9 +2,9 @@
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 Requires at least: 6.3
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -94,6 +94,11 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 * [Auto-Close](https://wordpress.org/plugins/autoclose/) - Automatically close comments, pingbacks and trackbacks and manage revisions
 
 == Changelog ==
+
+= 2.1.1 =
+
+* Bug fixes:
+	* Fixed `_load_textdomain_just_in_time` PHP warnings.
 
 = 2.1.0 =
 
