@@ -179,6 +179,7 @@ class Helpers {
 		);
 
 		$parsed_args = wp_parse_args( $args, $defaults );
+		$parsed_args = self::sanitize_args( $parsed_args );
 
 		$content = wp_strip_all_tags( strip_shortcodes( $content ) );
 		$words   = str_word_count( $content );
@@ -217,6 +218,23 @@ class Helpers {
 	 * @return boolean True if snippets are enabled. False if not.
 	 */
 	public static function is_snippets_enabled() {
-		return ( ata_get_option( 'enable_snippets', false ) && ! ( defined( '\ATA_DISABLE_SNIPPETS' ) && \ATA_DISABLE_SNIPPETS ) );
+		return ( ata_get_option( 'enable_snippets' ) && ! ( defined( '\ATA_DISABLE_SNIPPETS' ) && \ATA_DISABLE_SNIPPETS ) );
+	}
+
+	/**
+	 * Sanitize args.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @param array $args Array of arguments.
+	 * @return array Sanitized array of arguments.
+	 */
+	public static function sanitize_args( $args ): array {
+		foreach ( $args as $key => $value ) {
+			if ( is_string( $value ) ) {
+				$args[ $key ] = wp_kses_post( $value );
+			}
+		}
+		return $args;
 	}
 }

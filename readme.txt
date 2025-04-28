@@ -2,9 +2,9 @@
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
-Stable tag: 2.1.1
+Stable tag: 2.1.0
 Requires at least: 6.3
-Tested up to: 6.8
+Tested up to: 6.7
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -95,10 +95,15 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 == Changelog ==
 
+= 2.2.0 =
+
+* Bug fixes:
+	* Fixed sanitization of shortcode inputs.
+
 = 2.1.1 =
 
 * Bug fixes:
-	* Fixed `_load_textdomain_just_in_time` PHP warnings.
+	* Fixed `_load_textdomain_just_in_time` warning/error.
 
 = 2.1.0 =
 
