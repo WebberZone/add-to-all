@@ -10,6 +10,8 @@
 
 namespace WebberZone\Snippetz\Snippets;
 
+use WebberZone\Snippetz\Util\Helpers;
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -131,6 +133,7 @@ class Functions {
 			'is_shortcode' => true,
 		);
 		$args     = wp_parse_args( $args, $defaults );
+		$args     = Helpers::sanitize_args( $args );
 
 		$snippet = get_post( $snippet );
 

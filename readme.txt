@@ -98,7 +98,7 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 = 2.2.0 =
 
 * Bug fixes:
-	* Fixed sanitization of shortcode inputs.
+	* Fixed sanitization of shortcode and block inputs.
 
 = 2.1.1 =
 
