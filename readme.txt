@@ -2,9 +2,9 @@
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
 Donate link: https://ajaydsouza.com/donate/
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 Requires at least: 6.3
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -79,6 +79,10 @@ To use site verification with WebberZone Snippetz, go to Settings > WebberZone S
 
 To add custom CSS code to your site, go to Snippets > Add New in your WordPress dashboard. Give your snippet a title and enter your CSS code in the editor. Choose CSS from the dropdown menu and select Header as the location. You can also choose when to display your CSS code based on certain criteria.
 
+= How can I report security bugs? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/wordpress/plugin/add-to-all/vdp)
+
 == Screenshots ==
 
 1. Snippets Manager
@@ -120,6 +124,6 @@ Check changelog.txt for older entries the [Releases page on Github](https://gith
 
 == Upgrade Notice ==
 
-= 2.1.0 =
+= 2.2.0 =
 
-Major release; Check out the Changelog for more details.
+Security release.
