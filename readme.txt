@@ -8,7 +8,7 @@ Tested up to: 6.8
 Requires PHP: 7.4
 License: GPLv2 or later
 
-The ultimate snippet manager for WordPress that allows you to create and manage custom HTML, CSS, or JS code snippets and insert them in your site's header, footer, content, etc.
+The ultimate snippet manager for WordPress. Create and manage custom HTML, CSS, or JS code snippets and control where and when they are displayed.
 
 == Description ==
 

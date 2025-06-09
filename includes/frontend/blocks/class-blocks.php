@@ -10,6 +10,7 @@
 namespace WebberZone\Snippetz\Frontend\Blocks;
 
 use WebberZone\Snippetz\Snippets\Functions;
+use WebberZone\Snippetz\Util\Helpers;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

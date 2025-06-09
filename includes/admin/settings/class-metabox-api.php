@@ -162,7 +162,7 @@ class Metabox_API {
 		);
 		wp_enqueue_script(
 			'wz-codemirror-js',
-			plugins_url( 'js/apply-codemirror' . $minimize . '.js', __FILE__ ),
+			plugins_url( 'js/apply-cm' . $minimize . '.js', __FILE__ ),
 			array( 'jquery' ),
 			self::VERSION,
 			true
