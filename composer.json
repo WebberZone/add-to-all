@@ -28,9 +28,10 @@
         "php-stubs/wordpress-stubs": "^6",
         "wp-coding-standards/wpcs": "^3",
         "dealerdirect/phpcodesniffer-composer-installer": "^1",
-        "phpcompatibility/phpcompatibility-wp": "^2",
+        "phpcompatibility/phpcompatibility-wp": "*",
+        "phpcompatibility/php-compatibility": "dev-develop as 9.99.99",
         "yoast/phpunit-polyfills": "^3",
-        "phpunit/phpunit": "^7.5 || ^8 || ^9 || ^10 || ^11 || ^12"
+        "phpunit/phpunit": "^9 || ^10 || ^11 || ^12"
     },
     "config": {
         "allow-plugins": {
@@ -38,11 +39,13 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "phpstan": "vendor/bin/phpstan analyse --memory-limit=2048M",
         "phpstan-baseline": "vendor/bin/phpstan analyse --generate-baseline --memory-limit=2048M",
         "phpcs": "vendor/bin/phpcs -p -v -s --standard=phpcs.xml.dist $(find . -name '*.php')",
         "phpcbf": "vendor/bin/phpcbf -p -v -s --standard=phpcs.xml.dist $(find . -name '*.php')",
-        "zip": "mkdir -p build && zip -X -r build/add-to-all.zip . -x '*.git*' 'node_modules/*' '.*' '*/.git*' '*/.DS_Store' 'CODE_OF_CONDUCT.md' 'CONTRIBUTING.md' 'ISSUE_TEMPLATE.md' 'PULL_REQUEST_TEMPLATE.md' '*.dist' '*.yml' '*.neon' 'composer.*' 'package.json' 'dev-helpers**' 'build**' 'wporg-assets**' 'phpunit**'"
+        "zip": "mkdir -p build && zip -X -r build/$(basename $(pwd)).zip . -x '*.git*' 'node_modules/*' '.*' '*/.git*' '*/.DS_Store' 'CODE_OF_CONDUCT.md' 'CONTRIBUTING.md' 'ISSUE_TEMPLATE.md' 'PULL_REQUEST_TEMPLATE.md' '*.dist' '*.yml' '*.neon' 'composer.*' 'package.json' 'dev-helpers**' 'build**' 'wporg-assets**' 'phpunit**' 'phpstan-bootstrap.php'"
     }
 }
