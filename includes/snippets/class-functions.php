@@ -11,6 +11,7 @@
 namespace WebberZone\Snippetz\Snippets;
 
 use WebberZone\Snippetz\Util\Helpers;
+use WebberZone\Snippetz\Util\Hook_Registry;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -29,10 +30,10 @@ class Functions {
 	 * Constructor function.
 	 */
 	public function __construct() {
-		add_action( 'wp_head', array( $this, 'snippets_header' ) );
-		add_action( 'wp_footer', array( $this, 'snippets_footer' ) );
+		Hook_Registry::add_action( 'wp_head', array( $this, 'snippets_header' ) );
+		Hook_Registry::add_action( 'wp_footer', array( $this, 'snippets_footer' ) );
 		$priority = ata_get_option( 'snippet_priority', ata_get_option( 'content_filter_priority', 10 ) );
-		add_filter( 'the_content', array( $this, 'snippets_content' ), $priority );
+		Hook_Registry::add_filter( 'the_content', array( $this, 'snippets_content' ), $priority );
 	}
 
 	/**

@@ -7,6 +7,8 @@
 
 namespace WebberZone\Snippetz;
 
+use WebberZone\Snippetz\Util\Hook_Registry;
+
 if ( ! defined( 'WPINC' ) ) {
 	exit;
 }
@@ -109,7 +111,7 @@ final class Main {
 	 * @since 2.0.0
 	 */
 	private function init() {
-		$this->settings          = new \WebberZone\Snippetz\Admin\Settings\Settings();
+		$this->settings          = new \WebberZone\Snippetz\Admin\Settings();
 		$this->shortcodes        = new \WebberZone\Snippetz\Frontend\Shortcodes();
 		$this->site_verification = new \WebberZone\Snippetz\Frontend\Site_Verification();
 		$this->third_party       = new \WebberZone\Snippetz\Frontend\Third_Party();
@@ -128,15 +130,15 @@ final class Main {
 	 * @since 2.0.0
 	 */
 	public function hooks() {
-		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
-		add_action( 'wp_head', array( $this, 'wp_head' ) );
-		add_action( 'wp_body_open', array( $this, 'wp_body_open' ) );
-		add_action( 'wp_footer', array( $this, 'wp_footer' ) );
-		add_filter( 'the_excerpt_rss', array( $this, 'the_excerpt_rss' ), 99999999 );
-		add_filter( 'the_content_feed', array( $this, 'the_excerpt_rss' ), 99999999 );
+		Hook_Registry::add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+		Hook_Registry::add_action( 'wp_head', array( $this, 'wp_head' ) );
+		Hook_Registry::add_action( 'wp_body_open', array( $this, 'wp_body_open' ) );
+		Hook_Registry::add_action( 'wp_footer', array( $this, 'wp_footer' ) );
+		Hook_Registry::add_filter( 'the_excerpt_rss', array( $this, 'the_excerpt_rss' ), 99999999 );
+		Hook_Registry::add_filter( 'the_content_feed', array( $this, 'the_excerpt_rss' ), 99999999 );
 
 		$priority = ata_get_option( 'content_filter_priority', 10 );
-		add_filter( 'the_content', array( $this, 'the_content' ), $priority );
+		Hook_Registry::add_filter( 'the_content', array( $this, 'the_content' ), $priority );
 
 		$footer_process_shortcode  = ata_get_option( 'footer_process_shortcode', false );
 		$feed_process_shortcode    = ata_get_option( 'feed_process_shortcode', false );
@@ -159,9 +161,9 @@ final class Main {
 
 		foreach ( $filters as $filter => $process_shortcode ) {
 			if ( $process_shortcode ) {
-				add_filter( $filter, 'shortcode_unautop' );
-				add_filter( $filter, 'do_shortcode' );
-				add_filter( $filter, array( $this, 'process_placeholders' ), 99 );
+				Hook_Registry::add_filter( $filter, 'shortcode_unautop' );
+				Hook_Registry::add_filter( $filter, 'do_shortcode' );
+				Hook_Registry::add_filter( $filter, array( $this, 'process_placeholders' ), 99 );
 			}
 		}
 	}

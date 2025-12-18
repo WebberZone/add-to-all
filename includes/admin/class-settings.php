@@ -8,7 +8,9 @@
  * @package WebberZone\Snippetz\Admin
  */
 
-namespace WebberZone\Snippetz\Admin\Settings;
+namespace WebberZone\Snippetz\Admin;
+
+use WebberZone\Snippetz\Util\Hook_Registry;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -78,11 +80,11 @@ class Settings {
 		self::$prefix       = 'ata';
 		$this->menu_slug    = 'ata_options_page';
 
-		add_action( 'admin_menu', array( $this, 'initialise_settings' ) );
-		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 11, 2 );
-		add_filter( 'plugin_action_links_' . plugin_basename( WZ_SNIPPETZ_FILE ), array( $this, 'plugin_actions_links' ) );
-		add_filter( 'ata_settings_sanitize', array( $this, 'change_settings_on_save' ), 99 );
-		add_action( 'admin_menu', array( $this, 'redirect_on_save' ) );
+		Hook_Registry::add_action( 'admin_menu', array( $this, 'initialise_settings' ) );
+		Hook_Registry::add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 11, 2 );
+		Hook_Registry::add_filter( 'plugin_action_links_' . plugin_basename( WZ_SNIPPETZ_FILE ), array( $this, 'plugin_actions_links' ) );
+		Hook_Registry::add_filter( 'ata_settings_sanitize', array( $this, 'change_settings_on_save' ), 99 );
+		Hook_Registry::add_action( 'admin_menu', array( $this, 'redirect_on_save' ) );
 	}
 
 	/**
@@ -107,7 +109,7 @@ class Settings {
 			'upgraded_settings'   => array(),
 		);
 
-		$this->settings_api = new Settings_API( $this->settings_key, self::$prefix, $args );
+		$this->settings_api = new Settings\Settings_API( $this->settings_key, self::$prefix, $args );
 	}
 
 

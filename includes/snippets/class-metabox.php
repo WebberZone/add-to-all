@@ -10,6 +10,8 @@
 
 namespace WebberZone\Snippetz\Snippets;
 
+use WebberZone\Snippetz\Util\Hook_Registry;
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -50,7 +52,7 @@ class Metabox {
 		$this->settings_key = 'ata_meta';
 		$this->prefix       = 'ata';
 
-		add_action( 'admin_menu', array( $this, 'initialise_metabox_api' ) );
+		Hook_Registry::add_action( 'admin_menu', array( $this, 'initialise_metabox_api' ) );
 	}
 
 	/**

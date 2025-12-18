@@ -9,6 +9,8 @@
 
 namespace WebberZone\Snippetz\Snippets;
 
+use WebberZone\Snippetz\Util\Hook_Registry;
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -85,16 +87,16 @@ class Snippets {
 			$this->admin_columns = new \WebberZone\Snippetz\Snippets\Admin_Columns();
 		}
 
-		add_action( 'init', array( $this, 'register_post_type' ), 0 );
-		add_action( 'init', array( $this, 'register_taxonomy' ), 0 );
+		Hook_Registry::add_action( 'init', array( $this, 'register_post_type' ), 0 );
+		Hook_Registry::add_action( 'init', array( $this, 'register_taxonomy' ), 0 );
 
-		add_filter( 'wp_editor_settings', array( $this, 'wp_editor_settings' ), 10, 2 );
-		add_filter( 'the_content', array( $this, 'remove_wpautop' ), 0 );
-		add_action( 'edit_form_after_title', array( $this, 'media_buttons' ) );
-		add_filter( 'media_view_strings', array( $this, 'media_view_strings' ), 10, 2 );
+		Hook_Registry::add_filter( 'wp_editor_settings', array( $this, 'wp_editor_settings' ), 10, 2 );
+		Hook_Registry::add_filter( 'the_content', array( $this, 'remove_wpautop' ), 0 );
+		Hook_Registry::add_action( 'edit_form_after_title', array( $this, 'media_buttons' ) );
+		Hook_Registry::add_filter( 'media_view_strings', array( $this, 'media_view_strings' ), 10, 2 );
 
 		// Disable block editor for this post type.
-		add_filter( 'use_block_editor_for_post_type', array( $this, 'disable_block_editor' ), 10, 2 );
+		Hook_Registry::add_filter( 'use_block_editor_for_post_type', array( $this, 'disable_block_editor' ), 10, 2 );
 	}
 
 	/**

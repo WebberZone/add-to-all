@@ -10,6 +10,8 @@
 
 namespace WebberZone\Snippetz\Snippets;
 
+use WebberZone\Snippetz\Util\Hook_Registry;
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -33,15 +35,15 @@ class Admin_Columns {
 	 * Constructor class.
 	 */
 	public function __construct() {
-		add_filter( 'manage_ata_snippets_posts_columns', array( $this, 'manage_post_columns' ), 10 );
-		add_filter( 'manage_edit-ata_snippets_sortable_columns', array( $this, 'set_sortable_columns' ) );
-		add_action( 'manage_ata_snippets_posts_custom_column', array( $this, 'manage_posts_custom_column' ), 10, 2 );
-		add_action( 'admin_head', array( $this, 'custom_css' ) );
-		add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+		Hook_Registry::add_filter( 'manage_ata_snippets_posts_columns', array( $this, 'manage_post_columns' ), 10 );
+		Hook_Registry::add_filter( 'manage_edit-ata_snippets_sortable_columns', array( $this, 'set_sortable_columns' ) );
+		Hook_Registry::add_action( 'manage_ata_snippets_posts_custom_column', array( $this, 'manage_posts_custom_column' ), 10, 2 );
+		Hook_Registry::add_action( 'admin_head', array( $this, 'custom_css' ) );
+		Hook_Registry::add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
+		Hook_Registry::add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 
 		// Add AJAX action.
-		add_action( 'wp_ajax_ata_toggle_snippet', array( $this, 'ajax_toggle_snippet' ) );
+		Hook_Registry::add_action( 'wp_ajax_ata_toggle_snippet', array( $this, 'ajax_toggle_snippet' ) );
 	}
 
 	/**

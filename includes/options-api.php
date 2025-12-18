@@ -178,7 +178,7 @@ function ata_settings_defaults() {
 	$options = array();
 
 	// Populate some default values.
-	foreach ( \WebberZone\Snippetz\Admin\Settings\Settings::get_registered_settings() as $tab => $settings ) {
+	foreach ( \WebberZone\Snippetz\Admin\Settings::get_registered_settings() as $tab => $settings ) {
 		foreach ( $settings as $option ) {
 			// When checkbox is set to true, set this to 1.
 			if ( 'checkbox' === $option['type'] && ! empty( $option['options'] ) ) {
@@ -297,4 +297,4 @@ function ata_tag_search() {
 	echo wp_json_encode( $results );
 	wp_die();
 }
-add_action( 'wp_ajax_ata_tag_search', 'ata_tag_search' );
+\WebberZone\Snippetz\Util\Hook_Registry::add_action( 'wp_ajax_ata_tag_search', 'ata_tag_search' );

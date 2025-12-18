@@ -11,6 +11,7 @@ namespace WebberZone\Snippetz\Frontend\Blocks;
 
 use WebberZone\Snippetz\Snippets\Functions;
 use WebberZone\Snippetz\Util\Helpers;
+use WebberZone\Snippetz\Util\Hook_Registry;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -28,7 +29,7 @@ class Blocks {
 	 * Main constructor.
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'register_blocks' ) );
+		Hook_Registry::add_action( 'init', array( $this, 'register_blocks' ) );
 	}
 
 	/**
