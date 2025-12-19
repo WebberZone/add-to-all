@@ -969,7 +969,7 @@ class Settings_API {
 	 * Shows all the settings section labels as tab
 	 */
 	public function show_navigation() {
-		$active_tab = isset( $_GET['tab'] ) && array_key_exists( sanitize_key( wp_unslash( $_GET['tab'] ) ), $this->settings_sections ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general'; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
+		$active_tab = isset( $_GET['tab'] ) && array_key_exists( sanitize_key( wp_unslash( $_GET['tab'] ) ), $this->settings_sections ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : $this->default_tab; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
 
 		$html = '<ul class="nav-tab-wrapper" style="padding:0">';
 
@@ -984,9 +984,13 @@ class Settings_API {
 
 			$active = $active_tab === $tab_id ? ' ' : '';
 
-			$html .= '<li style="padding:0; border:0; margin:0;"><a href="#' . esc_attr( $tab_id ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab ' . sanitize_html_class( $active ) . '">';
-			$html .= esc_html( $tab_name );
-			$html .= '</a></li>';
+			$html .= sprintf(
+				'<li style="padding:0; border:0; margin:0;"><a href="#%s" title="%s" class="nav-tab %s">%s</a></li>',
+				esc_attr( $tab_id ),
+				esc_attr( $tab_name ),
+				sanitize_html_class( $active ),
+				esc_html( $tab_name )
+			);
 
 		}
 
