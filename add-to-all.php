@@ -10,7 +10,7 @@
  * @author    Ajay D'Souza
  * @license   GPL-2.0+
  * @link      https://webberzone.com
- * @copyright 2012-2025 Ajay D'Souza
+ * @copyright 2012-2026 Ajay D'Souza
  *
  * @wordpress-plugin
  * Plugin Name: WebberZone Snippetz - Header, Body and Footer manager
