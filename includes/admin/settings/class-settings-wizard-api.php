@@ -297,7 +297,7 @@ class Settings_Wizard_API {
 				'endpoint' => 'category',
 				'strings'  => array(
 					// translators: %s: Search query.
-					'no_results' => esc_html__( 'No results found for "%s"', 'knowledgebase' ),
+					'no_results' => esc_html( $this->translation_strings['tom_select_no_results'] ),
 				),
 			)
 		);
