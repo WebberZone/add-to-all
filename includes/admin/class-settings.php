@@ -1019,4 +1019,60 @@ class Settings {
 		}
 		return $location;
 	}
+
+	/**
+	 * Default settings.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @return array Default settings.
+	 */
+	public static function settings_defaults() {
+		$defaults = array();
+
+		$settings = self::get_registered_settings();
+
+		// Populate some default values.
+		foreach ( $settings as $tab => $tab_settings ) {
+			foreach ( $tab_settings as $option ) {
+				/**
+				 * Skip settings that are not really settings.
+				 *
+				 * @param  array $non_setting_types Array of types which are not settings.
+				 */
+				$non_setting_types = apply_filters( self::$prefix . '_non_setting_types', array( 'header', 'descriptive_text' ) );
+
+				if ( in_array( $option['type'], $non_setting_types, true ) ) {
+					continue;
+				}
+
+				// Base default per type.
+				$defaults[ $option['id'] ] = ( 'checkbox' === $option['type'] ) ? 0 : '';
+
+				// Prefer the explicit 'default' key when provided.
+				if ( isset( $option['default'] ) ) {
+					$defaults[ $option['id'] ] = $option['default'];
+				} else {
+					// Back-compat for legacy configs that used 'options' to store default values for text-like fields.
+					if ( in_array( $option['type'], array( 'textarea', 'css', 'html', 'text', 'url', 'csv', 'color', 'numbercsv', 'postids', 'posttypes', 'number', 'wysiwyg', 'file', 'password' ), true ) && isset( $option['options'] ) ) {
+						$defaults[ $option['id'] ] = $option['options'];
+					}
+
+					// Back-compat: when checkbox used 'options' truthy to indicate checked by default.
+					if ( 'checkbox' === $option['type'] && ! empty( $option['options'] ) ) {
+						$defaults[ $option['id'] ] = 1;
+					}
+				}
+			}
+		}
+
+		/**
+		 * Filters the default settings array.
+		 *
+		 * @since 2.2.0
+		 *
+		 * @param array $defaults Default settings.
+		 */
+		return apply_filters( self::$prefix . '_settings_defaults', $defaults );
+	}
 }

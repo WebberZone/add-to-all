@@ -93,12 +93,3 @@ add_action( 'plugins_loaded', __NAMESPACE__ . '\load_wz_snippetz' );
  *----------------------------------------------------------------------------
  */
 require_once plugin_dir_path( __FILE__ ) . 'includes/options-api.php';
-
-/**
- * Declare $wz_snippetz_settings global so that it can be accessed in every function
- *
- * @since 1.0
- * @var $wz_snippetz_settings WebberZone Snippetz settings array.
- */
-global $wz_snippetz_settings;
-$wz_snippetz_settings = \ata_get_settings();
