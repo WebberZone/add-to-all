@@ -5,13 +5,13 @@
  * A reusable API class for creating multi-step settings wizards.
  * This class provides the framework for creating guided setup experiences.
  *
- * @package WebberZone\Snippetz
+ * @package WebberZone\Snippetz\Admin
  */
 
 namespace WebberZone\Snippetz\Admin\Settings;
 
 use WebberZone\Snippetz\Admin\Settings\Settings_Sanitize;
-use WebberZone\Snippetz\Util\Hook_Registry;
+use WebberZone\Snippetz\Admin\Settings\Settings_API;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -30,7 +30,7 @@ class Settings_Wizard_API {
 	 *
 	 * @var string
 	 */
-	public const VERSION = '1.0.0';
+	public const VERSION = Settings_API::VERSION;
 
 	/**
 	 * Settings sanitizer instance.
@@ -127,6 +127,7 @@ class Settings_Wizard_API {
 	 *     @type array  $translation_strings  Translation strings.
 	 *     @type string $page_slug            Wizard page slug.
 	 *     @type array  $menu_args           Menu arguments array with parent and capability.
+	 *     @type bool   $hide_when_completed Whether to hide the wizard submenu item after completion.
 	 * }
 	 */
 	public function __construct( $settings_key, $prefix, $args = array() ) {
@@ -139,6 +140,7 @@ class Settings_Wizard_API {
 			'translation_strings' => array(),
 			'admin_menu_position' => 999,
 			'page_slug'           => "{$prefix}_wizard",
+			'hide_when_completed' => true,
 			'menu_args'           => array(
 				'parent'     => '', // Empty for dashboard, or parent slug for submenu.
 				'capability' => 'manage_options',
@@ -175,9 +177,9 @@ class Settings_Wizard_API {
 	 * Adds the functions to the appropriate WordPress hooks.
 	 */
 	public function hooks() {
-		Hook_Registry::add_action( 'admin_menu', array( $this, 'admin_menu' ), $this->args['admin_menu_position'] );
-		Hook_Registry::add_action( 'admin_init', array( $this, 'process_step' ) );
-		Hook_Registry::add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ), $this->args['admin_menu_position'] );
+		add_action( 'admin_init', array( $this, 'process_step' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**
@@ -195,6 +197,7 @@ class Settings_Wizard_API {
 			'finish_setup'          => 'Finish Setup',
 			'skip_wizard'           => 'Skip Wizard',
 			'step_of'               => 'Step %1$d of %2$d',
+			'steps_nav_aria_label'  => 'Setup Wizard Steps',
 			'wizard_complete'       => 'Wizard Complete!',
 			'setup_complete'        => 'Setup has been completed successfully.',
 			'go_to_settings'        => 'Go to Settings',
@@ -224,13 +227,38 @@ class Settings_Wizard_API {
 		$parent     = ! empty( $this->menu_args['parent'] ) ? $this->menu_args['parent'] : 'index.php';
 
 		$this->page_id = add_submenu_page(
-			$this->is_wizard_completed() ? 'options.php' : $parent,
-			$this->translation_strings['page_title'],
-			$this->translation_strings['menu_title'],
+			$parent,
+			(string) $this->translation_strings['page_title'],
+			(string) $this->translation_strings['menu_title'],
 			$capability,
 			$this->page_slug,
 			array( $this, 'render_wizard_page' )
 		);
+
+		$hide_when_completed = isset( $this->args['hide_when_completed'] ) ? (bool) $this->args['hide_when_completed'] : true;
+		if ( $hide_when_completed && $this->is_wizard_completed() ) {
+			add_action( 'admin_head', array( $this, 'hide_completed_wizard_submenu' ) );
+		}
+	}
+
+	/**
+	 * Hide wizard submenu item when the wizard is completed.
+	 *
+	 * @return void
+	 */
+	public function hide_completed_wizard_submenu() {
+		if ( ! $this->is_wizard_completed() ) {
+			return;
+		}
+		$slug = sanitize_key( $this->page_slug );
+		?>
+		<style>
+			#adminmenu a[href$="page=<?php echo esc_attr( $slug ); ?>"],
+			#adminmenu a[href*="page=<?php echo esc_attr( $slug ); ?>&"] {
+				display: none;
+			}
+		</style>
+		<?php
 	}
 
 	/**
@@ -245,14 +273,6 @@ class Settings_Wizard_API {
 
 		$minimize = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-		// Core scripts and styles.
-		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_media();
-		wp_enqueue_script( 'wp-color-picker' );
-		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'jquery-ui-autocomplete' );
-		wp_enqueue_script( 'jquery-ui-tabs' );
-
 		// Wizard styles.
 		wp_enqueue_style(
 			"{$this->prefix}-wizard-css",
@@ -261,6 +281,9 @@ class Settings_Wizard_API {
 			$this->get_version(),
 			'all'
 		);
+
+		// Use Settings_API to enqueue common scripts and styles.
+		Settings_API::enqueue_scripts_styles( $this->prefix );
 
 		// Tom Select assets for taxonomy fields.
 		wp_register_style(
@@ -290,7 +313,7 @@ class Settings_Wizard_API {
 		// Localize Tom Select settings for wizard.
 		wp_localize_script(
 			'wz-' . $this->prefix . '-tom-select-init',
-			'WZKBTomSelectSettings',
+			"{$this->prefix}TomSelectSettings",
 			array(
 				'action'   => $this->prefix . '_taxonomy_search_tom_select',
 				'nonce'    => wp_create_nonce( $this->prefix . '_taxonomy_search_tom_select' ),
@@ -450,12 +473,14 @@ class Settings_Wizard_API {
 	 * @param int $step Step number to redirect to.
 	 */
 	protected function redirect_to_step( $step ) {
-		$url = add_query_arg(
+		$parent = ! empty( $this->menu_args['parent'] ) ? $this->menu_args['parent'] : 'admin.php';
+		$base   = admin_url( $parent );
+		$url    = add_query_arg(
 			array(
 				'page' => $this->page_slug,
 				'step' => $step,
 			),
-			admin_url( 'admin.php' )
+			$base
 		);
 		wp_safe_redirect( $url );
 		exit;
@@ -617,25 +642,7 @@ class Settings_Wizard_API {
 							<table class="form-table">
 								<?php
 								foreach ( $step_config['settings'] as $setting_id => $field ) {
-									$args = wp_parse_args(
-										$field,
-										array(
-											'id'          => null,
-											'name'        => '',
-											'desc'        => '',
-											'type'        => null,
-											'default'     => '',
-											'options'     => '',
-											'max'         => null,
-											'min'         => null,
-											'step'        => null,
-											'size'        => null,
-											'field_class' => '',
-											'field_attributes' => '',
-											'placeholder' => '',
-											'pro'         => false,
-										)
-									);
+									$args = Settings_API::parse_field_args( $field );
 
 									// Get all settings from the main settings array.
 									$all_settings = get_option( $this->settings_key, array() );
@@ -696,6 +703,15 @@ class Settings_Wizard_API {
 	}
 
 	/**
+	 * Get the skip wizard link URL.
+	 *
+	 * @return string Skip wizard link URL.
+	 */
+	protected function get_skip_link_url() {
+		return admin_url( 'index.php' );
+	}
+
+	/**
 	 * Render wizard navigation buttons.
 	 */
 	protected function render_wizard_buttons() {
@@ -717,9 +733,9 @@ class Settings_Wizard_API {
 				</button>
 			<?php endif; ?>
 
-			<button type="submit" name="wizard_action" value="skip_wizard" class="button button-link">
+			<a href="<?php echo esc_url( $this->get_skip_link_url() ); ?>" class="button wizard-button-skip">
 				<?php echo esc_html( $this->translation_strings['skip_wizard'] ); ?>
-			</button>
+			</a>
 		</div>
 		<?php
 	}
@@ -826,7 +842,7 @@ class Settings_Wizard_API {
 	protected function render_wizard_steps_navigation() {
 		$step_keys = array_keys( $this->steps );
 		?>
-		<ol class="wizard-steps-nav" role="tablist" aria-label="<?php esc_attr_e( 'Setup Wizard Steps', 'knowledgebase' ); ?>">
+		<ol class="wizard-steps-nav" role="tablist" aria-label="<?php echo esc_attr( $this->translation_strings['steps_nav_aria_label'] ?? 'Setup Wizard Steps' ); ?>">
 			<?php
 			foreach ( $step_keys as $index => $step_key ) :
 				$step_number  = $index + 1;
@@ -845,14 +861,39 @@ class Settings_Wizard_API {
 				$class = implode( ' ', $class_parts );
 				?>
 				<li class="<?php echo esc_attr( $class ); ?>"<?php echo $aria_current; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-					<span class="step-number"><?php echo esc_html( (string) $step_number ); ?></span>
-					<span class="step-name"><?php echo esc_html( $step_config['title'] ?? '' ); ?></span>
+					<?php if ( $is_completed ) : ?>
+						<a href="<?php echo esc_url( $this->get_step_url( $step_number ) ); ?>" class="step-link">
+							<span class="step-number"><?php echo esc_html( (string) $step_number ); ?></span>
+							<span class="step-name"><?php echo esc_html( $step_config['title'] ?? '' ); ?></span>
+						</a>
+					<?php else : ?>
+						<span class="step-number"><?php echo esc_html( (string) $step_number ); ?></span>
+						<span class="step-name"><?php echo esc_html( $step_config['title'] ?? '' ); ?></span>
+					<?php endif; ?>
 				</li>
 				<?php
 			endforeach;
 			?>
 		</ol>
 		<?php
+	}
+
+	/**
+	 * Get the URL for a specific wizard step.
+	 *
+	 * @param int $step Step number.
+	 * @return string Step URL.
+	 */
+	protected function get_step_url( $step ) {
+		$parent = ! empty( $this->menu_args['parent'] ) ? $this->menu_args['parent'] : 'admin.php';
+		$base   = admin_url( $parent );
+		return add_query_arg(
+			array(
+				'page' => $this->page_slug,
+				'step' => $step,
+			),
+			$base
+		);
 	}
 
 	/**

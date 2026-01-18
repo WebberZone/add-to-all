@@ -4,7 +4,7 @@
  *
  * @link  https://webberzone.com
  *
- * @package WebberZone\Snippetz
+ * @package WebberZone\Snippetz\Admin
  */
 
 namespace WebberZone\Snippetz\Admin\Settings;

@@ -2,7 +2,7 @@
 /**
  * Sidebar template.
  *
- * @package WebberZone\Add_To_All
+ * @package WebberZone\Snippetz\Admin
  */
 
 ?>

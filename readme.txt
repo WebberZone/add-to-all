@@ -99,6 +99,12 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 == Changelog ==
 
+= 2.3.0 =
+
+
+* Improvements:
+	* Updated to latest version of WebberZone Settings API
+
 = 2.2.0 =
 
 * Bug fixes:

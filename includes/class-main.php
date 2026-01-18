@@ -27,20 +27,20 @@ final class Main {
 	private static $instance;
 
 	/**
-	 * Settings.
+	 * Admin.
 	 *
-	 * @since 2.0.0
+	 * @since 2.3.0
 	 *
-	 * @var object Settings API.
+	 * @var Admin\Admin Admin class.
 	 */
-	public $settings;
+	public $admin;
 
 	/**
 	 * Shortcodes.
 	 *
 	 * @since 2.0.0
 	 *
-	 * @var object Shortcodes.
+	 * @var Frontend\Shortcodes Shortcodes.
 	 */
 	public $shortcodes;
 
@@ -49,7 +49,7 @@ final class Main {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @var object Snippets.
+	 * @var Snippets\Snippets Snippets.
 	 */
 	public $snippets;
 
@@ -58,7 +58,7 @@ final class Main {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @var object Site verification.
+	 * @var Frontend\Site_Verification Site verification.
 	 */
 	public $site_verification;
 
@@ -67,7 +67,7 @@ final class Main {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @var object Third party functions.
+	 * @var Frontend\Third_Party Third party functions.
 	 */
 	public $third_party;
 
@@ -76,9 +76,10 @@ final class Main {
 	 *
 	 * @since 2.1.0
 	 *
-	 * @var object Blocks.
+	 * @var Frontend\Blocks\Blocks Blocks.
 	 */
 	public $blocks;
+
 
 	/**
 	 * Gets the instance of the class.
@@ -111,14 +112,17 @@ final class Main {
 	 * @since 2.0.0
 	 */
 	private function init() {
-		$this->settings          = new \WebberZone\Snippetz\Admin\Settings();
-		$this->shortcodes        = new \WebberZone\Snippetz\Frontend\Shortcodes();
-		$this->site_verification = new \WebberZone\Snippetz\Frontend\Site_Verification();
-		$this->third_party       = new \WebberZone\Snippetz\Frontend\Third_Party();
-		$this->blocks            = new \WebberZone\Snippetz\Frontend\Blocks\Blocks();
+		$this->shortcodes        = new Frontend\Shortcodes();
+		$this->site_verification = new Frontend\Site_Verification();
+		$this->third_party       = new Frontend\Third_Party();
+		$this->blocks            = new Frontend\Blocks\Blocks();
 
-		if ( \WebberZone\Snippetz\Util\Helpers::is_snippets_enabled() ) {
-			$this->snippets = new \WebberZone\Snippetz\Snippets\Snippets();
+		if ( is_admin() ) {
+			$this->admin = new Admin\Admin();
+		}
+
+		if ( Util\Helpers::is_snippets_enabled() ) {
+			$this->snippets = new Snippets\Snippets();
 		}
 
 		$this->hooks();
@@ -429,7 +433,7 @@ final class Main {
 	 * @return string $output Output string.
 	 */
 	public function process_placeholders( $input ) {
-		$output = \WebberZone\Snippetz\Util\Helpers::process_placeholders( $input );
+		$output = Util\Helpers::process_placeholders( $input );
 		return $output;
 	}
 }

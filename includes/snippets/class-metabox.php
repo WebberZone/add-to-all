@@ -53,6 +53,7 @@ class Metabox {
 		$this->prefix       = 'ata';
 
 		Hook_Registry::add_action( 'admin_menu', array( $this, 'initialise_metabox_api' ) );
+		Hook_Registry::add_action( 'ata_meta_box', array( $this, 'display_snippet_stats' ) );
 	}
 
 	/**
@@ -63,12 +64,16 @@ class Metabox {
 	public function initialise_metabox_api() {
 		$this->metabox_api = new \WebberZone\Snippetz\Admin\Settings\Metabox_API(
 			array(
-				'settings_key'           => $this->settings_key,
-				'prefix'                 => $this->prefix,
-				'post_type'              => 'ata_snippets',
-				'title'                  => __( 'WebberZone Snippetz', 'add-to-all' ),
-				'registered_settings'    => $this->get_registered_settings(),
-				'checkbox_modified_text' => __( 'Modified from default', 'add-to-all' ),
+				'settings_key'        => $this->settings_key,
+				'prefix'              => $this->prefix,
+				'post_type'           => 'ata_snippets',
+				'title'               => __( 'WebberZone Snippetz', 'add-to-all' ),
+				'registered_settings' => $this->get_registered_settings(),
+				'translation_strings' => array(
+					'checkbox_modified'     => __( 'Modified from default', 'add-to-all' ),
+					/* translators: %s: Search term */
+					'tom_select_no_results' => __( 'No results found for "%s"', 'add-to-all' ),
+				),
 			)
 		);
 	}
@@ -86,7 +91,7 @@ class Metabox {
 				'name'    => __( 'Disable Snippet', 'add-to-all' ),
 				'desc'    => __( 'When enabled the snippet will not be displayed.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'options' => false,
+				'default' => false,
 			),
 			'snippet_type'         => array(
 				'id'      => 'snippet_type',
@@ -111,28 +116,28 @@ class Metabox {
 				'name'    => __( 'Add to Header', 'add-to-all' ),
 				'desc'    => '',
 				'type'    => 'checkbox',
-				'options' => false,
+				'default' => false,
 			),
 			'add_to_footer'        => array(
 				'id'      => 'add_to_footer',
 				'name'    => __( 'Add to Footer', 'add-to-all' ),
 				'desc'    => '',
 				'type'    => 'checkbox',
-				'options' => false,
+				'default' => false,
 			),
 			'content_before'       => array(
 				'id'      => 'content_before',
 				'name'    => __( 'Add before Content', 'add-to-all' ),
 				'desc'    => __( 'When enabled the contents of this snippet are automatically added before the content of posts based on the selection below.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'options' => false,
+				'default' => false,
 			),
 			'content_after'        => array(
 				'id'      => 'content_after',
 				'name'    => esc_html__( 'Add after Content', 'add-to-all' ),
 				'desc'    => esc_html__( 'When enabled the contents of this snippet are automatically added after the content of posts based on the selection below.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'options' => false,
+				'default' => false,
 			),
 			'step2_header'         => array(
 				'id'   => 'step2_header',
@@ -156,7 +161,7 @@ class Metabox {
 				'name'    => esc_html__( 'Include on these post types', 'add-to-all' ),
 				'desc'    => esc_html__( 'Select on which post types to display the contents of this snippet.', 'add-to-all' ),
 				'type'    => 'posttypes',
-				'options' => '',
+				'default' => '',
 			),
 			'include_on_posts'     => array(
 				'id'      => 'include_on_posts',
@@ -164,14 +169,14 @@ class Metabox {
 				'desc'    => esc_html__( 'Enter a comma-separated list of post, page or custom post type IDs on which to include the code. Any incorrect ids will be removed when saving.', 'add-to-all' ),
 				'size'    => 'large',
 				'type'    => 'postids',
-				'options' => '',
+				'default' => '',
 			),
 			'include_on_category'  => array(
 				'id'               => 'include_on_category',
 				'name'             => esc_html__( 'Include on these Categories', 'add-to-all' ),
 				'desc'             => esc_html__( 'Comma separated list of category slugs. The field above has an autocomplete so simply start typing in the starting letters and it will prompt you with options. Does not support custom taxonomies.', 'add-to-all' ),
 				'type'             => 'csv',
-				'options'          => '',
+				'default'          => '',
 				'size'             => 'large',
 				'field_class'      => 'category_autocomplete',
 				'field_attributes' => array(
@@ -183,7 +188,7 @@ class Metabox {
 				'name'             => esc_html__( 'Include on these Tags', 'add-to-all' ),
 				'desc'             => esc_html__( 'Comma separated list of tag slugs. The field above has an autocomplete so simply start typing in the starting letters and it will prompt you with options. Does not support custom taxonomies.', 'add-to-all' ),
 				'type'             => 'csv',
-				'options'          => '',
+				'default'          => '',
 				'size'             => 'large',
 				'field_class'      => 'category_autocomplete',
 				'field_attributes' => array(
@@ -204,7 +209,6 @@ class Metabox {
 				'size'    => 'small',
 				'min'     => 0,
 				'default' => 10,
-				'options' => '',
 			),
 		);
 
@@ -216,5 +220,54 @@ class Metabox {
 		$settings = apply_filters( $this->prefix . '_metabox_settings', $settings );
 
 		return $settings;
+	}
+
+	/**
+	 * Display stats about the current snippet.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param \WP_Post $post Post object.
+	 */
+	public function display_snippet_stats( $post ) {
+		$snippet_type = get_post_meta( $post->ID, '_ata_snippet_type', true );
+
+		if ( ! in_array( $snippet_type, array( 'css', 'js' ), true ) ) {
+			return;
+		}
+
+		$file_url = get_post_meta( $post->ID, '_ata_snippet_file', true );
+
+		if ( ! $file_url ) {
+			return;
+		}
+
+		$upload_dir = wp_upload_dir();
+		$file_path  = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $file_url );
+
+		if ( ! file_exists( $file_path ) ) {
+			return;
+		}
+
+		$size  = filesize( $file_path );
+		$mtime = filemtime( $file_path );
+		?>
+		<div class="ata-snippet-stats" style="margin-top: 10px; padding: 10px; background: #f0f0f1; border: 1px solid #c3c4c7;">
+			<p>
+				<strong><?php esc_html_e( 'Snippet File Stats:', 'add-to-all' ); ?></strong>
+				<br />
+				<?php
+				/* translators: %s: File URL */
+				printf( esc_html__( 'URL: %s', 'add-to-all' ), '<a href="' . esc_url( $file_url ) . '" target="_blank">' . esc_html( $file_url ) . '</a>' );
+				echo '<br />';
+				/* translators: %s: File size */
+				printf( esc_html__( 'Size: %s', 'add-to-all' ), esc_html( size_format( $size, 2 ) ) );
+				echo '<br />';
+				/* translators: %s: Last Modified */
+				printf( esc_html__( 'Last Modified: %s', 'add-to-all' ), esc_html( date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $mtime ) ) );
+				?>
+			</p>
+		</div>
+		<?php
 	}
 }

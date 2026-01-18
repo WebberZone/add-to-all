@@ -14,7 +14,7 @@
  *
  * @wordpress-plugin
  * Plugin Name: WebberZone Snippetz - Header, Body and Footer manager
- * Version:     2.2.0
+ * Version:     2.3.0-beta1
  * Plugin URI:  https://webberzone.com/plugins/add-to-all/
  * Description: A simple yet powerful plugin that allows you to insert any code snippet or script into WordPress.
  * Author:      Ajay D'Souza
@@ -32,47 +32,18 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 if ( ! defined( 'WZ_SNIPPETZ_VERSION' ) ) {
-	/**
-	 * Holds the version of WebberZone Snippetz.
-	 *
-	 * @since 1.8.0
-	 *
-	 * @var string $WZ_SNIPPETZ_VERSION WebberZone Snippetz version.
-	 */
-	define( 'WZ_SNIPPETZ_VERSION', '2.2.0' );
+	define( 'WZ_SNIPPETZ_VERSION', '2.3.0-beta1' );
 }
 
-
 if ( ! defined( 'WZ_SNIPPETZ_FILE' ) ) {
-	/**
-	 * Holds the plugin file path
-	 *
-	 * @since 1.2.0
-	 *
-	 * @var string $WZ_SNIPPETZ_FILE Plugin Root File
-	 */
 	define( 'WZ_SNIPPETZ_FILE', __FILE__ );
 }
 
 if ( ! defined( 'WZ_SNIPPETZ_DIR' ) ) {
-	/**
-	 * Holds the filesystem directory path (with trailing slash)
-	 *
-	 * @since 1.2.0
-	 *
-	 * @var string $WZ_SNIPPETZ_DIR Plugin folder path
-	 */
 	define( 'WZ_SNIPPETZ_DIR', plugin_dir_path( WZ_SNIPPETZ_FILE ) );
 }
 
 if ( ! defined( 'WZ_SNIPPETZ_URL' ) ) {
-	/**
-	 * Holds the URL directory path (with trailing slash)
-	 *
-	 * @since 1.2.0
-	 *
-	 * @var string $WZ_SNIPPETZ_URL Plugin folder URL
-	 */
 	define( 'WZ_SNIPPETZ_URL', plugin_dir_url( WZ_SNIPPETZ_FILE ) );
 }
 
@@ -82,10 +53,10 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/autoloader.php';
 /**
  * The main function responsible for returning the one true WebberZone Snippetz instance to functions everywhere.
  */
-function load_wz_snippetz() {
+function load() {
 	\WebberZone\Snippetz\Main::get_instance();
 }
-add_action( 'plugins_loaded', __NAMESPACE__ . '\load_wz_snippetz' );
+add_action( 'plugins_loaded', __NAMESPACE__ . '\load' );
 
 /*
  *----------------------------------------------------------------------------

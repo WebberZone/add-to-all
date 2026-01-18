@@ -75,10 +75,6 @@ class Blocks {
 			)
 		);
 
-		if ( 'js' === $snippet_type || 'css' === $snippet_type ) {
-			$output = Functions::wrap_output( $output, $snippet_type );
-		}
-
 		return $output;
 	}
 }
