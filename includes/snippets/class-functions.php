@@ -641,16 +641,16 @@ class Functions {
 		$filename  = Minifier::get_snippet_filename( $post_id, $type );
 		$file_path = Minifier::get_snippet_path( $post_id, $type );
 
-		// Delete old file if exists.
-		$old_url = get_post_meta( $post_id, '_ata_snippet_file', true );
-		Minifier::delete_snippet_file_by_url( $old_url );
-
 		$written = Minifier::write_snippet_file( $file_path, $minified );
 		if ( ! $written ) {
 			return;
 		}
 
-		$url = Minifier::get_snippet_url( $post_id, $type );
+		$old_url = get_post_meta( $post_id, '_ata_snippet_file', true );
+		$url     = Minifier::get_snippet_url( $post_id, $type );
+		if ( $old_url && $old_url !== $url ) {
+			Minifier::delete_snippet_file_by_url( $old_url );
+		}
 		update_post_meta( $post_id, '_ata_snippet_file', $url );
 
 		// Regenerate combined files if enabled and snippet has location assignment.
