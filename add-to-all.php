@@ -50,6 +50,12 @@ if ( ! defined( 'WZ_SNIPPETZ_URL' ) ) {
 // Load the autoloader.
 require_once plugin_dir_path( __FILE__ ) . 'includes/autoloader.php';
 
+// Load Composer dependencies if available.
+$composer_autoload = plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+if ( file_exists( $composer_autoload ) ) {
+	require_once $composer_autoload;
+}
+
 /**
  * The main function responsible for returning the one true WebberZone Snippetz instance to functions everywhere.
  */

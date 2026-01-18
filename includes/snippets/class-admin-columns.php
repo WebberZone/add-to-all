@@ -67,6 +67,9 @@ class Admin_Columns {
 			if ( 'title' === $key ) {
 				$new_columns['type']      = __( 'Type', 'add-to-all' );
 				$new_columns['shortcode'] = __( 'Shortcode', 'add-to-all' );
+				if ( ata_get_option( 'enable_external_css_js' ) ) {
+					$new_columns['external_file'] = __( 'External File', 'add-to-all' );
+				}
 			}
 		}
 
@@ -139,6 +142,38 @@ class Admin_Columns {
 				);
 
 				echo trim( $output ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				break;
+
+			case 'external_file':
+				$snippet_type = Functions::get_snippet_type( get_post( $post_id ) );
+				if ( ! in_array( $snippet_type, array( 'css', 'js' ), true ) ) {
+					echo '&mdash;'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					break;
+				}
+
+				$file_url   = get_post_meta( $post_id, '_ata_snippet_file', true );
+				$type_label = ( 'css' === $snippet_type ) ? 'CSS' : 'JS';
+				if ( $file_url ) {
+					$link_text = sprintf(
+						/* translators: %s: Snippet type (CSS or JS). */
+						__( 'View %s file', 'add-to-all' ),
+						$type_label
+					);
+					$link_label = sprintf(
+						/* translators: 1: Snippet type (CSS or JS). 2: Snippet title. */
+						__( 'View %1$s file for %2$s', 'add-to-all' ),
+						$type_label,
+						get_the_title( $post_id )
+					);
+					printf(
+						'<a class="ata-snippet-file-link" href="%1$s" target="_blank" rel="noopener noreferrer" title="%2$s" aria-label="%2$s">%3$s</a>',
+						esc_url( $file_url ),
+						esc_attr( $link_label ),
+						esc_html( $link_text )
+					);
+				} else {
+					echo esc_html__( 'File not generated', 'add-to-all' );
+				}
 				break;
 
 			default:

@@ -8,6 +8,7 @@
 namespace WebberZone\Snippetz\Admin;
 
 use WebberZone\Snippetz\Util\Hook_Registry;
+use WebberZone\Snippetz\Snippets\Minifier;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -34,10 +35,10 @@ class Tools_Page {
 	public function __construct() {
 		Hook_Registry::add_action( 'admin_menu', array( $this, 'add_tools_page' ) );
 		Hook_Registry::add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+		Hook_Registry::add_action( 'admin_post_ata_clear_assets', array( $this, 'clear_assets' ) );
 		Hook_Registry::add_action( 'admin_post_ata_regenerate_combined', array( $this, 'regenerate_combined' ) );
 		Hook_Registry::add_action( 'admin_post_ata_export_settings', array( $this, 'process_settings_export' ) );
 		Hook_Registry::add_action( 'admin_post_ata_import_settings', array( $this, 'process_settings_import' ) );
-		Hook_Registry::add_action( 'wp_ajax_ata_clear_cache', array( $this, 'clear_cache_ajax' ) );
 	}
 
 	/**
@@ -104,7 +105,7 @@ class Tools_Page {
 						);
 
 						foreach ( $files as $type => $file ) {
-							$stats = \WebberZone\Snippetz\Snippets\Minifier::get_file_stats( $file['filename'] );
+							$stats = Minifier::get_file_stats( $file['filename'] );
 							?>
 							<p><strong><?php echo esc_html( $file['title'] ); ?>:</strong>
 							<?php if ( $stats ) : ?>
@@ -128,14 +129,16 @@ class Tools_Page {
 				<div class="postbox">
 					<h2><span><?php esc_html_e( 'Clear Generated Assets', 'add-to-all' ); ?></span></h2>
 					<div class="inside">
-						<p>
-							<button type="button" name="cache_clear" id="cache_clear" class="button button-secondary">
-								<?php esc_html_e( 'Clear generated assets', 'add-to-all' ); ?>
-							</button>
-						</p>
-						<p class="description">
-						<?php esc_html_e( 'Clear the WebberZone Snippetz cache. This will clear all cached CSS and JS files.', 'add-to-all' ); ?>
-						</p>
+						<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+							<?php wp_nonce_field( 'ata_clear_assets' ); ?>
+							<input type="hidden" name="action" value="ata_clear_assets">
+							<p>
+								<?php submit_button( esc_html__( 'Clear generated assets', 'add-to-all' ), 'secondary', 'cache_clear', false ); ?>
+							</p>
+							<p class="description">
+							<?php esc_html_e( 'Clear the WebberZone Snippetz cache. This will clear all cached CSS and JS files.', 'add-to-all' ); ?>
+							</p>
+						</form>
 					</div>
 				</div>
 
@@ -244,8 +247,8 @@ class Tools_Page {
 
 		check_admin_referer( 'ata_regenerate_combined' );
 
-		\WebberZone\Snippetz\Snippets\Minifier::save_combined_css();
-		\WebberZone\Snippetz\Snippets\Minifier::save_combined_js();
+		Minifier::save_combined_css();
+		Minifier::save_combined_js();
 
 		if ( \WebberZone\Snippetz\Util\Helpers::is_snippets_enabled() ) {
 			$redirect_url = admin_url( 'edit.php?post_type=ata_snippets&page=ata_tools' );
@@ -342,42 +345,20 @@ class Tools_Page {
 
 		if ( $this->parent_id === $screen->id || $this->parent_id === $hook ) {
 			wp_enqueue_style( 'wp-spinner' );
-
-			wp_enqueue_script(
-				'ata-tools-js',
-				plugins_url( 'includes/admin/js/tools.js', WZ_SNIPPETZ_FILE ),
-				array( 'jquery' ),
-				WZ_SNIPPETZ_VERSION,
-				true
-			);
-
-			wp_localize_script(
-				'ata-tools-js',
-				'ata_tools_data',
-				array(
-					'nonce'   => wp_create_nonce( 'ata_clear_cache_nonce' ),
-					'strings' => array(
-						'confirm_clear' => __( 'Are you sure you want to clear the generated assets?', 'add-to-all' ),
-						'clearing'      => __( 'Clearing...', 'add-to-all' ),
-						'cleared'       => __( 'Assets Cleared!', 'add-to-all' ),
-						'error'         => __( 'Error clearing assets. Please try again.', 'add-to-all' ),
-					),
-				)
-			);
 		}
 	}
 
 	/**
-	 * Clear cache via AJAX.
+	 * Clear generated assets and cached data.
 	 *
 	 * @since 2.3.0
 	 */
-	public function clear_cache_ajax() {
-		check_ajax_referer( 'ata_clear_cache_nonce', 'security' );
-
+	public function clear_assets() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( esc_html__( 'You do not have permission to perform this action.', 'add-to-all' ) );
 		}
+
+		check_admin_referer( 'ata_clear_assets' );
 
 		// Clear all cache transients.
 		$cache_keys = array(
@@ -390,14 +371,21 @@ class Tools_Page {
 			delete_transient( $key );
 		}
 
-		// Regenerate combined files.
-		\WebberZone\Snippetz\Snippets\Minifier::save_combined_css();
-		\WebberZone\Snippetz\Snippets\Minifier::save_combined_js();
+		// Clear stored combined file URLs.
+		delete_option( 'ata_combined_css_url' );
+		delete_option( 'ata_combined_js_url' );
 
-		wp_send_json_success(
-			array(
-				'message' => esc_html__( 'Cache cleared successfully!', 'add-to-all' ),
-			)
-		);
+		// Delete all generated files.
+		Minifier::delete_generated_files();
+		Minifier::clear_snippet_file_meta();
+
+		if ( \WebberZone\Snippetz\Util\Helpers::is_snippets_enabled() ) {
+			$redirect_url = admin_url( 'edit.php?post_type=ata_snippets&page=ata_tools' );
+		} else {
+			$redirect_url = admin_url( 'tools.php?page=ata_tools' );
+		}
+
+		wp_safe_redirect( $redirect_url );
+		exit;
 	}
 }

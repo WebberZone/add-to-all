@@ -37,7 +37,7 @@ class Functions {
 		$priority = ata_get_option( 'snippet_priority', ata_get_option( 'content_filter_priority', 10 ) );
 		Hook_Registry::add_filter( 'the_content', array( $this, 'snippets_content' ), $priority );
 
-		Hook_Registry::add_action( 'save_post_ata_snippets', array( $this, 'save_snippet_file' ), 10, 3 );
+		Hook_Registry::add_action( 'save_post_ata_snippets', array( $this, 'save_snippet_file' ), 10, 2 );
 		Hook_Registry::add_action( 'before_delete_post', array( $this, 'delete_snippet_file' ) );
 	}
 
@@ -616,10 +616,9 @@ class Functions {
 	 *
 	 * @param int      $post_id Post ID.
 	 * @param \WP_Post $post    Post object.
-	 * @param bool     $update  Whether this is an update.
 	 */
-	public function save_snippet_file( $post_id, $post, $update ) {
-		if ( ! $update || 'ata_snippets' !== $post->post_type ) {
+	public function save_snippet_file( $post_id, $post ) {
+		if ( 'ata_snippets' !== $post->post_type ) {
 			return;
 		}
 
@@ -636,31 +635,35 @@ class Functions {
 		$content  = Helpers::process_placeholders( $content );
 		$minified = ( 'css' === $type ) ? Minifier::minify_css( $content ) : Minifier::minify_js( $content );
 
-		$upload_dir = wp_upload_dir();
-		$dir        = trailingslashit( $upload_dir['basedir'] ) . Minifier::UPLOAD_SUBDIR . '/';
+		$dir = Minifier::get_upload_path();
 		wp_mkdir_p( $dir );
 
-		$hash      = md5( $minified );
-		$filename  = 'snippet-' . $post_id . '-' . $hash . '.' . $type;
-		$file_path = $dir . $filename;
+		$filename  = Minifier::get_snippet_filename( $post_id, $type );
+		$file_path = Minifier::get_snippet_path( $post_id, $type );
 
 		// Delete old file if exists.
 		$old_url = get_post_meta( $post_id, '_ata_snippet_file', true );
-		if ( $old_url ) {
-			$old_path = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $old_url );
-			if ( file_exists( $old_path ) ) {
-				wp_delete_file( $old_path );
-			}
+		Minifier::delete_snippet_file_by_url( $old_url );
+
+		$written = Minifier::write_snippet_file( $file_path, $minified );
+		if ( ! $written ) {
+			return;
 		}
 
-		file_put_contents( $file_path, $minified ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
-		$url = trailingslashit( $upload_dir['baseurl'] ) . Minifier::UPLOAD_SUBDIR . '/' . $filename;
+		$url = Minifier::get_snippet_url( $post_id, $type );
 		update_post_meta( $post_id, '_ata_snippet_file', $url );
 
-		// Regenerate combined files if enabled.
+		// Regenerate combined files if enabled and snippet has location assignment.
 		if ( ata_get_option( 'enable_combination' ) ) {
-			\WebberZone\Snippetz\Snippets\Minifier::save_combined_css();
-			\WebberZone\Snippetz\Snippets\Minifier::save_combined_js();
+			$has_location = get_post_meta( $post_id, '_ata_add_to_header', true )
+				|| get_post_meta( $post_id, '_ata_add_to_footer', true )
+				|| get_post_meta( $post_id, '_ata_content_before', true )
+				|| get_post_meta( $post_id, '_ata_content_after', true );
+
+			if ( $has_location ) {
+				\WebberZone\Snippetz\Snippets\Minifier::save_combined_css();
+				\WebberZone\Snippetz\Snippets\Minifier::save_combined_js();
+			}
 		}
 	}
 
