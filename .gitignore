@@ -1,6 +1,8 @@
-# Ignore entire vendor except Freemius
+# Ignore vendor development dependencies and binaries, but allow production dependencies
 /vendor/*
-!/vendor/freemius/
+!/vendor/matthiasmullie/
+!/vendor/composer/
+!/vendor/autoload.php
 
 # Tooling
 /phpcompat-tools/
