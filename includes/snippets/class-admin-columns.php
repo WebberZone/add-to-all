@@ -151,7 +151,7 @@ class Admin_Columns {
 					break;
 				}
 
-				$file_url   = get_post_meta( $post_id, '_ata_snippet_file', true );
+				$file_url   = Functions::get_snippet_file_url( $post_id, $snippet_type );
 				$type_label = ( 'css' === $snippet_type ) ? 'CSS' : 'JS';
 				if ( $file_url ) {
 					$link_text = sprintf(

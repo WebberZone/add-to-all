@@ -324,7 +324,7 @@ class Minifier {
 			return;
 		}
 
-		self::save_combined_file( $content, 'combined.css', 'ata_combined_css_url' );
+		self::save_combined_file( $content, 'combined.min.css', 'ata_combined_css_url' );
 	}
 
 	/**
@@ -336,7 +336,7 @@ class Minifier {
 			return;
 		}
 
-		self::save_combined_file( $content, 'combined.js', 'ata_combined_js_url' );
+		self::save_combined_file( $content, 'combined.min.js', 'ata_combined_js_url' );
 	}
 
 	/**

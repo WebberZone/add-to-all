@@ -236,15 +236,13 @@ class Metabox {
 			return;
 		}
 
-		$file_url = get_post_meta( $post->ID, '_ata_snippet_file', true );
-
+		$file_url = Functions::get_snippet_file_url( $post->ID, $snippet_type );
 		if ( ! $file_url ) {
 			return;
 		}
 
 		$upload_dir = wp_upload_dir();
 		$file_path  = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $file_url );
-
 		if ( ! file_exists( $file_path ) ) {
 			return;
 		}

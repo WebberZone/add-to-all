@@ -292,10 +292,54 @@ class Functions {
 	 * @since 2.3.0
 	 */
 	public static function enqueue_snippets() {
+		self::enqueue_combined_assets();
 		self::get_snippets_content_by_location( 'header', '', '', -1, true );
 		self::get_snippets_content_by_location( 'footer', '', '', -1, true );
 		self::get_snippets_content_by_location( 'content_before', '', '', -1, true );
 		self::get_snippets_content_by_location( 'content_after', '', '', -1, true );
+	}
+
+	/**
+	 * Enqueue combined CSS/JS assets when enabled and available.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @return array<string,bool> Map of asset types to enqueue status.
+	 */
+	public static function enqueue_combined_assets() {
+		static $status = null;
+		if ( null !== $status ) {
+			return $status;
+		}
+
+		$status = array(
+			'css' => false,
+			'js'  => false,
+		);
+
+		if ( ! ata_get_option( 'enable_combination' ) ) {
+			return $status;
+		}
+
+		foreach ( array( 'css', 'js' ) as $type ) {
+			$stats = Minifier::get_file_stats( 'combined.min.' . $type );
+			if ( ! $stats ) {
+				continue;
+			}
+
+			$handle = 'ata-combined-' . $type;
+			$ver    = isset( $stats['mtime'] ) ? $stats['mtime'] : false;
+			if ( 'css' === $type && ! wp_style_is( $handle, 'enqueued' ) ) {
+				wp_enqueue_style( $handle, esc_url( $stats['url'] ), array(), $ver );
+				$status['css'] = true;
+			}
+			if ( 'js' === $type && ! wp_script_is( $handle, 'enqueued' ) ) {
+				wp_enqueue_script( $handle, esc_url( $stats['url'] ), array(), $ver, true );
+				$status['js'] = true;
+			}
+		}
+
+		return $status;
 	}
 
 	/**
@@ -376,10 +420,10 @@ class Functions {
 			// Process post IDs and post types.
 			$include_relation     = get_post_meta( $snippet->ID, '_ata_include_relation', true );
 			$include_relation     = ! empty( $include_relation ) ? $include_relation : 'or';
-			$include_on_posts     = get_post_meta( $snippet->ID, '_ata_include_on_posts', true );
-			$include_on_posts     = $include_on_posts ? explode( ',', $include_on_posts ) : array();
-			$include_on_posttypes = get_post_meta( $snippet->ID, '_ata_include_on_posttypes', true );
-			$include_on_posttypes = $include_on_posttypes ? explode( ',', $include_on_posttypes ) : array();
+			$include_on_posts     = wp_parse_list( get_post_meta( $snippet->ID, '_ata_include_on_posts', true ) );
+			$include_on_posts     = array_filter( $include_on_posts );
+			$include_on_posttypes = wp_parse_list( get_post_meta( $snippet->ID, '_ata_include_on_posttypes', true ) );
+			$include_on_posttypes = array_filter( $include_on_posttypes );
 
 			// Process taxonomies.
 			foreach ( $taxes as $tax ) {
@@ -470,7 +514,6 @@ class Functions {
 	 * @return string Filtered post content
 	 */
 	public static function snippets_content( $content ) {
-
 		$before = self::snippets_credit() . '<div class="ata_snippets">';
 		$after  = '</div>';
 
@@ -523,6 +566,43 @@ class Functions {
 	}
 
 	/**
+	 * Get the external file URL for a snippet if it exists.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param int    $snippet_id  Snippet ID.
+	 * @param string $snippet_type Snippet type.
+	 * @param bool   $update_meta Whether to update the snippet meta when the file exists.
+	 * @return string External file URL or empty string.
+	 */
+	public static function get_snippet_file_url( $snippet_id, $snippet_type, $update_meta = true ) {
+		if ( ! $snippet_id || ! in_array( $snippet_type, array( 'css', 'js' ), true ) ) {
+			return '';
+		}
+
+		$file_url = get_post_meta( $snippet_id, '_ata_snippet_file', true );
+		if ( $file_url ) {
+			$upload_dir = wp_upload_dir();
+			$file_path  = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $file_url );
+			if ( ! file_exists( $file_path ) ) {
+				$file_url = '';
+			}
+		}
+
+		if ( ! $file_url ) {
+			$file_path = Minifier::get_snippet_path( $snippet_id, $snippet_type );
+			if ( file_exists( $file_path ) ) {
+				$file_url = Minifier::get_snippet_url( $snippet_id, $snippet_type );
+				if ( $update_meta ) {
+					update_post_meta( $snippet_id, '_ata_snippet_file', $file_url );
+				}
+			}
+		}
+
+		return $file_url;
+	}
+
+	/**
 	 * Wrap output in style or script tags depending on snippet type.
 	 *
 	 * @param string $output The output to be wrapped.
@@ -537,28 +617,33 @@ class Functions {
 			return $output;
 		}
 
+		if ( ata_get_option( 'enable_combination' ) ) {
+			$combined_status = self::enqueue_combined_assets();
+			if ( ! empty( $combined_status[ $snippet_type ] ) ) {
+				return '';
+			}
+		}
+
 		$output = str_replace( self::snippets_credit(), '', $output );
 		$handle = 'ata-' . $snippet_type . '-' . $snippet_id;
 
 		// Check if external file is available.
-		if ( $snippet_id ) {
-			$file_url = get_post_meta( $snippet_id, '_ata_snippet_file', true );
+		if ( $snippet_id && ata_get_option( 'enable_external_css_js' ) ) {
+			$file_url = self::get_snippet_file_url( $snippet_id, $snippet_type );
 			if ( $file_url ) {
 				$upload_dir = wp_upload_dir();
 				$file_path  = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $file_url );
-				if ( file_exists( $file_path ) ) {
-					$ver = filemtime( $file_path );
-					if ( 'css' === $snippet_type ) {
-						if ( ! wp_style_is( $handle, 'enqueued' ) ) {
-							wp_enqueue_style( $handle, esc_url( $file_url ), array(), $ver );
-						}
-						return '';
-					} elseif ( 'js' === $snippet_type ) {
-						if ( ! wp_script_is( $handle, 'enqueued' ) ) {
-							wp_enqueue_script( $handle, esc_url( $file_url ), array(), $ver, $in_footer );
-						}
-						return '';
+				$ver        = file_exists( $file_path ) ? filemtime( $file_path ) : false;
+				if ( 'css' === $snippet_type ) {
+					if ( ! wp_style_is( $handle, 'enqueued' ) ) {
+						wp_enqueue_style( $handle, esc_url( $file_url ), array(), $ver );
 					}
+					return '';
+				} elseif ( 'js' === $snippet_type ) {
+					if ( ! wp_script_is( $handle, 'enqueued' ) ) {
+						wp_enqueue_script( $handle, esc_url( $file_url ), array(), $ver, $in_footer );
+					}
+					return '';
 				}
 			}
 		}
@@ -612,23 +697,26 @@ class Functions {
 	}
 
 	/**
-	 * Save snippet as external file if enabled.
+	 * Generate or update the external file for a snippet.
+	 *
+	 * @since 2.3.0
 	 *
 	 * @param int      $post_id Post ID.
 	 * @param \WP_Post $post    Post object.
+	 * @return bool True when file written, false otherwise.
 	 */
-	public function save_snippet_file( $post_id, $post ) {
+	protected static function generate_snippet_file( $post_id, $post ) {
 		if ( 'ata_snippets' !== $post->post_type ) {
-			return;
+			return false;
 		}
 
 		if ( ! ata_get_option( 'enable_external_css_js' ) ) {
-			return;
+			return false;
 		}
 
 		$type = get_post_meta( $post_id, '_ata_snippet_type', true );
 		if ( ! in_array( $type, array( 'css', 'js' ), true ) ) {
-			return;
+			return false;
 		}
 
 		$content  = get_post_field( 'post_content', $post_id );
@@ -638,12 +726,10 @@ class Functions {
 		$dir = Minifier::get_upload_path();
 		wp_mkdir_p( $dir );
 
-		$filename  = Minifier::get_snippet_filename( $post_id, $type );
 		$file_path = Minifier::get_snippet_path( $post_id, $type );
-
-		$written = Minifier::write_snippet_file( $file_path, $minified );
+		$written   = Minifier::write_snippet_file( $file_path, $minified );
 		if ( ! $written ) {
-			return;
+			return false;
 		}
 
 		$old_url = get_post_meta( $post_id, '_ata_snippet_file', true );
@@ -653,17 +739,59 @@ class Functions {
 		}
 		update_post_meta( $post_id, '_ata_snippet_file', $url );
 
-		// Regenerate combined files if enabled and snippet has location assignment.
-		if ( ata_get_option( 'enable_combination' ) ) {
-			$has_location = get_post_meta( $post_id, '_ata_add_to_header', true )
-				|| get_post_meta( $post_id, '_ata_add_to_footer', true )
-				|| get_post_meta( $post_id, '_ata_content_before', true )
-				|| get_post_meta( $post_id, '_ata_content_after', true );
+		return true;
+	}
 
-			if ( $has_location ) {
-				\WebberZone\Snippetz\Snippets\Minifier::save_combined_css();
-				\WebberZone\Snippetz\Snippets\Minifier::save_combined_js();
+	/**
+	 * Regenerate external files for all CSS/JS snippets.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @return int Count of updated snippets.
+	 */
+	public static function regenerate_snippet_files() {
+		$snippets = get_posts(
+			array(
+				'post_type'      => 'ata_snippets',
+				'posts_per_page' => -1,
+				'no_found_rows'  => true,
+				'fields'         => 'all',
+				'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+					array(
+						'key'     => '_ata_snippet_type',
+						'value'   => array( 'css', 'js' ),
+						'compare' => 'IN',
+					),
+				),
+			)
+		);
+
+		if ( empty( $snippets ) ) {
+			return 0;
+		}
+
+		$count = 0;
+		foreach ( $snippets as $snippet ) {
+			if ( $snippet instanceof \WP_Post && self::generate_snippet_file( $snippet->ID, $snippet ) ) {
+				++$count;
 			}
+		}
+
+		return $count;
+	}
+
+	/**
+	 * Save snippet as external file if enabled.
+	 *
+	 * @param int      $post_id Post ID.
+	 * @param \WP_Post $post    Post object.
+	 */
+	public function save_snippet_file( $post_id, $post ) {
+		self::generate_snippet_file( $post_id, $post );
+
+		if ( ata_get_option( 'enable_combination' ) ) {
+			Minifier::save_combined_css();
+			Minifier::save_combined_js();
 		}
 	}
 

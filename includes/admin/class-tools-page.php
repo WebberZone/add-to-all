@@ -77,6 +77,16 @@ class Tools_Page {
 			add_settings_error( 'ata-notices', '', esc_html__( 'Settings have been imported successfully', 'add-to-all' ), 'updated' );
 		}
 
+		if ( isset( $_GET['assets_regenerated'] ) && isset( $_GET['snippet_files'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$snippet_count = absint( wp_unslash( $_GET['snippet_files'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$notice        = sprintf(
+				/* translators: %d: number of snippet files regenerated. */
+				_n( 'Regenerated assets and %d snippet file.', 'Regenerated assets and %d snippet files.', $snippet_count, 'add-to-all' ),
+				$snippet_count
+			);
+			add_settings_error( 'ata-notices', '', esc_html( $notice ), 'updated' );
+		}
+
 		ob_start();
 		?>
 		<div class="wrap">
@@ -96,11 +106,11 @@ class Tools_Page {
 						$files = array(
 							'css' => array(
 								'title'    => esc_html__( 'CSS File', 'add-to-all' ),
-								'filename' => 'combined.css',
+								'filename' => 'combined.min.css',
 							),
 							'js'  => array(
 								'title'    => esc_html__( 'JS File', 'add-to-all' ),
-								'filename' => 'combined.js',
+								'filename' => 'combined.min.js',
 							),
 						);
 
@@ -247,6 +257,7 @@ class Tools_Page {
 
 		check_admin_referer( 'ata_regenerate_combined' );
 
+		$snippet_files = \WebberZone\Snippetz\Snippets\Functions::regenerate_snippet_files();
 		Minifier::save_combined_css();
 		Minifier::save_combined_js();
 
@@ -255,6 +266,14 @@ class Tools_Page {
 		} else {
 			$redirect_url = admin_url( 'tools.php?page=ata_tools' );
 		}
+
+		$redirect_url = add_query_arg(
+			array(
+				'assets_regenerated' => 1,
+				'snippet_files'      => $snippet_files,
+			),
+			$redirect_url
+		);
 
 		wp_safe_redirect( $redirect_url );
 		exit;
