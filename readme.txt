@@ -101,9 +101,16 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 = 2.3.0 =
 
+* Features:
+	* New setting to generate external minified CSS/JS files.
+	* Option to combine all CSS/JS snippets into single minified files for improved performance
 
 * Improvements:
 	* Updated to latest version of WebberZone Settings API
+	* Centralized hook management system avoids duplicate registration of hooks.
+
+* Bug fixes:
+	* Fixed content display settings for post exclusions
 
 = 2.2.0 =
 
