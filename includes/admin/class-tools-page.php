@@ -100,6 +100,18 @@ class Tools_Page {
 			<div id="post-body-content">
 
 				<div class="postbox">
+					<h2><span><?php esc_html_e( 'System Information', 'add-to-all' ); ?></span></h2>
+					<div class="inside">
+						<p><strong><?php esc_html_e( 'Plugin Version:', 'add-to-all' ); ?></strong> <?php echo esc_html( WZ_SNIPPETZ_VERSION ); ?></p>
+						<p><strong><?php esc_html_e( 'WordPress Version:', 'add-to-all' ); ?></strong> <?php echo esc_html( get_bloginfo( 'version' ) ); ?></p>
+						<p><strong><?php esc_html_e( 'PHP Version:', 'add-to-all' ); ?></strong> <?php echo esc_html( PHP_VERSION ); ?></p>
+						<p><strong><?php esc_html_e( 'Snippets Enabled:', 'add-to-all' ); ?></strong> 
+							<?php echo \WebberZone\Snippetz\Util\Helpers::is_snippets_enabled() ? esc_html__( 'Yes', 'add-to-all' ) : esc_html__( 'No', 'add-to-all' ); ?>
+						</p>
+					</div>
+				</div>
+
+				<div class="postbox">
 					<h2><span><?php esc_html_e( 'Combined File Stats', 'add-to-all' ); ?></span></h2>
 					<div class="inside">
 						<?php
@@ -212,28 +224,7 @@ class Tools_Page {
 			<div id="postbox-container-1" class="postbox-container">
 
 				<div id="side-sortables" class="meta-box-sortables ui-sortable">
-					<div class="postbox">
-						<h2><span><?php esc_html_e( 'System Information', 'add-to-all' ); ?></span></h2>
-						<div class="inside">
-							<p><strong><?php esc_html_e( 'Plugin Version:', 'add-to-all' ); ?></strong> <?php echo esc_html( WZ_SNIPPETZ_VERSION ); ?></p>
-							<p><strong><?php esc_html_e( 'WordPress Version:', 'add-to-all' ); ?></strong> <?php echo esc_html( get_bloginfo( 'version' ) ); ?></p>
-							<p><strong><?php esc_html_e( 'PHP Version:', 'add-to-all' ); ?></strong> <?php echo esc_html( PHP_VERSION ); ?></p>
-							<p><strong><?php esc_html_e( 'Snippets Enabled:', 'add-to-all' ); ?></strong> 
-								<?php echo \WebberZone\Snippetz\Util\Helpers::is_snippets_enabled() ? esc_html__( 'Yes', 'add-to-all' ) : esc_html__( 'No', 'add-to-all' ); ?>
-							</p>
-						</div>
-					</div>
-
-					<div class="postbox">
-						<h2><span><?php esc_html_e( 'Useful Links', 'add-to-all' ); ?></span></h2>
-						<div class="inside">
-							<ul>
-								<li><a href="https://webberzone.com/plugins/add-to-all/" target="_blank"><?php esc_html_e( 'Plugin Homepage', 'add-to-all' ); ?></a></li>
-								<li><a href="https://wordpress.org/support/plugin/add-to-all/" target="_blank"><?php esc_html_e( 'Support Forum', 'add-to-all' ); ?></a></li>
-								<li><a href="https://webberzone.com/docs/add-to-all/" target="_blank"><?php esc_html_e( 'Documentation', 'add-to-all' ); ?></a></li>
-							</ul>
-						</div>
-					</div>
+					<?php include_once __DIR__ . '/sidebar.php'; ?>
 				</div><!-- /#side-sortables -->
 
 			</div><!-- /#postbox-container-1 -->
