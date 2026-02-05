@@ -107,7 +107,7 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 * Improvements:
 	* Updated to latest version of WebberZone Settings API
-	* Centralized hook management system avoids duplicate registration of hooks.
+	* Improved internal hook management for better reliability.
 
 * Bug fixes:
 	* Fixed content display settings for post exclusions
