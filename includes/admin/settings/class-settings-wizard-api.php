@@ -5,7 +5,7 @@
  * A reusable API class for creating multi-step settings wizards.
  * This class provides the framework for creating guided setup experiences.
  *
- * @package WebberZone\Snippetz\Admin
+ * @package WebberZone\Better_External_Links
  */
 
 namespace WebberZone\Snippetz\Admin\Settings;
@@ -20,8 +20,6 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Settings Wizard API class
- *
- * @since 4.2.0
  */
 class Settings_Wizard_API {
 
@@ -366,7 +364,7 @@ class Settings_Wizard_API {
 				break;
 
 			case 'skip_wizard':
-				$this->complete_wizard();
+				$this->mark_wizard_completed();
 				$this->redirect_to_admin();
 				break;
 			default:
@@ -407,7 +405,7 @@ class Settings_Wizard_API {
 		 * @param int   $step     Current step number.
 		 * @param array $settings Settings data for this step.
 		 */
-		do_action( $this->prefix . '_wizard_step_processed', $this->current_step, $settings );
+		do_action( $this->prefix . '_wizard_step_processed', $this->current_step, $settings ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 	}
 
 	/**
@@ -473,14 +471,12 @@ class Settings_Wizard_API {
 	 * @param int $step Step number to redirect to.
 	 */
 	protected function redirect_to_step( $step ) {
-		$parent = ! empty( $this->menu_args['parent'] ) ? $this->menu_args['parent'] : 'admin.php';
-		$base   = admin_url( $parent );
-		$url    = add_query_arg(
+		$url = add_query_arg(
 			array(
 				'page' => $this->page_slug,
 				'step' => $step,
 			),
-			$base
+			admin_url( 'admin.php' )
 		);
 		wp_safe_redirect( $url );
 		exit;
@@ -490,13 +486,7 @@ class Settings_Wizard_API {
 	 * Redirect to the admin page after wizard completion.
 	 */
 	protected function redirect_to_admin() {
-		$url = add_query_arg(
-			array(
-				'page'             => str_replace( '_wizard', '', $this->page_slug ),
-				'wizard-completed' => '1',
-			),
-			admin_url( 'admin.php' )
-		);
+		$url = $this->get_completion_redirect_url();
 		wp_safe_redirect( $url );
 		exit;
 	}
@@ -517,7 +507,7 @@ class Settings_Wizard_API {
 		 *
 		 * @param string $prefix Plugin prefix.
 		 */
-		do_action( "{$this->prefix}_wizard_completed", $this->prefix );
+		do_action( "{$this->prefix}_wizard_completed", $this->prefix ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 	}
 
 	/**
@@ -678,7 +668,7 @@ class Settings_Wizard_API {
 						 * @param int $current_step Current step number.
 						 * @param int $total_steps  Total number of steps.
 						 */
-						do_action( "{$this->prefix}_wizard_before_actions", $this->current_step, $this->total_steps );
+						do_action( "{$this->prefix}_wizard_before_actions", $this->current_step, $this->total_steps ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 						?>
 
 						<div class="wizard-actions">
@@ -708,7 +698,7 @@ class Settings_Wizard_API {
 	 * @return string Skip wizard link URL.
 	 */
 	protected function get_skip_link_url() {
-		return admin_url( 'index.php' );
+		return $this->get_completion_redirect_url();
 	}
 
 	/**
@@ -733,9 +723,9 @@ class Settings_Wizard_API {
 				</button>
 			<?php endif; ?>
 
-			<a href="<?php echo esc_url( $this->get_skip_link_url() ); ?>" class="button wizard-button-skip">
+			<button type="submit" name="wizard_action" value="skip_wizard" class="button wizard-button-skip">
 				<?php echo esc_html( $this->translation_strings['skip_wizard'] ); ?>
-			</a>
+			</button>
 		</div>
 		<?php
 	}
@@ -747,7 +737,7 @@ class Settings_Wizard_API {
 		/**
 		 * Fires before the wizard completion page content.
 		 */
-		do_action( "{$this->prefix}_wizard_completion_before" );
+		do_action( "{$this->prefix}_wizard_completion_before" ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 		?>
 		<div class="wrap wizard-wrap wizard-complete">
 			<h1><?php echo esc_html( $this->translation_strings['wizard_complete'] ); ?></h1>
@@ -757,7 +747,7 @@ class Settings_Wizard_API {
 			/**
 			 * Fires after the wizard completion message.
 			 */
-			do_action( "{$this->prefix}_wizard_completion_message" );
+			do_action( "{$this->prefix}_wizard_completion_message" ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 			?>
 
 			<p class="wizard-actions">
@@ -776,7 +766,7 @@ class Settings_Wizard_API {
 		/**
 		 * Fires after the wizard completion page content.
 		 */
-		do_action( "{$this->prefix}_wizard_completion_after" );
+		do_action( "{$this->prefix}_wizard_completion_after" ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 	}
 
 	/**
@@ -791,8 +781,8 @@ class Settings_Wizard_API {
 		 * @param string $url    The URL to redirect to.
 		 * @param string $prefix Plugin prefix.
 		 */
-		return apply_filters(
-			"{$this->prefix}_wizard_completion_url",
+		return apply_filters( // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
+			"{$this->prefix}_wizard_completion_url", // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 			admin_url( "admin.php?page={$this->prefix}_settings" ),
 			$this->prefix
 		);
@@ -818,7 +808,7 @@ class Settings_Wizard_API {
 		 * @param array  $buttons Array of button configurations.
 		 * @param string $prefix  Plugin prefix.
 		 */
-		return apply_filters( "{$this->prefix}_wizard_completion_buttons", $buttons, $this->prefix );
+		return apply_filters( "{$this->prefix}_wizard_completion_buttons", $buttons, $this->prefix ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 	}
 
 	/**
@@ -833,7 +823,7 @@ class Settings_Wizard_API {
 		 * @param string $version Version number.
 		 * @param string $prefix  Plugin prefix.
 		 */
-		return apply_filters( "{$this->prefix}_wizard_version", self::VERSION, $this->prefix );
+		return apply_filters( "{$this->prefix}_wizard_version", self::VERSION, $this->prefix ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 	}
 
 	/**
@@ -842,7 +832,7 @@ class Settings_Wizard_API {
 	protected function render_wizard_steps_navigation() {
 		$step_keys = array_keys( $this->steps );
 		?>
-		<ol class="wizard-steps-nav" role="tablist" aria-label="<?php echo esc_attr( $this->translation_strings['steps_nav_aria_label'] ?? 'Setup Wizard Steps' ); ?>">
+		<ol class="wizard-steps-nav" aria-label="<?php echo esc_attr( $this->translation_strings['steps_nav_aria_label'] ?? 'Setup Wizard Steps' ); ?>">
 			<?php
 			foreach ( $step_keys as $index => $step_key ) :
 				$step_number  = $index + 1;
@@ -885,14 +875,12 @@ class Settings_Wizard_API {
 	 * @return string Step URL.
 	 */
 	protected function get_step_url( $step ) {
-		$parent = ! empty( $this->menu_args['parent'] ) ? $this->menu_args['parent'] : 'admin.php';
-		$base   = admin_url( $parent );
 		return add_query_arg(
 			array(
 				'page' => $this->page_slug,
 				'step' => $step,
 			),
-			$base
+			admin_url( 'admin.php' )
 		);
 	}
 
