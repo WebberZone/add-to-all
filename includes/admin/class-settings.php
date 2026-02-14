@@ -870,7 +870,7 @@ class Settings {
 		if ( false !== strpos( $file, 'add-to-all.php' ) ) {
 			$new_links = array(
 				'support'    => '<a href = "https://wordpress.org/support/plugin/add-to-all">' . esc_html__( 'Support', 'add-to-all' ) . '</a>',
-				'donate'     => '<a href = "https://ajaydsouza.com/donate/">' . esc_html__( 'Donate', 'add-to-all' ) . '</a>',
+				'donate'     => '<a href = "https://wzn.io/donate-wz">' . esc_html__( 'Donate', 'add-to-all' ) . '</a>',
 				'contribute' => '<a href = "https://github.com/WebberZone/add-to-all">' . esc_html__( 'Contribute', 'add-to-all' ) . '</a>',
 			);
 

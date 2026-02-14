@@ -1,7 +1,7 @@
 === WebberZone Snippetz - Header, Body and Footer manager ===
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
-Donate link: https://ajaydsouza.com/donate/
+Donate link: https://wzn.io/donate-wz
 Stable tag: 2.2.0
 Requires at least: 6.3
 Tested up to: 6.8
