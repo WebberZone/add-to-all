@@ -104,16 +104,3 @@ function ata_get_default_option( $key = '' ) {
 function ata_settings_reset() {
 	return \WebberZone\Snippetz\Options_API::reset_settings();
 }
-
-/**
- * Function to add an action to search for tags using Ajax.
- *
- * @since 1.7.0
- *
- * @return void
- */
-function ata_tag_search() {
-	\WebberZone\Snippetz\Options_API::tags_search();
-}
-
-\WebberZone\Snippetz\Util\Hook_Registry::add_action( 'wp_ajax_ata_tag_search', 'ata_tag_search' );

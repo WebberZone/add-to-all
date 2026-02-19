@@ -14,7 +14,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Hook Registry class for managing WordPress actions and filters.
  *
- * @since 3.0.0
+ * @since 2.3.0
  */
 class Hook_Registry {
 
