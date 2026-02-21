@@ -2,7 +2,7 @@
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
 Donate link: https://wzn.io/donate-wz
-Stable tag: 2.2.0
+Stable tag: 2.3.0
 Requires at least: 6.3
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -112,31 +112,9 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 * Bug fixes:
 	* Fixed content display settings for post exclusions
 
-= 2.2.0 =
-
-* Bug fixes:
-	* Fixed sanitization of shortcode and block inputs.
-
-= 2.1.1 =
-
-* Bug fixes:
-	* Fixed `_load_textdomain_just_in_time` warning/error.
-
-= 2.1.0 =
-
-Release post: [https://webberzone.com/announcements/snippetz-v2-1-0/](https://webberzone.com/announcements/snippetz-v2-1-0/)
-
-* Features:
-	* New block to select and display any snippet in the block or site editor.
-	* New On/Off toggle button in the snippet screen to enable/disable a snippet.
-
-* Modifications:
-	* Snippets are no longer public or visible on the frontend. They are only visible in the snippet screen.
-
 Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 
 == Upgrade Notice ==
 
-= 2.2.0 =
-
-Security release.
+= 2.3.0 =
+New features including external minified CSS/JS files generation and performance improvements.

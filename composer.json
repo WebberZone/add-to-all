@@ -1,7 +1,7 @@
 {
     "name": "webberzone/add-to-all",
     "description": "WebberZone Snippetz lets you add custom text or HTML to your WordPress header, footer, sidebar, content or feed.",
-    "version": "2.1.1",
+    "version": "2.3.0",
     "type": "wordpress-plugin",
     "keywords": [
         "snippets",
