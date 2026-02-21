@@ -2,6 +2,27 @@
 
 This is an archive of older changelog entries. Most recent entries are maintained in readme.txt
 
+= 2.2.0 =
+
+* Bug fixes:
+	* Fixed sanitization of shortcode and block inputs.
+
+= 2.1.1 =
+
+* Bug fixes:
+	* Fixed `_load_textdomain_just_in_time` warning/error.
+
+= 2.1.0 =
+
+Release post: [https://webberzone.com/announcements/snippetz-v2-1-0/](https://webberzone.com/announcements/snippetz-v2-1-0/)
+
+* Features:
+	* New block to select and display any snippet in the block or site editor.
+	* New On/Off toggle button in the snippet screen to enable/disable a snippet.
+
+* Modifications:
+	* Snippets are no longer public or visible on the frontend. They are only visible in the snippet screen.
+
 = 2.0.1 =
 
 Release post: [https://webberzone.com/announcements/snippetz-v2-0-0/](https://webberzone.com/announcements/snippetz-v2-0-0/)

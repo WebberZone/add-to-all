@@ -10,11 +10,11 @@
  * @author    Ajay D'Souza
  * @license   GPL-2.0+
  * @link      https://webberzone.com
- * @copyright 2012-2025 Ajay D'Souza
+ * @copyright 2012-2026 Ajay D'Souza
  *
  * @wordpress-plugin
  * Plugin Name: WebberZone Snippetz - Header, Body and Footer manager
- * Version:     2.2.0
+ * Version:     2.3.0
  * Plugin URI:  https://webberzone.com/plugins/add-to-all/
  * Description: A simple yet powerful plugin that allows you to insert any code snippet or script into WordPress.
  * Author:      Ajay D'Souza
@@ -32,60 +32,37 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 if ( ! defined( 'WZ_SNIPPETZ_VERSION' ) ) {
-	/**
-	 * Holds the version of WebberZone Snippetz.
-	 *
-	 * @since 1.8.0
-	 *
-	 * @var string $WZ_SNIPPETZ_VERSION WebberZone Snippetz version.
-	 */
-	define( 'WZ_SNIPPETZ_VERSION', '2.2.0' );
+	define( 'WZ_SNIPPETZ_VERSION', '2.3.0' );
 }
 
-
 if ( ! defined( 'WZ_SNIPPETZ_FILE' ) ) {
-	/**
-	 * Holds the plugin file path
-	 *
-	 * @since 1.2.0
-	 *
-	 * @var string $WZ_SNIPPETZ_FILE Plugin Root File
-	 */
 	define( 'WZ_SNIPPETZ_FILE', __FILE__ );
 }
 
 if ( ! defined( 'WZ_SNIPPETZ_DIR' ) ) {
-	/**
-	 * Holds the filesystem directory path (with trailing slash)
-	 *
-	 * @since 1.2.0
-	 *
-	 * @var string $WZ_SNIPPETZ_DIR Plugin folder path
-	 */
 	define( 'WZ_SNIPPETZ_DIR', plugin_dir_path( WZ_SNIPPETZ_FILE ) );
 }
 
 if ( ! defined( 'WZ_SNIPPETZ_URL' ) ) {
-	/**
-	 * Holds the URL directory path (with trailing slash)
-	 *
-	 * @since 1.2.0
-	 *
-	 * @var string $WZ_SNIPPETZ_URL Plugin folder URL
-	 */
 	define( 'WZ_SNIPPETZ_URL', plugin_dir_url( WZ_SNIPPETZ_FILE ) );
 }
 
 // Load the autoloader.
 require_once plugin_dir_path( __FILE__ ) . 'includes/autoloader.php';
 
+// Load Composer dependencies if available.
+$composer_autoload = plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+if ( file_exists( $composer_autoload ) ) {
+	require_once $composer_autoload;
+}
+
 /**
  * The main function responsible for returning the one true WebberZone Snippetz instance to functions everywhere.
  */
-function load_wz_snippetz() {
+function load() {
 	\WebberZone\Snippetz\Main::get_instance();
 }
-add_action( 'plugins_loaded', __NAMESPACE__ . '\load_wz_snippetz' );
+add_action( 'plugins_loaded', __NAMESPACE__ . '\load' );
 
 /*
  *----------------------------------------------------------------------------
@@ -93,12 +70,3 @@ add_action( 'plugins_loaded', __NAMESPACE__ . '\load_wz_snippetz' );
  *----------------------------------------------------------------------------
  */
 require_once plugin_dir_path( __FILE__ ) . 'includes/options-api.php';
-
-/**
- * Declare $wz_snippetz_settings global so that it can be accessed in every function
- *
- * @since 1.0
- * @var $wz_snippetz_settings WebberZone Snippetz settings array.
- */
-global $wz_snippetz_settings;
-$wz_snippetz_settings = \ata_get_settings();

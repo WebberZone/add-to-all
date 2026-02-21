@@ -7,6 +7,8 @@
 
 namespace WebberZone\Snippetz;
 
+use WebberZone\Snippetz\Util\Hook_Registry;
+
 if ( ! defined( 'WPINC' ) ) {
 	exit;
 }
@@ -25,20 +27,20 @@ final class Main {
 	private static $instance;
 
 	/**
-	 * Settings.
+	 * Admin.
 	 *
-	 * @since 2.0.0
+	 * @since 2.3.0
 	 *
-	 * @var object Settings API.
+	 * @var Admin\Admin Admin class.
 	 */
-	public $settings;
+	public $admin;
 
 	/**
 	 * Shortcodes.
 	 *
 	 * @since 2.0.0
 	 *
-	 * @var object Shortcodes.
+	 * @var Frontend\Shortcodes Shortcodes.
 	 */
 	public $shortcodes;
 
@@ -47,7 +49,7 @@ final class Main {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @var object Snippets.
+	 * @var Snippets\Snippets Snippets.
 	 */
 	public $snippets;
 
@@ -56,7 +58,7 @@ final class Main {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @var object Site verification.
+	 * @var Frontend\Site_Verification Site verification.
 	 */
 	public $site_verification;
 
@@ -65,7 +67,7 @@ final class Main {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @var object Third party functions.
+	 * @var Frontend\Third_Party Third party functions.
 	 */
 	public $third_party;
 
@@ -74,9 +76,10 @@ final class Main {
 	 *
 	 * @since 2.1.0
 	 *
-	 * @var object Blocks.
+	 * @var Frontend\Blocks\Blocks Blocks.
 	 */
 	public $blocks;
+
 
 	/**
 	 * Gets the instance of the class.
@@ -109,14 +112,17 @@ final class Main {
 	 * @since 2.0.0
 	 */
 	private function init() {
-		$this->settings          = new \WebberZone\Snippetz\Admin\Settings\Settings();
-		$this->shortcodes        = new \WebberZone\Snippetz\Frontend\Shortcodes();
-		$this->site_verification = new \WebberZone\Snippetz\Frontend\Site_Verification();
-		$this->third_party       = new \WebberZone\Snippetz\Frontend\Third_Party();
-		$this->blocks            = new \WebberZone\Snippetz\Frontend\Blocks\Blocks();
+		$this->shortcodes        = new Frontend\Shortcodes();
+		$this->site_verification = new Frontend\Site_Verification();
+		$this->third_party       = new Frontend\Third_Party();
+		$this->blocks            = new Frontend\Blocks\Blocks();
 
-		if ( \WebberZone\Snippetz\Util\Helpers::is_snippets_enabled() ) {
-			$this->snippets = new \WebberZone\Snippetz\Snippets\Snippets();
+		if ( is_admin() ) {
+			$this->admin = new Admin\Admin();
+		}
+
+		if ( Util\Helpers::is_snippets_enabled() ) {
+			$this->snippets = new Snippets\Snippets();
 		}
 
 		$this->hooks();
@@ -128,15 +134,15 @@ final class Main {
 	 * @since 2.0.0
 	 */
 	public function hooks() {
-		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
-		add_action( 'wp_head', array( $this, 'wp_head' ) );
-		add_action( 'wp_body_open', array( $this, 'wp_body_open' ) );
-		add_action( 'wp_footer', array( $this, 'wp_footer' ) );
-		add_filter( 'the_excerpt_rss', array( $this, 'the_excerpt_rss' ), 99999999 );
-		add_filter( 'the_content_feed', array( $this, 'the_excerpt_rss' ), 99999999 );
+		Hook_Registry::add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+		Hook_Registry::add_action( 'wp_head', array( $this, 'wp_head' ) );
+		Hook_Registry::add_action( 'wp_body_open', array( $this, 'wp_body_open' ) );
+		Hook_Registry::add_action( 'wp_footer', array( $this, 'wp_footer' ) );
+		Hook_Registry::add_filter( 'the_excerpt_rss', array( $this, 'the_excerpt_rss' ), 99999999 );
+		Hook_Registry::add_filter( 'the_content_feed', array( $this, 'the_excerpt_rss' ), 99999999 );
 
 		$priority = ata_get_option( 'content_filter_priority', 10 );
-		add_filter( 'the_content', array( $this, 'the_content' ), $priority );
+		Hook_Registry::add_filter( 'the_content', array( $this, 'the_content' ), $priority );
 
 		$footer_process_shortcode  = ata_get_option( 'footer_process_shortcode', false );
 		$feed_process_shortcode    = ata_get_option( 'feed_process_shortcode', false );
@@ -159,9 +165,9 @@ final class Main {
 
 		foreach ( $filters as $filter => $process_shortcode ) {
 			if ( $process_shortcode ) {
-				add_filter( $filter, 'shortcode_unautop' );
-				add_filter( $filter, 'do_shortcode' );
-				add_filter( $filter, array( $this, 'process_placeholders' ), 99 );
+				Hook_Registry::add_filter( $filter, 'shortcode_unautop' );
+				Hook_Registry::add_filter( $filter, 'do_shortcode' );
+				Hook_Registry::add_filter( $filter, array( $this, 'process_placeholders' ), 99 );
 			}
 		}
 	}
@@ -427,7 +433,7 @@ final class Main {
 	 * @return string $output Output string.
 	 */
 	public function process_placeholders( $input ) {
-		$output = \WebberZone\Snippetz\Util\Helpers::process_placeholders( $input );
+		$output = Util\Helpers::process_placeholders( $input );
 		return $output;
 	}
 }

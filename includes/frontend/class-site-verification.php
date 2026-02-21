@@ -10,6 +10,8 @@
 
 namespace WebberZone\Snippetz\Frontend;
 
+use WebberZone\Snippetz\Util\Hook_Registry;
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -26,7 +28,7 @@ class Site_Verification {
 	 * Main constructor.
 	 */
 	public function __construct() {
-		add_action( 'wp_head', array( $this, 'site_verification' ) );
+		Hook_Registry::add_action( 'wp_head', array( $this, 'site_verification' ) );
 	}
 
 	/**

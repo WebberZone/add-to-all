@@ -1,0 +1,13 @@
+# Ignore vendor development dependencies and binaries, but allow production dependencies
+/vendor/*
+!/vendor/matthiasmullie/
+!/vendor/composer/
+!/vendor/autoload.php
+
+# Tooling
+/phpcompat-tools/
+/node_modules/
+
+# Lock files
+package-lock.json
+composer.lock

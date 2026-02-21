@@ -1,8 +1,8 @@
 === WebberZone Snippetz - Header, Body and Footer manager ===
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
-Donate link: https://ajaydsouza.com/donate/
-Stable tag: 2.2.0
+Donate link: https://wzn.io/donate-wz
+Stable tag: 2.3.0
 Requires at least: 6.3
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -99,31 +99,22 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 == Changelog ==
 
-= 2.2.0 =
-
-* Bug fixes:
-	* Fixed sanitization of shortcode and block inputs.
-
-= 2.1.1 =
-
-* Bug fixes:
-	* Fixed `_load_textdomain_just_in_time` warning/error.
-
-= 2.1.0 =
-
-Release post: [https://webberzone.com/announcements/snippetz-v2-1-0/](https://webberzone.com/announcements/snippetz-v2-1-0/)
+= 2.3.0 =
 
 * Features:
-	* New block to select and display any snippet in the block or site editor.
-	* New On/Off toggle button in the snippet screen to enable/disable a snippet.
+	* New setting to generate external minified CSS/JS files.
+	* Option to combine all CSS/JS snippets into single minified files for improved performance
 
-* Modifications:
-	* Snippets are no longer public or visible on the frontend. They are only visible in the snippet screen.
+* Improvements:
+	* Updated to latest version of WebberZone Settings API
+	* Improved internal hook management for better reliability.
+
+* Bug fixes:
+	* Fixed content display settings for post exclusions
 
 Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 
 == Upgrade Notice ==
 
-= 2.2.0 =
-
-Security release.
+= 2.3.0 =
+New features including external minified CSS/JS files generation and performance improvements.

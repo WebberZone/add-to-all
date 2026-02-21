@@ -10,6 +10,8 @@
 
 namespace WebberZone\Snippetz\Snippets;
 
+use WebberZone\Snippetz\Util\Hook_Registry;
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -33,15 +35,15 @@ class Admin_Columns {
 	 * Constructor class.
 	 */
 	public function __construct() {
-		add_filter( 'manage_ata_snippets_posts_columns', array( $this, 'manage_post_columns' ), 10 );
-		add_filter( 'manage_edit-ata_snippets_sortable_columns', array( $this, 'set_sortable_columns' ) );
-		add_action( 'manage_ata_snippets_posts_custom_column', array( $this, 'manage_posts_custom_column' ), 10, 2 );
-		add_action( 'admin_head', array( $this, 'custom_css' ) );
-		add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+		Hook_Registry::add_filter( 'manage_ata_snippets_posts_columns', array( $this, 'manage_post_columns' ), 10 );
+		Hook_Registry::add_filter( 'manage_edit-ata_snippets_sortable_columns', array( $this, 'set_sortable_columns' ) );
+		Hook_Registry::add_action( 'manage_ata_snippets_posts_custom_column', array( $this, 'manage_posts_custom_column' ), 10, 2 );
+		Hook_Registry::add_action( 'admin_head', array( $this, 'custom_css' ) );
+		Hook_Registry::add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
+		Hook_Registry::add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 
 		// Add AJAX action.
-		add_action( 'wp_ajax_ata_toggle_snippet', array( $this, 'ajax_toggle_snippet' ) );
+		Hook_Registry::add_action( 'wp_ajax_ata_toggle_snippet', array( $this, 'ajax_toggle_snippet' ) );
 	}
 
 	/**
@@ -65,6 +67,9 @@ class Admin_Columns {
 			if ( 'title' === $key ) {
 				$new_columns['type']      = __( 'Type', 'add-to-all' );
 				$new_columns['shortcode'] = __( 'Shortcode', 'add-to-all' );
+				if ( ata_get_option( 'enable_external_css_js' ) ) {
+					$new_columns['external_file'] = __( 'External File', 'add-to-all' );
+				}
 			}
 		}
 
@@ -137,6 +142,38 @@ class Admin_Columns {
 				);
 
 				echo trim( $output ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				break;
+
+			case 'external_file':
+				$snippet_type = Functions::get_snippet_type( get_post( $post_id ) );
+				if ( ! in_array( $snippet_type, array( 'css', 'js' ), true ) ) {
+					echo '&mdash;'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					break;
+				}
+
+				$file_url   = Functions::get_snippet_file_url( $post_id, $snippet_type );
+				$type_label = ( 'css' === $snippet_type ) ? 'CSS' : 'JS';
+				if ( $file_url ) {
+					$link_text = sprintf(
+						/* translators: %s: Snippet type (CSS or JS). */
+						__( 'View %s file', 'add-to-all' ),
+						$type_label
+					);
+					$link_label = sprintf(
+						/* translators: 1: Snippet type (CSS or JS). 2: Snippet title. */
+						__( 'View %1$s file for %2$s', 'add-to-all' ),
+						$type_label,
+						get_the_title( $post_id )
+					);
+					printf(
+						'<a class="ata-snippet-file-link" href="%1$s" target="_blank" rel="noopener noreferrer" title="%2$s" aria-label="%2$s">%3$s</a>',
+						esc_url( $file_url ),
+						esc_attr( $link_label ),
+						esc_html( $link_text )
+					);
+				} else {
+					echo esc_html__( 'File not generated', 'add-to-all' );
+				}
 				break;
 
 			default:
