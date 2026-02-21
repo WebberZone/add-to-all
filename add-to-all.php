@@ -64,6 +64,18 @@ function load() {
 }
 add_action( 'plugins_loaded', __NAMESPACE__ . '\load' );
 
+if ( ! function_exists( 'snippetz' ) ) {
+	/**
+	 * Get the main WebberZone Snippetz instance.
+	 *
+	 * @since 2.3.0
+	 * @return Main Main instance.
+	 */
+	function snippetz() {
+		return \WebberZone\Snippetz\Main::get_instance();
+	}
+}
+
 /*
  *----------------------------------------------------------------------------
  * Include files
