@@ -30,11 +30,12 @@ class Functions {
 	 * Constructor function.
 	 */
 	public function __construct() {
-		Hook_Registry::add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_snippets' ) );
-		Hook_Registry::add_action( 'wp_head', array( $this, 'snippets_header' ) );
-		Hook_Registry::add_action( 'wp_footer', array( $this, 'snippets_footer' ) );
-
 		$priority = ata_get_option( 'snippet_priority', ata_get_option( 'content_filter_priority', 10 ) );
+
+		Hook_Registry::add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_snippets' ) );
+		Hook_Registry::add_action( 'wp_head', array( $this, 'snippets_header' ), $priority );
+		Hook_Registry::add_action( 'wp_footer', array( $this, 'snippets_footer' ), $priority );
+
 		Hook_Registry::add_filter( 'the_content', array( $this, 'snippets_content' ), $priority );
 
 		Hook_Registry::add_action( 'save_post_ata_snippets', array( $this, 'save_snippet_file' ), 10, 2 );

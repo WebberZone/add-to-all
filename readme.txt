@@ -102,19 +102,24 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 = 2.3.0 =
 
 * Features:
-	* New setting to generate external minified CSS/JS files.
-	* Option to combine all CSS/JS snippets into single minified files for improved performance
+	* **External Minified Files:** New setting to generate and load external minified CSS/JS files instead of inline output.
+	* **File Combination:** Option to combine all CSS/JS snippets into single minified files for significantly improved page load performance.
+	* **Tools Page:** Added a new Tools page under Settings (or Snippets) to easily regenerate minified assets, clear cache, and view system and file statistics.
+	* Added support for `class` attributes in the `[ata_snippet]` shortcode (e.g. `[ata_snippet id="1" class="custom-class"]`).
 
 * Improvements:
-	* Updated to latest version of WebberZone Settings API
+	* Updated to latest version of WebberZone Settings API.
 	* Improved internal hook management for better reliability.
+	* Reorganized plugin architecture with strict namespaces and autoloading.
+	* Applied global `snippet_priority` option to `wp_head` and `wp_footer` hooks for better execution order control.
 
 * Bug fixes:
-	* Fixed content display settings for post exclusions
+	* Fixed content display settings for post exclusions.
+	* Corrected multiple `@since` tag references in internal options API documentation.
 
 Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 
 == Upgrade Notice ==
 
 = 2.3.0 =
-New features including external minified CSS/JS files generation and performance improvements.
+New features including external minified CSS/JS files generation, file combination, a dedicated tools page, and significant architectural performance improvements.

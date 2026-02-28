@@ -41,14 +41,21 @@ class Shortcodes {
 
 		$atts = shortcode_atts(
 			array(
-				'id' => 0,
+				'id'    => 0,
+				'class' => '',
 			),
 			$atts,
 			'ata_snippet'
 		);
 
 		$id     = absint( $atts['id'] );
-		$output = Functions::get_snippet_content( $id, array( 'is_shortcode' => true ) );
+		$output = Functions::get_snippet_content(
+			$id,
+			array(
+				'is_shortcode' => true,
+				'class'        => $atts['class'],
+			)
+		);
 
 		return $output;
 	}
