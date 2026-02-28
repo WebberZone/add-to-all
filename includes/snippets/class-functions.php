@@ -155,7 +155,7 @@ class Functions {
 		$classes[] = $args['class'];
 		$classes[] = $args['is_block'] ? 'ata_snippet_block' : '';
 		$classes[] = $args['is_shortcode'] ? 'ata_snippet_shortcode' : '';
-		$class     = implode( ' ', $classes );
+		$class     = implode( ' ', array_filter( $classes ) );
 
 		$content = do_shortcode( $snippet->post_content );
 		$type    = self::get_snippet_type( $snippet );
