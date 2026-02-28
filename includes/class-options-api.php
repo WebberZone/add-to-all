@@ -18,14 +18,14 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Options API Class.
  *
- * @since 3.0.0
+ * @since 2.3.0
  */
 class Options_API {
 
 	/**
 	 * Settings option name.
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 * @var string
 	 */
 	const SETTINGS_OPTION = 'ata_settings';
@@ -33,7 +33,7 @@ class Options_API {
 	/**
 	 * Filter prefix.
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 * @var string
 	 */
 	const FILTER_PREFIX = 'ata';
@@ -41,7 +41,7 @@ class Options_API {
 	/**
 	 * Settings array.
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 * @var array
 	 */
 	private static $settings;
@@ -49,7 +49,7 @@ class Options_API {
 	/**
 	 * Initialize hooks for AJAX functionality.
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 */
 	public static function init() {
 		Hook_Registry::add_action( 'wp_ajax_' . self::FILTER_PREFIX . '_tags_search', array( __CLASS__, 'tags_search' ) );
@@ -60,7 +60,7 @@ class Options_API {
 	 *
 	 * Retrieves all plugin settings
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 * @return array Glue Link settings
 	 */
 	public static function get_settings() {
@@ -71,7 +71,7 @@ class Options_API {
 		 *
 		 * Retrieves all plugin settings
 		 *
-		 * @since 3.0.0
+		 * @since 2.3.0
 		 * @param array $settings Settings array
 		 */
 		return apply_filters( self::FILTER_PREFIX . '_get_settings', $settings );
@@ -82,7 +82,7 @@ class Options_API {
 	 *
 	 * Looks to see if the specified setting exists, returns default if not
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 *
 	 * @param string $key           Option to fetch.
 	 * @param mixed  $default_value Default option.
@@ -105,7 +105,7 @@ class Options_API {
 		/**
 		 * Filter the value for the option being fetched.
 		 *
-		 * @since 3.0.0
+		 * @since 2.3.0
 		 *
 		 * @param mixed $value         Value of the option.
 		 * @param mixed $key           Name of the option.
@@ -116,7 +116,7 @@ class Options_API {
 		/**
 		 * Key specific filter for the value of the option being fetched.
 		 *
-		 * @since 3.0.0
+		 * @since 2.3.0
 		 *
 		 * @param mixed $value         Value of the option.
 		 * @param mixed $key           Name of the option.
@@ -132,7 +132,7 @@ class Options_API {
 	 * Warning: Passing in an empty, false or null string value will remove
 	 *        the key from the settings array.
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 *
 	 * @param  string          $key   The Key to update.
 	 * @param  string|bool|int $value The value to set the key to.
@@ -165,7 +165,7 @@ class Options_API {
 	/**
 	 * Update all settings at once.
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 *
 	 * @param array $settings  Settings array to save.
 	 * @param bool  $merge     Whether to merge with existing settings. Default true.
@@ -190,7 +190,7 @@ class Options_API {
 	 *
 	 * Removes a Glue Link setting value in both the db and the static variable.
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 *
 	 * @param  string $key The Key to delete.
 	 * @return boolean True if updated, false if not.
@@ -222,7 +222,7 @@ class Options_API {
 	/**
 	 * Default settings.
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 *
 	 * @return array Default settings
 	 */
@@ -233,7 +233,7 @@ class Options_API {
 	/**
 	 * Get the default option for a specific key
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 *
 	 * @param string $key Key of the option to fetch.
 	 * @return mixed
@@ -251,7 +251,7 @@ class Options_API {
 	/**
 	 * Reset settings.
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 *
 	 * @return bool True if updated, false if not.
 	 */
@@ -269,7 +269,7 @@ class Options_API {
 	/**
 	 * Function to add an action to search for tags using Ajax.
 	 *
-	 * @since 3.0.0
+	 * @since 2.3.0
 	 *
 	 * @return void
 	 */
