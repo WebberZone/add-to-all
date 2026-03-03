@@ -178,9 +178,12 @@ class Metabox {
 				'type'             => 'csv',
 				'default'          => '',
 				'size'             => 'large',
-				'field_class'      => 'category_autocomplete',
+				'field_class'      => 'ts_autocomplete',
 				'field_attributes' => array(
-					'data-wp-taxonomy' => 'category',
+					'data-wp-prefix'   => 'ATA',
+					'data-wp-action'   => 'ata_taxonomy_search_tom_select',
+					'data-wp-nonce'    => wp_create_nonce( 'ata_taxonomy_search_tom_select' ),
+					'data-wp-endpoint' => 'category',
 				),
 			),
 			'include_on_post_tag'  => array(
@@ -190,9 +193,12 @@ class Metabox {
 				'type'             => 'csv',
 				'default'          => '',
 				'size'             => 'large',
-				'field_class'      => 'category_autocomplete',
+				'field_class'      => 'ts_autocomplete',
 				'field_attributes' => array(
-					'data-wp-taxonomy' => 'post_tag',
+					'data-wp-prefix'   => 'ATA',
+					'data-wp-action'   => 'ata_taxonomy_search_tom_select',
+					'data-wp-nonce'    => wp_create_nonce( 'ata_taxonomy_search_tom_select' ),
+					'data-wp-endpoint' => 'post_tag',
 				),
 			),
 			'step3_header'         => array(
