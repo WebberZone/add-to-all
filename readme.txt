@@ -112,6 +112,9 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 	* Improved internal hook management for better reliability.
 	* Reorganized plugin architecture with strict namespaces and autoloading.
 	* Applied global `snippet_priority` option to `wp_head` and `wp_footer` hooks for better execution order control.
+	* Custom CSS (Header CSS setting) is now enqueued via `wp_add_inline_style` instead of a raw `<style>` tag, following WordPress best practices.
+	* CSS/JS snippets are now exclusively enqueued via `wp_enqueue_scripts`, eliminating redundant processing during `wp_head`/`wp_footer` that could cause incorrect output timing.
+	* Admin column styles are now enqueued via `wp_add_inline_style` on `admin_enqueue_scripts` instead of a raw `<style>` tag in `admin_head`.
 
 * Bug fixes:
 	* Fixed content display settings for post exclusions.
