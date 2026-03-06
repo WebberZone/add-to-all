@@ -151,7 +151,7 @@ class Functions {
 		$id = $snippet->ID;
 
 		$classes[] = 'ata_snippet';
-		$classes[] = 'ata_snippet_' . $id;
+		$classes[] = "ata_snippet_{$id}";
 		$classes[] = $args['class'];
 		$classes[] = $args['is_block'] ? 'ata_snippet_block' : '';
 		$classes[] = $args['is_shortcode'] ? 'ata_snippet_shortcode' : '';
@@ -210,9 +210,22 @@ class Functions {
 		$args = array(
 			'numberposts' => $numberposts,
 			'meta_query'  => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				'relation' => 'AND',
 				array(
 					'key'   => $key,
 					'value' => 1,
+				),
+				array(
+					'relation' => 'OR',
+					array(
+						'key'     => '_ata_disable_snippet',
+						'compare' => 'NOT EXISTS',
+					),
+					array(
+						'key'     => '_ata_disable_snippet',
+						'value'   => '1',
+						'compare' => '!=',
+					),
 				),
 			),
 		);
@@ -400,21 +413,35 @@ class Functions {
 			}
 		);
 
-		$output[]  = $before;
+		$output    = array( $before );
 		$all_terms = array();
 
-		// Get taxonomies for the current post.
-		$taxes = get_object_taxonomies( $post );
+		// Null-safe access to current post properties.
+		$post_id        = $post instanceof \WP_Post ? $post->ID : 0;
+		$post_type      = $post instanceof \WP_Post ? $post->post_type : '';
+		$queried_object = get_queried_object();
+		if ( empty( $post_type ) && $queried_object instanceof \WP_Post_Type ) {
+			$post_type = $queried_object->name;
+		}
 
-		foreach ( $taxes as $tax ) {
-			$terms = get_the_terms( $post->ID, $tax );
+		// Collect terms from the current post (used to match against snippet conditions).
+		$current_taxes = get_object_taxonomies( $post );
+		foreach ( $current_taxes as $tax ) {
+			$terms = get_the_terms( $post_id, $tax );
 			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 				$term_taxonomy_ids = wp_list_pluck( $terms, 'term_taxonomy_id' );
 				$all_terms         = array_merge( $all_terms, $term_taxonomy_ids );
 			}
 		}
 
-		foreach ( $snippets_with_priority  as $item ) {
+		// On taxonomy archive pages, add the queried term so taxonomy conditions match.
+		if ( $queried_object instanceof \WP_Term ) {
+			$all_terms[] = (int) $queried_object->term_taxonomy_id;
+		}
+
+		$all_terms = array_unique( array_map( 'intval', $all_terms ) );
+
+		foreach ( $snippets_with_priority as $item ) {
 			$snippet          = $item['snippet'];
 			$include_on_terms = array();
 
@@ -426,41 +453,42 @@ class Functions {
 			$include_on_posttypes = wp_parse_list( get_post_meta( $snippet->ID, '_ata_include_on_posttypes', true ) );
 			$include_on_posttypes = array_filter( $include_on_posttypes );
 
-			// Process taxonomies.
-			foreach ( $taxes as $tax ) {
-				$include_on       = get_post_meta( $snippet->ID, "_ata_include_on_{$tax}_ids", true );
-				$include_on       = $include_on ? explode( ',', $include_on ) : array();
-				$include_on_terms = array_merge( $include_on_terms, $include_on );
+			// Scan all stored meta at once for taxonomy condition keys (_ata_include_on_*_ids).
+			// One get_post_meta() cache hit instead of one call per registered taxonomy.
+			foreach ( get_post_meta( $snippet->ID ) as $meta_key => $meta_values ) {
+				if ( 0 === strpos( $meta_key, '_ata_include_on_' ) && '_ids' === substr( $meta_key, -4 ) ) {
+					$raw = isset( $meta_values[0] ) ? $meta_values[0] : '';
+					if ( $raw ) {
+						$include_on_terms = array_merge(
+							$include_on_terms,
+							array_map( 'intval', array_filter( array_map( 'trim', explode( ',', $raw ) ) ) )
+						);
+					}
+				}
 			}
 
+			// No conditions set — do not display (consistent with documented behaviour).
 			if ( empty( $include_on_posts ) && empty( $include_on_posttypes ) && empty( $include_on_terms ) ) {
-				$include_code = true;
-			}
-			if ( 'or' === $include_relation ) {
-				if ( ( ! empty( $include_on_posts ) && in_array( $post->ID, $include_on_posts ) ) // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
-				|| ( ! empty( $include_on_posttypes ) && in_array( $post->post_type, $include_on_posttypes ) ) // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
-				|| ( ! empty( $include_on_terms ) && 0 !== count( array_intersect( $all_terms, $include_on_terms ) ) ) // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
-				) {
-					$include_code = true;
-				} else {
-					$include_code = false;
-				}
+				$include_code = false;
+			} elseif ( 'or' === $include_relation ) {
+				// OR: display if any one condition matches.
+				$include_code = (
+					( ! empty( $include_on_posts ) && in_array( $post_id, $include_on_posts ) ) // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+					|| ( ! empty( $include_on_posttypes ) && in_array( $post_type, $include_on_posttypes ) ) // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+					|| ( ! empty( $include_on_terms ) && ! empty( array_intersect( $all_terms, $include_on_terms ) ) )
+				);
 			} else {
-				$condition = array();
-				$include   = array();
+				// AND: every non-empty condition must match.
+				$include_code = true;
 				if ( ! empty( $include_on_posts ) ) {
-					$condition[] = 1;
-					$include[]   = in_array( $post->ID, $include_on_posts ) ? 1 : 0; // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+					$include_code = in_array( $post_id, $include_on_posts ); // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 				}
 				if ( ! empty( $include_on_posttypes ) ) {
-					$condition[] = 1;
-					$include[]   = in_array( $post->post_type, $include_on_posttypes ) ? 1 : 0; // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
+					$include_code = $include_code && in_array( $post_type, $include_on_posttypes ); // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 				}
 				if ( ! empty( $include_on_terms ) ) {
-					$condition[] = 1;
-					$include[]   = count( array_intersect( $all_terms, $include_on_terms ) ) ? 1 : 0;
+					$include_code = $include_code && ! empty( array_intersect( $all_terms, $include_on_terms ) );
 				}
-				$include_code = ( array_sum( $condition ) === array_sum( $include ) ) ? true : false;
 			}
 			if ( $include_code ) {
 				$type = self::get_snippet_type( $snippet );

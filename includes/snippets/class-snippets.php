@@ -299,7 +299,8 @@ class Snippets {
 	 * @return array Updated settings array.
 	 */
 	public function wp_editor_settings( $settings, $editor_id ) {
-		if ( 'content' === $editor_id && get_current_screen()->post_type === $this->post_type ) {
+		$screen = get_current_screen();
+		if ( 'content' === $editor_id && $screen instanceof \WP_Screen && $screen->post_type === $this->post_type ) {
 			$snippet_type = $this->get_snippet_type( get_post() );
 
 			$settings['wpautop']       = false;

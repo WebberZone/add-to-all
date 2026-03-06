@@ -142,7 +142,7 @@ class Metabox {
 			'step2_header'         => array(
 				'id'   => 'step2_header',
 				'name' => '<h3>' . esc_html__( 'Step 2: Conditions', 'add-to-all' ) . '</h3>',
-				'desc' => esc_html__( 'Select at least one condition below to display the contents of this snippet. Leaving any of the conditions blank will ignore it. Leaving all blank will ignore the snippet. If you want to include the snippet on all posts, then you can use the Global Settings.', 'add-to-all' ),
+				'desc' => esc_html__( 'Set conditions to control where this snippet appears. Blank conditions are ignored. If all conditions are left blank the snippet will not be displayed. Use OR to show when any one condition matches, or AND to require all conditions to match.', 'add-to-all' ),
 				'type' => 'header',
 			),
 			'include_relation'     => array(
