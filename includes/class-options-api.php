@@ -262,7 +262,6 @@ class Options_API {
 
 		return $did_update;
 	}
-
 }
 
 // Initialize hooks.

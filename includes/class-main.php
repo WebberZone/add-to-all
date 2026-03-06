@@ -135,6 +135,7 @@ final class Main {
 	 */
 	public function hooks() {
 		Hook_Registry::add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+		Hook_Registry::add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		Hook_Registry::add_action( 'wp_head', array( $this, 'wp_head' ) );
 		Hook_Registry::add_action( 'wp_body_open', array( $this, 'wp_body_open' ) );
 		Hook_Registry::add_action( 'wp_footer', array( $this, 'wp_footer' ) );
@@ -201,6 +202,20 @@ final class Main {
 	}
 
 	/**
+	 * Function to enqueue scripts and styles. Filters `wp_enqueue_scripts`.
+	 *
+	 * @since 2.3.0
+	 */
+	public function enqueue_scripts() {
+		$head_css = $this->get_option_and_filter( 'head_css' );
+		if ( '' !== $head_css ) {
+			wp_register_style( 'ata-head-css', false, array(), '1.0' );
+			wp_enqueue_style( 'ata-head-css' );
+			wp_add_inline_style( 'ata-head-css', $head_css );
+		}
+	}
+
+	/**
 	 * Function to add custom code to the header. Filters `wp_head`.
 	 *
 	 * @since 2.0.0
@@ -208,15 +223,8 @@ final class Main {
 	public function wp_head() {
 
 		$head_other_html = $this->get_option_and_filter( 'head_other_html' );
-		$head_css        = $this->get_option_and_filter( 'head_css' );
-		$tynt_id         = ata_get_option( 'tynt_id', '' );
 
-		// Add CSS to header.
-		if ( '' !== $head_css ) {
-			echo '<style type="text/css">' . $head_css . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		}
-
-		// Add other header.
+		// Add other header HTML (arbitrary HTML; cannot be safely enqueued).
 		if ( '' !== $head_other_html ) {
 			echo $head_other_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}

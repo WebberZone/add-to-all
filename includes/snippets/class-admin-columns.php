@@ -38,7 +38,6 @@ class Admin_Columns {
 		Hook_Registry::add_filter( 'manage_ata_snippets_posts_columns', array( $this, 'manage_post_columns' ), 10 );
 		Hook_Registry::add_filter( 'manage_edit-ata_snippets_sortable_columns', array( $this, 'set_sortable_columns' ) );
 		Hook_Registry::add_action( 'manage_ata_snippets_posts_custom_column', array( $this, 'manage_posts_custom_column' ), 10, 2 );
-		Hook_Registry::add_action( 'admin_head', array( $this, 'custom_css' ) );
 		Hook_Registry::add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
 		Hook_Registry::add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 
@@ -182,39 +181,6 @@ class Admin_Columns {
 	}
 
 	/**
-	 * Add custom CSS to the admin head.
-	 */
-	public function custom_css() {
-		$screen = get_current_screen();
-
-		if ( ! $screen || 'ata_snippets' !== $screen->post_type ) {
-			return;
-		}
-		?>
-		<style>
-			.column-enabled {
-				width: 60px;
-			}
-			.column-type {
-				width: 90px;
-			}
-			.column-shortcode {
-				width: 200px;
-			}
-			.ata_shortcode input.code {
-				min-width: 100%;
-			}
-			.ata-column-narrow {
-				display: block;
-			}
-			.ata-snippet-toggle-wrapper {
-				text-align: center;
-			}
-		</style>
-		<?php
-	}
-
-	/**
 	 * Order by or filtery by type meta value.
 	 *
 	 * @param \WP_Query $query The current query object.
@@ -248,6 +214,22 @@ class Admin_Columns {
 		$minimize = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		$screen   = get_current_screen();
 
+		if ( ! $screen || 'ata_snippets' !== $screen->post_type ) {
+			return;
+		}
+
+		wp_register_style( 'ata-admin-columns', false, array(), WZ_SNIPPETZ_VERSION );
+		wp_enqueue_style( 'ata-admin-columns' );
+		wp_add_inline_style(
+			'ata-admin-columns',
+			'.column-enabled { width: 60px; }
+			.column-type { width: 90px; }
+			.column-shortcode { width: 200px; }
+			.ata_shortcode input.code { min-width: 100%; }
+			.ata-column-narrow { display: block; }
+			.ata-snippet-toggle-wrapper { text-align: center; }'
+		);
+
 		if ( 'edit-ata_snippets' === $screen->id ) {
 			wp_enqueue_script(
 				'ata-admin-snippets',
@@ -257,9 +239,7 @@ class Admin_Columns {
 				true
 			);
 
-			wp_enqueue_style(
-				'wp-components'
-			);
+			wp_enqueue_style( 'wp-components' );
 		}
 	}
 

@@ -492,17 +492,26 @@ class Functions {
 			}
 			if ( $include_code ) {
 				$type = self::get_snippet_type( $snippet );
-				if ( $enqueue_only && 'html' === $type ) {
-					continue;
-				}
 
-				$in_footer = ( 'header' === $location ) ? false : true;
-				$output[]  = self::wrap_output(
-					do_shortcode( $snippet->post_content ),
-					$type,
-					$snippet->ID,
-					$in_footer
-				);
+				if ( 'html' === $type ) {
+					// HTML snippets: output directly, cannot be enqueued.
+					if ( $enqueue_only ) {
+						continue;
+					}
+					$output[] = do_shortcode( $snippet->post_content );
+				} else {
+					// CSS/JS snippets: enqueue only — never echo raw tags.
+					if ( ! $enqueue_only ) {
+						continue;
+					}
+					$in_footer = ( 'header' === $location ) ? false : true;
+					self::wrap_output(
+						do_shortcode( $snippet->post_content ),
+						$type,
+						$snippet->ID,
+						$in_footer
+					);
+				}
 			}
 		}
 
