@@ -10,4 +10,6 @@ parameters:
         - add-to-all.php
         - uninstall.php
         - includes/
+    bootstrapFiles:
+        - phpstan-bootstrap.php
     ignoreErrors:

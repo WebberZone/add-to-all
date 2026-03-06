@@ -15,11 +15,10 @@ defined( 'ABSPATH' ) || exit;
  * @param string $class_name The name of the class to load.
  */
 function autoload( $class_name ) {
-	$namespace         = __NAMESPACE__;
-	$classes_subfolder = 'includes';
+	$namespace = __NAMESPACE__;
 
 	if ( false !== strpos( $class_name, $namespace ) ) {
-		$classes_dir = realpath( WZ_SNIPPETZ_DIR ) . DIRECTORY_SEPARATOR . $classes_subfolder . DIRECTORY_SEPARATOR;
+		$classes_dir = __DIR__ . DIRECTORY_SEPARATOR;
 
 		// Project namespace.
 		$project_namespace = $namespace . '\\';
