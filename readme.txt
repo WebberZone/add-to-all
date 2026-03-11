@@ -101,6 +101,8 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 = 2.3.0 =
 
+Release post: [https://webberzone.com/announcements/snippetz-v2-3-0/](https://webberzone.com/announcements/snippetz-v2-3-0/)
+
 * Features:
 	* **External Minified Files:** New setting to generate and load external minified CSS/JS files instead of inline output.
 	* **File Combination:** Option to combine all CSS/JS snippets into single minified files for significantly improved page load performance.
