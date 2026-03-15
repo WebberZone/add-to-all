@@ -50,6 +50,7 @@
 					<li><a href="https://webberzone.com/plugins/knowledgebase/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Knowledge Base', 'add-to-all' ); ?></a></li>
 					<li><a href="https://webberzone.com/plugins/better-search/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Better Search', 'add-to-all' ); ?></a></li>
 					<li><a href="https://webberzone.com/webberzone-followed-posts/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Followed Posts', 'add-to-all' ); ?></a></li>
+					<li><a href="https://webberzone.com/plugins/webberzone-link-warnings/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Link Warnings', 'add-to-all' ); ?></a></li>
 					<li><a href="https://webberzone.com/plugins/popular-authors/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Popular Authors', 'add-to-all' ); ?></a></li>
 					<li><a href="https://webberzone.com/plugins/autoclose/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Auto Close', 'add-to-all' ); ?></a></li>
 				</ul>
