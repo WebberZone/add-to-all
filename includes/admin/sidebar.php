@@ -7,6 +7,8 @@
 
 ?>
 <div class="postbox-container">
+	<a href="https://wzn.io/donate-wz" target="_blank" rel="noopener noreferrer"><img src="<?php echo esc_url( WZ_SNIPPETZ_URL . 'includes/admin/images/support.webp' ); ?>" alt="<?php esc_attr_e( 'Support WebberZone Snippetz', 'add-to-all' ); ?>" style="max-width: 100%; height: auto;"></a>
+
 	<div id="qlinksdiv" class="postbox meta-box-sortables">
 		<h2 class="metabox-holder"><span><?php esc_html_e( 'Quick links', 'add-to-all' ); ?></span></h2>
 
@@ -61,11 +63,11 @@
 
 <div class="postbox-container">
 	<div id="followdiv" class="postbox meta-box-sortables">
-		<h2><span><?php esc_html_e( 'Follow me', 'add-to-all' ); ?></span></h2>
+		<h2 class="metabox-holder"><span><?php esc_html_e( 'Follow us', 'add-to-all' ); ?></span></h2>
 
 		<div class="inside" style="text-align: center">
-			<a href="https://x.com/webberzone/" target="_blank" rel="noopener noreferrer"><img src="<?php echo esc_url( WZ_SNIPPETZ_URL . 'includes/admin/images/x.png' ); ?>" width="100" height="100" alt="<?php esc_attr_e( 'WebberZone on X', 'add-to-all' ); ?>"></a>
-			<a href="https://facebook.com/webberzone/" target="_blank" rel="noopener noreferrer"><img src="<?php echo esc_url( WZ_SNIPPETZ_URL . 'includes/admin/images/fb.png' ); ?>" width="100" height="100" alt="<?php esc_attr_e( 'WebberZone on Facebook', 'add-to-all' ); ?>"></a>
-		</div>
-	</div>
+			<a href="https://x.com/webberzone/" target="_blank" rel="noopener noreferrer"><img src="<?php echo esc_url( WZ_SNIPPETZ_URL . 'includes/admin/images/x.png' ); ?>" width="100" height="100" alt="X (Twitter)"></a>
+			<a href="https://facebook.com/webberzone/" target="_blank" rel="noopener noreferrer"><img src="<?php echo esc_url( WZ_SNIPPETZ_URL . 'includes/admin/images/fb.png' ); ?>" width="100" height="100" alt="Facebook"></a>
+		</div><!-- /.inside -->
+	</div><!-- /.postbox -->
 </div>
