@@ -117,15 +117,22 @@ final class Main {
 		$this->third_party       = new Frontend\Third_Party();
 		$this->blocks            = new Frontend\Blocks\Blocks();
 
-		if ( is_admin() ) {
-			$this->admin = new Admin\Admin();
-		}
-
 		if ( Util\Helpers::is_snippets_enabled() ) {
 			$this->snippets = new Snippets\Snippets();
 		}
 
 		$this->hooks();
+	}
+
+	/**
+	 * Initialize admin components.
+	 *
+	 * @since 2.3.1
+	 */
+	public function init_admin() {
+		if ( is_admin() ) {
+			$this->admin = new Admin\Admin();
+		}
 	}
 
 	/**
@@ -135,6 +142,7 @@ final class Main {
 	 */
 	public function hooks() {
 		Hook_Registry::add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+		Hook_Registry::add_action( 'init', array( $this, 'init_admin' ) );
 		Hook_Registry::add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		Hook_Registry::add_action( 'wp_head', array( $this, 'wp_head' ) );
 		Hook_Registry::add_action( 'wp_body_open', array( $this, 'wp_body_open' ) );
@@ -171,15 +179,6 @@ final class Main {
 				Hook_Registry::add_filter( $filter, array( $this, 'process_placeholders' ), 99 );
 			}
 		}
-	}
-
-	/**
-	 * Load the plugin translations.
-	 *
-	 * @since 2.0.0
-	 */
-	public function load_plugin_textdomain() {
-		load_plugin_textdomain( 'add-to-all', false, dirname( plugin_basename( WZ_SNIPPETZ_FILE ) ) . '/languages/' );
 	}
 
 	/**
