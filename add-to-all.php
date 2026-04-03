@@ -56,6 +56,13 @@ if ( file_exists( $composer_autoload ) ) {
 	require_once $composer_autoload;
 }
 
+/*
+ *----------------------------------------------------------------------------
+ * Include files
+ *----------------------------------------------------------------------------
+ */
+require_once plugin_dir_path( __FILE__ ) . 'includes/options-api.php';
+
 /**
  * The main function responsible for returning the one true WebberZone Snippetz instance to functions everywhere.
  */
@@ -75,10 +82,3 @@ if ( ! function_exists( 'snippetz' ) ) {
 		return \WebberZone\Snippetz\Main::get_instance();
 	}
 }
-
-/*
- *----------------------------------------------------------------------------
- * Include files
- *----------------------------------------------------------------------------
- */
-require_once plugin_dir_path( __FILE__ ) . 'includes/options-api.php';
