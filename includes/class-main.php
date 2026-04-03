@@ -141,7 +141,6 @@ final class Main {
 	 * @since 2.0.0
 	 */
 	public function hooks() {
-		Hook_Registry::add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		Hook_Registry::add_action( 'init', array( $this, 'init_admin' ) );
 		Hook_Registry::add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		Hook_Registry::add_action( 'wp_head', array( $this, 'wp_head' ) );

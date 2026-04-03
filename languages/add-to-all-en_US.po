@@ -17,39 +17,39 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: includes/admin/class-settings.php:127
+#: includes/admin/class-settings.php:130
 msgid "Settings have been reset to their default values. Reload this page to view the updated settings."
 msgstr ""
 
-#: includes/admin/class-settings.php:128
+#: includes/admin/class-settings.php:131
 msgid "Settings updated."
 msgstr ""
 
-#: includes/admin/class-settings.php:129
+#: includes/admin/class-settings.php:132
 msgid "Save Changes"
 msgstr ""
 
-#: includes/admin/class-settings.php:130
+#: includes/admin/class-settings.php:133
 msgid "Reset all settings"
 msgstr ""
 
-#: includes/admin/class-settings.php:131
+#: includes/admin/class-settings.php:134
 msgid "Do you really want to reset all these settings to their default values?"
 msgstr ""
 
-#: includes/admin/class-settings.php:132
+#: includes/admin/class-settings.php:135
 msgid "Modified from default setting"
 msgstr ""
 
-#: includes/admin/class-settings.php:126
-#: includes/admin/class-settings.php:157
-#: includes/admin/class-settings.php:166
+#: includes/admin/class-settings.php:129
+#: includes/admin/class-settings.php:160
+#: includes/admin/class-settings.php:169
 msgid "WebberZone Snippetz Settings"
 msgstr ""
 
 #: includes/admin/class-admin.php:82
-#: includes/admin/class-settings.php:158
-#: includes/admin/class-settings.php:853
+#: includes/admin/class-settings.php:161
+#: includes/admin/class-settings.php:856
 msgid "Settings"
 msgstr ""
 
@@ -62,464 +62,464 @@ msgstr ""
 msgid "WebberZone Snippetz"
 msgstr ""
 
-#: includes/admin/class-settings.php:184
-#: includes/admin/class-settings.php:921
+#: includes/admin/class-settings.php:187
+#: includes/admin/class-settings.php:924
 msgid "General"
 msgstr ""
 
-#: includes/admin/class-settings.php:185
-#: includes/admin/class-settings.php:928
+#: includes/admin/class-settings.php:188
+#: includes/admin/class-settings.php:931
 msgid "Third Party"
 msgstr ""
 
-#: includes/admin/class-settings.php:186
-#: includes/admin/class-settings.php:941
+#: includes/admin/class-settings.php:189
+#: includes/admin/class-settings.php:944
 msgid "Header"
 msgstr ""
 
-#: includes/admin/class-settings.php:187
-#: includes/admin/class-settings.php:949
+#: includes/admin/class-settings.php:190
+#: includes/admin/class-settings.php:952
 msgid "Body"
 msgstr ""
 
-#: includes/admin/class-settings.php:188
-#: includes/admin/class-settings.php:957
+#: includes/admin/class-settings.php:191
+#: includes/admin/class-settings.php:960
 msgid "Footer"
 msgstr ""
 
-#: includes/admin/class-settings.php:189
-#: includes/admin/class-settings.php:965
+#: includes/admin/class-settings.php:192
+#: includes/admin/class-settings.php:968
 msgid "Feed"
 msgstr ""
 
-#: includes/admin/class-settings.php:244
+#: includes/admin/class-settings.php:247
 msgid "Enable Snippets Manager"
 msgstr ""
 
-#: includes/admin/class-settings.php:245
+#: includes/admin/class-settings.php:248
 msgid "Disabling this will turn off the Snippets manager and any of the associated functionality. This will not delete any snippets data that was created before this was turned off."
 msgstr ""
 
-#: includes/admin/class-settings.php:265
+#: includes/admin/class-settings.php:268
 msgid "Snippet content priority"
 msgstr ""
 
-#: includes/admin/class-settings.php:266
+#: includes/admin/class-settings.php:269
 msgid "Priority of the snippet content. Lower number means all snippets are added earlier relative to other content. Number below 10 is not recommended. At the next level, priority of each snippet is independently set from the Edit Snippets screen."
 msgstr ""
 
-#: includes/admin/class-settings.php:294
+#: includes/admin/class-settings.php:297
 msgid "StatCounter"
 msgstr ""
 
-#: includes/admin/class-settings.php:300
+#: includes/admin/class-settings.php:303
 msgid "Project ID"
 msgstr ""
 
-#: includes/admin/class-settings.php:301
+#: includes/admin/class-settings.php:304
 msgid "This is the value of sc_project in your StatCounter code."
 msgstr ""
 
-#: includes/admin/class-settings.php:307
+#: includes/admin/class-settings.php:310
 msgid "Security ID"
 msgstr ""
 
-#: includes/admin/class-settings.php:308
+#: includes/admin/class-settings.php:311
 msgid "This is the value of sc_security in your StatCounter code."
 msgstr ""
 
-#: includes/admin/class-settings.php:314
+#: includes/admin/class-settings.php:317
 msgid "Google Analytics"
 msgstr ""
 
-#: includes/admin/class-settings.php:320
+#: includes/admin/class-settings.php:323
 msgid "Tracking ID"
 msgstr ""
 
 #. translators: 1: Google Tag ID link.
-#: includes/admin/class-settings.php:322
+#: includes/admin/class-settings.php:325
 #, php-format
 msgid "Find your %s"
 msgstr ""
 
 #. translators: 1: Google Tag ID link.
-#: includes/admin/class-settings.php:322
+#: includes/admin/class-settings.php:325
 msgid "Google Tag ID"
 msgstr ""
 
-#: includes/admin/class-settings.php:328
+#: includes/admin/class-settings.php:331
 msgid "Site verification"
 msgstr ""
 
-#: includes/admin/class-settings.php:334
+#: includes/admin/class-settings.php:337
 msgid "Google"
 msgstr ""
 
 #. translators: 1: Google verification details page.
 #. translators: 1: Bing verification details page.
-#: includes/admin/class-settings.php:336
-#: includes/admin/class-settings.php:344
+#: includes/admin/class-settings.php:339
+#: includes/admin/class-settings.php:347
 #, php-format
 msgid "Value of the content portion of the HTML tag method on the %s"
 msgstr ""
 
 #. translators: 1: Google verification details page.
 #. translators: 1: Bing verification details page.
-#: includes/admin/class-settings.php:336
-#: includes/admin/class-settings.php:344
+#: includes/admin/class-settings.php:339
+#: includes/admin/class-settings.php:347
 msgid "verification details page"
 msgstr ""
 
-#: includes/admin/class-settings.php:342
+#: includes/admin/class-settings.php:345
 msgid "Bing"
 msgstr ""
 
-#: includes/admin/class-settings.php:350
+#: includes/admin/class-settings.php:353
 msgid "Meta"
 msgstr ""
 
 #. translators: 1: Meta tag details page.
-#: includes/admin/class-settings.php:352
+#: includes/admin/class-settings.php:355
 #, php-format
 msgid "Value of the content portion of the Meta tag method. Read how to verify your domain in the %s"
 msgstr ""
 
 #. translators: 1: Meta tag details page.
-#: includes/admin/class-settings.php:352
+#: includes/admin/class-settings.php:355
 msgid "Meta Business Help Centre"
 msgstr ""
 
-#: includes/admin/class-settings.php:358
+#: includes/admin/class-settings.php:361
 msgid "Pinterest"
 msgstr ""
 
 #. translators: 1: Pinterest meta tag details page.
-#: includes/admin/class-settings.php:360
+#: includes/admin/class-settings.php:363
 #, php-format
 msgid "Read how to get the Meta Tag from the %s"
 msgstr ""
 
 #. translators: 1: Pinterest meta tag details page.
-#: includes/admin/class-settings.php:360
+#: includes/admin/class-settings.php:363
 msgid "Pinterest help page"
 msgstr ""
 
-#: includes/admin/class-settings.php:388
+#: includes/admin/class-settings.php:391
 msgid "Custom CSS"
 msgstr ""
 
-#: includes/admin/class-settings.php:389
+#: includes/admin/class-settings.php:392
 msgid "Add the CSS code without the <style></style> tags."
 msgstr ""
 
-#: includes/admin/class-settings.php:396
+#: includes/admin/class-settings.php:399
 msgid "HTML to add to the header"
 msgstr ""
 
 #. translators: 1: Code.
-#: includes/admin/class-settings.php:398
-#: includes/admin/class-settings.php:643
+#: includes/admin/class-settings.php:401
+#: includes/admin/class-settings.php:646
 #, php-format
 msgid "The code entered here is added to %1$s. Please ensure that you enter valid HTML or JavaScript."
 msgstr ""
 
-#: includes/admin/class-settings.php:427
+#: includes/admin/class-settings.php:430
 msgid "Opening Body Tag"
 msgstr ""
 
-#: includes/admin/class-settings.php:433
+#: includes/admin/class-settings.php:436
 msgid "HTML to add to wp_body_open()"
 msgstr ""
 
-#: includes/admin/class-settings.php:434
+#: includes/admin/class-settings.php:437
 msgid "wp_body_open() is called after the opening body tag. Please ensure that you enter valid HTML or JavaScript. This might not work if your theme does not include the tag."
 msgstr ""
 
-#: includes/admin/class-settings.php:441
+#: includes/admin/class-settings.php:444
 msgid "Content settings"
 msgstr ""
 
-#: includes/admin/class-settings.php:447
+#: includes/admin/class-settings.php:450
 msgid "Content filter priority"
 msgstr ""
 
-#: includes/admin/class-settings.php:448
+#: includes/admin/class-settings.php:451
 msgid "A higher number will cause the WebberZone Snippetz output to be processed after other filters. Number below 10 is not recommended."
 msgstr ""
 
-#: includes/admin/class-settings.php:454
+#: includes/admin/class-settings.php:457
 msgid "Exclude display on these post IDs"
 msgstr ""
 
-#: includes/admin/class-settings.php:455
+#: includes/admin/class-settings.php:458
 msgid "Comma-separated list of post or page IDs to exclude displaying the above content. e.g. 188,320,500"
 msgstr ""
 
-#: includes/admin/class-settings.php:461
+#: includes/admin/class-settings.php:464
 msgid "Process shortcodes in content"
 msgstr ""
 
-#: includes/admin/class-settings.php:462
-#: includes/admin/class-settings.php:705
+#: includes/admin/class-settings.php:465
+#: includes/admin/class-settings.php:708
 msgid "Check this box to execute any shortcodes that you enter in the options below."
 msgstr ""
 
-#: includes/admin/class-settings.php:468
+#: includes/admin/class-settings.php:471
 msgid "Home and other views"
 msgstr ""
 
-#: includes/admin/class-settings.php:469
+#: includes/admin/class-settings.php:472
 msgid "Displays when viewing single posts, home, category, tag and other archives."
 msgstr ""
 
-#: includes/admin/class-settings.php:474
-#: includes/admin/class-settings.php:510
-#: includes/admin/class-settings.php:546
-#: includes/admin/class-settings.php:582
-#: includes/admin/class-settings.php:711
+#: includes/admin/class-settings.php:477
+#: includes/admin/class-settings.php:513
+#: includes/admin/class-settings.php:549
+#: includes/admin/class-settings.php:585
+#: includes/admin/class-settings.php:714
 msgid "Add HTML before content?"
 msgstr ""
 
-#: includes/admin/class-settings.php:475
-#: includes/admin/class-settings.php:490
-#: includes/admin/class-settings.php:511
-#: includes/admin/class-settings.php:526
-#: includes/admin/class-settings.php:547
-#: includes/admin/class-settings.php:562
-#: includes/admin/class-settings.php:712
-#: includes/admin/class-settings.php:727
+#: includes/admin/class-settings.php:478
+#: includes/admin/class-settings.php:493
+#: includes/admin/class-settings.php:514
+#: includes/admin/class-settings.php:529
+#: includes/admin/class-settings.php:550
+#: includes/admin/class-settings.php:565
+#: includes/admin/class-settings.php:715
+#: includes/admin/class-settings.php:730
 msgid "Check this to add the HTML below before the content of your post."
 msgstr ""
 
-#: includes/admin/class-settings.php:481
-#: includes/admin/class-settings.php:517
-#: includes/admin/class-settings.php:553
-#: includes/admin/class-settings.php:589
-#: includes/admin/class-settings.php:718
+#: includes/admin/class-settings.php:484
+#: includes/admin/class-settings.php:520
+#: includes/admin/class-settings.php:556
+#: includes/admin/class-settings.php:592
+#: includes/admin/class-settings.php:721
 msgid "HTML to add before the content"
 msgstr ""
 
-#: includes/admin/class-settings.php:482
-#: includes/admin/class-settings.php:497
-#: includes/admin/class-settings.php:518
-#: includes/admin/class-settings.php:533
-#: includes/admin/class-settings.php:554
-#: includes/admin/class-settings.php:569
-#: includes/admin/class-settings.php:590
-#: includes/admin/class-settings.php:605
-#: includes/admin/class-settings.php:719
-#: includes/admin/class-settings.php:734
+#: includes/admin/class-settings.php:485
+#: includes/admin/class-settings.php:500
+#: includes/admin/class-settings.php:521
+#: includes/admin/class-settings.php:536
+#: includes/admin/class-settings.php:557
+#: includes/admin/class-settings.php:572
+#: includes/admin/class-settings.php:593
+#: includes/admin/class-settings.php:608
+#: includes/admin/class-settings.php:722
+#: includes/admin/class-settings.php:737
 msgid "Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed."
 msgstr ""
 
-#: includes/admin/class-settings.php:489
-#: includes/admin/class-settings.php:525
-#: includes/admin/class-settings.php:561
-#: includes/admin/class-settings.php:597
-#: includes/admin/class-settings.php:726
+#: includes/admin/class-settings.php:492
+#: includes/admin/class-settings.php:528
+#: includes/admin/class-settings.php:564
+#: includes/admin/class-settings.php:600
+#: includes/admin/class-settings.php:729
 msgid "Add HTML after content?"
 msgstr ""
 
-#: includes/admin/class-settings.php:496
-#: includes/admin/class-settings.php:532
-#: includes/admin/class-settings.php:568
-#: includes/admin/class-settings.php:604
-#: includes/admin/class-settings.php:733
+#: includes/admin/class-settings.php:499
+#: includes/admin/class-settings.php:535
+#: includes/admin/class-settings.php:571
+#: includes/admin/class-settings.php:607
+#: includes/admin/class-settings.php:736
 msgid "HTML to add after the content"
 msgstr ""
 
-#: includes/admin/class-settings.php:504
+#: includes/admin/class-settings.php:507
 msgid "Single posts views"
 msgstr ""
 
-#: includes/admin/class-settings.php:505
+#: includes/admin/class-settings.php:508
 msgid "Displays when viewing single views including posts, pages, custom-post-types."
 msgstr ""
 
-#: includes/admin/class-settings.php:540
+#: includes/admin/class-settings.php:543
 msgid "Post only views"
 msgstr ""
 
-#: includes/admin/class-settings.php:541
+#: includes/admin/class-settings.php:544
 msgid "Displays only on posts"
 msgstr ""
 
-#: includes/admin/class-settings.php:576
+#: includes/admin/class-settings.php:579
 msgid "Page only views"
 msgstr ""
 
-#: includes/admin/class-settings.php:577
+#: includes/admin/class-settings.php:580
 msgid "Displays only on pages"
 msgstr ""
 
-#: includes/admin/class-settings.php:583
-#: includes/admin/class-settings.php:598
+#: includes/admin/class-settings.php:586
+#: includes/admin/class-settings.php:601
 msgid "Check this to add the HTML below before the content of your page."
 msgstr ""
 
-#: includes/admin/class-settings.php:634
+#: includes/admin/class-settings.php:637
 msgid "Process shortcodes in footer"
 msgstr ""
 
-#: includes/admin/class-settings.php:635
+#: includes/admin/class-settings.php:638
 msgid "Check this box to execute any shortcodes that you enter in the option below."
 msgstr ""
 
-#: includes/admin/class-settings.php:641
+#: includes/admin/class-settings.php:644
 msgid "HTML to add to the footer"
 msgstr ""
 
-#: includes/admin/class-settings.php:672
+#: includes/admin/class-settings.php:675
 msgid "Add copyright notice?"
 msgstr ""
 
-#: includes/admin/class-settings.php:673
+#: includes/admin/class-settings.php:676
 msgid "Check this to add the below copyright notice to your feed."
 msgstr ""
 
-#: includes/admin/class-settings.php:679
+#: includes/admin/class-settings.php:682
 msgid "Coyright text"
 msgstr ""
 
 #. translators: No strings here.
-#: includes/admin/class-settings.php:681
+#: includes/admin/class-settings.php:684
 #, php-format
 msgid "Enter valid HTML only. This copyright notice is added as the last item of your feed. You can also use %year% for the year or %first_year% for the year of the first post,"
 msgstr ""
 
-#: includes/admin/class-settings.php:688
+#: includes/admin/class-settings.php:691
 msgid "Add post title?"
 msgstr ""
 
-#: includes/admin/class-settings.php:689
+#: includes/admin/class-settings.php:692
 msgid "Add a link to the title of the post in the feed."
 msgstr ""
 
-#: includes/admin/class-settings.php:695
+#: includes/admin/class-settings.php:698
 msgid "Title text"
-msgstr ""
-
-#. translators: No strings here.
-#: includes/admin/class-settings.php:697
-#, php-format
-msgid "The above text will be added to the feed. You can use %title% to add a link to the post, %date% and %time% to display the date and time of the post respectively."
 msgstr ""
 
 #. translators: No strings here.
 #: includes/admin/class-settings.php:700
 #, php-format
+msgid "The above text will be added to the feed. You can use %title% to add a link to the post, %date% and %time% to display the date and time of the post respectively."
+msgstr ""
+
+#. translators: No strings here.
+#: includes/admin/class-settings.php:703
+#, php-format
 msgid "%title% was first posted on %date% at %time%."
 msgstr ""
 
-#: includes/admin/class-settings.php:704
+#: includes/admin/class-settings.php:707
 msgid "Process shortcodes in feed"
 msgstr ""
 
-#: includes/admin/class-settings.php:741
+#: includes/admin/class-settings.php:744
 msgid "Add a link to \"WebberZone Snippetz\" plugin page"
 msgstr ""
 
-#: includes/admin/class-settings.php:767
+#: includes/admin/class-settings.php:770
 msgid "Use of this feed is for personal non-commercial use only. If you are not reading this article in your feed reader, then the site is guilty of copyright infringement. Please contact me at "
 msgstr ""
 
-#: includes/admin/class-settings.php:872
-#: includes/admin/sidebar.php:26
+#: includes/admin/class-settings.php:875
+#: includes/admin/sidebar.php:28
 msgid "Support"
 msgstr ""
 
-#: includes/admin/class-settings.php:873
+#: includes/admin/class-settings.php:876
 msgid "Donate"
 msgstr ""
 
-#: includes/admin/class-settings.php:874
+#: includes/admin/class-settings.php:877
 msgid "Contribute"
 msgstr ""
 
 #. translators: 1: Plugin support site link.
-#: includes/admin/class-settings.php:891
+#: includes/admin/class-settings.php:894
 #, php-format
 msgid "For more information or how to get support visit the <a href=\"%s\">support site</a>."
 msgstr ""
 
 #. translators: 1: WordPress.org support forums link.
-#: includes/admin/class-settings.php:893
+#: includes/admin/class-settings.php:896
 #, php-format
 msgid "Support queries should be posted in the <a href=\"%s\">WordPress.org support forums</a>."
 msgstr ""
 
 #. translators: 1: Github issues link, 2: Github plugin page link.
-#: includes/admin/class-settings.php:896
+#: includes/admin/class-settings.php:899
 #, php-format
 msgid "<a href=\"%1$s\">Post an issue</a> on <a href=\"%2$s\">GitHub</a> (bug reports only)."
 msgstr ""
 
-#: includes/admin/class-settings.php:923
+#: includes/admin/class-settings.php:926
 msgid "This screen provides general settings. Enable/disable the Snippets Manager and set the global priority of snippets."
 msgstr ""
 
-#: includes/admin/class-settings.php:924
-#: includes/admin/class-settings.php:937
-#: includes/admin/class-settings.php:945
-#: includes/admin/class-settings.php:953
-#: includes/admin/class-settings.php:961
-#: includes/admin/class-settings.php:969
+#: includes/admin/class-settings.php:927
+#: includes/admin/class-settings.php:940
+#: includes/admin/class-settings.php:948
+#: includes/admin/class-settings.php:956
+#: includes/admin/class-settings.php:964
+#: includes/admin/class-settings.php:972
 msgid "You must click the Save Changes button at the bottom of the screen for new settings to take effect."
 msgstr ""
 
-#: includes/admin/class-settings.php:930
+#: includes/admin/class-settings.php:933
 msgid "This screen provides the settings for configuring the integration with third party scripts."
 msgstr ""
 
 #. translators: 1: Google Analystics help article.
-#: includes/admin/class-settings.php:933
+#: includes/admin/class-settings.php:936
 #, php-format
 msgid "Google Analytics tracking can be found by visiting this %s"
 msgstr ""
 
-#: includes/admin/class-settings.php:934
+#: includes/admin/class-settings.php:937
 msgid "article"
 msgstr ""
 
-#: includes/admin/class-settings.php:943
+#: includes/admin/class-settings.php:946
 msgid "This screen allows you to control what content is added to the header of your site."
 msgstr ""
 
-#: includes/admin/class-settings.php:944
+#: includes/admin/class-settings.php:947
 msgid "You can add custom CSS or HTML code. Useful for adding meta tags for site verification, etc."
 msgstr ""
 
-#: includes/admin/class-settings.php:951
+#: includes/admin/class-settings.php:954
 msgid "This screen allows you to control what content is added to the content of posts, pages and custom post types."
 msgstr ""
 
-#: includes/admin/class-settings.php:952
+#: includes/admin/class-settings.php:955
 msgid "You can set the priority of the filter and choose if you want this to be displayed on either all content (including archives) or just single posts/pages."
 msgstr ""
 
-#: includes/admin/class-settings.php:959
+#: includes/admin/class-settings.php:962
 msgid "This screen allows you to control what content is added to the footer of your site."
 msgstr ""
 
-#: includes/admin/class-settings.php:960
+#: includes/admin/class-settings.php:963
 msgid "You can add custom HTML code. Useful for adding tracking code for analytics, etc."
 msgstr ""
 
-#: includes/admin/class-settings.php:967
+#: includes/admin/class-settings.php:970
 msgid "This screen allows you to control what content is added to the feed of your site."
 msgstr ""
 
-#: includes/admin/class-settings.php:968
+#: includes/admin/class-settings.php:971
 msgid "You can add copyright text, a link to the title and date of the post, and HTML before and after the content"
 msgstr ""
 
 #. translators: 1: Opening anchor tag with Plugin page link, 2: Closing anchor tag, 3: Opening anchor tag with review link.
-#: includes/admin/class-settings.php:987
+#: includes/admin/class-settings.php:990
 #, php-format
 msgid "Thank you for using %1$sWebberZone Snippetz%2$s! Please %3$srate us%2$s on %3$sWordPress.org%2$s"
 msgstr ""
 
-#: includes/class-main.php:414
+#: includes/class-main.php:420
 msgid "Feed enhanced by "
 msgstr ""
 
@@ -556,37 +556,37 @@ msgstr ""
 msgid "Snippet Settings"
 msgstr ""
 
-#: includes/class-options-api.php:296
+#: includes/admin/class-settings.php:1136
 msgctxt "tag delimiter"
 msgid ","
 msgstr ""
 
-#: includes/snippets/class-admin-columns.php:58
+#: includes/snippets/class-admin-columns.php:57
 msgid "Status"
 msgstr ""
 
-#: includes/snippets/class-admin-columns.php:68
+#: includes/snippets/class-admin-columns.php:67
 msgid "Type"
 msgstr ""
 
-#: includes/snippets/class-admin-columns.php:69
+#: includes/snippets/class-admin-columns.php:68
 msgid "Shortcode"
 msgstr ""
 
-#: includes/snippets/class-admin-columns.php:141
+#: includes/snippets/class-admin-columns.php:140
 msgid "Copy to clipboard"
 msgstr ""
 
-#: includes/snippets/class-admin-columns.php:271
+#: includes/snippets/class-admin-columns.php:251
 msgid "No post ID provided."
 msgstr ""
 
-#: includes/snippets/class-admin-columns.php:279
+#: includes/snippets/class-admin-columns.php:259
 msgid "You do not have permission to edit this snippet."
 msgstr ""
 
-#: includes/snippets/class-functions.php:111
-#: includes/snippets/class-functions.php:147
+#: includes/snippets/class-functions.php:112
+#: includes/snippets/class-functions.php:148
 msgid "Incorrect snippet ID"
 msgstr ""
 
@@ -654,10 +654,6 @@ msgstr ""
 msgid "Step 2: Conditions"
 msgstr ""
 
-#: includes/snippets/class-metabox.php:145
-msgid "Select at least one condition below to display the contents of this snippet. Leaving any of the conditions blank will ignore it. Leaving all blank will ignore the snippet. If you want to include the snippet on all posts, then you can use the Global Settings."
-msgstr ""
-
 #: includes/snippets/class-metabox.php:150
 msgid "The logical relationship between each condition below"
 msgstr ""
@@ -698,23 +694,23 @@ msgstr ""
 msgid "Comma separated list of category slugs. The field above has an autocomplete so simply start typing in the starting letters and it will prompt you with options. Does not support custom taxonomies."
 msgstr ""
 
-#: includes/snippets/class-metabox.php:188
+#: includes/snippets/class-metabox.php:191
 msgid "Include on these Tags"
 msgstr ""
 
-#: includes/snippets/class-metabox.php:189
+#: includes/snippets/class-metabox.php:192
 msgid "Comma separated list of tag slugs. The field above has an autocomplete so simply start typing in the starting letters and it will prompt you with options. Does not support custom taxonomies."
 msgstr ""
 
-#: includes/snippets/class-metabox.php:200
+#: includes/snippets/class-metabox.php:206
 msgid "Step 3: Priority"
 msgstr ""
 
-#: includes/snippets/class-metabox.php:206
+#: includes/snippets/class-metabox.php:212
 msgid "Priority"
 msgstr ""
 
-#: includes/snippets/class-metabox.php:207
+#: includes/snippets/class-metabox.php:213
 msgid "Used to specify the order in which the code snippets are added to the content. Lower numbers correspond with earlier addition, and functions with the same priority are added in the order in which they were added, typically by post ID."
 msgstr ""
 
@@ -728,7 +724,7 @@ msgctxt "Post Type Singular Name"
 msgid "Snippet"
 msgstr ""
 
-#: includes/admin/class-settings.php:167
+#: includes/admin/class-settings.php:170
 #: includes/snippets/class-snippets.php:127
 msgid "Snippetz"
 msgstr ""
@@ -914,16 +910,16 @@ msgid "Categories list navigation"
 msgstr ""
 
 #. translators: 1: snippet type, 2: tag
-#: includes/snippets/class-snippets.php:343
+#: includes/snippets/class-snippets.php:344
 #, php-format
 msgid "This is a %1$s snippet. You do not need to add %2$s tags in your code."
 msgstr ""
 
-#: includes/snippets/class-snippets.php:350
+#: includes/snippets/class-snippets.php:351
 msgid "Add Media"
 msgstr ""
 
-#: includes/snippets/class-snippets.php:369
+#: includes/snippets/class-snippets.php:370
 msgid "Insert into editor"
 msgstr ""
 
@@ -1047,19 +1043,19 @@ msgstr ""
 msgid "Manage snippets, configure settings, and enhance your WordPress site."
 msgstr ""
 
-#: includes/admin/class-settings.php:251
+#: includes/admin/class-settings.php:254
 msgid "Enable external CSS/JS files"
 msgstr ""
 
-#: includes/admin/class-settings.php:252
+#: includes/admin/class-settings.php:255
 msgid "Save CSS and JS snippets as external minified files instead of inline output. Improves page load performance."
 msgstr ""
 
-#: includes/admin/class-settings.php:258
+#: includes/admin/class-settings.php:261
 msgid "Enable file combination"
 msgstr ""
 
-#: includes/admin/class-settings.php:259
+#: includes/admin/class-settings.php:262
 msgid "Combine all CSS/JS snippets into single files. Note: Conditions are ignored for combined files."
 msgstr ""
 
@@ -1206,95 +1202,83 @@ msgstr ""
 msgid "Please upload a file to import"
 msgstr ""
 
-#: includes/admin/sidebar.php:11
+#: includes/admin/sidebar.php:13
 msgid "Quick links"
 msgstr ""
 
-#: includes/admin/sidebar.php:17
+#: includes/admin/sidebar.php:19
 msgid "Snippetz plugin homepage"
 msgstr ""
 
-#: includes/admin/sidebar.php:20
+#: includes/admin/sidebar.php:22
 msgid "Documentation"
 msgstr ""
 
-#: includes/admin/sidebar.php:23
+#: includes/admin/sidebar.php:25
 msgid "FAQ"
 msgstr ""
 
-#: includes/admin/sidebar.php:29
+#: includes/admin/sidebar.php:31
 msgid "Reviews"
 msgstr ""
 
-#: includes/admin/sidebar.php:32
+#: includes/admin/sidebar.php:34
 msgid "Github repository"
 msgstr ""
 
-#: includes/admin/sidebar.php:35
+#: includes/admin/sidebar.php:37
 msgid "Ajay's blog"
 msgstr ""
 
-#: includes/admin/sidebar.php:43
+#: includes/admin/sidebar.php:45
 msgid "WebberZone plugins"
 msgstr ""
 
-#: includes/admin/sidebar.php:48
+#: includes/admin/sidebar.php:50
 msgid "Contextual Related Posts"
 msgstr ""
 
-#: includes/admin/sidebar.php:49
+#: includes/admin/sidebar.php:51
 msgid "Top 10"
 msgstr ""
 
-#: includes/admin/sidebar.php:50
+#: includes/admin/sidebar.php:52
 msgid "Knowledge Base"
 msgstr ""
 
-#: includes/admin/sidebar.php:51
+#: includes/admin/sidebar.php:53
 msgid "Better Search"
 msgstr ""
 
-#: includes/admin/sidebar.php:52
+#: includes/admin/sidebar.php:54
 msgid "Followed Posts"
 msgstr ""
 
-#: includes/admin/sidebar.php:53
+#: includes/admin/sidebar.php:56
 msgid "Popular Authors"
 msgstr ""
 
-#: includes/admin/sidebar.php:54
+#: includes/admin/sidebar.php:57
 msgid "Auto Close"
 msgstr ""
 
-#: includes/admin/sidebar.php:63
-msgid "Follow me"
-msgstr ""
-
-#: includes/admin/sidebar.php:66
-msgid "WebberZone on X"
-msgstr ""
-
-#: includes/admin/sidebar.php:67
-msgid "WebberZone on Facebook"
-msgstr ""
-
-#: includes/snippets/class-admin-columns.php:71
+#: includes/snippets/class-admin-columns.php:70
 msgid "External File"
 msgstr ""
 
 #. translators: %s: Snippet type (CSS or JS).
-#: includes/snippets/class-admin-columns.php:159
+#: includes/snippets/class-admin-columns.php:158
 #, php-format
 msgid "View %s file"
 msgstr ""
 
 #. translators: 1: Snippet type (CSS or JS). 2: Snippet title.
-#: includes/snippets/class-admin-columns.php:164
+#: includes/snippets/class-admin-columns.php:163
 #, php-format
 msgid "View %1$s file for %2$s"
 msgstr ""
 
-#: includes/snippets/class-admin-columns.php:175
+#: includes/snippets/class-admin-columns.php:174
 msgid "File not generated"
 msgstr ""
 
@@ -1304,24 +1288,40 @@ msgstr ""
 msgid "No results found for \"%s\""
 msgstr ""
 
-#: includes/snippets/class-metabox.php:255
+#: includes/snippets/class-metabox.php:261
 msgid "Snippet File Stats:"
 msgstr ""
 
 #. translators: %s: File URL
-#: includes/snippets/class-metabox.php:259
+#: includes/snippets/class-metabox.php:265
 #, php-format
 msgid "URL: %s"
 msgstr ""
 
 #. translators: %s: File size
-#: includes/snippets/class-metabox.php:262
+#: includes/snippets/class-metabox.php:268
 #, php-format
 msgid "Size: %s"
 msgstr ""
 
 #. translators: %s: Last Modified
-#: includes/snippets/class-metabox.php:265
+#: includes/snippets/class-metabox.php:271
 #, php-format
 msgid "Last Modified: %s"
+msgstr ""
+
+#: includes/admin/sidebar.php:10
+msgid "Support WebberZone Snippetz"
+msgstr ""
+
+#: includes/admin/sidebar.php:55
+msgid "Link Warnings"
+msgstr ""
+
+#: includes/admin/sidebar.php:66
+msgid "Follow us"
+msgstr ""
+
+#: includes/snippets/class-metabox.php:145
+msgid "Set conditions to control where this snippet appears. Blank conditions are ignored. If all conditions are left blank the snippet will not be displayed. Use OR to show when any one condition matches, or AND to require all conditions to match."
 msgstr ""
