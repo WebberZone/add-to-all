@@ -4,7 +4,7 @@ This file provides guidance to Codex (Codex.ai/code) when working with code in t
 
 ## Plugin Overview
 
-**WebberZone Snippetz** (plugin slug: `add-to-all`) is a WordPress plugin (v2.3.0) that lets users insert arbitrary code snippets (HTML, CSS, JS) into the header, body open, footer, content, or feed of a WordPress site. It also manages a `ata_snippets` custom post type for reusable named snippets. Namespace: `WebberZone\Snippetz`. Requires WordPress 6.3+, PHP 7.4+. No Freemius.
+**WebberZone Snippetz** (plugin slug: `add-to-all`) is a WordPress plugin (v2.3.1) that lets users insert arbitrary code snippets (HTML, CSS, JS) into the header, body open, footer, content, or feed of a WordPress site. It also manages a `ata_snippets` custom post type for reusable named snippets. Namespace: `WebberZone\Snippetz`. Requires WordPress 6.3+, PHP 7.4+. No Freemius.
 
 Constants defined in `add-to-all.php`: `WZ_SNIPPETZ_VERSION`, `WZ_SNIPPETZ_FILE`, `WZ_SNIPPETZ_DIR`, `WZ_SNIPPETZ_URL`.
 
