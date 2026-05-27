@@ -4,6 +4,7 @@ slug: installing-webberzone-snippetz
 title: "Installing WebberZone Snippetz"
 products: [add-to-all]
 sections: [01-ata-getting-started]
+tags: [add-to-all,installation,snippetz]
 status: publish
 order: 0
 ---
