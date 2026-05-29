@@ -2,7 +2,7 @@
 /**
  * Class to display and save a Metabox.
  *
- * @package WebberZone\Snippetz\Admin
+ * @package WebberZone\Snippetz
  */
 
 namespace WebberZone\Snippetz\Admin\Settings;

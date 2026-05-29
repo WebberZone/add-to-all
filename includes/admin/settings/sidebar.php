@@ -2,7 +2,7 @@
 /**
  * Sidebar template.
  *
- * @package WebberZone\Snippetz\Admin
+ * @package WebberZone\Snippetz
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
