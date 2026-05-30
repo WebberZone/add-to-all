@@ -16,3 +16,5 @@ composer.lock
 # Claude AI
 .claude/
 .commandcode/
+
+.devin/
