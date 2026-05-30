@@ -1,5 +1,4 @@
 ---
-id: 8749
 slug: installing-webberzone-snippetz
 title: "Installing WebberZone Snippetz"
 products: [add-to-all]
