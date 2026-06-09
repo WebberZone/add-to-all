@@ -27,12 +27,12 @@ WebberZone Snippetz (formerly Add to All) is available in the WordPress.org plug
 
 If you’re using [WP CLI](http://wp-cli.org/), you can install and activate this plugin by running:
 
-``` wp-block-code
+```bash
 wp plugin install add-to-all --activate
 ```
 
 This plugin can also be network-activated using the following:
 
-``` wp-block-code
+```bash
 wp plugin install add-to-all --activate-network
 ```
