@@ -12,16 +12,16 @@ WebberZone Snippetz (formerly Add to All) is available in the WordPress.org plug
 
 ## WordPress install (the easy way)
 
-1.  Navigate to Plugins within your WordPress Admin Area
-2.  Click “Add new” and enter “WebberZone Snippetz” in the search box.
-3.  Find the plugin in the list (usually the first result) and click “Install Now”.
+1. Navigate to **Plugins** within your WordPress Admin area.
+2. Click **Add new** and enter “WebberZone Snippetz” in the search box.
+3. Find the plugin in the list (usually the first result) and click **Install Now**.
 
 ## Manual install
 
-1.  Download the plugin
-2.  Extract the contents of where-did-they-go-from-here.zip to the **/wp-content/plugins** folder. You should get a folder called **add-to-all**.
-3.  Activate the Plugin “WebberZone Followed Posts” in WP-Admin.
-4.  Go to **Snippetz » Settings** to configure.
+1. Download the plugin
+2. Extract the contents of add-to-all.zip to the **/wp-content/plugins** folder. You should get a folder called **add-to-all**.
+3. Activate the plugin **WebberZone Snippetz** in WP-Admin under the Plugins screen.
+4. Go to **Snippetz → Settings** to configure.
 
 ## Installing via WP CLI
 
