@@ -10,7 +10,7 @@ order: 0
 
 [kbtoc]
 
-The Snippets Manager lets you create named, reusable code snippets — HTML, CSS, or JavaScript — and control exactly where each one appears on your site. Each snippet is a custom post type entry with its own location settings, display conditions, and priority.
+The [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) Snippets Manager lets you create named, reusable code snippets — HTML, CSS, or JavaScript — and control exactly where each one appears on your site. Each snippet is a custom post type entry with its own location settings, display conditions, and priority.
 
 The Snippets Manager is enabled by default. If it is turned off, go to **Settings → Snippetz → General** and enable **Enable Snippets Manager**.
 

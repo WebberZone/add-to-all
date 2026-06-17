@@ -8,7 +8,7 @@ status: publish
 order: 0
 ---
 
-WebberZone Snippetz (formerly Add to All) is available in the WordPress.org plugins repository. This means you can search for and install the plugin directly from within your WordPress site’s dashboard.
+[WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) (formerly Add to All) is available in the WordPress.org plugins repository. This means you can search for and install the plugin directly from within your WordPress site’s dashboard.
 
 ## WordPress install (the easy way)
 
