@@ -8,7 +8,7 @@ status: publish
 order: 0
 ---
 
-[WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) provides two ways to embed a named snippet inline inside post or page content: a shortcode and a Gutenberg block.
+[WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) provides three ways to embed a named snippet inline inside post or page content: a shortcode, a Gutenberg block, and an Insert Snippet button for the Classic Editor.
 
 Both require the Snippets Manager to be enabled (**Snippetz → Settings → General → Enable Snippets Manager**) and a published snippet to exist.
 
@@ -47,6 +47,14 @@ Select the snippet to embed from the dropdown in the block sidebar. The block re
 | `className` | string | Extra CSS class on the block wrapper. |
 
 CSS and JS snippets embedded via the block are enqueued using the standard WordPress enqueue system — the block itself outputs nothing visible for those types.
+
+## Insert Snippet button (Classic Editor)
+
+When the Classic Editor is active, an **Insert Snippet** button appears in the editor toolbar on post and page edit screens. The button is not shown on the snippet editing screen itself, and it is not available in the block editor.
+
+Clicking the button opens a modal where you can choose from any published snippet. After selecting a snippet and clicking **Insert Snippet**, the shortcode `[ata_snippet id="..."]` is inserted at the cursor position in the editor.
+
+This requires at least one published snippet in the Snippets Manager. If no snippets exist, the dropdown will be empty.
 
 ## `[ata_reading_time]` shortcode
 
