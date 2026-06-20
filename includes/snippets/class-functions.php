@@ -810,7 +810,7 @@ class Functions {
 
 		$count = 0;
 		foreach ( $snippets as $snippet ) {
-			if ( $snippet instanceof \WP_Post && self::generate_snippet_file( $snippet->ID, $snippet ) ) {
+			if ( self::generate_snippet_file( $snippet->ID, $snippet ) ) {
 				++$count;
 			}
 		}

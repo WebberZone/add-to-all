@@ -263,6 +263,3 @@ class Options_API {
 		return $did_update;
 	}
 }
-
-// Initialize hooks.
-Options_API::init();

@@ -130,13 +130,13 @@ class Helpers {
 						break;
 					// Make sure sprintf has a good datatype to work with.
 					case 'integer':
-						$sp_format = '%i';
+						$sp_format = '%1$d';
 						break;
 					case 'double':
-						$sp_format = '%0.2f';
+						$sp_format = '%1$.2f';
 						break;
 					case 'string':
-						$sp_format        = '%s';
+						$sp_format        = '%1$s';
 						$work_array[ $i ] = str_replace( "$enclosure", "$enclosure$enclosure", $work_array[ $i ] );
 						break;
 					// Unknown or invalid items for a csv - note: the datatype of array is already handled above, assuming the data is nested.
