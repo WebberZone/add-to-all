@@ -10,7 +10,7 @@ order: 0
 
 [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) provides three ways to embed a named snippet inline inside post or page content: a shortcode, a Gutenberg block, and an Insert Snippet button for the Classic Editor.
 
-Both require the Snippets Manager to be enabled (**Snippetz → Settings → General → Enable Snippets Manager**) and a published snippet to exist.
+All three require the Snippets Manager to be enabled (**Snippetz → Settings → General → Enable Snippets Manager**) and a published snippet to exist.
 
 ## `[ata_snippet]` shortcode
 
