@@ -105,9 +105,6 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 * Features:
 	* Added an Insert Snippet button to the Classic Editor for selecting and inserting a snippet shortcode.
 
-* Bug fixes:
-	* Fixed Insert Snippet button height in the Classic Editor toolbar caused by an inline `vertical-align` style on the dashicon.
-
 = 2.3.1 =
 
 * Bug fixes:
