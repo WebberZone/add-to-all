@@ -65,7 +65,7 @@ class Third_Party {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '$gtm_id');
+        gtag('config', '" . esc_js( $gtm_id ) . "');
         ";
 		wp_add_inline_script( 'wz-snippetz-gtm', $inline_code );
 	}
@@ -91,11 +91,11 @@ class Third_Party {
 			wp_script_add_data( 'wz-snippetz-statcounter', 'async', true );
 		}
 
-		$inline_code = "
-        var sc_project=$sc_project; 
-        var sc_invisible=1; 
-        var sc_security=\"$sc_security\"; 
-        ";
+		$inline_code = '
+        var sc_project=' . absint( $sc_project ) . ';
+        var sc_invisible=1;
+        var sc_security="' . esc_js( $sc_security ) . '";
+        ';
 		wp_add_inline_script( 'wz-snippetz-statcounter', $inline_code );
 	}
 }

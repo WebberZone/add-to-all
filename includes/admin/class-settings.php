@@ -233,6 +233,58 @@ class Settings {
 	}
 
 	/**
+	 * Sanitize a raw settings array against all registered field callbacks.
+	 *
+	 * Does not depend on $_POST or a Settings_API instance, so it is safe to
+	 * call during admin-post.php requests (e.g. settings import).
+	 *
+	 * @param array $input Raw settings array (e.g. decoded from imported JSON).
+	 * @return array Sanitized array containing only known setting keys.
+	 */
+	public static function sanitize_all( array $input ): array {
+		$registered_settings = self::get_registered_settings();
+		$non_setting_types   = array( 'header', 'descriptive_text' );
+		$settings_sanitize   = new Settings\Settings_Sanitize(
+			array(
+				'settings_key' => 'ata_settings',
+				'prefix'       => self::$prefix ?: 'ata',
+			)
+		);
+		$output              = array();
+
+		foreach ( $registered_settings as $tab_settings ) {
+			foreach ( $tab_settings as $setting ) {
+				$key  = $setting['id'];
+				$type = $setting['type'];
+
+				if ( in_array( $type, $non_setting_types, true ) || ! array_key_exists( $key, $input ) ) {
+					continue;
+				}
+
+				$sanitize_callback = false;
+
+				if ( isset( $setting['sanitize_callback'] ) && is_callable( $setting['sanitize_callback'] ) ) {
+					$sanitize_callback = $setting['sanitize_callback'];
+				} elseif ( is_callable( array( $settings_sanitize, 'sanitize_' . $type . '_field' ) ) ) {
+					if ( 'repeater' === $type ) {
+						$sanitize_callback = static function ( $value ) use ( $settings_sanitize, $setting ) {
+							return $settings_sanitize->sanitize_repeater_field( $value, $setting );
+						};
+					} else {
+						$sanitize_callback = array( $settings_sanitize, 'sanitize_' . $type . '_field' );
+					}
+				}
+
+				$output[ $key ] = $sanitize_callback
+					? call_user_func( $sanitize_callback, $input[ $key ] )
+					: $input[ $key ];
+			}
+		}
+
+		return $output;
+	}
+
+	/**
 	 * Returns the Header settings.
 	 *
 	 * @since 1.7.0

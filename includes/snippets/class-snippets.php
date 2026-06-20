@@ -93,6 +93,8 @@ class Snippets {
 		Hook_Registry::add_filter( 'wp_editor_settings', array( $this, 'wp_editor_settings' ), 10, 2 );
 		Hook_Registry::add_filter( 'the_content', array( $this, 'remove_wpautop' ), 0 );
 		Hook_Registry::add_action( 'edit_form_after_title', array( $this, 'media_buttons' ) );
+		Hook_Registry::add_action( 'media_buttons', array( $this, 'insert_snippet_button' ), 20, 1 );
+		Hook_Registry::add_action( 'admin_footer', array( $this, 'insert_snippet_modal' ) );
 		Hook_Registry::add_filter( 'media_view_strings', array( $this, 'media_view_strings' ), 10, 2 );
 
 		// Disable block editor for this post type.
@@ -351,6 +353,92 @@ class Snippets {
 				esc_html__( 'Add Media', 'add-to-all' )
 			);
 		}
+	}
+
+	/**
+	 * Add an Insert Snippet button to the Classic Editor.
+	 *
+	 * @since 2.4.0
+	 *
+	 * @param string $editor_id Editor identifier.
+	 */
+	public function insert_snippet_button( $editor_id ) {
+		$screen = get_current_screen();
+
+		if ( ! $screen instanceof \WP_Screen || $this->post_type === $screen->post_type || $screen->is_block_editor() ) {
+			return;
+		}
+
+		add_thickbox();
+		printf(
+			'<button type="button" class="button ata-insert-snippet-button" data-editor="%1$s"><span class="dashicons dashicons-editor-code"></span> %2$s</button>',
+			esc_attr( $editor_id ),
+			esc_html__( 'Insert Snippet', 'add-to-all' )
+		);
+	}
+
+	/**
+	 * Render the Insert Snippet modal and its editor integration script.
+	 *
+	 * @since 2.4.0
+	 */
+	public function insert_snippet_modal() {
+		$screen = get_current_screen();
+
+		if ( ! $screen instanceof \WP_Screen || $this->post_type === $screen->post_type || $screen->is_block_editor() ) {
+			return;
+		}
+
+		$snippets = get_posts(
+			array(
+				'post_type'      => $this->post_type,
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'orderby'        => 'title',
+				'order'          => 'ASC',
+			)
+		);
+		?>
+		<div id="ata-insert-snippet-modal" style="display:none;">
+			<div style="padding:16px;">
+				<label for="ata-insert-snippet-select"><strong><?php esc_html_e( 'Choose a snippet', 'add-to-all' ); ?></strong></label>
+				<select id="ata-insert-snippet-select" style="display:block;width:100%;margin:8px 0 16px;">
+					<option value=""><?php esc_html_e( 'Select a snippet', 'add-to-all' ); ?></option>
+					<?php foreach ( $snippets as $snippet ) : ?>
+						<option value="<?php echo esc_attr( (string) $snippet->ID ); ?>"><?php echo esc_html( get_the_title( $snippet ) ); ?></option>
+					<?php endforeach; ?>
+				</select>
+				<button type="button" class="button button-primary" id="ata-insert-selected-snippet" disabled><?php esc_html_e( 'Insert Snippet', 'add-to-all' ); ?></button>
+			</div>
+		</div>
+		<script>
+			(function($) {
+				'use strict';
+				var editorId = 'content';
+				var $select = $('#ata-insert-snippet-select');
+				var $insert = $('#ata-insert-selected-snippet');
+
+				$(document).on('click', '.ata-insert-snippet-button', function() {
+					editorId = $(this).data('editor') || 'content';
+					window.wpActiveEditor = editorId;
+					tb_show(<?php echo wp_json_encode( __( 'Insert Snippet', 'add-to-all' ) ); ?>, '#TB_inline?width=500&height=180&inlineId=ata-insert-snippet-modal');
+				});
+
+				$select.on('change', function() {
+					$insert.prop('disabled', ! this.value);
+				});
+
+				$insert.on('click', function() {
+					var snippetId = $select.val();
+					if (! snippetId) {
+						return;
+					}
+					wp.media.editor.insert('[ata_snippet id="' + snippetId + '"]');
+					tb_remove();
+				});
+			})(jQuery);
+		</script>
+		<?php
 	}
 
 	/**

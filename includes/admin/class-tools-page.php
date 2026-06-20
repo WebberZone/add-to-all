@@ -9,6 +9,7 @@ namespace WebberZone\Snippetz\Admin;
 
 use WebberZone\Snippetz\Util\Hook_Registry;
 use WebberZone\Snippetz\Snippets\Minifier;
+use WebberZone\Snippetz\Admin\Settings;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -330,6 +331,8 @@ class Tools_Page {
 
 		// Retrieve the settings from the file and convert the json object to an array.
 		$settings = (array) json_decode( file_get_contents( $import_file ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+
+		$settings = Settings::sanitize_all( $settings );
 
 		update_option( 'ata_settings', $settings );
 
