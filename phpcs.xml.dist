@@ -7,6 +7,7 @@
 	<exclude-pattern>*/phpunit/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 	<exclude-pattern>*/tests/*</exclude-pattern>
+	<exclude-pattern>*/build/*</exclude-pattern>
 	<exclude-pattern>*/index.php</exclude-pattern>
 	<exclude-pattern>*/index.asset.php</exclude-pattern>
 	<exclude-pattern>*/phpstan-bootstrap.php</exclude-pattern>
@@ -31,6 +32,7 @@
 		<exclude name="Universal.Files.SeparateFunctionsFromOO.Mixed" />
 	</rule>
 	<rule ref="WordPress.Files.FileName">
+		<exclude-pattern>*/phpunit/tests/*\.php$</exclude-pattern>
 	</rule>
 
 	<!-- Add in some extra rules from other standards. -->

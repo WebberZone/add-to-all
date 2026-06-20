@@ -14,6 +14,10 @@ echo "Creating distribution zip for $PLUGIN_SLUG..."
 rm -rf "$BUILD_DIR"
 mkdir -p "$TEMP_DIR"
 
+# Build production vendor with Composer autoloader.
+echo "Building production vendor..."
+composer build:vendor
+
 # Copy plugin files (excluding dev/build artifacts and all of vendor)
 echo "Copying plugin files..."
 rsync -av --exclude-from=- . "$TEMP_DIR/" <<EOF
@@ -48,13 +52,15 @@ CLAUDE.md
 AGENTS.md
 EOF
 
-# Copy vendor/matthiasmullie (runtime Composer dependency for CSS/JS minification)
+# Copy runtime Composer dependencies and generated autoloader.
 echo "Copying vendor dependencies..."
-if [ -d "vendor/matthiasmullie" ]; then
+if [ -d "vendor/matthiasmullie" ] && [ -f "vendor/autoload.php" ] && [ -d "vendor/composer" ]; then
     mkdir -p "$TEMP_DIR/vendor"
     cp -r vendor/matthiasmullie "$TEMP_DIR/vendor/"
+    cp -r vendor/composer "$TEMP_DIR/vendor/"
+    cp vendor/autoload.php "$TEMP_DIR/vendor/"
 else
-    echo "Error: vendor/matthiasmullie directory not found. Run 'composer install' first."
+    echo "Error: vendor files not found. Run 'composer build:vendor' first."
     exit 1
 fi
 

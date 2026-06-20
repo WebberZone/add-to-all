@@ -247,7 +247,7 @@ class Settings {
 		$settings_sanitize   = new Settings\Settings_Sanitize(
 			array(
 				'settings_key' => 'ata_settings',
-				'prefix'       => self::$prefix ?: 'ata',
+				'prefix'       => self::$prefix ? self::$prefix : 'ata',
 			)
 		);
 		$output              = array();

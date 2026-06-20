@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: WebberZone Snippetz - Header, Body and Footer manager 2.3.1\n"
+"Project-Id-Version: WebberZone Snippetz - Header, Body and Footer manager 2.4.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/add-to-all\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,7 +12,20 @@ msgstr ""
 "POT-Creation-Date: 2026-04-03T12:04:39+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
+
 "X-Domain: add-to-all\n"
+
+#: includes/snippets/class-snippets.php
+msgid "Choose a snippet"
+msgstr ""
+
+#: includes/snippets/class-snippets.php
+msgid "Insert Snippet"
+msgstr ""
+
+#: includes/snippets/class-snippets.php
+msgid "Select a snippet"
+msgstr ""
 
 #. Plugin Name of the plugin
 #: add-to-all.php
