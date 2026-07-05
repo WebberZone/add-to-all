@@ -102,6 +102,8 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 = 2.4.0 =
 
+Release post: [https://webberzone.com/announcements/snippetz-v2-4-0/](https://webberzone.com/announcements/snippetz-v2-4-0/)
+
 * Features:
 	* Added an Insert Snippet button to the Classic Editor for selecting and inserting a snippet shortcode.
 
