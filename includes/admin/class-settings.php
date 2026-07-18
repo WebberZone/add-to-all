@@ -132,7 +132,10 @@ class Settings {
 			'save_changes'         => esc_html__( 'Save Changes', 'add-to-all' ),
 			'reset_settings'       => esc_html__( 'Reset all settings', 'add-to-all' ),
 			'reset_button_confirm' => esc_html__( 'Do you really want to reset all these settings to their default values?', 'add-to-all' ),
-			'checkbox_modified'    => esc_html__( 'Modified from default setting', 'add-to-all' ),
+			'modified_field'       => esc_html__( 'Modified from default setting', 'add-to-all' ),
+			'modified_legend'      => esc_html__( 'Setting modified from its default value', 'add-to-all' ),
+			'default_label'        => esc_html__( 'Default', 'add-to-all' ),
+			'default_none'         => esc_html__( 'None', 'add-to-all' ),
 		);
 
 		/**

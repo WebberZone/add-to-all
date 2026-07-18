@@ -129,6 +129,9 @@ class Admin {
 		return array(
 			'capability'           => 'manage_options',
 			'prefix'               => 'ata',
+			'style'      => array(
+				'version' => WZ_SNIPPETZ_VERSION,
+			),
 			'exclude_screen_bases' => array(),
 			'strings'              => array(
 				'region_label' => esc_html__( 'WebberZone Snippetz quick links', 'add-to-all' ),
