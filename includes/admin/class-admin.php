@@ -129,7 +129,7 @@ class Admin {
 		return array(
 			'capability'           => 'manage_options',
 			'prefix'               => 'ata',
-			'style'      => array(
+			'style'                => array(
 				'version' => WZ_SNIPPETZ_VERSION,
 			),
 			'exclude_screen_bases' => array(),
