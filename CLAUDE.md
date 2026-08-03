@@ -9,6 +9,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - No suggestions outside the scope of what was asked
 - Skip preamble and trailing summaries
 
+## Links
+
+- GitHub: <https://github.com/WebberZone/add-to-all>
+- WordPress.org: <https://wordpress.org/plugins/add-to-all/>
+- Documentation: <https://webberzone.com/support/product/add-to-all/>
+- webberzone.com: <https://webberzone.com/plugins/add-to-all/>
+
 ## Plugin Overview
 
 **WebberZone Snippetz** (plugin slug: `add-to-all`) is a WordPress plugin (v2.4.0) that lets users insert arbitrary code snippets (HTML, CSS, JS) into the header, body open, footer, content, or feed of a WordPress site. It also manages a `ata_snippets` custom post type for reusable named snippets. Namespace: `WebberZone\Snippetz`. Requires WordPress 6.3+, PHP 7.4+. No Freemius.
