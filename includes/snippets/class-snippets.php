@@ -17,7 +17,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * ATA Settings class to register the settings.
+ * Registers the snippets post type, taxonomy and editor integration.
  *
  * @version 1.0
  * @since   1.7.0
