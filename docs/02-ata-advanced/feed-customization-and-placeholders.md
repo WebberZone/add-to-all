@@ -65,7 +65,7 @@ Available only in the **Title text** field:
 
 ### Adding custom tokens
 
-Use the `ata_placeholders` filter to register additional tokens:
+Use the [`ata_placeholders`](https://webberzone.dev/add-to-all/hooks/ata_placeholders/) filter to register additional tokens:
 
 ```php
 add_filter( 'ata_placeholders', function( array $placeholders ): array {
@@ -83,7 +83,7 @@ Enable **Process shortcodes in feed** to execute shortcodes inside these HTML fi
 
 ## Filters
 
-**`ata_feed_title_text`** — Filter the rendered feed title line.
+**[`ata_feed_title_text`](https://webberzone.dev/add-to-all/hooks/ata_feed_title_text/)** — Filter the rendered feed title line.
 
 ```php
 add_filter( 'ata_feed_title_text', function( string $output ): string {
@@ -91,7 +91,7 @@ add_filter( 'ata_feed_title_text', function( string $output ): string {
 } );
 ```
 
-**`ata_creditline`** — Filter the credit link added when **Add a link to "WebberZone Snippetz"** is enabled.
+**[`ata_creditline`](https://webberzone.dev/add-to-all/hooks/ata_creditline/)** — Filter the credit link added when **Add a link to "WebberZone Snippetz"** is enabled.
 
 ```php
 add_filter( 'ata_creditline', function( string $output ): string {
@@ -99,10 +99,17 @@ add_filter( 'ata_creditline', function( string $output ): string {
 } );
 ```
 
-**`ata_process_placeholders`** — Filter the final output after all placeholder tokens have been replaced.
+**[`ata_process_placeholders`](https://webberzone.dev/add-to-all/hooks/ata_process_placeholders/)** — Filter the final output after all placeholder tokens have been replaced.
 
 ```php
 add_filter( 'ata_process_placeholders', function( string $output, string $input, array $placeholders ): string {
     return $output;
 }, 10, 3 );
 ```
+
+## See also
+
+- [`ata_placeholders`](https://webberzone.dev/add-to-all/hooks/ata_placeholders/)
+- [`ata_feed_title_text`](https://webberzone.dev/add-to-all/hooks/ata_feed_title_text/)
+- [`ata_creditline`](https://webberzone.dev/add-to-all/hooks/ata_creditline/)
+- [`ata_process_placeholders`](https://webberzone.dev/add-to-all/hooks/ata_process_placeholders/)

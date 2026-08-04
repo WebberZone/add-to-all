@@ -102,7 +102,7 @@ $snippets = Functions::get_snippets( array(
 
 ## Filter hooks
 
-### `ata_get_snippet_content`
+### [`ata_get_snippet_content`](https://webberzone.dev/add-to-all/hooks/ata_get_snippet_content/)
 
 Filter the rendered output of a single snippet.
 
@@ -120,7 +120,7 @@ add_filter( 'ata_get_snippet_content', function( string $output, \WP_Post $snipp
 
 ---
 
-### `ata_get_snippets_by_location`
+### [`ata_get_snippets_by_location`](https://webberzone.dev/add-to-all/hooks/ata_get_snippets_by_location/)
 
 Filter the array of snippets returned for a location.
 
@@ -132,7 +132,7 @@ add_filter( 'ata_get_snippets_by_location', function( array $snippets, string $l
 
 ---
 
-### `ata_get_snippets_args`
+### [`ata_get_snippets_args`](https://webberzone.dev/add-to-all/hooks/ata_get_snippets_args/)
 
 Filter the `get_posts()` arguments before snippets are queried.
 
@@ -145,7 +145,7 @@ add_filter( 'ata_get_snippets_args', function( array $args ): array {
 
 ---
 
-### `ata_get_snippets`
+### [`ata_get_snippets`](https://webberzone.dev/add-to-all/hooks/ata_get_snippets/)
 
 Filter the raw array of snippets returned by `get_posts()`.
 
@@ -157,7 +157,7 @@ add_filter( 'ata_get_snippets', function( array $snippets, array $args ): array 
 
 ---
 
-### `ata_get_snippet`
+### [`ata_get_snippet`](https://webberzone.dev/add-to-all/hooks/ata_get_snippet/)
 
 Filter an individual snippet post object.
 
@@ -169,7 +169,7 @@ add_filter( 'ata_get_snippet', function( \WP_Post $snippet, $input ): \WP_Post {
 
 ---
 
-### `ata_placeholders`
+### [`ata_placeholders`](https://webberzone.dev/add-to-all/hooks/ata_placeholders/)
 
 Add or modify placeholder tokens used in copyright notices and other text fields. See [Feed Customization and Placeholders](https://webberzone.com/support/knowledgebase/feed-customization-and-placeholders/) for the full token list.
 
@@ -182,7 +182,7 @@ add_filter( 'ata_placeholders', function( array $placeholders ): array {
 
 ---
 
-### `ata_process_placeholders`
+### [`ata_process_placeholders`](https://webberzone.dev/add-to-all/hooks/ata_process_placeholders/)
 
 Filter the final string after all placeholder tokens have been replaced.
 
@@ -194,7 +194,7 @@ add_filter( 'ata_process_placeholders', function( string $output, string $input,
 
 ---
 
-### `ata_get_reading_time`
+### [`ata_get_reading_time`](https://webberzone.dev/add-to-all/hooks/ata_get_reading_time/)
 
 Filter the calculated reading time string.
 
@@ -207,7 +207,7 @@ add_filter( 'ata_get_reading_time', function( string $time, string $content, arr
 
 ---
 
-### `ata_feed_title_text`
+### [`ata_feed_title_text`](https://webberzone.dev/add-to-all/hooks/ata_feed_title_text/)
 
 Filter the rendered feed title line after placeholder substitution.
 
@@ -219,7 +219,7 @@ add_filter( 'ata_feed_title_text', function( string $output ): string {
 
 ---
 
-### `ata_creditline`
+### [`ata_creditline`](https://webberzone.dev/add-to-all/hooks/ata_creditline/)
 
 Filter the credit link appended to the feed.
 
@@ -231,7 +231,7 @@ add_filter( 'ata_creditline', function( string $output ): string {
 
 ---
 
-### `ata_snippets_credit`
+### [`ata_snippets_credit`](https://webberzone.dev/add-to-all/hooks/ata_snippets_credit/)
 
 Filter the HTML comment credit marker (`<!-- Snippets by WebberZone Snippetz -->`) injected into snippet output.
 
@@ -256,7 +256,7 @@ add_filter( 'ata_head_css', function( string $css ): string {
 
 ## Action hooks
 
-### `ata_site_verification`
+### [`ata_site_verification`](https://webberzone.dev/add-to-all/hooks/ata_site_verification/)
 
 Fires inside `wp_head()` after the built-in site verification meta tags have been output. Use this to add additional verification tags.
 
@@ -268,13 +268,13 @@ add_action( 'ata_site_verification', function(): void {
 
 ---
 
-### `ata_tools_page_header`
+### [`ata_tools_page_header`](https://webberzone.dev/add-to-all/hooks/ata_tools_page_header/)
 
 Fires at the top of the Snippetz Tools page, inside the page wrapper.
 
 ---
 
-### `ata_admin_tools_page_content`
+### [`ata_admin_tools_page_content`](https://webberzone.dev/add-to-all/hooks/ata_admin_tools_page_content/)
 
 Fires in the main content area of the Snippetz Tools page, below the built-in tool cards. Use this to register custom tool cards or notices.
 
@@ -283,3 +283,20 @@ add_action( 'ata_admin_tools_page_content', function(): void {
     echo '<div class="card"><h2>My Custom Tool</h2><p>...</p></div>';
 } );
 ```
+
+## See also
+
+- [`ata_get_snippet_content`](https://webberzone.dev/add-to-all/hooks/ata_get_snippet_content/)
+- [`ata_get_snippets_by_location`](https://webberzone.dev/add-to-all/hooks/ata_get_snippets_by_location/)
+- [`ata_get_snippets_args`](https://webberzone.dev/add-to-all/hooks/ata_get_snippets_args/)
+- [`ata_get_snippets`](https://webberzone.dev/add-to-all/hooks/ata_get_snippets/)
+- [`ata_get_snippet`](https://webberzone.dev/add-to-all/hooks/ata_get_snippet/)
+- [`ata_placeholders`](https://webberzone.dev/add-to-all/hooks/ata_placeholders/)
+- [`ata_process_placeholders`](https://webberzone.dev/add-to-all/hooks/ata_process_placeholders/)
+- [`ata_get_reading_time`](https://webberzone.dev/add-to-all/hooks/ata_get_reading_time/)
+- [`ata_feed_title_text`](https://webberzone.dev/add-to-all/hooks/ata_feed_title_text/)
+- [`ata_creditline`](https://webberzone.dev/add-to-all/hooks/ata_creditline/)
+- [`ata_snippets_credit`](https://webberzone.dev/add-to-all/hooks/ata_snippets_credit/)
+- [`ata_site_verification`](https://webberzone.dev/add-to-all/hooks/ata_site_verification/)
+- [`ata_tools_page_header`](https://webberzone.dev/add-to-all/hooks/ata_tools_page_header/)
+- [`ata_admin_tools_page_content`](https://webberzone.dev/add-to-all/hooks/ata_admin_tools_page_content/)
