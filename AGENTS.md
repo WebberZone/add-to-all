@@ -40,12 +40,13 @@ composer build:vendor   # Install production deps only
 ### JavaScript/CSS
 
 ```bash
-npm run build           # Build the snippetz Gutenberg block (wp-scripts)
-npm start               # Watch block source files
-npm run build:assets    # Minify CSS/JS, generate RTL CSS (node build-assets.js)
-npm run lint:js         # ESLint
-npm run lint:css        # Stylelint
-npm run zip             # Create distribution zip (wp-scripts plugin-zip)
+pnpm run build           # Build the snippetz Gutenberg block (wp-scripts)
+pnpm start               # Watch block source files
+pnpm run build:assets    # Minify CSS/JS, generate RTL CSS (node build-assets.js)
+pnpm run lint:js         # ESLint
+pnpm run lint:css        # Stylelint
+pnpm run zip             # Create distribution zip (wp-scripts plugin-zip)
+ncu -u && pnpm install   # Update dependencies to latest and reinstall
 ```
 
 ## Architecture
