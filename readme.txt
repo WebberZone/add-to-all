@@ -2,9 +2,9 @@
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
 Donate link: https://wzn.io/donate-wz
-Stable tag: 2.4.0
-Requires at least: 6.3
-Tested up to: 7.0
+Stable tag: 2.4.1
+Requires at least: 6.7
+Tested up to: 7.1
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -100,6 +100,18 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 == Changelog ==
 
+= 2.4.1 =
+
+* Improvements:
+	* Tested with WordPress 7.1. The minimum supported WordPress version is now 6.7.
+	* Updated to v2.11.0 of the WebberZone Settings API, which refreshes the settings screen: tabs now run vertically down the left, a search box filters settings across all tabs as you type, each field displays its default value, and checkboxes are rendered as toggle switches.
+	* Admin settings and banner stylesheets are now versioned against the plugin version so browsers pick up changes immediately.
+	* Settings page now scrolls smoothly back to the top when switching tabs.
+
+* Bug fixes:
+	* Fixed the admin banner extending past the right edge of the settings page and overlapping the tab content.
+	* Fixed the default value label lookup for select and radio options whose value is an empty string.
+
 = 2.4.0 =
 
 Release post: [https://webberzone.com/announcements/snippetz-v2-4-0/](https://webberzone.com/announcements/snippetz-v2-4-0/)
@@ -112,32 +124,12 @@ Release post: [https://webberzone.com/announcements/snippetz-v2-4-0/](https://we
 * Bug fixes:
 	* Fixed missing method referenced in hook registration in class-main.php
 
-= 2.3.0 =
-
-Release post: [https://webberzone.com/announcements/snippetz-v2-3-0/](https://webberzone.com/announcements/snippetz-v2-3-0/)
-
-* Features:
-	* **External Minified Files:** New setting to generate and load external minified CSS/JS files instead of inline output.
-	* **File Combination:** Option to combine all CSS/JS snippets into single minified files for significantly improved page load performance.
-	* **Tools Page:** Added a new Tools page under Settings (or Snippets) to easily regenerate minified assets, clear cache, and view system and file statistics.
-	* Added support for `class` attributes in the `[ata_snippet]` shortcode (e.g. `[ata_snippet id="1" class="custom-class"]`).
-
-* Improvements:
-	* Updated to latest version of WebberZone Settings API.
-	* Improved internal hook management for better reliability.
-	* Reorganized plugin architecture with strict namespaces and autoloading.
-	* Applied global `snippet_priority` option to `wp_head` and `wp_footer` hooks for better execution order control.
-	* Custom CSS (Header CSS setting) is now enqueued via `wp_add_inline_style` instead of a raw `<style>` tag, following WordPress best practices.
-	* CSS/JS snippets are now exclusively enqueued via `wp_enqueue_scripts`, eliminating redundant processing during `wp_head`/`wp_footer` that could cause incorrect output timing.
-	* Admin column styles are now enqueued via `wp_add_inline_style` on `admin_enqueue_scripts` instead of a raw `<style>` tag in `admin_head`.
-
-* Bug fixes:
-	* Fixed content display settings for post exclusions.
-	* Corrected multiple `@since` tag references in internal options API documentation.
-
 Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 
 == Upgrade Notice ==
+
+= 2.4.1 =
+Tested with WordPress 7.1. Refreshed settings screen with search and default value indicators.
 
 = 2.4.0 =
 Adds an Insert Snippet button to the Classic Editor.
