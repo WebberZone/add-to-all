@@ -104,6 +104,7 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 * Bug fixes:
 	* Fixed the `ata_settings_defaults` filter being ignored when a default was read outside the admin area.
+	* Fixed settings on a multisite network reading another site's values in the same request after a `switch_to_blog()` call, such as during network activation.
 
 * Improvements:
 	* Setting defaults are now resolved from a single lightweight list instead of building every settings field, so reading an option early in the page load no longer risks loading translations too early.

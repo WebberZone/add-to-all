@@ -37,12 +37,48 @@ class Options_API {
 	const FILTER_PREFIX = 'ata';
 
 	/**
-	 * Settings array.
+	 * Per-request settings cache, keyed by blog ID.
 	 *
-	 * @since 2.3.0
-	 * @var array
+	 * Keyed rather than a single array so that a `switch_to_blog()` in the same
+	 * request reads that blog's settings instead of the ones cached before the
+	 * switch. On single site the key is always 0.
+	 *
+	 * @since 2.4.3
+	 * @var array<int, array>
 	 */
-	private static $settings;
+	private static $settings_cache = array();
+
+	/**
+	 * Cache key for the current blog.
+	 *
+	 * @since 2.4.3
+	 *
+	 * @return int Blog ID on multisite, 0 otherwise.
+	 */
+	private static function cache_key() {
+		return is_multisite() ? get_current_blog_id() : 0;
+	}
+
+	/**
+	 * Flush the per-request settings cache.
+	 *
+	 * Call after any write that bypasses this class (e.g. a direct
+	 * `update_option()` call) so a subsequent read in the same request sees the
+	 * new value. Pass a blog ID to flush a single blog, or nothing to flush all.
+	 *
+	 * @since 2.4.3
+	 *
+	 * @param int|null $blog_id Blog ID to flush. Null flushes every cached blog.
+	 * @return void
+	 */
+	public static function flush_cache( $blog_id = null ) {
+		if ( null === $blog_id ) {
+			self::$settings_cache = array();
+			return;
+		}
+
+		unset( self::$settings_cache[ (int) $blog_id ] );
+	}
 
 	/**
 	 * Initialize hooks for AJAX functionality.
@@ -61,17 +97,24 @@ class Options_API {
 	 * @return array Glue Link settings
 	 */
 	public static function get_settings() {
-		$settings = get_option( self::SETTINGS_OPTION );
+		$cache_key = self::cache_key();
 
-		/**
-		 * Settings array
-		 *
-		 * Retrieves all plugin settings
-		 *
-		 * @since 2.3.0
-		 * @param array $settings Settings array
-		 */
-		return apply_filters( self::FILTER_PREFIX . '_get_settings', $settings );
+		if ( ! array_key_exists( $cache_key, self::$settings_cache ) ) {
+			/**
+			 * Settings array
+			 *
+			 * Retrieves all plugin settings
+			 *
+			 * @since 2.3.0
+			 * @param array $settings Settings array
+			 */
+			self::$settings_cache[ $cache_key ] = apply_filters(
+				self::FILTER_PREFIX . '_get_settings',
+				get_option( self::SETTINGS_OPTION, array() )
+			);
+		}
+
+		return self::$settings_cache[ $cache_key ];
 	}
 
 	/**
@@ -86,11 +129,9 @@ class Options_API {
 	 * @return mixed
 	 */
 	public static function get_option( $key = '', $default_value = null ) {
-		if ( empty( self::$settings ) ) {
-			self::$settings = self::get_settings();
-		}
+		$settings = self::get_settings();
 
-		$value = isset( self::$settings[ $key ] ) ? self::$settings[ $key ] : null;
+		$value = isset( $settings[ $key ] ) ? $settings[ $key ] : null;
 
 		if ( is_null( $value ) ) {
 			if ( is_null( $default_value ) ) {
@@ -153,7 +194,7 @@ class Options_API {
 
 		// If it updated, let's update the static variable.
 		if ( $did_update ) {
-			self::$settings = $options;
+			self::$settings_cache[ self::cache_key() ] = $options;
 		}
 
 		return $did_update;
@@ -177,7 +218,7 @@ class Options_API {
 		}
 		$did_update = update_option( self::SETTINGS_OPTION, $settings, $autoload );
 		if ( $did_update ) {
-			self::$settings = $settings;
+			self::$settings_cache[ self::cache_key() ] = $settings;
 		}
 		return $did_update;
 	}
@@ -210,7 +251,7 @@ class Options_API {
 
 		// If it updated, let's update the static variable.
 		if ( $did_update ) {
-			self::$settings = $options;
+			self::$settings_cache[ self::cache_key() ] = $options;
 		}
 
 		return $did_update;
@@ -271,11 +312,12 @@ class Options_API {
 	 * @return bool True if updated, false if not.
 	 */
 	public static function reset_settings(): bool {
-		$did_update = update_option( self::SETTINGS_OPTION, self::get_settings_defaults() );
+		$defaults   = self::get_settings_defaults();
+		$did_update = update_option( self::SETTINGS_OPTION, $defaults );
 
 		// If it updated, let's update the static variable.
 		if ( $did_update ) {
-			self::$settings = self::get_settings_defaults();
+			self::$settings_cache[ self::cache_key() ] = $defaults;
 		}
 
 		return $did_update;
