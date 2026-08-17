@@ -46,11 +46,16 @@ class Settings {
 	/**
 	 * Prefix which is used for creating the unique filters and actions.
 	 *
+	 * Initialised at declaration rather than only in the constructor: the static
+	 * methods on this class are reachable on the frontend where the Settings object
+	 * is never instantiated, and a null prefix there fires `_settings_defaults`
+	 * instead of `ata_settings_defaults`.
+	 *
 	 * @since 1.7.0
 	 *
 	 * @var string Prefix.
 	 */
-	public static $prefix;
+	public static $prefix = 'ata';
 
 	/**
 	 * Settings Key.
@@ -288,6 +293,95 @@ class Settings {
 	}
 
 	/**
+	 * Raw default values for every setting, keyed by option ID.
+	 *
+	 * Single source of truth for field defaults. Deliberately contains no
+	 * translation calls so it is safe to invoke before `init` (e.g. from
+	 * `ata_get_option()` on the frontend) without triggering a "translation
+	 * loading triggered too early" notice. The field definition methods below
+	 * reference this array instead of duplicating literals.
+	 *
+	 * Values are pre-normalised: checkbox defaults use 1/0 rather than true/false
+	 * so that they match what `settings_defaults()` produces after its
+	 * `(int) (bool)` cast. This array is deliberately unfiltered — the
+	 * `ata_settings_defaults` filter is applied by the consumers
+	 * (`settings_defaults()` and `Options_API::get_default_option()`) so that it
+	 * runs exactly once on each path.
+	 *
+	 * `feed_copyrightnotice` is the one entry that is not the field's own default.
+	 * Its field definition computes the notice through `self::get_copyright_text()`,
+	 * which builds a string from the current year, blog name and admin email and
+	 * translates part of it. That call stays in the field definition so a fresh
+	 * install still seeds the notice into `wp_options`, but it cannot run here. The
+	 * raw value is empty instead, which is what both consumers already pass
+	 * explicitly as their fallback.
+	 *
+	 * @since 2.4.2
+	 *
+	 * @return array Raw default values keyed by option ID.
+	 */
+	public static function get_defaults() {
+		return array(
+			// General.
+			'enable_snippets'                => 1,
+			'enable_external_css_js'         => 0,
+			'enable_combination'             => 0,
+			'snippet_priority'               => 999,
+
+			// Third party.
+			'sc_project'                     => '',
+			'sc_security'                    => '',
+			'ga_uacct'                       => '',
+			'google_verification'            => '',
+			'bing_verification'              => '',
+			'facebook_domain_verification'   => '',
+			'pinterest_verification'         => '',
+
+			// Header.
+			'head_css'                       => '',
+			'head_other_html'                => '',
+
+			// Body.
+			'wp_body_open'                   => '',
+			'content_filter_priority'        => 999,
+			'exclude_on_post_ids'            => '',
+			'content_process_shortcode'      => 0,
+			'content_add_html_before'        => 0,
+			'content_html_before'            => '',
+			'content_add_html_after'         => 0,
+			'content_html_after'             => '',
+			'content_add_html_before_single' => 0,
+			'content_html_before_single'     => '',
+			'content_add_html_after_single'  => 0,
+			'content_html_after_single'      => '',
+			'content_add_html_before_post'   => 0,
+			'content_html_before_post'       => '',
+			'content_add_html_after_post'    => 0,
+			'content_html_after_post'        => '',
+			'content_add_html_before_page'   => 0,
+			'content_html_before_page'       => '',
+			'content_add_html_after_page'    => 0,
+			'content_html_after_page'        => '',
+
+			// Footer.
+			'footer_process_shortcode'       => 0,
+			'footer_other_html'              => '',
+			'add_credit'                     => 0,
+
+			// Feed.
+			'feed_add_copyright'             => 1,
+			'feed_copyrightnotice'           => '',
+			'feed_add_title'                 => 1,
+			'feed_title_text'                => '%title% was first posted on %date% at %time%.',
+			'feed_process_shortcode'         => 0,
+			'feed_add_html_before'           => 0,
+			'feed_html_before'               => '',
+			'feed_add_html_after'            => 0,
+			'feed_html_after'                => '',
+		);
+	}
+
+	/**
 	 * Returns the Header settings.
 	 *
 	 * @since 1.7.0
@@ -296,34 +390,35 @@ class Settings {
 	 */
 	public static function settings_general() {
 
+		$defaults = self::get_defaults();
 		$settings = array(
 			'enable_snippets'        => array(
 				'id'      => 'enable_snippets',
 				'name'    => esc_html__( 'Enable Snippets Manager', 'add-to-all' ),
 				'desc'    => esc_html__( 'Disabling this will turn off the Snippets manager and any of the associated functionality. This will not delete any snippets data that was created before this was turned off.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => true,
+				'default' => $defaults['enable_snippets'],
 			),
 			'enable_external_css_js' => array(
 				'id'      => 'enable_external_css_js',
 				'name'    => esc_html__( 'Enable external CSS/JS files', 'add-to-all' ),
 				'desc'    => esc_html__( 'Save CSS and JS snippets as external minified files instead of inline output. Improves page load performance.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['enable_external_css_js'],
 			),
 			'enable_combination'     => array(
 				'id'      => 'enable_combination',
 				'name'    => esc_html__( 'Enable file combination', 'add-to-all' ),
 				'desc'    => esc_html__( 'Combine all CSS/JS snippets into single files. Note: Conditions are ignored for combined files.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['enable_combination'],
 			),
 			'snippet_priority'       => array(
 				'id'      => 'snippet_priority',
 				'name'    => esc_html__( 'Snippet content priority', 'add-to-all' ),
 				'desc'    => esc_html__( 'Priority of the snippet content. Lower number means all snippets are added earlier relative to other content. Number below 10 is not recommended. At the next level, priority of each snippet is independently set from the Edit Snippets screen.', 'add-to-all' ),
 				'type'    => 'text',
-				'default' => 999,
+				'default' => $defaults['snippet_priority'],
 			),
 		);
 
@@ -346,6 +441,7 @@ class Settings {
 	 */
 	public static function settings_third_party() {
 
+		$defaults = self::get_defaults();
 		$settings = array(
 			'statcounter_header'           => array(
 				'id'   => 'statcounter_header',
@@ -358,14 +454,14 @@ class Settings {
 				'name'    => esc_html__( 'Project ID', 'add-to-all' ),
 				'desc'    => esc_html__( 'This is the value of sc_project in your StatCounter code.', 'add-to-all' ),
 				'type'    => 'text',
-				'default' => '',
+				'default' => $defaults['sc_project'],
 			),
 			'sc_security'                  => array(
 				'id'      => 'sc_security',
 				'name'    => esc_html__( 'Security ID', 'add-to-all' ),
 				'desc'    => esc_html__( 'This is the value of sc_security in your StatCounter code.', 'add-to-all' ),
 				'type'    => 'text',
-				'default' => '',
+				'default' => $defaults['sc_security'],
 			),
 			'google_analytics_header'      => array(
 				'id'   => 'google_analytics_header',
@@ -379,7 +475,7 @@ class Settings {
 				/* translators: 1: Google Tag ID link. */
 				'desc'    => sprintf( esc_html__( 'Find your %s', 'add-to-all' ), '<a href="https://www.google.com/webmasters/verification/verification" target="_blank">' . esc_html__( 'Google Tag ID', 'add-to-all' ) . '</a>' ),
 				'type'    => 'text',
-				'default' => '',
+				'default' => $defaults['ga_uacct'],
 			),
 			'verification_header'          => array(
 				'id'   => 'verification_header',
@@ -393,7 +489,7 @@ class Settings {
 				/* translators: 1: Google verification details page. */
 				'desc'    => sprintf( esc_html__( 'Value of the content portion of the HTML tag method on the %s', 'add-to-all' ), '<a href="https://www.google.com/webmasters/verification/verification" target="_blank">' . esc_html__( 'verification details page', 'add-to-all' ) . '</a>' ),
 				'type'    => 'text',
-				'default' => '',
+				'default' => $defaults['google_verification'],
 			),
 			'bing_verification'            => array(
 				'id'      => 'bing_verification',
@@ -401,7 +497,7 @@ class Settings {
 				/* translators: 1: Bing verification details page. */
 				'desc'    => sprintf( esc_html__( 'Value of the content portion of the HTML tag method on the %s', 'add-to-all' ), '<a href="https://www.bing.com/webmaster/" target="_blank">' . esc_html__( 'verification details page', 'add-to-all' ) . '</a>' ),
 				'type'    => 'text',
-				'default' => '',
+				'default' => $defaults['bing_verification'],
 			),
 			'facebook_domain_verification' => array(
 				'id'      => 'facebook_domain_verification',
@@ -409,7 +505,7 @@ class Settings {
 				/* translators: 1: Meta tag details page. */
 				'desc'    => sprintf( esc_html__( 'Value of the content portion of the Meta tag method. Read how to verify your domain in the %s', 'add-to-all' ), '<a href="https://www.facebook.com/business/help/321167023127050" target="_blank">' . esc_html__( 'Meta Business Help Centre', 'add-to-all' ) . '</a>' ),
 				'type'    => 'text',
-				'default' => '',
+				'default' => $defaults['facebook_domain_verification'],
 			),
 			'pinterest_verification'       => array(
 				'id'      => 'pinterest_verification',
@@ -417,7 +513,7 @@ class Settings {
 				/* translators: 1: Pinterest meta tag details page. */
 				'desc'    => sprintf( esc_html__( 'Read how to get the Meta Tag from the %s', 'add-to-all' ), '<a href="https://help.pinterest.com/en/articles/confirm-your-website" target="_blank">' . esc_html__( 'Pinterest help page', 'add-to-all' ) . '</a>' ),
 				'type'    => 'text',
-				'default' => '',
+				'default' => $defaults['pinterest_verification'],
 			),
 		);
 
@@ -440,13 +536,14 @@ class Settings {
 	 */
 	public static function settings_head() {
 
+		$defaults = self::get_defaults();
 		$settings = array(
 			'head_css'        => array(
 				'id'          => 'head_css',
 				'name'        => esc_html__( 'Custom CSS', 'add-to-all' ),
 				'desc'        => esc_html__( 'Add the CSS code without the <style></style> tags.', 'add-to-all' ),
 				'type'        => 'css',
-				'default'     => '',
+				'default'     => $defaults['head_css'],
 				'field_class' => 'codemirror_css',
 			),
 			'head_other_html' => array(
@@ -455,7 +552,7 @@ class Settings {
 				/* translators: 1: Code. */
 				'desc'        => sprintf( esc_html__( 'The code entered here is added to %1$s. Please ensure that you enter valid HTML or JavaScript.', 'add-to-all' ), '<code>wp_head()</code>' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['head_other_html'],
 				'field_class' => 'codemirror_html',
 			),
 		);
@@ -479,6 +576,7 @@ class Settings {
 	 */
 	public static function settings_body() {
 
+		$defaults = self::get_defaults();
 		$settings = array(
 			'wp_body_open_header'            => array(
 				'id'   => 'wp_body_open_header',
@@ -491,7 +589,7 @@ class Settings {
 				'name'        => esc_html__( 'HTML to add to wp_body_open()', 'add-to-all' ),
 				'desc'        => esc_html__( 'wp_body_open() is called after the opening body tag. Please ensure that you enter valid HTML or JavaScript. This might not work if your theme does not include the tag.', 'add-to-all' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['wp_body_open'],
 				'field_class' => 'codemirror_html',
 			),
 			'content_header'                 => array(
@@ -505,21 +603,21 @@ class Settings {
 				'name'    => esc_html__( 'Content filter priority', 'add-to-all' ),
 				'desc'    => esc_html__( 'A higher number will cause the WebberZone Snippetz output to be processed after other filters. Number below 10 is not recommended.', 'add-to-all' ),
 				'type'    => 'text',
-				'default' => 999,
+				'default' => $defaults['content_filter_priority'],
 			),
 			'exclude_on_post_ids'            => array(
 				'id'      => 'exclude_on_post_ids',
 				'name'    => esc_html__( 'Exclude display on these post IDs', 'add-to-all' ),
 				'desc'    => esc_html__( 'Comma-separated list of post or page IDs to exclude displaying the above content. e.g. 188,320,500', 'add-to-all' ),
 				'type'    => 'postids',
-				'default' => '',
+				'default' => $defaults['exclude_on_post_ids'],
 			),
 			'content_process_shortcode'      => array(
 				'id'      => 'content_process_shortcode',
 				'name'    => esc_html__( 'Process shortcodes in content', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this box to execute any shortcodes that you enter in the options below.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['content_process_shortcode'],
 			),
 			'content_header_all'             => array(
 				'id'   => 'content_header_all',
@@ -532,14 +630,14 @@ class Settings {
 				'name'    => esc_html__( 'Add HTML before content?', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this to add the HTML below before the content of your post.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['content_add_html_before'],
 			),
 			'content_html_before'            => array(
 				'id'          => 'content_html_before',
 				'name'        => esc_html__( 'HTML to add before the content', 'add-to-all' ),
 				'desc'        => esc_html__( 'Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed.', 'add-to-all' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['content_html_before'],
 				'field_class' => 'codemirror_html',
 			),
 			'content_add_html_after'         => array(
@@ -547,14 +645,14 @@ class Settings {
 				'name'    => esc_html__( 'Add HTML after content?', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this to add the HTML below before the content of your post.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['content_add_html_after'],
 			),
 			'content_html_after'             => array(
 				'id'          => 'content_html_after',
 				'name'        => esc_html__( 'HTML to add after the content', 'add-to-all' ),
 				'desc'        => esc_html__( 'Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed.', 'add-to-all' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['content_html_after'],
 				'field_class' => 'codemirror_html',
 			),
 			'content_header_single'          => array(
@@ -568,14 +666,14 @@ class Settings {
 				'name'    => esc_html__( 'Add HTML before content?', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this to add the HTML below before the content of your post.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['content_add_html_before_single'],
 			),
 			'content_html_before_single'     => array(
 				'id'          => 'content_html_before_single',
 				'name'        => esc_html__( 'HTML to add before the content', 'add-to-all' ),
 				'desc'        => esc_html__( 'Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed.', 'add-to-all' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['content_html_before_single'],
 				'field_class' => 'codemirror_html',
 			),
 			'content_add_html_after_single'  => array(
@@ -583,14 +681,14 @@ class Settings {
 				'name'    => esc_html__( 'Add HTML after content?', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this to add the HTML below before the content of your post.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['content_add_html_after_single'],
 			),
 			'content_html_after_single'      => array(
 				'id'          => 'content_html_after_single',
 				'name'        => esc_html__( 'HTML to add after the content', 'add-to-all' ),
 				'desc'        => esc_html__( 'Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed.', 'add-to-all' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['content_html_after_single'],
 				'field_class' => 'codemirror_html',
 			),
 			'content_header_post'            => array(
@@ -604,14 +702,14 @@ class Settings {
 				'name'    => esc_html__( 'Add HTML before content?', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this to add the HTML below before the content of your post.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['content_add_html_before_post'],
 			),
 			'content_html_before_post'       => array(
 				'id'          => 'content_html_before_post',
 				'name'        => esc_html__( 'HTML to add before the content', 'add-to-all' ),
 				'desc'        => esc_html__( 'Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed.', 'add-to-all' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['content_html_before_post'],
 				'field_class' => 'codemirror_html',
 			),
 			'content_add_html_after_post'    => array(
@@ -619,14 +717,14 @@ class Settings {
 				'name'    => esc_html__( 'Add HTML after content?', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this to add the HTML below before the content of your post.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['content_add_html_after_post'],
 			),
 			'content_html_after_post'        => array(
 				'id'          => 'content_html_after_post',
 				'name'        => esc_html__( 'HTML to add after the content', 'add-to-all' ),
 				'desc'        => esc_html__( 'Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed.', 'add-to-all' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['content_html_after_post'],
 				'field_class' => 'codemirror_html',
 			),
 			'content_header_page'            => array(
@@ -640,14 +738,14 @@ class Settings {
 				'name'    => esc_html__( 'Add HTML before content?', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this to add the HTML below before the content of your page.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['content_add_html_before_page'],
 			),
 			'content_html_before_page'       => array(
 				'id'          => 'content_html_before_page',
 				'name'        => esc_html__( 'HTML to add before the content', 'add-to-all' ),
 				'desc'        => esc_html__( 'Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed.', 'add-to-all' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['content_html_before_page'],
 				'field_class' => 'codemirror_html',
 			),
 			'content_add_html_after_page'    => array(
@@ -655,14 +753,14 @@ class Settings {
 				'name'    => esc_html__( 'Add HTML after content?', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this to add the HTML below before the content of your page.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['content_add_html_after_page'],
 			),
 			'content_html_after_page'        => array(
 				'id'          => 'content_html_after_page',
 				'name'        => esc_html__( 'HTML to add after the content', 'add-to-all' ),
 				'desc'        => esc_html__( 'Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed.', 'add-to-all' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['content_html_after_page'],
 				'field_class' => 'codemirror_html',
 			),
 		);
@@ -686,13 +784,14 @@ class Settings {
 	 */
 	public static function settings_footer() {
 
+		$defaults = self::get_defaults();
 		$settings = array(
 			'footer_process_shortcode' => array(
 				'id'      => 'footer_process_shortcode',
 				'name'    => esc_html__( 'Process shortcodes in footer', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this box to execute any shortcodes that you enter in the option below.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['footer_process_shortcode'],
 			),
 			'footer_other_html'        => array(
 				'id'          => 'footer_other_html',
@@ -700,7 +799,7 @@ class Settings {
 				/* translators: 1: Code. */
 				'desc'        => sprintf( esc_html__( 'The code entered here is added to %1$s. Please ensure that you enter valid HTML or JavaScript.', 'add-to-all' ), '<code>wp_footer()</code>' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['footer_other_html'],
 				'field_class' => 'codemirror_html',
 			),
 		);
@@ -724,13 +823,14 @@ class Settings {
 	 */
 	public static function settings_feed() {
 
+		$defaults = self::get_defaults();
 		$settings = array(
 			'feed_add_copyright'     => array(
 				'id'      => 'feed_add_copyright',
 				'name'    => esc_html__( 'Add copyright notice?', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this to add the below copyright notice to your feed.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => true,
+				'default' => $defaults['feed_add_copyright'],
 			),
 			'feed_copyrightnotice'   => array(
 				'id'          => 'feed_copyrightnotice',
@@ -746,7 +846,7 @@ class Settings {
 				'name'    => esc_html__( 'Add post title?', 'add-to-all' ),
 				'desc'    => esc_html__( 'Add a link to the title of the post in the feed.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => true,
+				'default' => $defaults['feed_add_title'],
 			),
 			'feed_title_text'        => array(
 				'id'      => 'feed_title_text',
@@ -755,28 +855,28 @@ class Settings {
 				'desc'    => esc_html__( 'The above text will be added to the feed. You can use %title% to add a link to the post, %date% and %time% to display the date and time of the post respectively.', 'add-to-all' ),
 				'type'    => 'textarea',
 				/* translators: No strings here. */
-				'default' => esc_html__( '%title% was first posted on %date% at %time%.', 'add-to-all' ),
+				'default' => $defaults['feed_title_text'],
 			),
 			'feed_process_shortcode' => array(
 				'id'      => 'feed_process_shortcode',
 				'name'    => esc_html__( 'Process shortcodes in feed', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this box to execute any shortcodes that you enter in the options below.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['feed_process_shortcode'],
 			),
 			'feed_add_html_before'   => array(
 				'id'      => 'feed_add_html_before',
 				'name'    => esc_html__( 'Add HTML before content?', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this to add the HTML below before the content of your post.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['feed_add_html_before'],
 			),
 			'feed_html_before'       => array(
 				'id'          => 'feed_html_before',
 				'name'        => esc_html__( 'HTML to add before the content', 'add-to-all' ),
 				'desc'        => esc_html__( 'Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed.', 'add-to-all' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['feed_html_before'],
 				'field_class' => 'codemirror_html',
 			),
 			'feed_add_html_after'    => array(
@@ -784,14 +884,14 @@ class Settings {
 				'name'    => esc_html__( 'Add HTML after content?', 'add-to-all' ),
 				'desc'    => esc_html__( 'Check this to add the HTML below before the content of your post.', 'add-to-all' ),
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['feed_add_html_after'],
 			),
 			'feed_html_after'        => array(
 				'id'          => 'feed_html_after',
 				'name'        => esc_html__( 'HTML to add after the content', 'add-to-all' ),
 				'desc'        => esc_html__( 'Enter valid HTML or JavaScript (wrapped in script tags). No PHP allowed.', 'add-to-all' ),
 				'type'        => 'html',
-				'default'     => '',
+				'default'     => $defaults['feed_html_after'],
 				'field_class' => 'codemirror_html',
 			),
 			'add_credit'             => array(
@@ -799,7 +899,7 @@ class Settings {
 				'name'    => esc_html__( 'Add a link to "WebberZone Snippetz" plugin page', 'add-to-all' ),
 				'desc'    => '',
 				'type'    => 'checkbox',
-				'default' => false,
+				'default' => $defaults['add_credit'],
 			),
 		);
 
