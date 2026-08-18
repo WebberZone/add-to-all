@@ -46,10 +46,10 @@ class Settings {
 	/**
 	 * Prefix which is used for creating the unique filters and actions.
 	 *
-	 * Initialised at declaration rather than only in the constructor: the static
-	 * methods on this class are reachable on the frontend where the Settings object
-	 * is never instantiated, and a null prefix there fires `_settings_defaults`
-	 * instead of `ata_settings_defaults`.
+	 * Initialised at declaration rather than only in the constructor: the static methods on
+	 * this class are reachable on the frontend where the Settings object is never
+	 * instantiated, and a null prefix there fires `_settings_defaults` instead of
+	 * `ata_settings_defaults`.
 	 *
 	 * @since 1.7.0
 	 *
@@ -295,26 +295,14 @@ class Settings {
 	/**
 	 * Raw default values for every setting, keyed by option ID.
 	 *
-	 * Single source of truth for field defaults. Deliberately contains no
-	 * translation calls so it is safe to invoke before `init` (e.g. from
-	 * `ata_get_option()` on the frontend) without triggering a "translation
-	 * loading triggered too early" notice. The field definition methods below
-	 * reference this array instead of duplicating literals.
-	 *
-	 * Values are pre-normalised: checkbox defaults use 1/0 rather than true/false
-	 * so that they match what `settings_defaults()` produces after its
-	 * `(int) (bool)` cast. This array is deliberately unfiltered — the
-	 * `ata_settings_defaults` filter is applied by the consumers
-	 * (`settings_defaults()` and `Options_API::get_default_option()`) so that it
-	 * runs exactly once on each path.
-	 *
-	 * `feed_copyrightnotice` is the one entry that is not the field's own default.
-	 * Its field definition computes the notice through `self::get_copyright_text()`,
-	 * which builds a string from the current year, blog name and admin email and
-	 * translates part of it. That call stays in the field definition so a fresh
-	 * install still seeds the notice into `wp_options`, but it cannot run here. The
-	 * raw value is empty instead, which is what both consumers already pass
-	 * explicitly as their fallback.
+	 * Deliberately contains no translation calls, so it is safe to invoke before `init`
+	 * (e.g. from `ata_get_option()` on the frontend). Values are pre-normalised (checkboxes
+	 * as 1/0) and the array is intentionally unfiltered — consumers apply the
+	 * `ata_settings_defaults` filter themselves. `feed_copyrightnotice` is the one entry
+	 * that isn't the field's own default: its real value is computed by
+	 * `get_copyright_text()` in the field definition (which needs to run on every install,
+	 * not just here), so the raw default is left empty, matching what both consumers
+	 * already pass as their fallback.
 	 *
 	 * @since 2.4.2
 	 *
