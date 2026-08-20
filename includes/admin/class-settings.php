@@ -269,23 +269,20 @@ class Settings {
 					continue;
 				}
 
-				$sanitize_callback = false;
-
 				if ( isset( $setting['sanitize_callback'] ) && is_callable( $setting['sanitize_callback'] ) ) {
-					$sanitize_callback = $setting['sanitize_callback'];
-				} elseif ( is_callable( array( $settings_sanitize, 'sanitize_' . $type . '_field' ) ) ) {
-					if ( 'repeater' === $type ) {
-						$sanitize_callback = static function ( $value ) use ( $settings_sanitize, $setting ) {
-							return $settings_sanitize->sanitize_repeater_field( $value, $setting );
-						};
-					} else {
-						$sanitize_callback = array( $settings_sanitize, 'sanitize_' . $type . '_field' );
-					}
+					$output[ $key ] = call_user_func( $setting['sanitize_callback'], $input[ $key ] );
+					continue;
 				}
 
-				$output[ $key ] = $sanitize_callback
-					? call_user_func( $sanitize_callback, $input[ $key ] )
-					: $input[ $key ];
+				$method = 'sanitize_' . $type . '_field';
+
+				// Field types with no callback of their own must still not store raw input.
+				if ( ! is_callable( array( $settings_sanitize, $method ) ) ) {
+					$method = 'sanitize_missing';
+				}
+
+				// Every callback receives the field configuration so choice fields can validate against their own options.
+				$output[ $key ] = $settings_sanitize->$method( $input[ $key ], $setting );
 			}
 		}
 
