@@ -12,6 +12,8 @@ order: 0
 
 This document covers all settings in [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/). Access settings via **Snippetz → Settings** when the Snippets Manager is enabled, or via **Settings → Snippetz** when it is disabled.
 
+The settings screen, refreshed in v2.4.1, lays its tabs out vertically down the left side with a search box above them that filters options across all tabs as you type. Each field displays its default value, and checkboxes render as toggle switches.
+
 ## General
 
 ### Enable Snippets Manager
