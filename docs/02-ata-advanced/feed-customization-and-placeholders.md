@@ -2,13 +2,13 @@
 slug: feed-customization-and-placeholders
 title: "Feed Customization and Placeholders"
 products: [add-to-all]
-sections: [02-ata-advanced]
-tags: [add-to-all, feed, rss, placeholders, copyright]
+sections: ["02-ata-advanced"]
+tags: [add-to-all, copyright, feed, placeholders, rss]
 status: publish
-order: 0
+toc: true
 ---
 
-[kbtoc]
+[toc]
 
 [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) can append a copyright notice and a linked title line to every item in your site's RSS feed, and inject arbitrary HTML before or after each item's content. All text fields support placeholder tokens that expand to dynamic values at render time.
 
@@ -45,7 +45,7 @@ Tokens expand when the feed is rendered. They work in the **Copyright text** and
 Available in the copyright notice and any other field that runs through `process_placeholders()`:
 
 | Token | Expands to |
-|---|---|
+| --- | --- |
 | `%year%` | Current four-digit year |
 | `%first_year%` | Year of the oldest published post on the site |
 | `%month%` | Current month name (January–December) |
@@ -57,7 +57,7 @@ Available in the copyright notice and any other field that runs through `process
 Available only in the **Title text** field:
 
 | Token | Expands to |
-|---|---|
+| --- | --- |
 | `%title%` | Post title linked to its permalink |
 | `%date%` | Post publication date (e.g. "June 17, 2026") |
 | `%time%` | Post publication time (e.g. "9:30 am") |
@@ -69,8 +69,8 @@ Use the [`ata_placeholders`](https://webberzone.dev/add-to-all/hooks/ata_placeho
 
 ```php
 add_filter( 'ata_placeholders', function( array $placeholders ): array {
-    $placeholders['%site_name%'] = get_bloginfo( 'name' );
-    $placeholders['%tagline%']   = get_bloginfo( 'description' );
+    $placeholders[['%site_name%']] = get_bloginfo( 'name' );
+    $placeholders[['%tagline%']]   = get_bloginfo( 'description' );
     return $placeholders;
 } );
 ```

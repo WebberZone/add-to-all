@@ -2,13 +2,13 @@
 slug: external-css-js-files
 title: "External CSS and JS Files"
 products: [add-to-all]
-sections: [02-ata-advanced]
-tags: [add-to-all, performance, css, javascript, minification]
+sections: ["02-ata-advanced"]
+tags: [add-to-all, css, javascript, minification, performance]
 status: publish
-order: 0
+toc: true
 ---
 
-[kbtoc]
+[toc]
 
 By default, [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) injects CSS and JavaScript snippets as inline styles and scripts using the WordPress enqueue system (`wp_add_inline_style` / `wp_add_inline_script`). The **External CSS/JS files** feature saves those snippets as minified flat files and serves them from the uploads directory instead.
 

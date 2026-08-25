@@ -2,13 +2,13 @@
 slug: using-the-snippets-manager
 title: "Using the Snippets Manager"
 products: [add-to-all]
-sections: [01-ata-getting-started]
-tags: [add-to-all, snippets, snippetz, conditions]
+sections: ["01-ata-getting-started"]
+tags: [add-to-all, conditions, snippets, snippetz]
 status: publish
-order: 0
+toc: true
 ---
 
-[kbtoc]
+[toc]
 
 The [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) Snippets Manager lets you create named, reusable code snippets — HTML, CSS, or JavaScript — and control exactly where each one appears on your site. Each snippet is a custom post type entry with its own location settings, display conditions, and priority.
 
@@ -26,7 +26,7 @@ The Snippets Manager is enabled by default. If it is turned off, go to **Setting
 ## Snippet types
 
 | Type | Output method |
-|---|---|
+| --- | --- |
 | **HTML** | Wrapped in `<div class="ata_snippet ata_snippet_{id}">` and output inline |
 | **CSS** | Enqueued via `wp_add_inline_style` (or as an external file when external files are enabled) |
 | **JavaScript** | Enqueued via `wp_add_inline_script` in the footer (or as an external file when external files are enabled) |
@@ -38,7 +38,7 @@ Changing the snippet type after saving updates the editor's syntax highlighting 
 Each snippet can be injected into one or more locations independently:
 
 | Option | Where it appears |
-|---|---|
+| --- | --- |
 | **Add to Header** | `wp_head()` — inside `<head>` |
 | **Add to Footer** | `wp_footer()` — just before `</body>` |
 | **Add before Content** | Prepended to `the_content` on posts matching the conditions below |
@@ -61,7 +61,7 @@ Choose **OR** (show when any one condition matches) or **AND** (show only when a
 ### Available conditions
 
 | Condition | Description |
-|---|---|
+| --- | --- |
 | **Include on these post types** | Checkboxes for registered public post types |
 | **Include on these Post IDs** | Comma-separated post, page, or custom post type IDs |
 | **Include on these Categories** | Comma-separated category slugs (autocomplete supported) |
@@ -83,7 +83,7 @@ Check **Disable Snippet** in the metabox to temporarily suppress a snippet witho
 
 ## Embedding snippets inline
 
-Use the `[ata_snippet id=""]` shortcode or the **WebberZone Snippetz** block to embed a snippet directly inside post or page content. See [Snippetz Shortcode and Block](https://webberzone.com/support/knowledgebase/snippetz-shortcode-and-block/) for details.
+Use the `[[ata_snippet id=""]]` shortcode or the **WebberZone Snippetz** block to embed a snippet directly inside post or page content. See [Snippetz Shortcode and Block](https://webberzone.com/support/knowledgebase/snippetz-shortcode-and-block/) for details.
 
 ## Organizing snippets
 

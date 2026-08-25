@@ -2,13 +2,13 @@
 slug: webberzone-snippetz-settings
 title: "WebberZone Snippetz Settings"
 products: [add-to-all]
-sections: [01-ata-getting-started]
+sections: ["01-ata-getting-started"]
 tags: [add-to-all, settings, snippetz]
 status: publish
-order: 0
+toc: true
 ---
 
-[kbtoc]
+[toc]
 
 This document covers all settings in [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/). Access settings via **Snippetz → Settings** when the Snippets Manager is enabled, or via **Settings → Snippetz** when it is disabled.
 
@@ -55,7 +55,7 @@ Enter your **Tracking ID** (Google Tag ID, e.g. `G-XXXXXXXXXX`) to inject the Go
 Add site verification meta tags to `<head>` for each service:
 
 | Field | Service |
-|---|---|
+| --- | --- |
 | **Google** | Value of the `content` attribute in the Google Search Console HTML tag method |
 | **Bing** | Value of the `content` attribute in the Bing Webmaster Tools HTML tag method |
 | **Meta** | Value of the `content` attribute in the Meta (Facebook) domain verification tag |
