@@ -5,6 +5,7 @@ products: [add-to-all]
 sections: ["01-ata-getting-started"]
 tags: [add-to-all, installation, snippetz]
 status: publish
+order: 0
 ---
 
 [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) (formerly Add to All) is available in the WordPress.org plugins repository. This means you can search for and install the plugin directly from within your WordPress site’s dashboard.

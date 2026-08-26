@@ -5,6 +5,7 @@ products: [add-to-all]
 sections: ["01-ata-getting-started"]
 tags: [add-to-all, settings, snippetz]
 status: publish
+order: 0
 toc: true
 ---
 

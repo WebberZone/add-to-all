@@ -5,6 +5,7 @@ products: [add-to-all]
 sections: ["01-ata-getting-started"]
 tags: [add-to-all, block, shortcode, snippetz]
 status: publish
+order: 0
 ---
 
 [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) provides three ways to embed a named snippet inline inside post or page content: a shortcode, a Gutenberg block, and an Insert Snippet button for the Classic Editor.

@@ -5,6 +5,7 @@ products: [add-to-all]
 sections: ["02-ata-advanced"]
 tags: [add-to-all, css, javascript, minification, performance]
 status: publish
+order: 0
 toc: true
 ---
 
