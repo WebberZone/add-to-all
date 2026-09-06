@@ -140,7 +140,7 @@ class Admin_Columns {
 					__( 'Copy to clipboard', 'add-to-all' )
 				);
 
-				echo trim( $output ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo trim( $output, '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				break;
 
 			case 'external_file':

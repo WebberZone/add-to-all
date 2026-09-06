@@ -223,7 +223,7 @@ class Minifier {
 		$css = preg_replace( '/\/\*.*?\*\//s', '', $css );
 		$css = preg_replace( '/\s+/', ' ', $css );
 		$css = preg_replace( '/\s*([{}:;,])\s*/', '$1', $css );
-		return trim( $css );
+		return trim( $css, '' );
 	}
 
 	/**
@@ -241,7 +241,7 @@ class Minifier {
 		$js = preg_replace( '/\/\*.*?\*\//s', '', $js );
 		$js = preg_replace( '/\/\/.*$/m', '', $js );
 		$js = preg_replace( '/\s+/', ' ', $js );
-		return trim( $js );
+		return trim( $js, '' );
 	}
 
 	/**
