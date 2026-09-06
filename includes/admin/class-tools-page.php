@@ -92,7 +92,14 @@ class Tools_Page {
 		?>
 		<div class="wrap">
 			<h1><?php esc_html_e( 'WebberZone Snippetz Tools', 'add-to-all' ); ?></h1>
-			<?php do_action( 'ata_tools_page_header' ); ?>
+			<?php
+			/**
+			 * Fires at the top of the Snippetz Tools page, after the heading.
+			 *
+			 * @since 2.3.0
+			 */
+			do_action( 'ata_tools_page_header' );
+			?>
 
 			<?php settings_errors(); ?>
 
