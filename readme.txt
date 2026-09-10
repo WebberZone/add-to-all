@@ -2,7 +2,7 @@
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
 Donate link: https://wzn.io/donate-wz
-Stable tag: 2.4.1
+Stable tag: 2.4.2
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -102,12 +102,23 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 = 2.4.2 =
 
-* Bug fixes:
-	* Fixed the `ata_settings_defaults` filter being ignored when a default was read outside the admin area.
-	* Fixed settings on a multisite network reading another site's values in the same request after a `switch_to_blog()` call, such as during network activation.
+Release date: 10 September 2026
 
-* Improvements:
-	* Setting defaults are now resolved from a single lightweight list instead of building every settings field, so reading an option early in the page load no longer risks loading translations too early.
+**Changed**
+
+* Setting defaults are now resolved from a single lightweight list instead of building every settings field, so reading an option early in the page load no longer risks loading translations too early.
+
+**Security**
+
+* Hardened textarea sanitization in the Settings API.
+* Settings values are now sanitized against their field type on import, including previously unhandled field types.
+
+**Fixed**
+
+* Fixed the `ata_settings_defaults` filter being ignored when a default was read outside the admin area.
+* Fixed settings on a multisite network reading another site's values in the same request after a `switch_to_blog()` call, such as during network activation.
+* Fixed the settings wizard silently dropping repeater field rows on save.
+* Fixed PHP 8.6 compatibility notices from `trim()`/`ltrim()`/`rtrim()` calls without an explicit character list.
 
 = 2.4.1 =
 
@@ -128,20 +139,12 @@ Release post: [https://webberzone.com/announcements/snippetz-v2-4-0/](https://we
 * Features:
 	* Added an Insert Snippet button to the Classic Editor for selecting and inserting a snippet shortcode.
 
-= 2.3.1 =
-
-* Bug fixes:
-	* Fixed missing method referenced in hook registration in class-main.php
-
 Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
 
 == Upgrade Notice ==
 
-= 2.4.1 =
-Tested with WordPress 7.1. Refreshed settings screen with search and default value indicators.
-
-= 2.4.0 =
-Adds an Insert Snippet button to the Classic Editor.
+= 2.4.2 =
+Bug fixes for the settings wizard, multisite settings and PHP 8.6 compatibility, plus hardened settings sanitization. Update recommended.
 
 = 2.3.1 =
 Bug fix for PHPUnit bootstrap error.
