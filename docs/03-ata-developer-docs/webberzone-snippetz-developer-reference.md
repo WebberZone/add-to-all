@@ -13,7 +13,7 @@ toc: true
 
 This reference covers the PHP functions, filter hooks, and action hooks exposed by [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) for use in themes and plugins.
 
-All functions are in the `WebberZoneSnippetzSnippetsFunctions` class. All hook names are prefixed `ata_`.
+All functions are in the `WebberZone\Snippetz\Snippets\Functions` class. All hook names are prefixed `ata_`.
 
 ## PHP functions
 
@@ -22,7 +22,7 @@ All functions are in the `WebberZoneSnippetzSnippetsFunctions` class. All hook n
 Returns the rendered output for a snippet.
 
 ```php
-use WebberZoneSnippetzSnippetsFunctions;
+use WebberZone\Snippetz\Snippets\Functions;
 
 $html = Functions::get_snippet_content( 42 );
 echo $html;

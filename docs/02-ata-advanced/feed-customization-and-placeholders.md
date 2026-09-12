@@ -70,8 +70,8 @@ Use the [`ata_placeholders`](https://webberzone.dev/add-to-all/hooks/ata_placeho
 
 ```php
 add_filter( 'ata_placeholders', function( array $placeholders ): array {
-    $placeholders[['%site_name%']] = get_bloginfo( 'name' );
-    $placeholders[['%tagline%']]   = get_bloginfo( 'description' );
+    $placeholders['%site_name%'] = get_bloginfo( 'name' );
+    $placeholders['%tagline%']   = get_bloginfo( 'description' );
     return $placeholders;
 } );
 ```
