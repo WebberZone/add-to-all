@@ -8,9 +8,11 @@
 [![Required PHP](https://img.shields.io/wordpress/plugin/required-php/add-to-all?style=flat-square)](https://wordpress.org/plugins/add-to-all/)
 [![Active installs](https://img.shields.io/wordpress/plugin/installs/add-to-all?style=flat-square)](https://wordpress.org/plugins/add-to-all/)
 
-__Requires:__ WordPress 6.3
+__Requires:__ WordPress 6.7
 
-__Tested up to:__ 7.0
+__Tested up to:__ 7.1
+
+__Requires PHP:__ 7.4
 
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
