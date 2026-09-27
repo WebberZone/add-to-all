@@ -19,3 +19,4 @@ composer.lock
 
 # Testing
 /.playwright-mcp
+.phpunit.result.cache
