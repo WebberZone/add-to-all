@@ -107,7 +107,7 @@ Release date: 8 October 2026
 **Fixed**
 
 * Settings field labels were not linked to their fields, so clicking a label did not focus the field and screen readers did not announce the label.
-* Saving or deleting an individual setting failed with a PHP error when the stored settings option was not an array.
+* `ata_update_option()` and `ata_delete_option()` failed with a PHP error when the stored settings option was not an array.
 
 = 2.4.2 =
 
@@ -166,4 +166,4 @@ For the changelog of earlier versions, please refer to the [releases page on Git
 == Upgrade Notice ==
 
 = 2.4.3 =
-Fixes settings labels for screen readers and a PHP error when saving settings that were stored in the wrong format. No action needed.
+Fixes settings labels for screen readers and a PHP error in the settings API when the stored settings were not an array. No action needed.
