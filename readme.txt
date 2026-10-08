@@ -2,7 +2,7 @@
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
 Donate link: https://wzn.io/donate-wz
-Stable tag: 2.4.2
+Stable tag: 2.4.3
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -100,6 +100,15 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 == Changelog ==
 
+= 2.4.3 =
+
+Release date: 8 October 2026
+
+**Fixed**
+
+* Settings field labels were not linked to their fields, so clicking a label did not focus the field and screen readers did not announce the label.
+* Saving or deleting an individual setting failed with a PHP error when the stored settings option was not an array.
+
 = 2.4.2 =
 
 Release date: 10 September 2026
@@ -122,29 +131,39 @@ Release date: 10 September 2026
 
 = 2.4.1 =
 
-* Improvements:
-	* Tested with WordPress 7.1. The minimum supported WordPress version is now 6.7.
-	* Updated to v2.11.0 of the WebberZone Settings API, which refreshes the settings screen: tabs now run vertically down the left, a search box filters settings across all tabs as you type, each field displays its default value, and checkboxes are rendered as toggle switches.
-	* Admin settings and banner stylesheets are now versioned against the plugin version so browsers pick up changes immediately.
-	* Settings page now scrolls smoothly back to the top when switching tabs.
+Release date: 9 August 2026
 
-* Bug fixes:
-	* Fixed the admin banner extending past the right edge of the settings page and overlapping the tab content.
-	* Fixed the default value label lookup for select and radio options whose value is an empty string.
+**Added**
+
+* Settings search box that filters settings across all tabs as you type.
+* Default value shown alongside each setting.
+
+**Changed**
+
+* Tested with WordPress 7.1. Raised the minimum supported WordPress version to 6.7.
+* Refreshed the settings screen with vertical tabs and toggle-switch checkboxes (WebberZone Settings API v2.11.0).
+* Versioned the admin settings and banner stylesheets against the plugin version so browsers pick up changes immediately.
+* Switching settings tabs scrolls smoothly back to the top of the page.
+
+**Fixed**
+
+* The admin banner extended past the right edge of the settings page and overlapped the tab content.
+* The default value label was wrong for select and radio options whose value is an empty string.
 
 = 2.4.0 =
 
-Release post: [https://webberzone.com/announcements/snippetz-v2-4-0/](https://webberzone.com/announcements/snippetz-v2-4-0/)
+Release date: 6 July 2026
+Release post: https://webberzone.com/announcements/snippetz-v2-4-0/
 
-* Features:
-	* Added an Insert Snippet button to the Classic Editor for selecting and inserting a snippet shortcode.
+**Added**
 
-Check changelog.txt for older entries the [Releases page on Github](https://github.com/WebberZone/add-to-all/releases)
+* Insert Snippet button in the Classic Editor for selecting and inserting a snippet shortcode.
+
+= Earlier versions =
+
+For the changelog of earlier versions, please refer to the [releases page on GitHub](https://github.com/WebberZone/add-to-all/releases).
 
 == Upgrade Notice ==
 
-= 2.4.2 =
-Bug fixes for the settings wizard, multisite settings and PHP 8.6 compatibility, plus hardened settings sanitization. Update recommended.
-
-= 2.3.1 =
-Bug fix for PHPUnit bootstrap error.
+= 2.4.3 =
+Fixes settings labels for screen readers and a PHP error when saving settings that were stored in the wrong format. No action needed.
