@@ -122,6 +122,8 @@ class Helpers {
 
 		$content = wp_strip_all_tags( strip_shortcodes( $content ) );
 		$words   = str_word_count( $content );
+		$parsed_args['wpm'] = max( 1, absint( $parsed_args['wpm'] ) );
+
 		$minutes = floor( $words / $parsed_args['wpm'] );
 		$seconds = floor( ( $words % $parsed_args['wpm'] ) / ( $parsed_args['wpm'] / 60 ) );
 
