@@ -2,7 +2,7 @@
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
 Donate link: https://wzn.io/donate-wz
-Stable tag: 2.4.3
+Stable tag: 2.4.4
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -100,6 +100,18 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 == Changelog ==
 
+= 2.4.4 =
+
+Release date: 2 November 2026
+
+**Security**
+
+* Hardened snippet rendering in blocks and shortcodes.
+
+**Fixed**
+
+* `[ata_reading_time]` with `wpm="0"` caused a fatal error.
+
 = 2.4.3 =
 
 Release date: 8 October 2026
@@ -165,5 +177,5 @@ For the changelog of earlier versions, please refer to the [releases page on Git
 
 == Upgrade Notice ==
 
-= 2.4.3 =
-Fixes settings labels for screen readers and a PHP error in the settings API when the stored settings were not an array. No action needed.
+= 2.4.4 =
+Security hardening release. Update recommended.
