@@ -150,9 +150,9 @@ class Functions {
 
 		$id = $snippet->ID;
 
-		// Only published, enabled snippets render; anyone who can read the snippet directly may preview it.
+		// Only published, enabled snippets render; users who can edit the snippet may preview others.
 		$is_live = 'publish' === $snippet->post_status && ! get_post_meta( $id, '_ata_disable_snippet', true );
-		if ( ! $is_live && ! current_user_can( 'read_post', $id ) ) {
+		if ( ! $is_live && ! current_user_can( 'edit_post', $id ) ) {
 			return '';
 		}
 
