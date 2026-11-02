@@ -120,8 +120,8 @@ class Helpers {
 		$parsed_args = wp_parse_args( $args, $defaults );
 		$parsed_args = self::sanitize_args( $parsed_args );
 
-		$content = wp_strip_all_tags( strip_shortcodes( $content ) );
-		$words   = str_word_count( $content );
+		$content            = wp_strip_all_tags( strip_shortcodes( $content ) );
+		$words              = str_word_count( $content );
 		$parsed_args['wpm'] = max( 1, absint( $parsed_args['wpm'] ) );
 
 		$minutes = floor( $words / $parsed_args['wpm'] );
