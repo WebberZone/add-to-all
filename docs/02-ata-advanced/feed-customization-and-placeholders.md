@@ -49,8 +49,8 @@ Available in the copyright notice and any other field that runs through `process
 | --- | --- |
 | `%year%` | Current four-digit year |
 | `%first_year%` | Year of the oldest published post on the site |
-| `%month%` | Current month name (January–December) |
-| `%date%` | Current day of the month (1–31) |
+| `%month%` | Current month name (January to December) |
+| `%date%` | Current day of the month (1 to 31) |
 | `%reading_time%` | Estimated reading time of the current post (e.g. "3 minutes, 12 seconds") |
 
 ### Feed title tokens
@@ -84,7 +84,7 @@ Enable **Process shortcodes in feed** to execute shortcodes inside these HTML fi
 
 ## Filters
 
-**[`ata_feed_title_text`](https://webberzone.dev/add-to-all/hooks/ata_feed_title_text/)** — Filter the rendered feed title line.
+**[`ata_feed_title_text`](https://webberzone.dev/add-to-all/hooks/ata_feed_title_text/)**: Filter the rendered feed title line.
 
 ```php
 add_filter( 'ata_feed_title_text', function( string $output ): string {
@@ -92,7 +92,7 @@ add_filter( 'ata_feed_title_text', function( string $output ): string {
 } );
 ```
 
-**[`ata_creditline`](https://webberzone.dev/add-to-all/hooks/ata_creditline/)** — Filter the credit link added when **Add a link to "WebberZone Snippetz"** is enabled.
+**[`ata_creditline`](https://webberzone.dev/add-to-all/hooks/ata_creditline/)**: Filter the credit link added when **Add a link to "WebberZone Snippetz"** is enabled.
 
 ```php
 add_filter( 'ata_creditline', function( string $output ): string {
@@ -100,7 +100,7 @@ add_filter( 'ata_creditline', function( string $output ): string {
 } );
 ```
 
-**[`ata_process_placeholders`](https://webberzone.dev/add-to-all/hooks/ata_process_placeholders/)** — Filter the final output after all placeholder tokens have been replaced.
+**[`ata_process_placeholders`](https://webberzone.dev/add-to-all/hooks/ata_process_placeholders/)**: Filter the final output after all placeholder tokens have been replaced.
 
 ```php
 add_filter( 'ata_process_placeholders', function( string $output, string $input, array $placeholders ): string {

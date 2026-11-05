@@ -6,11 +6,14 @@ sections: ["01-ata-getting-started"]
 tags: [add-to-all, block, shortcode, snippetz]
 status: publish
 order: 0
+toc: true
 ---
+
+[toc]
 
 [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) provides three ways to embed a named snippet inline inside post or page content: a shortcode, a Gutenberg block, and an Insert Snippet button for the Classic Editor.
 
-All three require the Snippets Manager to be enabled (**Snippetz → Settings → General → Enable Snippets Manager**) and a published snippet to exist.
+All three require the Snippets Manager to be enabled (**Snippetz → Settings → General → Enable Snippets Manager**) and a published, enabled snippet to exist. Visitors receive no output for unpublished or disabled snippets. A user who can edit the specific snippet can preview its output through an inline embed.
 
 ## `[[ata_snippet]]` shortcode
 
@@ -46,7 +49,7 @@ Select the snippet to embed from the dropdown in the block sidebar. The block re
 | `snippetId` | number | ID of the snippet post to embed. Default `0`. |
 | `className` | string | Extra CSS class on the block wrapper. |
 
-CSS and JS snippets embedded via the block are enqueued using the standard WordPress enqueue system — the block itself outputs nothing visible for those types.
+CSS and JS snippets embedded via the block are enqueued using the standard WordPress enqueue system: the block itself outputs nothing visible for those types.
 
 ## Insert Snippet button (Classic Editor)
 
@@ -75,3 +78,5 @@ Outputs the estimated reading time of a post.
 | `after` | string | Text appended to the reading time string. Default empty. |
 
 Output is wrapped in `<span class="ata_reading_time ata_reading_time_{post_id}">`. Reading time is calculated after stripping HTML tags and shortcodes.
+
+The reading speed is converted to a non-negative integer and clamped to at least `1` word per minute. A value of `0` therefore uses `1`, avoiding division by zero.

@@ -31,7 +31,7 @@ Save CSS and JS snippets as minified external files under `wp-content/uploads/sn
 
 ### Enable file combination
 
-Combine all CSS snippets into one file and all JS snippets into one file, then enqueue the combined files. When enabled, per-snippet display conditions are ignored — the combined file loads on every page. Works independently of **Enable external CSS/JS files**.
+Combine all CSS snippets into one file and all JS snippets into one file, then enqueue the combined files. When enabled, per-snippet display conditions are ignored: the combined file loads on every page. Works independently of **Enable external CSS/JS files**.
 
 **Default:** Disabled
 
@@ -78,23 +78,23 @@ Raw HTML or JavaScript injected into `<head>` via `wp_head()`. Enter valid HTML;
 
 ### Opening Body Tag
 
-**HTML to add to `wp_body_open()`** — HTML injected immediately after the opening `<body>` tag via `wp_body_open()`. Requires your theme to call `wp_body_open()`. Useful for tag manager noscripts and other body-open snippets.
+**HTML to add to `wp_body_open()`**: HTML injected immediately after the opening `<body>` tag via `wp_body_open()`. Requires your theme to call `wp_body_open()`. Useful for tag manager noscripts and other body-open snippets.
 
 ### Content settings
 
-**Content filter priority** — Priority of the `the_content` filter that injects HTML before and after post content. Default: `999`.
+**Content filter priority**: Priority of the `the_content` filter that injects HTML before and after post content. Default: `999`.
 
-**Exclude display on these post IDs** — Comma-separated list of post or page IDs. Content-area HTML from this tab is suppressed on these IDs.
+**Exclude display on these post IDs**: Comma-separated list of post or page IDs. Content-area HTML from this tab is suppressed on these IDs.
 
-**Process shortcodes in content** — When enabled, shortcodes in the HTML fields below are executed before output.
+**Process shortcodes in content**: When enabled, shortcodes in the HTML fields below are executed before output.
 
 ### Home and other views
 
 Displays on home, category, tag, and other archive views as well as single posts.
 
-**Add HTML before content** / **HTML to add before the content** — Toggle and HTML field. Content is prepended to `the_content`.
+**Add HTML before content** / **HTML to add before the content**: Toggle and HTML field. Content is prepended to `the_content`.
 
-**Add HTML after content** / **HTML to add after the content** — Toggle and HTML field. Content is appended to `the_content`.
+**Add HTML after content** / **HTML to add after the content**: Toggle and HTML field. Content is appended to `the_content`.
 
 ### Single posts views
 
@@ -116,24 +116,24 @@ Same before/after toggle and HTML field pair, scoped to `is_page()`.
 
 ## Footer
 
-**Process shortcodes in footer** — When enabled, shortcodes in the footer HTML field are executed before output.
+**Process shortcodes in footer**: When enabled, shortcodes in the footer HTML field are executed before output.
 
-**HTML to add to the footer** — HTML injected just before `</body>` via `wp_footer()`. JavaScript must be wrapped in `<script>` tags.
+**HTML to add to the footer**: HTML injected just before `</body>` via `wp_footer()`. JavaScript must be wrapped in `<script>` tags.
 
 ## Feed
 
-**Add copyright notice** — Appends a copyright notice to every feed item. Enabled by default.
+**Add copyright notice**: Appends a copyright notice to every feed item. Enabled by default.
 
-**Copyright text** — HTML added as the last item in your feed. Supports placeholder tokens: `%year%`, `%first_year%`. Default text includes your site name, home URL, and admin email.
+**Copyright text**: HTML added as the last item in your feed. Supports placeholder tokens: `%year%`, `%first_year%`. Default text includes your site name, home URL, and admin email.
 
-**Add post title** — Prepends a linked title line to each feed item. Enabled by default.
+**Add post title**: Prepends a linked title line to each feed item. Enabled by default.
 
-**Title text** — Template for the title line. Supports `%title%` (linked post title), `%date%`, `%time%`, `%updated_time%`.
+**Title text**: Template for the title line. Supports `%title%` (linked post title), `%date%`, `%time%`, `%updated_time%`.
 
-**Process shortcodes in feed** — When enabled, shortcodes in the feed HTML fields are executed before output.
+**Process shortcodes in feed**: When enabled, shortcodes in the feed HTML fields are executed before output.
 
-**Add HTML before content** / **HTML to add before the content** — Toggle and HTML field injected before each feed item's content.
+**Add HTML before content** / **HTML to add before the content**: Toggle and HTML field injected before each feed item's content.
 
-**Add HTML after content** / **HTML to add after the content** — Toggle and HTML field injected after each feed item's content.
+**Add HTML after content** / **HTML to add after the content**: Toggle and HTML field injected after each feed item's content.
 
-**Add a link to "WebberZone Snippetz" plugin page** — Adds a small credit link in the feed. Disabled by default.
+**Add a link to "WebberZone Snippetz" plugin page**: Adds a small credit link in the feed. Disabled by default.

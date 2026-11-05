@@ -11,7 +11,7 @@ toc: true
 
 [toc]
 
-The [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) Snippets Manager lets you create named, reusable code snippets — HTML, CSS, or JavaScript — and control exactly where each one appears on your site. Each snippet is a custom post type entry with its own location settings, display conditions, and priority.
+The [WebberZone Snippetz](https://webberzone.com/plugins/add-to-all/) Snippets Manager lets you create named, reusable code snippets (HTML, CSS, or JavaScript) and control exactly where each one appears on your site. Each snippet is a custom post type entry with its own location settings, display conditions, and priority.
 
 The Snippets Manager is enabled by default. If it is turned off, go to **Settings → Snippetz → General** and enable **Enable Snippets Manager**.
 
@@ -40,8 +40,8 @@ Each snippet can be injected into one or more locations independently:
 
 | Option | Where it appears |
 | --- | --- |
-| **Add to Header** | `wp_head()` — inside `<head>` |
-| **Add to Footer** | `wp_footer()` — just before `</body>` |
+| **Add to Header** | `wp_head()`: inside `<head>` |
+| **Add to Footer** | `wp_footer()`: just before `</body>` |
 | **Add before Content** | Prepended to `the_content` on posts matching the conditions below |
 | **Add after Content** | Appended to `the_content` on posts matching the conditions below |
 
@@ -49,7 +49,7 @@ A snippet can be assigned to multiple locations simultaneously.
 
 ## Step 2: Conditions
 
-Conditions control which posts or pages a snippet's content-area output (before/after content) applies to. Header and footer output ignores conditions — those locations always inject globally.
+Conditions control which posts or pages a snippet's content-area output (before/after content) applies to. Header and footer output ignores conditions: those locations always inject globally.
 
 Leave all conditions blank to suppress content-area output entirely. Set at least one condition to restrict where the snippet appears.
 
@@ -80,7 +80,7 @@ The global **Snippet content priority** setting in **Settings → General** sets
 
 ## Disabling a snippet
 
-Check **Disable Snippet** in the metabox to temporarily suppress a snippet without deleting it. The snippet data is preserved and the setting can be reversed at any time.
+Check **Disable Snippet** in the metabox to temporarily suppress a snippet without deleting it. The snippet data is preserved and the setting can be reversed at any time. Visitors receive no output from inline embeds of a disabled or unpublished snippet. Users who can edit that snippet can still preview it through an inline embed.
 
 ## Embedding snippets inline
 

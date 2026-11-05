@@ -30,13 +30,13 @@ echo $html;
 
 **Parameters:**
 
-- `$snippet` *(int|WP_Post)* — Snippet ID or post object.
-- `$args` *(array, optional)* — Output arguments.
-    - `class` *(string)* — Extra CSS class on the wrapper `<div>`. Default `''`.
-    - `is_block` *(bool)* — Mark output as block-rendered. Adds `ata_snippet_block` class. Default `false`.
-    - `is_shortcode` *(bool)* — Mark output as shortcode-rendered. Adds `ata_snippet_shortcode` class. Default `true`.
+- `$snippet` *(int|WP_Post)*: Snippet ID or post object.
+- `$args` *(array, optional)*: Output arguments.
+    - `class` *(string)*: Extra CSS class on the wrapper `<div>`. Default `''`.
+    - `is_block` *(bool)*: Mark output as block-rendered. Adds `ata_snippet_block` class. Default `false`.
+    - `is_shortcode` *(bool)*: Mark output as shortcode-rendered. Adds `ata_snippet_shortcode` class. Default `true`.
 
-**Returns:** `string` — Rendered snippet HTML, or an error string if the ID is invalid.
+**Returns:** `string`: Rendered snippet output, or an error string if the ID is invalid. Returns an empty string for an unpublished or disabled snippet unless the current user has `edit_post` permission for that snippet.
 
 ---
 
@@ -53,10 +53,10 @@ foreach ( $snippets as $snippet ) {
 
 **Parameters:**
 
-- `$location` *(string)* — One of `header`, `footer`, `content_before`, `content_after`.
-- `$numberposts` *(int, optional)* — Maximum number to return. Default `-1` (all).
+- `$location` *(string)*: One of `header`, `footer`, `content_before`, `content_after`.
+- `$numberposts` *(int, optional)*: Maximum number to return. Default `-1` (all).
 
-**Returns:** `WP_Post[]|int[]|false` — Array of snippet post objects, or `false` if location is invalid.
+**Returns:** `WP_Post[]|int[]|false`: Array of snippet post objects, or `false` if location is invalid.
 
 ---
 
@@ -97,4 +97,4 @@ $snippets = Functions::get_snippets( array(
 
 **Parameters:**
 
-- `$args` *(array)* — Accepts `numberposts`, `include`, `exclude`, and any `WP_Query` argument. `post_type` is always forced to `ata_snippets`.
+- `$args` *(array)*: Accepts `numberposts`, `include`, `exclude`, and any `WP_Query` argument. `post_type` is always forced to `ata_snippets`.

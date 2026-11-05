@@ -44,7 +44,7 @@ wp-content/uploads/snippetz/combined.min.js
 
 The combined files are enqueued on every page load.
 
-**Important:** When file combination is active, per-snippet display conditions are ignored. A snippet set to show only on specific post types or IDs will appear on all pages when combination is enabled. File combination works independently — enabling it does not require **Enable external CSS/JS files** to also be on. Use combination only when all your CSS or JS snippets should load globally.
+**Important:** When file combination is active, per-snippet display conditions are ignored. A snippet set to show only on specific post types or IDs will appear on all pages when combination is enabled. File combination works independently: enabling it does not require **Enable external CSS/JS files** to also be on. Use combination only when all your CSS or JS snippets should load globally.
 
 ## When to use external files
 
