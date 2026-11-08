@@ -137,3 +137,6 @@ The Settings API (`includes/admin/settings/*.php`) and Admin Banner (`includes/a
 | `includes/admin/settings/class-metabox-api.php` | 2.0.0 |
 | `includes/admin/class-admin-banner.php` | 2.3.0 |
 
+## Versioning
+
+WordPress-style: once a version is released (matches `Stable tag`/git tag), all further changes — code, `@since`, changelog — go in the next version: `X.Y.(Z+1)` for fixes, `X.(Y+1).0` for features/deprecations. Never `X+1.0.0`. Full rule: [../AGENTS.md](../AGENTS.md#versioning).
