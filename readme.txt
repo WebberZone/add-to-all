@@ -100,6 +100,12 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 == Changelog ==
 
+= 2.4.5 =
+
+**Added**
+
+* Save Changes button in settings navigation.
+
 = 2.4.4 =
 
 Release date: 3 November 2026
