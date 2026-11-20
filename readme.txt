@@ -2,7 +2,7 @@
 Tags: code, snippets, html, css, javascript
 Contributors: Ajay, webberzone
 Donate link: https://wzn.io/donate-wz
-Stable tag: 2.4.4
+Stable tag: 2.4.5
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -102,9 +102,16 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 = 2.4.5 =
 
+Release date: 20 November 2026
+
 **Added**
 
-* Save Changes button in settings navigation.
+* Save Changes button in the settings navigation.
+
+**Fixed**
+
+* Backslashes were stripped from settings values when they were saved.
+* A single-value setting that received an array, for example from a modified form submission, could trigger a PHP error on save.
 
 = 2.4.4 =
 
@@ -183,5 +190,5 @@ For the changelog of earlier versions, please refer to the [releases page on Git
 
 == Upgrade Notice ==
 
-= 2.4.4 =
-Security hardening release. Update recommended.
+= 2.4.5 =
+Keeps backslashes in settings values and adds a Save Changes button to the settings navigation. No action needed.
