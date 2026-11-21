@@ -102,7 +102,7 @@ WebberZone Snippetz is one of the many plugins developed by WebberZone. Check ou
 
 = 2.4.5 =
 
-Release date: 20 November 2026
+Release date: 21 November 2026
 
 **Added**
 
